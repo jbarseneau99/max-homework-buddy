@@ -8,7 +8,7 @@
       view: "view-comingSoon",
       enter(ctx) {
         const data = window.SPELLING_DATA[ctx.opts.list];
-        HB.comingSoon("view-comingSoon", `${ctx.sub.title} · ${kind === "review" ? "Review" : "Quiz"}`,
+        HB.comingSoon("view-comingSoon", `${ctx.session.title} · ${kind === "review" ? "Review" : "Quiz"}`,
           data && data.words && data.words.length
             ? `${data.words.length} words loaded — the ${kind} screen is next to build.`
             : "Coming soon. Spelling content will drop in here.");

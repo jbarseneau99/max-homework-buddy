@@ -286,6 +286,15 @@
   .mx-num { cursor:default; min-width:160px; border:1px solid var(--gold); border-radius:10px; }
   .mx-pad { width:min(320px,100%); }
   .mx-missed { text-align:left; max-width:640px; margin:12px auto 0; line-height:1.5; color:var(--muted); }
+  .comp-chips { display:flex; flex-wrap:wrap; gap:8px; margin:10px 0 12px; }
+  .comp-chip { min-height:48px; padding:10px 14px; font-size:.98rem; border-radius:10px; }
+  .comp-chip.active { border-color:var(--cyan2); color:var(--cyan2); box-shadow:0 0 14px rgba(76,201,240,.45); background:rgba(76,201,240,.14); }
+  .comp-chip.soon { opacity:.45; border:1px dashed var(--line); color:var(--muted); display:inline-flex; align-items:center; }
+  .scan .part.on .hot, .scan .part.on .hot * { stroke:var(--cyan2) !important; }
+  .scan .part.on .hot path[fill], .scan .part.on .hot rect, .scan .part.on .hot circle { fill:var(--cyan2) !important; }
+  .scan .part.on.has-hot [data-sub]:not(.hot) { opacity:.3; }
+  .scan .p-muscles .hot path { fill:#ff8a96 !important; }
+  .scan [data-sub="capillaries"] path { fill:none; stroke:#b36ad6; stroke-width:1.3; }
   .cs { text-align:center; padding:40px 18px; }
   .cs .ic { width:44px; height:44px; color:var(--muted); }
   #toolbarHolder { display:none; }
@@ -306,35 +315,38 @@
     <div class="home-head">
       <div class="eyebrow">Homework HQ</div>
       <h1 class="brand">Max's <span>Homework Buddy</span></h1>
-      <p class="greet">Hey Max, let's get to work. Pick a topic.</p>
+      <p class="greet">Hey Max, let's get to work. Pick a subject.</p>
     </div>
     <div class="tiles" id="homeTiles"></div>
     <div class="home-foot"><button id="homeHelloBtn" type="button" class="btn-cyan" data-icon="sound"> Play greeting</button></div>
   </section>
 
-  <!-- ===== TOPIC LANDING ===== -->
-  <section id="view-topic" class="view" hidden>
-    <div class="toolbar-slot"></div>
-    <div class="hero"><div id="topicIcon"></div><div><div class="eyebrow">Topic</div><h2 class="h2" id="topicTitle"></h2><p id="topicIntro"></p></div></div>
-    <p class="topic-meta" id="topicCount"></p>
-    <button id="topicGoBtn" type="button" class="btn-gold action" style="width:100%;min-height:90px" data-icon="next"><b>Browse subtopics</b><small>Choose what to review or quiz</small></button>
-  </section>
-
-  <!-- ===== SUBTOPIC LIST ===== -->
-  <section id="view-subtopics" class="view" hidden>
-    <div class="toolbar-slot"></div>
+  <!-- ===== SUBJECT (list of subtopics) ===== -->
+  <section id="view-subject" class="view" hidden>
+    <div class="hero"><div id="subjIcon"></div><div><div class="eyebrow">Subject</div><h2 class="h2" id="subjTitle"></h2><p id="subjBlurb"></p></div></div>
     <div class="eyebrow">Choose a subtopic</div>
-    <h2 class="h2" id="subHeading"></h2>
-    <div class="card-list" id="subList" style="margin-top:12px"></div>
+    <div class="card-list" id="subjList" style="margin-top:10px"></div>
   </section>
 
-  <!-- ===== SUBTOPIC PAGE ===== -->
-  <section id="view-sub" class="view" hidden>
+  <!-- ===== SUBTOPIC (list of sessions) ===== -->
+  <section id="view-subtopic" class="view" hidden>
     <div class="toolbar-slot"></div>
-    <div class="hero"><div id="subIcon"></div><div><div class="eyebrow">Subtopic</div><h2 class="h2" id="subTitle"></h2><p id="subBlurb"></p></div></div>
+    <div class="hero"><div id="subtIcon"></div><div><div class="eyebrow">Subtopic</div><h2 class="h2" id="subtTitle"></h2><p id="subtBlurb"></p></div></div>
+    <div class="eyebrow">Choose a session</div>
+    <div class="card-list" id="sessList" style="margin-top:10px"></div>
+  </section>
+
+  <!-- ===== SESSION (Review | Quiz + components) ===== -->
+  <section id="view-session" class="view" hidden>
+    <div class="toolbar-slot"></div>
+    <div class="hero"><div id="sessIcon"></div><div><div class="eyebrow">Session</div><h2 class="h2" id="sessTitle"></h2><p id="sessBlurb"></p></div></div>
     <div class="big-actions">
-      <button id="subReviewBtn" type="button" class="action review" data-icon="play"><b>Start review</b><small id="subReviewLabel"></small></button>
-      <button id="subQuizBtn" type="button" class="action quiz" data-icon="quiz"><b>Take the quiz</b><small id="subQuizLabel"></small></button>
+      <button id="sessReviewBtn" type="button" class="action review" data-icon="play"><b>Start review</b><small id="sessReviewLabel"></small></button>
+      <button id="sessQuizBtn" type="button" class="action quiz" data-icon="quiz"><b>Take the quiz</b><small id="sessQuizLabel"></small></button>
+    </div>
+    <div id="compSection" style="margin-top:18px">
+      <div class="eyebrow">Components · tap one to inspect</div>
+      <div class="comp-chips" id="compChipsSession"></div>
     </div>
   </section>
 
@@ -411,10 +423,11 @@
   <section id="view-anatExplore" class="view" hidden>
     <div class="toolbar-slot"></div>
     <div class="ex-head">
-      <div><div class="eyebrow">Body scanner · review</div><h2 class="h2" id="exploreTitle">Organ walkthrough</h2></div>
+      <div><div class="eyebrow" id="exploreEyebrow">Body scanner · review</div><h2 class="h2" id="exploreTitle">Organ walkthrough</h2></div>
       <button id="exploreQuizBtn" type="button" class="btn-gold" data-icon="quiz"> Take the quiz</button>
     </div>
     <div class="sys-btns" id="sysBtns" hidden></div>
+    <div class="comp-chips" id="compChips" hidden></div>
     <div class="scan-stage" id="scanStage">
       <div id="scanSvgWrap"></div>
       <div class="callout" id="scanCallout" aria-live="polite">
@@ -429,6 +442,12 @@
         <button id="walkNext" type="button" class="btn-gold">Step forward ›</button>
         <button id="bonesBtn" type="button" aria-pressed="false">Skeleton overlay</button>
       </div>
+    </div>
+    <div id="compCtl" class="walk-ctl" hidden>
+      <button id="compPrev" type="button">‹ Previous</button>
+      <span class="count" id="compCount">1 / 5</span>
+      <button id="compNext" type="button" class="btn-gold">Next ›</button>
+      <button id="compHear" type="button">Hear it again</button>
     </div>
   </section>
 
@@ -460,7 +479,7 @@
   <section id="view-maxQuiz" class="view" hidden>
     <div class="toolbar-slot"></div>
     <div class="eyebrow" id="mxProgress">Question 1 of 15</div>
-    <div class="h2">Max's test topics · quiz</div>
+    <div class="h2" id="mxTitle">Max's test topics · quiz</div>
     <div class="meter"><div id="mxBar"></div></div>
     <div id="mxCard" class="glass-card" style="margin-top:14px">
       <p class="mx-q" id="mxQ"></p>
@@ -539,15 +558,16 @@
 <audio id="aud-ex4_step4" preload="auto" playsinline controlsList="nodownload"><source src="audio/ex4_step4.mp3" type="audio/mpeg"></audio>
 <audio id="aud-ex4_step5" preload="auto" playsinline controlsList="nodownload"><source src="audio/ex4_step5.mp3" type="audio/mpeg"></audio>
   </div>
+<script src="math_quiz_data.js"></script>
+<script src="anatomy_data.js"></script>
+<script src="explore_data.js"></script>
+<script src="maxtopics_data.js"></script>
+<script src="sessions_data.js"></script>
 <script src="topics.js"></script>
 <script src="core.js"></script>
 <script src="math_review.js"></script>
-<script src="math_quiz_data.js"></script>
 <script src="math_quiz.js"></script>
-<script src="anatomy_data.js"></script>
 <script src="anatomy_app.js"></script>
-<script src="explore_data.js"></script>
-<script src="maxtopics_data.js"></script>
 <script src="explore_app.js"></script>
 <script src="maxquiz.js"></script>
 <script src="spelling.js"></script>

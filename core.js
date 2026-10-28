@@ -21,14 +21,14 @@
   }
 
   const modules = {};
-  const st = { level: "home", topic: null, sub: null, kind: null, active: null };
+  // level: home | subject | subtopic | session | review | quiz | component
+  const st = { level: "home", subject: null, subtopic: null, session: null, comp: null, active: null };
   const HB = window.HB = { icon, modules, state: st };
 
   HB.registerModule = (name, mod) => { modules[name] = mod; };
   HB.stopAudio = () => {
     document.querySelectorAll("audio").forEach(a => { try { a.pause(); a.currentTime = 0; } catch (e) {} });
   };
-  const topicById = id => window.TOPICS.find(t => t.id === id);
 
   function leaveActive() {
     if (st.active && st.active.leave) { try { st.active.leave(); } catch (e) { console.error(e); } }
@@ -37,50 +37,56 @@
 
   function placeToolbar(viewEl) {
     const holder = $("toolbarHolder");
-    window.TOPICS.forEach(t => { if (t.toolbar && $(t.toolbar)) holder.appendChild($(t.toolbar)); });
-    if (!st.topic || !st.topic.toolbar || !viewEl) return;
+    window.TOPICS.forEach(s => s.subtopics.forEach(t => { if (t.toolbar && $(t.toolbar)) holder.appendChild($(t.toolbar)); }));
+    const tb = st.subtopic && st.subtopic.toolbar;
+    if (!tb || !viewEl) return;
     const slot = viewEl.querySelector(".toolbar-slot");
-    if (slot && $(st.topic.toolbar)) slot.appendChild($(st.topic.toolbar));
+    if (slot && $(tb)) slot.appendChild($(tb));
   }
 
+  const here = () => ({ subject: st.subject, subtopic: st.subtopic, session: st.session });
   // ---- navigation targets ----
-  function sequenceTarget() {
-    const T = st.topic, subs = T ? T.subtopics : [];
+  function nextTarget() {
+    const sessions = st.subtopic ? st.subtopic.sessions : [];
     switch (st.level) {
       case "home": return null;
-      case "topic": return { level: "subtopics", topic: T, label: "Subtopics" };
-      case "subtopics": return subs.length ? { level: "sub", topic: T, sub: subs[0], label: subs[0].title } : null;
-      case "sub": return { level: "review", topic: T, sub: st.sub, label: "Review" };
-      case "review": return { level: "quiz", topic: T, sub: st.sub, label: "Quiz" };
+      case "subject": { const t = st.subject.subtopics[0]; return t ? { level: "subtopic", subject: st.subject, subtopic: t, label: t.title } : null; }
+      case "subtopic": { const s = sessions[0]; return s ? { level: "session", ...here(), session: s, label: s.title } : null; }
+      case "session": return { level: "review", ...here(), label: "Review" };
+      case "review": return { level: "quiz", ...here(), label: "Quiz" };
       case "quiz": {
-        const i = subs.indexOf(st.sub);
-        return i < subs.length - 1 ? { level: "sub", topic: T, sub: subs[i + 1], label: subs[i + 1].title }
-                                   : { level: "subtopics", topic: T, label: "All subtopics" };
+        const i = sessions.indexOf(st.session);
+        return i < sessions.length - 1 ? { level: "session", ...here(), session: sessions[i + 1], label: sessions[i + 1].title }
+                                       : { level: "subtopic", subject: st.subject, subtopic: st.subtopic, label: "All sessions" };
+      }
+      case "component": {
+        const comps = st.session.components;
+        return st.comp < comps.length - 1 ? { level: "component", ...here(), comp: st.comp + 1, label: comps[st.comp + 1].title.replace(/^\d+\.\s*/, "") }
+                                          : { level: "review", ...here(), label: "Review" };
       }
     }
   }
   function backTarget() {
     switch (st.level) {
-      case "topic": return { level: "home" };
-      case "subtopics": return { level: "topic", topic: st.topic };
-      case "sub": return { level: "subtopics", topic: st.topic };
-      case "review": case "quiz": return { level: "sub", topic: st.topic, sub: st.sub };
+      case "subject": return { level: "home" };
+      case "subtopic": return { level: "subject", subject: st.subject };
+      case "session": return { level: "subtopic", subject: st.subject, subtopic: st.subtopic };
+      case "review": case "quiz": case "component": return { level: "session", ...here() };
       default: return null;
     }
   }
 
   function crumbs() {
     const parts = ["Home"];
-    if (st.topic) parts.push(st.topic.title);
-    if (st.level === "subtopics") parts.push("Subtopics");
-    if (st.sub) parts.push(st.sub.title);
+    [st.subject, st.subtopic, st.session].forEach(x => { if (x) parts.push(x.title); });
     if (st.level === "review") parts.push("Review");
     if (st.level === "quiz") parts.push("Quiz");
+    if (st.level === "component") parts.push(st.session.components[st.comp].title.replace(/^\d+\.\s*/, ""));
     return parts;
   }
 
   function updateNav() {
-    const b = backTarget(), n = sequenceTarget();
+    const b = backTarget(), n = nextTarget();
     $("navHome").disabled = st.level === "home";
     $("navBack").disabled = !b;
     $("navNext").disabled = !n;
@@ -97,73 +103,91 @@
     return el;
   }
 
-  // ---- renderers for the shared template screens ----
+  // ---- shared template screens ----
+  function cardList(container, items, kindAttr, onPick, soon) {
+    container.innerHTML = "";
+    items.forEach((it, i) => {
+      const b = document.createElement("button");
+      b.type = "button"; b.className = "card-btn"; b.dataset[kindAttr] = it.id;
+      b.innerHTML = `<span class="num">${String(i + 1).padStart(2, "0")}</span>${icon(it.icon, "card-ic")}<span class="card-txt"><b>${it.title}</b><small>${it.blurb || ""}</small></span>${icon("next", "chev")}`;
+      b.onclick = () => onPick(it, i);
+      container.appendChild(b);
+    });
+    if (soon) {
+      const d = document.createElement("div");
+      d.className = "card-btn soon"; d.setAttribute("aria-disabled", "true");
+      d.innerHTML = `<span class="num">+</span>${icon("lock", "card-ic")}<span class="card-txt"><b>More coming soon</b><small>New items will appear here.</small></span>`;
+      container.appendChild(d);
+    }
+  }
   function renderHome() {
     const g = $("homeTiles"); g.innerHTML = "";
     window.TOPICS.forEach(t => {
       const b = document.createElement("button");
-      b.type = "button"; b.className = "tile"; b.dataset.topic = t.id;
+      b.type = "button"; b.className = "tile"; b.dataset.subject = t.id;
       b.innerHTML = `${icon(t.icon, "tile-ic")}<span class="tile-title">${t.title}</span><span class="tile-blurb">${t.blurb}</span>`;
-      b.onclick = () => HB.go({ level: "topic", topic: t });
+      b.onclick = () => HB.go({ level: "subject", subject: t });
       g.appendChild(b);
     });
   }
-  function renderTopic() {
-    const t = st.topic;
-    $("topicIcon").innerHTML = icon(t.icon, "hero-ic");
-    $("topicTitle").textContent = t.title;
-    $("topicIntro").textContent = t.intro;
-    $("topicCount").textContent = `${t.subtopics.length} subtopic${t.subtopics.length === 1 ? "" : "s"} available`;
+  function renderSubject() {
+    const s = st.subject;
+    $("subjIcon").innerHTML = icon(s.icon, "hero-ic"); $("subjTitle").textContent = s.title; $("subjBlurb").textContent = s.blurb;
+    cardList($("subjList"), s.subtopics, "subtopic", t => HB.go({ level: "subtopic", subject: s, subtopic: t }), s.moreComingSoon);
   }
-  function renderSubtopics() {
-    const t = st.topic, g = $("subList"); g.innerHTML = "";
-    $("subHeading").textContent = t.title + " · Subtopics";
-    t.subtopics.forEach((s, i) => {
+  function renderSubtopic() {
+    const t = st.subtopic;
+    $("subtIcon").innerHTML = icon(t.icon, "hero-ic"); $("subtTitle").textContent = t.title; $("subtBlurb").textContent = t.blurb;
+    cardList($("sessList"), t.sessions, "session", s => HB.go({ level: "session", subject: st.subject, subtopic: t, session: s }), t.moreComingSoon);
+  }
+  function renderSession() {
+    const s = st.session;
+    $("sessIcon").innerHTML = icon(s.icon, "hero-ic"); $("sessTitle").textContent = s.title; $("sessBlurb").textContent = s.blurb;
+    $("sessReviewLabel").textContent = s.review.label || ""; $("sessQuizLabel").textContent = s.quiz.label || "";
+    const box = $("compChipsSession"); box.innerHTML = "";
+    const comps = s.components || [];
+    $("compSection").hidden = !comps.length && !s.componentsSoon;
+    comps.forEach((c, i) => {
       const b = document.createElement("button");
-      b.type = "button"; b.className = "card-btn"; b.dataset.sub = s.id;
-      b.innerHTML = `<span class="num">${String(i + 1).padStart(2, "0")}</span>${icon(s.icon, "card-ic")}<span class="card-txt"><b>${s.title}</b><small>${s.blurb}</small></span>${icon("next", "chev")}`;
-      b.onclick = () => HB.go({ level: "sub", topic: t, sub: s });
-      g.appendChild(b);
+      b.type = "button"; b.className = "comp-chip"; b.dataset.comp = c.id; b.textContent = c.title;
+      b.onclick = () => HB.go({ level: "component", ...here(), comp: i });
+      box.appendChild(b);
     });
-    if (t.moreComingSoon) {
-      const d = document.createElement("div");
-      d.className = "card-btn soon"; d.setAttribute("aria-disabled", "true");
-      d.innerHTML = `<span class="num">+</span>${icon("lock", "card-ic")}<span class="card-txt"><b>More coming soon</b><small>New subtopics will appear here.</small></span>`;
-      g.appendChild(d);
-    }
-  }
-  function renderSub() {
-    const s = st.sub;
-    $("subIcon").innerHTML = icon(s.icon, "hero-ic");
-    $("subTitle").textContent = s.title;
-    $("subBlurb").textContent = s.blurb;
-    $("subReviewLabel").textContent = s.review.label || "";
-    $("subQuizLabel").textContent = s.quiz.label || "";
+    if (s.componentsSoon) box.innerHTML = '<span class="comp-chip soon">Components coming soon</span>';
   }
 
   HB.go = function (t) {
     leaveActive();
     HB.stopAudio();
-    st.level = t.level; st.topic = t.topic || null; st.sub = t.sub || null;
-    if (t.level === "home") { showView("view-home"); }
-    else if (t.level === "topic") { renderTopic(); showView("view-topic"); }
-    else if (t.level === "subtopics") { renderSubtopics(); showView("view-subtopics"); }
-    else if (t.level === "sub") { renderSub(); showView("view-sub"); }
+    st.level = t.level; st.subject = t.subject || null; st.subtopic = t.subtopic || null; st.session = t.session || null;
+    st.comp = t.level === "component" ? t.comp : null;
+    if (t.level === "home") showView("view-home");
+    else if (t.level === "subject") { renderSubject(); showView("view-subject"); }
+    else if (t.level === "subtopic") { renderSubtopic(); showView("view-subtopic"); }
+    else if (t.level === "session") { renderSession(); showView("view-session"); }
     else {
-      const entry = st.sub[t.level], mod = modules[entry.module];
-      if (!mod) { console.error("missing module", entry.module); return; }
+      let name, opts, entry;
+      if (t.level === "component") {
+        entry = st.session.components[st.comp];
+        name = entry.module || st.session.componentModule;
+        opts = entry.opts || { session: st.session.id, index: st.comp };
+      } else { entry = st.session[t.level]; name = entry.module; opts = entry.opts || {}; }
+      const mod = modules[name];
+      if (!mod) { console.error("missing module", name); return; }
       showView(mod.view);
       st.active = mod;
       updateNav();
-      mod.enter({ topic: st.topic, sub: st.sub, kind: t.level, opts: entry.opts || {}, entry });
+      mod.enter({ subject: st.subject, subtopic: st.subtopic, session: st.session, kind: t.level, opts, entry, comp: st.comp });
       return;
     }
     updateNav();
   };
   HB.home = () => HB.go({ level: "home" });
   HB.back = () => { const b = backTarget(); if (b) HB.go(b); };
-  HB.next = () => { const n = sequenceTarget(); if (n) HB.go(n); };
-  HB.goQuiz = () => { if (st.sub) HB.go({ level: "quiz", topic: st.topic, sub: st.sub }); };
+  HB.next = () => { const n = nextTarget(); if (n) HB.go(n); };
+  HB.goQuiz = () => { if (st.session) HB.go({ level: "quiz", ...here() }); };
+  HB.goReview = () => { if (st.session) HB.go({ level: "review", ...here() }); };
+  HB.goComponent = i => { if (st.session) HB.go({ level: "component", ...here(), comp: i }); };
 
   // Shared "coming soon" module (used by placeholder content).
   HB.comingSoon = function (viewId, title, msg) {
@@ -177,9 +201,8 @@
     $("navHome").onclick = HB.home;
     $("navBack").onclick = HB.back;
     $("navNext").onclick = HB.next;
-    $("subReviewBtn").onclick = () => HB.go({ level: "review", topic: st.topic, sub: st.sub });
-    $("subQuizBtn").onclick = () => HB.go({ level: "quiz", topic: st.topic, sub: st.sub });
-    $("topicGoBtn").onclick = () => HB.go({ level: "subtopics", topic: st.topic });
+    $("sessReviewBtn").onclick = HB.goReview;
+    $("sessQuizBtn").onclick = HB.goQuiz;
     $("homeHelloBtn").onclick = () => {
       const a = $("aud-greeting"); HB.stopAudio();
       if (a) { a.muted = false; const p = a.play(); if (p && p.catch) p.catch(e => console.error(e)); }

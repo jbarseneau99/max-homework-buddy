@@ -44,7 +44,7 @@ function playAudioEl(el) {
   currentAudio = el;
   // Mirror into visible controls for debugging/confirmation
   try {
-    nowPlaying.src = el.querySelector("source") ? el.querySelector("source").src : el.currentSrc || el.src;
+    nowPlaying.src = el.querySelector("source") ? el.querySelector("source").getAttribute("src") : el.getAttribute("src");
     nowPlaying.load();
   } catch (e) {}
   el.muted = false;
@@ -198,7 +198,7 @@ function resetMathReview() {
 // Registered as a reusable review module (see topics.js / core.js).
 HB.registerModule("mathReview", {
   view: "view-mathReview",
-  enter() { resetMathReview(); },
+  enter(ctx) { resetMathReview(); if (ctx.opts && ctx.opts.start) loadExercise(ctx.opts.start); },
   leave() { resetMathReview(); }
 });
 

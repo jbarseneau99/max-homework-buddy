@@ -2,7 +2,8 @@
 //   mc (tap one), pick (tap N then Check), number (keypad then Check). Data: window.MAX_TOPICS_DATA.quiz.
 // Audio goes through window.ANAT.play (shared anatomy player, Sound ON/OFF and "Hear it again").
 (function () {
-  const Q = window.MAX_TOPICS_DATA.quiz;
+  // opts.set picks a question set from window.QUIZ_SETS (per-system quizzes); default = Max's Test Topics.
+  let Q = window.MAX_TOPICS_DATA.quiz;
   const $ = id => document.getElementById(id);
   const st = { i: 0, score: 0, results: [], picked: [], num: "" };
   const play = src => { if (window.ANAT) ANAT.play(src); };
@@ -111,11 +112,14 @@
   $("mxPrev").onclick = () => { if (st.i > 0) { st.i--; render(false); } };
   $("mxNext").onclick = () => { if (st.i < n() - 1) { st.i++; render(true); } else finish(); };
   $("mxAgain").onclick = () => { reset(); document.querySelectorAll("#mxPad button").forEach(b => b.disabled = false); render(true); };
-  $("mxReview").onclick = () => HB.go({ level: "review", topic: HB.state.topic, sub: HB.state.sub });
+  $("mxReview").onclick = () => HB.goReview();
 
   HB.registerModule("maxQuiz", {
     view: "view-maxQuiz",
-    enter() { $("anatScore").hidden = false; reset(); document.querySelectorAll("#mxPad button").forEach(b => b.disabled = false); render(true); },
+    enter(ctx) {
+      Q = (ctx.opts.set && window.QUIZ_SETS && QUIZ_SETS[ctx.opts.set]) || window.MAX_TOPICS_DATA.quiz;
+      $("mxTitle").textContent = Q.title || "Max's test topics · quiz";
+      $("anatScore").hidden = false; reset(); document.querySelectorAll("#mxPad button").forEach(b => b.disabled = false); render(true); },
     leave() { reset(); }
   });
 })();

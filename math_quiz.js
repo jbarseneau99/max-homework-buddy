@@ -123,11 +123,11 @@
     $("mqSoundLabel").textContent = st.sound ? "Sound on" : "Sound off"; if (!st.sound) player.pause();
   };
   $("mqAgain").onclick = () => { reset(); show(0, true); };
-  $("mqReview").onclick = () => HB.go({ level: "review", topic: HB.state.topic, sub: HB.state.sub });
+  $("mqReview").onclick = () => HB.goReview();
 
   HB.registerModule("mathQuiz", {
     view: "view-mathQuiz",
-    enter() { reset(); show(0, true); },
+    enter(ctx) { reset(); show((ctx.opts && ctx.opts.start) || 0, true); },
     leave() { reset(); }
   });
 })();
