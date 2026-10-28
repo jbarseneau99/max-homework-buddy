@@ -57,6 +57,7 @@
   }
 
   function startLesson(lesson) {
+    $("anatEmailBtn").hidden = true;
     st.lesson = lesson; st.idx = 0; st.score = 0; st.phase = "welcome";
     els.picker.hidden = true; els.lesson.hidden = false;
     els.progress.textContent = lesson.title;
@@ -139,6 +140,8 @@
     els.options.innerHTML = ""; els.feedback.textContent = "";
     els.quizBtn.hidden = true;
     els.nextBtn.disabled = false; els.nextBtn.textContent = "Play again";
+    if (window.HB && HB.recordResult) HB.recordResult({ score: st.score, total: n });
+    $("anatEmailBtn").hidden = false;
     play(st.lesson.doneAudioPrefix + st.score + ".mp3");
   }
 
@@ -150,6 +153,7 @@
     } else if (st.phase === "done") startLesson(st.lesson);
   };
   els.quizBtn.onclick = () => { if (st.phase === "intro") showQuestion(); };
+  $("anatEmailBtn").onclick = () => HB.emailResults();
   els.backBtn.onclick = () => (window.HB ? HB.back() : showPicker());
   els.replayBtn.onclick = () => { if (st.lastClip) play(st.lastClip); };
   els.audioBtn.onclick = () => {

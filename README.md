@@ -49,6 +49,24 @@ and its narration MP3.
 - **Subtopic or subject:** add an object to `subtopics` or to `window.TOPICS`. The tiles and lists are generated from it.
 - **New module:** call `HB.registerModule("name", { view: "view-id", enter(ctx) {...}, leave() {...} })` and add its `<section>` and `<script>`.
 
+## Home icons (anime style)
+`anime_icons.js` holds three inline SVGs (`window.ANIME_ICONS`, viewBox 64x64, cyan #4cc9f0 / gold #ffe08a→#f0a91c glow, CSS-only motion, honours prefers-reduced-motion). A subject picks one with `homeIcon` in `topics.js`:
+- math: "Sigil of Division", a rotating rune ring around a hexagram with a gold ÷ core
+- science: "Power-up Orb", a pulsing energy core with three atom orbits and a gold lightning bolt
+- language: "Word Scroll", an open scroll with gold rods and the kanji 言 ("word / to say")
+
+## Settings, Correspondence and Outbox (`settings.js`)
+- The top bar has an Outbox (envelope) button and a Settings (gear) button. Both screens sit off the tree, and Back returns to where you were.
+- `window.SETTINGS_SCHEMA` is extensible. It is a list of sections, each with fields `{key, label, type: email|text, placeholder, recipient?}`. Add a section or field there and the Settings screen renders and validates it.
+  - Correspondence: Max's email, Dad's email (Brant / Parent 1), Mom's email (Max's mom / Parent 2). Fields with `recipient.results: true` get results by default.
+  - Outbox: signature.
+- The Outbox is outbound only (there is no inbox).
+  - Recipient checkboxes appear only for saved addresses.
+  - It has a subject and a message, plus templates ("Send my latest quiz results", "I have a question about …").
+  - Send opens a prefilled `mailto:` (`HB.openMailto`, overridable for tests). There is no backend.
+- Quiz end screens have an "Email my results" button. It works for the Math quiz, Max's/system quizzes and the Organs/Body Systems lessons. It stores the result (`HB.recordResult`) and opens the Outbox prefilled to the parents.
+- Storage is localStorage only, on the device: `hb.settings.v1`, `hb.outbox.sent.v1` (Sent log, with a Clear button) and `hb.lastResult.v1`. No real addresses are kept in the repo; placeholders use example.com.
+
 ## Narration MP3s (gTTS)
 
 Never use `speechSynthesis` or the Web Speech API, because the Tesla browser doesn't have them. Every clip is an MP3 played from a button tap.

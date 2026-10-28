@@ -92,6 +92,8 @@
     $("mqCard").hidden = true; $("mqEnd").hidden = false;
     $("mqEndScore").textContent = `${st.score} / ${n}`;
     $("mqEndMsg").textContent = d.text;
+    if (HB.recordResult) HB.recordResult({ score: st.score, total: n,
+      details: D.problems.map((p, k) => `${st.answered[k] && st.answered[k].ok ? "✓" : "✗"} ${p.label} = ${p.quotient} R ${p.remainder}`) });
     $("mqBar").style.width = "100%";
     play(d.audio);
   }
@@ -122,6 +124,7 @@
     st.sound = !st.sound; $("mqSound").setAttribute("aria-pressed", st.sound ? "true" : "false");
     $("mqSoundLabel").textContent = st.sound ? "Sound on" : "Sound off"; if (!st.sound) player.pause();
   };
+  $("mqEmail").onclick = () => HB.emailResults();
   $("mqAgain").onclick = () => { reset(); show(0, true); };
   $("mqReview").onclick = () => HB.goReview();
 

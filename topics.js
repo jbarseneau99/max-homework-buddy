@@ -22,7 +22,7 @@
 
   window.TOPICS = [
     {
-      id: "math", title: "Math", icon: "divide", blurb: "Long division, worked step by step, then on your own.",
+      id: "math", title: "Math", icon: "divide", homeIcon: "math", blurb: "Long division, worked step by step, then on your own.",
       subtopics: [
         { id: "division", title: "Division", icon: "divide", blurb: "Long division with remainders.",
           sessions: [
@@ -38,7 +38,7 @@
       moreComingSoon: true
     },
     {
-      id: "science", title: "Science", icon: "body", blurb: "Anatomy: organs, body systems and Max's test topics.",
+      id: "science", title: "Science", icon: "body", homeIcon: "science", blurb: "Anatomy: organs, body systems and Max's test topics.",
       subtopics: [
         { id: "anatomy", title: "Anatomy", icon: "body", blurb: "Scan the human body on the body scanner.", toolbar: "anatBar",
           sessions: [
@@ -66,7 +66,7 @@
       moreComingSoon: true
     },
     {
-      id: "language", title: "Language", icon: "book", blurb: "Spelling lists and word challenges.",
+      id: "language", title: "Language", icon: "book", homeIcon: "language", blurb: "Spelling lists and word challenges.",
       subtopics: [
         { id: "spelling", title: "Spelling", icon: "book", blurb: "Weekly word lists.",
           sessions: [

@@ -14,7 +14,9 @@
     play: '<path d="M8 5v14l11-7z"/>',
     quiz: '<path d="M4 12.5 9 17.5 20 6.5"/>',
     lock: '<rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/>',
-    sound: '<path d="M4 9.5h4L13 5v14l-5-4.5H4z"/><path d="M16.5 8.5a5 5 0 0 1 0 7"/>'
+    sound: '<path d="M4 9.5h4L13 5v14l-5-4.5H4z"/><path d="M16.5 8.5a5 5 0 0 1 0 7"/>',
+    gear: '<circle cx="12" cy="12" r="3.2"/><path d="M12 2.8v2.6M12 18.6v2.6M2.8 12h2.6M18.6 12h2.6M5.5 5.5l1.8 1.8M16.7 16.7l1.8 1.8M5.5 18.5l1.8-1.8M16.7 7.3l1.8-1.8"/><circle cx="12" cy="12" r="6.6"/>',
+    mail: '<rect x="3" y="5.5" width="18" height="13" rx="2"/><path d="M3.5 7l8.5 6 8.5-6"/>'
   };
   function icon(name, cls) {
     return `<svg class="ic ${cls || ""}" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${ICONS[name] || ICONS.next}</svg>`;
@@ -22,7 +24,8 @@
 
   const modules = {};
   // level: home | subject | subtopic | session | review | quiz | component
-  const st = { level: "home", subject: null, subtopic: null, session: null, comp: null, active: null };
+  const st = { level: "home", subject: null, subtopic: null, session: null, comp: null, active: null, returnTo: null };
+  const PANELS = ["settings", "outbox"];   // off-tree screens (top bar); Back returns to where you were
   const HB = window.HB = { icon, modules, state: st };
 
   HB.registerModule = (name, mod) => { modules[name] = mod; };
@@ -72,16 +75,19 @@
       case "subtopic": return { level: "subject", subject: st.subject };
       case "session": return { level: "subtopic", subject: st.subject, subtopic: st.subtopic };
       case "review": case "quiz": case "component": return { level: "session", ...here() };
+      case "settings": case "outbox": return st.returnTo || { level: "home" };
       default: return null;
     }
   }
 
   function crumbs() {
     const parts = ["Home"];
-    [st.subject, st.subtopic, st.session].forEach(x => { if (x) parts.push(x.title); });
+    if (!PANELS.includes(st.level)) [st.subject, st.subtopic, st.session].forEach(x => { if (x) parts.push(x.title); });
     if (st.level === "review") parts.push("Review");
     if (st.level === "quiz") parts.push("Quiz");
     if (st.level === "component") parts.push(st.session.components[st.comp].title.replace(/^\d+\.\s*/, ""));
+    if (st.level === "settings") parts.push("Settings");
+    if (st.level === "outbox") parts.push("Outbox");
     return parts;
   }
 
@@ -125,7 +131,7 @@
     window.TOPICS.forEach(t => {
       const b = document.createElement("button");
       b.type = "button"; b.className = "tile"; b.dataset.subject = t.id;
-      b.innerHTML = `${icon(t.icon, "tile-ic")}<span class="tile-title">${t.title}</span><span class="tile-blurb">${t.blurb}</span>`;
+      b.innerHTML = `${(t.homeIcon && window.ANIME_ICONS && ANIME_ICONS[t.homeIcon]) || icon(t.icon, "tile-ic")}<span class="tile-title">${t.title}</span><span class="tile-blurb">${t.blurb}</span>`;
       b.onclick = () => HB.go({ level: "subject", subject: t });
       g.appendChild(b);
     });
@@ -157,8 +163,18 @@
   }
 
   HB.go = function (t) {
+    if (PANELS.includes(t.level)) {
+      if (!PANELS.includes(st.level)) st.returnTo = { level: st.level, subject: st.subject, subtopic: st.subtopic, session: st.session, comp: st.comp };
+      const about = [st.subject, st.subtopic, st.session].filter(Boolean).map(x => x.title).join(" › ");
+      leaveActive(); HB.stopAudio();
+      st.level = t.level;
+      const mod = modules[t.level]; showView(mod.view); st.active = mod; updateNav();
+      mod.enter({ opts: t.opts || {}, about: (st.returnTo && st.returnTo.subject) ? about : "" });
+      return;
+    }
     leaveActive();
     HB.stopAudio();
+    st.returnTo = null;
     st.level = t.level; st.subject = t.subject || null; st.subtopic = t.subtopic || null; st.session = t.session || null;
     st.comp = t.level === "component" ? t.comp : null;
     if (t.level === "home") showView("view-home");
@@ -201,6 +217,8 @@
     $("navHome").onclick = HB.home;
     $("navBack").onclick = HB.back;
     $("navNext").onclick = HB.next;
+    $("navSettings").onclick = () => HB.go({ level: "settings" });
+    $("navOutbox").onclick = () => HB.go({ level: "outbox" });
     $("sessReviewBtn").onclick = HB.goReview;
     $("sessQuizBtn").onclick = HB.goQuiz;
     $("homeHelloBtn").onclick = () => {

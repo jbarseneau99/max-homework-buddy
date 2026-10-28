@@ -85,6 +85,13 @@
   .tile::after { content:""; position:absolute; left:0; top:0; bottom:0; width:3px; background:var(--gold); opacity:.85; }
   .tile:hover:not(:disabled) { border-color:var(--gold); box-shadow:0 0 22px rgba(255,194,61,.25); }
   .tile .tile-ic { width:40px; height:40px; color:var(--cyan2); }
+  .tile .anime-ic { width:60px; height:60px; overflow:visible; }
+  .tile:hover .anime-ic { filter:drop-shadow(0 0 6px rgba(76,201,240,.6)); }
+  .anime-ic .am-spin { transform-box:view-box; transform-origin:32px 32px; animation:amspin 24s linear infinite; }
+  .anime-ic .am-pulse { animation:ampulse 2.4s ease-in-out infinite; }
+  @keyframes amspin { to { transform:rotate(360deg); } }
+  @keyframes ampulse { 0%,100% { opacity:.85; } 50% { opacity:1; } }
+  @media (prefers-reduced-motion: reduce) { .anime-ic .am-spin, .anime-ic .am-pulse { animation:none; } }
   .tile-title { font-size:1.45rem; font-weight:800; }
   .tile-blurb { font-weight:500; color:var(--muted); font-size:.95rem; line-height:1.35; }
   .home-foot { display:flex; justify-content:center; margin-top:16px; }
@@ -295,6 +302,35 @@
   .scan .part.on.has-hot [data-sub]:not(.hot) { opacity:.3; }
   .scan .p-muscles .hot path { fill:#ff8a96 !important; }
   .scan [data-sub="capillaries"] path { fill:none; stroke:#b36ad6; stroke-width:1.3; }
+  .navbtn.icon-only { padding:0 13px; }
+  @media (max-width:420px) { .topnav { gap:6px; padding-left:8px; padding-right:8px; } .navbtn, .navbtn.icon-only { padding:0 11px; } }
+  .set-grid { display:grid; gap:14px; margin-top:12px; }
+  .set-sec { margin-top:14px; }
+  .set-blurb { color:var(--muted); margin:6px 0 10px; }
+  .set-field { display:flex; flex-direction:column; gap:6px; margin:0 0 12px; }
+  .set-field span { font-weight:700; font-size:.95rem; }
+  .set-field input, .set-field textarea { font:inherit; font-size:16px; color:var(--ink); background:rgba(4,10,24,.75); border:1px solid rgba(76,201,240,.45); border-radius:10px; padding:12px 14px; min-height:50px; width:100%; }
+  .set-field textarea { min-height:160px; resize:vertical; line-height:1.4; }
+  .set-field input:focus, .set-field textarea:focus { outline:none; border-color:var(--gold); box-shadow:0 0 12px rgba(255,194,61,.3); }
+  .set-field input.bad { border-color:var(--bad); }
+  .set-err { color:#ff9aa9; min-height:1em; }
+  .set-actions { display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
+  .set-status { color:var(--ok); font-weight:600; }
+  .set-status.err { color:#ff9aa9; }
+  .ob-grid { display:grid; grid-template-columns:minmax(0,1.4fr) minmax(0,1fr); gap:14px; margin-top:12px; align-items:start; }
+  @media (max-width:760px) { .ob-grid { grid-template-columns:1fr; } }
+  .ob-label { font-size:.74rem; letter-spacing:.16em; text-transform:uppercase; color:var(--cyan); font-weight:700; margin:2px 0 8px; }
+  .ob-rcpts { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:14px; }
+  .ob-rcpt { display:flex; align-items:center; gap:10px; border:1px solid rgba(76,201,240,.45); border-radius:10px; padding:10px 14px; min-height:54px; cursor:pointer; background:rgba(20,40,78,.6); }
+  .ob-rcpt input { width:22px; height:22px; accent-color:#ffc23d; }
+  .ob-rcpt span { display:flex; flex-direction:column; } .ob-rcpt small { color:var(--muted); }
+  .ob-none { color:var(--muted); margin-bottom:14px; display:flex; flex-direction:column; gap:8px; align-items:flex-start; }
+  .ob-tpls { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:14px; }
+  .ob-sent-top { display:flex; justify-content:space-between; align-items:center; gap:8px; }
+  .ob-sent { list-style:none; margin:8px 0 0; padding:0; display:grid; gap:8px; max-height:420px; overflow:auto; }
+  .ob-sent li { border:1px solid var(--line); border-radius:10px; padding:10px 12px; background:rgba(4,10,24,.5); display:flex; flex-direction:column; gap:4px; }
+  .ob-sent .ob-sent-h { display:flex; justify-content:space-between; gap:8px; flex-wrap:wrap; } .ob-sent small { color:var(--muted); }
+  .ob-sent .ob-empty { color:var(--muted); }
   .cs { text-align:center; padding:40px 18px; }
   .cs .ic { width:44px; height:44px; color:var(--muted); }
   #toolbarHolder { display:none; }
@@ -306,6 +342,8 @@
   <button id="navHome" class="navbtn" type="button" data-icon="home"><span class="lbl">Home</span></button>
   <button id="navBack" class="navbtn" type="button" data-icon="back"><span class="lbl">Back</span></button>
   <div class="crumbs" id="crumbs" aria-label="Breadcrumb"></div>
+  <button id="navOutbox" class="navbtn icon-only" type="button" data-icon="mail" aria-label="Outbox" title="Outbox"></button>
+  <button id="navSettings" class="navbtn icon-only" type="button" data-icon="gear" aria-label="Settings" title="Settings"></button>
   <button id="navNext" class="navbtn btn-cyan" type="button" data-icon="next"><span class="lbl" id="navNextLabel">Next</span></button>
 </nav>
 <main class="wrap">
@@ -415,7 +453,7 @@
       <div class="eyebrow">Quiz complete</div>
       <div class="big" id="mqEndScore">0 / 5</div>
       <p id="mqEndMsg"></p>
-      <div class="row"><button id="mqAgain" type="button" class="btn-gold">Try again</button><button id="mqReview" type="button" class="btn-cyan">Back to review</button></div>
+      <div class="row"><button id="mqEmail" type="button" class="btn-cyan" data-icon="mail"> Email my results</button><button id="mqAgain" type="button" class="btn-gold">Try again</button><button id="mqReview" type="button" class="btn-cyan">Back to review</button></div>
     </div>
   </section>
 
@@ -470,7 +508,8 @@
       <div class="anat-actions">
         <button id="anatQuizBtn" type="button">I'm ready — quiz me</button>
         <button id="anatNextBtn" type="button" disabled>Next ›</button>
-        <button id="anatBackBtn" type="button">‹ Back to subtopic</button>
+        <button id="anatEmailBtn" type="button" class="btn-cyan" hidden>Email my results</button>
+        <button id="anatBackBtn" type="button">‹ Back to session</button>
       </div>
     </div>
   </section>
@@ -501,7 +540,46 @@
       <div class="big" id="mxEndScore">0 / 15</div>
       <p id="mxEndMsg"></p>
       <ul id="mxMissed" class="mx-missed"></ul>
-      <div class="row"><button id="mxAgain" type="button" class="btn-gold">Try again</button><button id="mxReview" type="button" class="btn-cyan">Back to review</button></div>
+      <div class="row"><button id="mxEmail" type="button" class="btn-cyan" data-icon="mail"> Email my results</button><button id="mxAgain" type="button" class="btn-gold">Try again</button><button id="mxReview" type="button" class="btn-cyan">Back to review</button></div>
+    </div>
+  </section>
+
+  <!-- ===== SETTINGS (schema-driven, localStorage only) ===== -->
+  <section id="view-settings" class="view" hidden>
+    <div class="eyebrow">Settings</div>
+    <h2 class="h2">Settings</h2>
+    <p class="set-blurb">Everything here is stored only in this browser on this device. Nothing is uploaded.</p>
+    <div id="settingsSections" class="set-grid"></div>
+    <div class="glass-card set-sec">
+      <div class="eyebrow">Outbox · Sent log</div>
+      <p class="set-blurb" id="settingsSentInfo"></p>
+      <button id="settingsToOutbox" type="button" class="btn-cyan" data-icon="mail"> Open Outbox</button>
+    </div>
+  </section>
+
+  <!-- ===== OUTBOX (outbound only: opens a prefilled mailto:, keeps a local Sent log) ===== -->
+  <section id="view-outbox" class="view" hidden>
+    <div class="eyebrow">Outbox · outbound only</div>
+    <h2 class="h2">Compose a message</h2>
+    <div class="ob-grid">
+      <div class="glass-card">
+        <div class="ob-label">To</div>
+        <div id="obRecipients" class="ob-rcpts"></div>
+        <div id="obNoRecipients" class="ob-none" hidden>No saved addresses yet. <button id="obToSettings" type="button" class="btn-cyan">Add them in Settings › Correspondence</button></div>
+        <div class="ob-label">Quick templates</div>
+        <div class="ob-tpls">
+          <button id="obTplResults" type="button">Send my latest quiz results</button>
+          <button id="obTplQuestion" type="button">I have a question about …</button>
+        </div>
+        <label class="set-field"><span>Subject</span><input id="obSubject" type="text" autocomplete="off"></label>
+        <label class="set-field"><span>Message</span><textarea id="obBody" rows="8"></textarea></label>
+        <div class="set-actions"><button id="obSend" type="button" class="btn-gold" data-icon="mail"> Send</button><span id="obStatus" class="set-status" aria-live="polite"></span></div>
+        <p class="set-blurb">Send opens your email app with the message filled in. You press send there.</p>
+      </div>
+      <div class="glass-card">
+        <div class="ob-sent-top"><div class="ob-label">Sent log (this device) · <span id="obSentCount">0</span></div><button id="obClear" type="button">Clear</button></div>
+        <ul id="obSent" class="ob-sent"></ul>
+      </div>
     </div>
   </section>
 
@@ -563,6 +641,7 @@
 <script src="explore_data.js"></script>
 <script src="maxtopics_data.js"></script>
 <script src="sessions_data.js"></script>
+<script src="anime_icons.js"></script>
 <script src="topics.js"></script>
 <script src="core.js"></script>
 <script src="math_review.js"></script>
@@ -571,6 +650,7 @@
 <script src="explore_app.js"></script>
 <script src="maxquiz.js"></script>
 <script src="spelling.js"></script>
+<script src="settings.js"></script>
 <script>HB.start();</script>
 </body>
 </html>

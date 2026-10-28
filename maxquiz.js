@@ -85,6 +85,8 @@
     $("mxCard").hidden = true; $("mxEnd").hidden = false;
     $("mxEndScore").textContent = `${st.score} / ${n()}`;
     $("mxEndMsg").textContent = d.text;
+    if (HB.recordResult) HB.recordResult({ score: st.score, total: n(),
+      details: Q.questions.map((q, i) => `${st.results[i] && st.results[i].ok ? "✓" : "✗"} ${q.q}`) });
     $("mxBar").style.width = "100%";
     const missed = Q.questions.map((q, i) => ({ q, r: st.results[i] })).filter(x => x.r && !x.r.ok);
     $("mxMissed").innerHTML = missed.length ? "<div class='eyebrow'>Review these</div>" + missed.map(x => `<li>${x.q.explain}</li>`).join("") : "";
@@ -111,6 +113,7 @@
   };
   $("mxPrev").onclick = () => { if (st.i > 0) { st.i--; render(false); } };
   $("mxNext").onclick = () => { if (st.i < n() - 1) { st.i++; render(true); } else finish(); };
+  $("mxEmail").onclick = () => HB.emailResults();
   $("mxAgain").onclick = () => { reset(); document.querySelectorAll("#mxPad button").forEach(b => b.disabled = false); render(true); };
   $("mxReview").onclick = () => HB.goReview();
 
