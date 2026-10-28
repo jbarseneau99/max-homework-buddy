@@ -2,193 +2,505 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="icon" href="data:," />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <title>Max's Homework Buddy — Math, Spelling &amp; Anatomy</title>
 <style>
   :root {
-    --bg:#0b1b3a; --card:#1a2f55; --ink:#fff8f0; --muted:#b8c7e0;
-    --accent:#ffb703; --sky:#4cc9f0; --ok:#80ed99; --line:#7aa2d6; --pink:#ef476f;
+    --bg:#060b1a; --glass:rgba(10,18,38,.72); --glass-solid:#0c1630; --panel2:rgba(14,26,54,.78);
+    --ink:#eaf2ff; --muted:#93a6c6; --cyan:#4cc9f0; --cyan2:#7fe7ff; --gold:#ffc23d; --gold2:#ffd166;
+    --ok:#5ef2a0; --bad:#ff5d73; --line:rgba(76,201,240,.22); --r:12px;
+    --font: "Inter", "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Roboto, Arial, sans-serif;
   }
-  * { box-sizing: border-box; }
+  * { box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+  html { background:#060b1a; }
   body {
-    margin:0; min-height:100vh; font-family:"Segoe UI", system-ui, sans-serif;
-    background: radial-gradient(circle at top, #274690, var(--bg));
-    color: var(--ink); display:flex; align-items:center; justify-content:center; padding:20px;
+    margin:0; min-height:100vh; font-family:var(--font); color:var(--ink); letter-spacing:.01em;
+    display:flex; justify-content:center; align-items:flex-start;
+    padding:84px 16px 28px; padding-top:calc(84px + env(safe-area-inset-top));
   }
+  /* full-page fixed background (iOS ignores background-attachment:fixed, so use a fixed layer) */
+  .bg { position:fixed; inset:0; z-index:-2; background:#060b1a url("img/bg.jpg") center/cover no-repeat; }
+  .bg::after { content:""; position:absolute; inset:0; background:linear-gradient(180deg, rgba(4,8,20,.55), rgba(4,8,20,.72)); }
   .wrap {
-    width:min(820px,100%); background:var(--card); border-radius:24px;
-    padding:24px; box-shadow:0 24px 70px rgba(0,0,0,.4);
-    border:3px solid rgba(255,183,3,.35);
+    width:min(1000px,100%); background:var(--glass-solid); border-radius:16px; padding:22px 22px 26px;
+    border:2px solid rgba(255,194,61,.75); box-shadow:0 0 0 1px rgba(255,194,61,.18), 0 0 28px rgba(255,194,61,.12), 0 30px 80px rgba(0,0,0,.55);
   }
-  .brand {
-    text-align:center; margin:0 0 8px; font-size:clamp(1.6rem,4vw,2.2rem); font-weight:800;
-    background: linear-gradient(90deg, #ffd166, #ef476f, #4cc9f0);
-    -webkit-background-clip:text; background-clip:text; color:transparent;
+  @supports ((backdrop-filter: blur(8px)) or (-webkit-backdrop-filter: blur(8px))) {
+    .wrap { background:var(--glass); -webkit-backdrop-filter:blur(14px) saturate(1.2); backdrop-filter:blur(14px) saturate(1.2); }
   }
-  .sub { text-align:center; color:var(--muted); margin:0 0 14px; }
-  .meta { text-align:center; margin:0 0 12px; color:#d7e6ff; font-weight:700; }
-  .stage {
-    background:#0a162d; border-radius:18px; padding:22px 12px;
-    margin-bottom:16px; border:1px solid #35507a; overflow-x:auto;
+  .ic { width:22px; height:22px; flex:none; vertical-align:middle; }
+
+  /* ---------- top nav ---------- */
+  .topnav {
+    position:fixed; top:0; left:0; right:0; z-index:50; display:flex; align-items:center; gap:10px;
+    padding:10px 14px; padding-top:calc(10px + env(safe-area-inset-top));
+    background:rgba(6,12,28,.86); border-bottom:1px solid rgba(255,194,61,.45);
   }
-  .ld {
-    display:grid; grid-template-columns: auto auto repeat(3, 1.6rem);
-    gap:0; justify-content:center; font-family:"Courier New", Courier, monospace;
-    font-size:clamp(1.25rem, 3.8vw, 1.85rem); font-weight:700; line-height:1.15;
-    width:max-content; margin:0 auto;
+  @supports ((backdrop-filter: blur(8px)) or (-webkit-backdrop-filter: blur(8px))) {
+    .topnav { background:rgba(6,12,28,.62); -webkit-backdrop-filter:blur(12px); backdrop-filter:blur(12px); }
   }
-  .cell { width:1.6rem; height:1.7rem; display:flex; align-items:center; justify-content:center; }
-  .cell.hl { color:var(--accent); }
-  .cell.sky { color:var(--sky); }
-  .cell.ok { color:var(--ok); }
-  .cell.muted { color:#8fa6c9; }
-  .span-div { grid-column:1 / 2; padding-right:.35rem; justify-content:flex-end; width:auto; min-width:2.4rem; }
-  .paren {
-    grid-column:2 / 3; width:1.1rem;
-    border-right:3px solid var(--line); border-top:3px solid var(--line); border-top-right-radius:10px;
+  .navbtn { display:inline-flex; align-items:center; gap:8px; min-height:50px; padding:0 16px; }
+  #navHome { color:#1a1200; background:var(--gold); border-color:var(--gold); font-weight:800; }
+  #navHome:hover:not(:disabled) { box-shadow:0 0 16px rgba(255,194,61,.55); }
+  #navNext { margin-left:auto; flex-direction:row-reverse; }
+  .crumbs { flex:1; min-width:0; font-size:.92rem; color:var(--muted); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; text-align:center; }
+  .crumbs .sep { margin:0 8px; color:var(--cyan); opacity:.7; }
+  .crumbs .here { color:var(--ink); font-weight:700; }
+  @media (max-width:640px) {
+    .navbtn .lbl { display:none; } .navbtn { padding:0 14px; }
+    .crumbs { font-size:.8rem; }
   }
-  .qbar { border-top:3px solid var(--line); }
-  .rule { border-top:2px solid var(--ok); }
-  .narration {
-    min-height:78px; background:#10203d; border-radius:14px; padding:14px 16px;
-    color:#eef4ff; margin-bottom:14px; border-left:5px solid var(--sky); font-size:1.05rem;
-  }
-  .controls { display:flex; flex-wrap:wrap; gap:10px; align-items:center; }
+
+  /* ---------- base controls ---------- */
   button {
-    appearance:none; border:none; border-radius:999px; padding:12px 18px;
-    font-size:1rem; font-weight:700; cursor:pointer;
+    appearance:none; font-family:inherit; font-size:1rem; font-weight:700; cursor:pointer; color:var(--ink);
+    border-radius:10px; border:1px solid rgba(76,201,240,.45); background:rgba(20,40,78,.75); padding:12px 18px;
+    min-height:48px; transition:box-shadow .2s, border-color .2s, background .2s, transform .1s;
   }
-  #startBtn { background:var(--accent); color:#1b1200; }
-  #nextBtn { background:#35507a; color:var(--ink); }
-  #testAudioBtn { background:#7b2cbf; color:white; }
-  #startAudioBtn { background:#ff6b6b; color:white; box-shadow:0 0 0 3px rgba(255,107,107,.35); }
-  #startAudioBtn.ready { background:#80ed99; color:#062816; box-shadow:none; }
-  #nextExerciseBtn { background:#80ed99; color:#062816; }
-  button:disabled { opacity:.45; cursor:not-allowed; }
-  .progress { margin-top:12px; color:var(--muted); font-size:.95rem; }
-  .audio-wrap {
-    display:inline-flex; align-items:center; gap:10px;
-    background:#10203d; border-radius:999px; padding:8px 12px 8px 14px;
-    border:1px solid #35507a;
+  button:hover:not(:disabled) { border-color:var(--cyan2); box-shadow:0 0 14px rgba(76,201,240,.35); }
+  button:active:not(:disabled) { transform:translateY(1px); }
+  button:disabled { opacity:.38; cursor:not-allowed; }
+  .btn-gold { background:var(--gold); color:#1a1200; border-color:var(--gold); }
+  .btn-gold:hover:not(:disabled) { box-shadow:0 0 18px rgba(255,194,61,.55); border-color:var(--gold2); }
+  .btn-cyan { background:rgba(76,201,240,.18); border-color:var(--cyan); color:var(--cyan2); }
+  [hidden] { display:none !important; }
+  h1, h2, h3 { margin:0; }
+  .brand { text-align:center; font-size:clamp(1.6rem,4vw,2.3rem); font-weight:800; letter-spacing:.02em; color:var(--ink); margin:2px 0 4px; }
+  .brand span { color:var(--gold); }
+  .eyebrow { text-transform:uppercase; letter-spacing:.18em; font-size:.74rem; color:var(--cyan); font-weight:700; }
+  .sub { text-align:center; color:var(--muted); margin:0 0 16px; }
+  .h2 { font-size:clamp(1.3rem,3vw,1.7rem); font-weight:800; margin:4px 0 6px; }
+  .glass-card { background:rgba(8,16,36,.7); border:1px solid var(--line); border-radius:var(--r); padding:18px; }
+
+  /* ---------- home ---------- */
+  .home-head { text-align:center; margin-bottom:18px; }
+  .greet { color:var(--muted); margin:6px 0 0; font-size:1.05rem; }
+  .tiles { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; }
+  .tile {
+    display:flex; flex-direction:column; align-items:flex-start; gap:8px; text-align:left; min-height:170px; padding:20px;
+    background:linear-gradient(160deg, rgba(20,42,84,.85), rgba(8,16,36,.85)); border:1px solid rgba(76,201,240,.35); border-radius:14px;
+    position:relative; overflow:hidden;
   }
-  .audio-label { font-weight:700; font-size:.95rem; min-width:4.5rem; }
-  .switch {
-    position:relative; width:56px; height:30px; border-radius:999px;
-    background:#5a6b88; cursor:pointer; border:none; padding:0; transition:background .2s;
+  .tile::after { content:""; position:absolute; left:0; top:0; bottom:0; width:3px; background:var(--gold); opacity:.85; }
+  .tile:hover:not(:disabled) { border-color:var(--gold); box-shadow:0 0 22px rgba(255,194,61,.25); }
+  .tile .tile-ic { width:40px; height:40px; color:var(--cyan2); }
+  .tile-title { font-size:1.45rem; font-weight:800; }
+  .tile-blurb { font-weight:500; color:var(--muted); font-size:.95rem; line-height:1.35; }
+  .home-foot { display:flex; justify-content:center; margin-top:16px; }
+  @media (max-width:700px) { .tiles { grid-template-columns:1fr; } .tile { min-height:0; } }
+
+  /* ---------- topic / subtopic screens ---------- */
+  .hero { display:flex; align-items:center; gap:16px; margin-bottom:16px; }
+  .hero-ic { width:56px; height:56px; color:var(--cyan2); padding:10px; border:1px solid var(--line); border-radius:12px; background:rgba(76,201,240,.08); }
+  .hero p { margin:4px 0 0; color:var(--muted); }
+  .big-actions { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; }
+  .action {
+    display:flex; flex-direction:column; align-items:flex-start; gap:6px; text-align:left; padding:20px; min-height:130px; border-radius:14px;
   }
-  .switch.on { background:#80ed99; }
-  .switch .knob {
-    position:absolute; top:3px; left:3px; width:24px; height:24px; border-radius:50%;
-    background:white; transition:transform .2s; box-shadow:0 1px 4px rgba(0,0,0,.35);
+  .action .ic { width:30px; height:30px; }
+  .action b { font-size:1.3rem; }
+  .action small { font-weight:500; color:inherit; opacity:.8; font-size:.92rem; }
+  .action.review { background:rgba(76,201,240,.12); border-color:var(--cyan); color:var(--ink); }
+  .action.review .ic { color:var(--cyan2); }
+  .action.quiz { background:linear-gradient(160deg, #ffcc4d, #f0a91c); color:#1a1200; border-color:var(--gold); }
+  @media (max-width:640px) { .big-actions { grid-template-columns:1fr; } }
+  .card-list { display:grid; gap:10px; }
+  .card-btn {
+    display:flex; align-items:center; gap:14px; text-align:left; padding:16px 18px; min-height:76px; border-radius:12px;
+    background:rgba(14,28,58,.8); border:1px solid rgba(76,201,240,.35);
   }
-  .switch.on .knob { transform:translateX(26px); }
-  .audio-bank { display:none; }
-  #nowPlaying { width:100%; margin:8px 0 12px; }
-  .tabs {
-    display:flex; gap:8px; margin:0 0 18px; padding:6px;
-    background:#10203d; border:1px solid #35507a; border-radius:999px;
-  }
-  .tab {
-    flex:1; padding:10px 16px; background:transparent; color:var(--muted);
-    border:1px solid transparent; transition:background .2s, color .2s, border-color .2s;
-  }
-  .tab:hover { color:var(--ink); background:#243e6b; }
-  .tab.active { background:var(--accent); color:#1b1200; border-color:#ffd166; }
-  .tab-panel[hidden] { display:none; }
-  .anatomy-card {
-    background:#0a162d; border-radius:18px; padding:22px 18px;
-    border:1px solid #35507a; text-align:center;
-  }
-  .anatomy-progress { color:var(--muted); font-size:.95rem; margin-bottom:10px; }
-  .anatomy-card h2 { margin:8px 0; color:#ffd166; font-size:clamp(1.35rem,4vw,1.9rem); }
-  .anatomy-clue { min-height:48px; color:#eef4ff; margin:0 auto 18px; font-size:1.05rem; }
-  .anatomy-options { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; max-width:560px; margin:0 auto 16px; }
-  .anatomy-option { background:#35507a; color:var(--ink); border:2px solid transparent; }
-  .anatomy-option:hover:not(:disabled) { background:#4b6895; }
-  .anatomy-option.correct { background:#80ed99; color:#062816; border-color:#b8ffc8; }
-  .anatomy-option.incorrect { background:#ef476f; color:white; border-color:#ff91a9; }
-  .anatomy-feedback { min-height:28px; margin:8px 0 14px; color:#ffd166; font-weight:700; }
-  #anatomyNextBtn { background:var(--accent); color:#1b1200; }
-  .anat-bar { display:flex; flex-wrap:wrap; gap:10px; justify-content:center; align-items:center; margin:0 0 14px; }
-  #anatAudioBtn { background:#ff6b6b; color:white; box-shadow:0 0 0 3px rgba(255,107,107,.35); }
-  #anatAudioBtn.ready { background:#80ed99; color:#062816; box-shadow:none; }
-  #anatSoundBtn, #anatReplayBtn, #anatBackBtn { background:#35507a; color:var(--ink); }
-  .anat-score { background:#10203d; border:1px solid #35507a; border-radius:999px; padding:8px 14px; font-weight:800; color:#ffd166; }
+  .card-btn .num { font-family:ui-monospace, "SF Mono", Menlo, Consolas, monospace; color:var(--gold); font-size:.95rem; width:26px; }
+  .card-btn .card-ic { width:30px; height:30px; color:var(--cyan2); }
+  .card-txt { flex:1; display:flex; flex-direction:column; gap:3px; }
+  .card-txt b { font-size:1.12rem; } .card-txt small { color:var(--muted); font-weight:500; }
+  .card-btn .chev { color:var(--muted); }
+  .card-btn.soon { opacity:.42; border-style:dashed; cursor:default; color:var(--muted); }
+  .topic-meta { color:var(--muted); font-size:.92rem; margin:10px 0 16px; }
+  .toolbar-slot:empty { display:none; }
+  .toolbar-slot { margin:0 0 14px; }
+
+  /* ---------- anatomy shared bar + quiz ---------- */
+  .anat-bar { display:flex; flex-wrap:wrap; gap:10px; justify-content:center; align-items:center; }
+  #anatAudioBtn { background:rgba(255,93,115,.18); border-color:var(--bad); color:#ffd3da; }
+  #anatAudioBtn.ready { background:rgba(94,242,160,.15); color:var(--ok); border-color:var(--ok); }
+  .anat-score { border:1px solid rgba(255,194,61,.5); border-radius:10px; padding:10px 14px; font-weight:800; color:var(--gold); }
+  .anat-score[hidden] { display:none; }
+  body:not([data-level="quiz"]) #anatScore { display:none; }
+  #anatPlayer, #mqPlayer { display:none; }
+  .anatomy-card { background:rgba(8,16,36,.7); border-radius:var(--r); padding:22px 18px; border:1px solid var(--line); text-align:center; }
+  .anatomy-progress { color:var(--muted); font-size:.92rem; margin-bottom:8px; text-transform:uppercase; letter-spacing:.12em; }
+  .anatomy-card h2 { margin:8px 0; color:var(--gold2); font-size:clamp(1.35rem,4vw,1.8rem); }
+  .anatomy-options { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; max-width:600px; margin:0 auto 14px; }
+  .anatomy-option { min-height:58px; font-size:1.08rem; }
+  .anatomy-option.correct { background:rgba(94,242,160,.2); border-color:var(--ok); color:#c9ffe2; }
+  .anatomy-option.incorrect { background:rgba(255,93,115,.2); border-color:var(--bad); color:#ffd3da; }
+  .anatomy-feedback { min-height:26px; margin:8px auto 14px; color:var(--gold2); font-weight:600; max-width:640px; }
   .anat-set-title { color:var(--muted); margin:4px 0 12px; font-weight:700; }
   .lesson-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; max-width:560px; margin:0 auto; }
-  .lesson-btn { background:#35507a; color:var(--ink); border-radius:18px; padding:18px 12px; font-size:1.1rem; border:2px solid transparent; }
-  .lesson-btn:hover { background:#4b6895; border-color:#ffd166; }
-  .lesson-btn .big { display:block; font-size:2.4rem; margin-bottom:6px; }
-  .organ-emoji { font-size:clamp(3.2rem,12vw,4.8rem); line-height:1.1; margin:4px 0; }
-  .organ-list { color:#4cc9f0; font-weight:700; margin:-6px 0 12px; }
-  .anat-text { background:#10203d; border-radius:14px; padding:14px 16px; border-left:5px solid var(--sky); text-align:left; color:#eef4ff; margin:0 auto 14px; max-width:620px; font-size:1.05rem; min-height:52px; }
-  #anatQuizBtn { background:#7b2cbf; color:white; }
-  #anatNextBtn { background:var(--accent); color:#1b1200; }
+  .lesson-btn .big { display:block; font-size:1.6rem; }
+  .organ-emoji { display:none; }
+  .organ-list { color:var(--cyan2); font-weight:600; margin:-4px 0 12px; }
+  .anat-text { background:rgba(4,10,24,.6); border-radius:10px; padding:14px 16px; border-left:3px solid var(--cyan); text-align:left; margin:0 auto 14px; max-width:640px; font-size:1.05rem; min-height:52px; line-height:1.45; }
+  #anatQuizBtn { background:rgba(76,201,240,.18); border-color:var(--cyan); }
+  #anatNextBtn { background:var(--gold); color:#1a1200; border-color:var(--gold); }
   .anat-actions { display:flex; flex-wrap:wrap; gap:10px; justify-content:center; }
-  #anatPlayer { display:none; }
-  @media (max-width:520px) { .lesson-grid { grid-template-columns:1fr; } }
-  @media (max-width:520px) { .anatomy-options { grid-template-columns:1fr; } }
+  @media (max-width:520px) { .anatomy-options, .lesson-grid { grid-template-columns:1fr; } }
+
+  /* ---------- body scanner ---------- */
+  .ex-head { display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; margin-bottom:12px; }
+  .scan-stage { display:grid; grid-template-columns:minmax(0,1.25fr) minmax(220px,.9fr); gap:0; align-items:start;
+    background:radial-gradient(ellipse at 40% 40%, rgba(76,201,240,.10), rgba(4,10,24,.75) 70%); border:1px solid var(--line); border-radius:var(--r); padding:8px; }
+  #scanSvgWrap { width:100%; }
+  svg.scan { display:block; width:100%; height:auto; max-height:72vh; }
+  .scan .hud-frame path { fill:none; stroke:var(--cyan); stroke-width:2; opacity:.7; }
+  .scan .sil { fill:url(#gBody); stroke:#6fdcff; stroke-width:1.3; stroke-opacity:.75; }
+  .scan .part { transition:opacity .45s; }
+  .scan .p-brain > path:first-child { fill:url(#gBrain); }
+  .scan .p-brain .gyri { fill:none; stroke:#9a5f68; stroke-width:1.2; }
+  .scan .sclera { fill:#eef3f7; } .scan .iris { fill:#3d7fa6; }
+  .scan .p-mouth path { fill:#b86a70; }
+  .scan .p-lungs path { fill:url(#gLung); stroke:#7a2f3b; stroke-width:.8; } .scan .p-lungs .lobe { fill:none; stroke:#7a2f3b; }
+  .scan .p-heart path { fill:url(#gHeart); stroke:#5a0e1a; stroke-width:.8; } .scan .p-heart .aorta { fill:none; stroke:#c0283f; stroke-width:5; stroke-linecap:round; }
+  .scan .p-liver path { fill:url(#gLiver); stroke:#3e120d; stroke-width:.8; }
+  .scan .p-stomach path { fill:url(#gStom); stroke:#8a4a3c; stroke-width:.8; }
+  .scan .p-largeint path { fill:none; stroke:#b8714f; stroke-width:9; stroke-linecap:round; stroke-linejoin:round; }
+  .scan .p-smallint path { fill:none; stroke:#e7a996; stroke-width:6; stroke-linecap:round; }
+  .scan .p-kidneys path { fill:url(#gKid); stroke:#4a0f17; stroke-width:.8; }
+  .scan .p-bladder path { fill:url(#gBlad); stroke:#7a5c14; stroke-width:.8; }
+  .scan .p-ureters path { fill:none; stroke:#e3c46a; stroke-width:2; }
+  .scan .p-esophagus path { fill:none; stroke:#c98a7a; stroke-width:4.5; stroke-linecap:round; }
+  .scan .p-epiglottis path { fill:#e58a98; stroke:#8a2f3d; stroke-width:.8; }
+  .scan .p-trachea .tube { fill:none; stroke:#bcd3dc; stroke-width:6; stroke-linecap:round; } .scan .p-trachea .ring { stroke:#7f99a6; stroke-width:1.2; }
+  .scan .p-vessels path { fill:none; stroke-width:2.2; stroke-linecap:round; } .scan .p-vessels .art { stroke:#e2364f; } .scan .p-vessels .vein { stroke:#3b6fd8; }
+  .scan .p-nerves path, .scan .p-spine path { fill:none; stroke:#f5c84c; stroke-width:1.6; } .scan .p-spine path { stroke-width:3.2; }
+  .scan .p-bones { fill:none; stroke:#e9e2cf; stroke-width:3.4; stroke-linecap:round; } .scan .p-bones rect { fill:#e9e2cf; stroke:none; } .scan .p-bones circle { fill:#e9e2cf; stroke:none; }
+  .scan .p-muscles path { fill:#b0414e; stroke:#6d1a24; stroke-width:.8; }
+  .scan .faint { opacity:.28; }
+  .scan .layer { opacity:0; }
+  .scan.bones-on .p-bones { opacity:.75; }
+  .scan.focus .part:not(.on):not(.p-skin):not(.layer) { opacity:.2; }
+  .scan.focus .layer:not(.on) { opacity:0; }
+  .scan.focus.bones-on .p-bones:not(.on) { opacity:.3; }
+  .scan.focus .p-skin:not(.on) { opacity:.8; }
+  .scan .part.on { opacity:1; filter:url(#glow); animation:pulse 1.8s ease-in-out infinite; }
+  .scan .p-skin.on .sil { stroke:var(--cyan2); stroke-width:3; stroke-opacity:1; }
+  @keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:.72; } }
+  .scan .flowgrp { display:none; } .scan .flowgrp.show { display:inline; }
+  .scan .flow-track { fill:none; stroke-width:3; stroke-opacity:.25; stroke-linecap:round; }
+  .scan .flow { fill:none; stroke-width:6; stroke-linecap:round; stroke-dasharray:.1 14; animation:flow 1.1s linear infinite; }
+  @keyframes flow { to { stroke-dashoffset:-14.1; } }
+  .scan .flowgrp[data-sys="respiratory"] .flow { animation:breathe 3.2s ease-in-out infinite alternate; }
+  @keyframes breathe { from { stroke-dashoffset:0; } to { stroke-dashoffset:-84.6; } }
+  .scan .flowgrp[data-sys="nervous"] .flow { animation-duration:.6s; stroke-width:4.5; }
+  .scan .lbl circle { fill:var(--cyan2); } .scan .lbl path { fill:none; stroke:var(--cyan2); stroke-width:.8; stroke-opacity:.8; }
+  .scan .lbl text { fill:#dff6ff; font:600 11px var(--font); letter-spacing:.04em; paint-order:stroke; stroke:#04101e; stroke-width:3px; }
+  .scan .reticle circle#retRing { fill:none; stroke:var(--cyan2); stroke-width:1.5; stroke-dasharray:4 3; animation:spin 6s linear infinite; transform-box:fill-box; transform-origin:center; }
+  .scan .reticle circle#retDot { fill:var(--cyan2); }
+  .scan .reticle line { stroke:var(--cyan2); stroke-width:1; stroke-dasharray:3 3; }
+  @keyframes spin { to { transform:rotate(360deg); } }
+  .scan .scanline { animation:scanmove 6s linear infinite; pointer-events:none; opacity:.45; }
+  @keyframes scanmove { from { transform:translateY(0); } to { transform:translateY(600px); } }
+  .callout { background:rgba(6,14,32,.92); border:1px solid var(--cyan); border-left:3px solid var(--cyan2); border-radius:10px; padding:14px 16px;
+    box-shadow:0 0 18px rgba(76,201,240,.2); transition:margin-top .35s ease; }
+  .callout .tag { font-family:ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size:.74rem; letter-spacing:.16em; color:var(--cyan); }
+  .callout h3 { font-size:1.35rem; margin:4px 0 6px; color:var(--gold2); }
+  .callout p { margin:0 0 8px; line-height:1.4; }
+  .callout .fact { color:var(--muted); font-size:.95rem; }
+  .parts-h { display:block; font-size:.74rem; letter-spacing:.16em; text-transform:uppercase; color:var(--cyan); margin:4px 0 6px; }
+  .chip { display:inline-block; border:1px solid var(--line); border-radius:8px; padding:4px 9px; margin:0 6px 6px 0; font-size:.88rem; color:var(--ink); background:rgba(76,201,240,.08); }
+  .walk-ctl { display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-top:12px; justify-content:center; }
+  .walk-ctl .count { font-family:ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size:1.2rem; color:var(--gold); min-width:80px; text-align:center; }
+  .walk-ctl button { min-height:56px; min-width:150px; }
+  .meter { height:4px; background:rgba(76,201,240,.15); border-radius:4px; overflow:hidden; margin-top:10px; }
+  .meter > div { height:100%; background:linear-gradient(90deg,var(--cyan),var(--gold)); width:0; transition:width .35s; }
+  .sys-btns { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:10px; margin-bottom:12px; }
+  .sys-btn { display:flex; align-items:center; gap:10px; justify-content:flex-start; min-height:56px; }
+  .sys-btn .dot { width:12px; height:12px; border-radius:3px; background:var(--c); box-shadow:0 0 10px var(--c); }
+  .sys-btn.active { border-color:var(--c); box-shadow:0 0 16px color-mix(in srgb, var(--c) 45%, transparent); background:rgba(255,255,255,.07); }
+  #bonesBtn[aria-pressed="true"] { border-color:var(--gold); color:var(--gold2); }
+  @media (max-width:700px) {
+    .scan-stage { grid-template-columns:1fr; } .callout { margin-top:8px !important; }
+    .scan .reticle line { display:none; } .sys-btns { grid-template-columns:repeat(2,minmax(0,1fr)); }
+    .walk-ctl button { min-width:0; flex:1; }
+  }
+  @media (prefers-reduced-motion: reduce) { .scan .scanline { display:none; } }
+
+  /* ---------- math review (existing) ---------- */
+  .meta { text-align:center; margin:0 0 12px; color:#d7e6ff; font-weight:700; }
+  .stage { background:rgba(4,10,24,.7); border-radius:var(--r); padding:22px 12px; margin-bottom:14px; border:1px solid var(--line); overflow-x:auto; }
+  .ld { display:grid; grid-template-columns:auto auto repeat(3,1.6rem); gap:0; justify-content:center; font-family:"Courier New", Courier, monospace;
+    font-size:clamp(1.25rem,3.8vw,1.85rem); font-weight:700; line-height:1.15; width:max-content; margin:0 auto; }
+  .cell { width:1.6rem; height:1.7rem; display:flex; align-items:center; justify-content:center; }
+  .cell.hl { color:var(--gold); } .cell.sky { color:var(--cyan2); } .cell.ok { color:var(--ok); } .cell.muted { color:#6f84a8; }
+  .span-div { grid-column:1 / 2; padding-right:.35rem; justify-content:flex-end; width:auto; min-width:2.4rem; }
+  .paren { grid-column:2 / 3; width:1.1rem; border-right:3px solid #7aa2d6; border-top:3px solid #7aa2d6; border-top-right-radius:10px; }
+  .qbar { border-top:3px solid #7aa2d6; } .rule { border-top:2px solid var(--ok); }
+  .narration { min-height:78px; background:rgba(4,10,24,.6); border-radius:10px; padding:14px 16px; margin-bottom:12px; border-left:3px solid var(--cyan); font-size:1.05rem; line-height:1.45; }
+  .controls { display:flex; flex-wrap:wrap; gap:10px; align-items:center; }
+  #startAudioBtn { background:rgba(255,93,115,.18); border-color:var(--bad); color:#ffd3da; }
+  #startAudioBtn.ready { background:rgba(94,242,160,.15); color:var(--ok); border-color:var(--ok); }
+  #startBtn, #nextBtn { background:var(--gold); color:#1a1200; border-color:var(--gold); }
+  #nextExerciseBtn { background:rgba(94,242,160,.15); border-color:var(--ok); color:var(--ok); }
+  .progress { margin-top:12px; color:var(--muted); font-size:.95rem; }
+  .audio-wrap { display:inline-flex; align-items:center; gap:10px; border:1px solid var(--line); border-radius:10px; padding:6px 12px; min-height:48px; }
+  .audio-label { font-weight:700; font-size:.95rem; min-width:4.5rem; }
+  .switch { position:relative; width:56px; min-height:30px; height:30px; border-radius:999px; background:#4a5a78; cursor:pointer; border:none; padding:0; }
+  .switch.on { background:var(--ok); }
+  .switch .knob { position:absolute; top:3px; left:3px; width:24px; height:24px; border-radius:50%; background:white; transition:transform .2s; }
+  .switch.on .knob { transform:translateX(26px); }
+  .audio-bank { display:none; }
+  #nowPlaying { width:100%; margin:4px 0 12px; height:36px; opacity:.8; }
+
+  /* ---------- math quiz ---------- */
+  .mq-top { display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap; margin-bottom:10px; }
+  .mq-score { border:1px solid rgba(255,194,61,.5); border-radius:10px; padding:10px 14px; font-weight:800; color:var(--gold); }
+  .mq-grid { display:grid; grid-template-columns:minmax(0,1fr) minmax(260px,330px); gap:16px; align-items:start; }
+  .mq-problem { text-align:center; padding:18px; }
+  .mq-eq { font-family:ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size:clamp(2.2rem,7vw,3.4rem); font-weight:800; margin:6px 0 14px; }
+  .mq-eq .op { color:var(--cyan2); margin:0 .3em; }
+  .mq-ans { display:flex; justify-content:center; align-items:center; gap:12px; flex-wrap:wrap; }
+  .mq-field { min-width:110px; min-height:72px; font-size:2rem; font-family:ui-monospace, "SF Mono", Menlo, Consolas, monospace; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:6px 14px; }
+  .mq-field small { font-family:var(--font); font-size:.7rem; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); font-weight:700; }
+  .mq-field.sel { border-color:var(--gold); box-shadow:0 0 16px rgba(255,194,61,.4); }
+  .mq-field.empty .v { color:#5a6f92; }
+  .mq-R { font-size:1.6rem; font-weight:800; color:var(--gold); }
+  .mq-feedback { min-height:52px; margin:14px 0 0; padding:12px 14px; border-radius:10px; background:rgba(4,10,24,.6); border-left:3px solid var(--cyan); text-align:left; line-height:1.4; }
+  .mq-feedback.ok { border-left-color:var(--ok); color:#c9ffe2; } .mq-feedback.bad { border-left-color:var(--bad); color:#ffd3da; }
+  .pad { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; }
+  .key { min-height:62px; font-size:1.5rem; font-family:ui-monospace, "SF Mono", Menlo, Consolas, monospace; }
+  .key.fn { color:var(--muted); font-size:1.2rem; }
+  .pad-actions { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:8px; }
+  .pad-actions button { min-height:58px; }
+  .mq-nav { display:flex; gap:10px; justify-content:space-between; margin-top:14px; flex-wrap:wrap; }
+  .mq-nav button { min-width:150px; min-height:54px; }
+  .mq-how { margin-top:12px; text-align:left; } .mq-how ol { margin:6px 0 0; padding-left:22px; line-height:1.6; font-family:ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size:.98rem; }
+  .mq-end { text-align:center; padding:30px 18px; }
+  .mq-end .big { font-family:ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size:3.4rem; font-weight:800; color:var(--gold); margin:8px 0; }
+  .mq-end .row { display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:16px; }
+  @media (max-width:760px) { .mq-grid { grid-template-columns:1fr; } }
+  .mx-q { font-size:clamp(1.2rem,3vw,1.5rem); font-weight:700; margin:0 0 4px; text-align:center; }
+  .mx-hint { color:var(--muted); text-align:center; margin:0 0 14px; }
+  .mx-opt.picked { border-color:var(--gold); box-shadow:0 0 14px rgba(255,194,61,.4); background:rgba(255,194,61,.12); }
+  .mx-num-wrap { display:flex; gap:16px; justify-content:center; align-items:flex-start; flex-wrap:wrap; margin-bottom:12px; }
+  .mx-num { cursor:default; min-width:160px; border:1px solid var(--gold); border-radius:10px; }
+  .mx-pad { width:min(320px,100%); }
+  .mx-missed { text-align:left; max-width:640px; margin:12px auto 0; line-height:1.5; color:var(--muted); }
+  .cs { text-align:center; padding:40px 18px; }
+  .cs .ic { width:44px; height:44px; color:var(--muted); }
+  #toolbarHolder { display:none; }
 </style>
 </head>
 <body>
-  <div class="wrap">
-    <nav class="tabs" aria-label="Subject tabs">
-      <button class="tab active" type="button" data-tab="math" aria-selected="true">Math</button>
-      <button class="tab" type="button" data-tab="spelling" aria-selected="false">Spelling</button>
-      <button class="tab" type="button" data-tab="anatomy" aria-selected="false">Anatomy</button>
-    </nav>
-    <h1 class="brand">Max's Homework Buddy</h1>
-    <section id="panel-math" class="tab-panel">
-      <p class="sub">Five long division exercises with remainders</p>
-      <div class="meta" id="exMeta">Exercise 1 of 5</div>
-      <div class="stage"><div class="ld" id="board"></div></div>
-      <div class="narration" id="narration">Hey Max, let's get to work. Tap Start Audio / Unmute so sound can play.</div>
-      <audio id="nowPlaying" controls playsinline preload="auto"></audio>
-      <div class="controls">
-        <button id="startAudioBtn" type="button">🔊 Start Audio / Unmute</button>
-        <button id="startBtn" type="button">Start</button>
-        <button id="nextBtn" type="button" disabled>Next step</button>
-        <div class="audio-wrap">
-          <span class="audio-label" id="audioLabel">Audio ON</span>
-          <button type="button" class="switch on" id="audioToggle" aria-pressed="true" aria-label="Audio toggle"><span class="knob"></span></button>
+<div class="bg" aria-hidden="true"></div>
+<nav class="topnav" aria-label="Navigation">
+  <button id="navHome" class="navbtn" type="button" data-icon="home"><span class="lbl">Home</span></button>
+  <button id="navBack" class="navbtn" type="button" data-icon="back"><span class="lbl">Back</span></button>
+  <div class="crumbs" id="crumbs" aria-label="Breadcrumb"></div>
+  <button id="navNext" class="navbtn btn-cyan" type="button" data-icon="next"><span class="lbl" id="navNextLabel">Next</span></button>
+</nav>
+<main class="wrap">
+
+  <!-- ===== HOME ===== -->
+  <section id="view-home" class="view">
+    <div class="home-head">
+      <div class="eyebrow">Homework HQ</div>
+      <h1 class="brand">Max's <span>Homework Buddy</span></h1>
+      <p class="greet">Hey Max, let's get to work. Pick a topic.</p>
+    </div>
+    <div class="tiles" id="homeTiles"></div>
+    <div class="home-foot"><button id="homeHelloBtn" type="button" class="btn-cyan" data-icon="sound"> Play greeting</button></div>
+  </section>
+
+  <!-- ===== TOPIC LANDING ===== -->
+  <section id="view-topic" class="view" hidden>
+    <div class="toolbar-slot"></div>
+    <div class="hero"><div id="topicIcon"></div><div><div class="eyebrow">Topic</div><h2 class="h2" id="topicTitle"></h2><p id="topicIntro"></p></div></div>
+    <p class="topic-meta" id="topicCount"></p>
+    <button id="topicGoBtn" type="button" class="btn-gold action" style="width:100%;min-height:90px" data-icon="next"><b>Browse subtopics</b><small>Choose what to review or quiz</small></button>
+  </section>
+
+  <!-- ===== SUBTOPIC LIST ===== -->
+  <section id="view-subtopics" class="view" hidden>
+    <div class="toolbar-slot"></div>
+    <div class="eyebrow">Choose a subtopic</div>
+    <h2 class="h2" id="subHeading"></h2>
+    <div class="card-list" id="subList" style="margin-top:12px"></div>
+  </section>
+
+  <!-- ===== SUBTOPIC PAGE ===== -->
+  <section id="view-sub" class="view" hidden>
+    <div class="toolbar-slot"></div>
+    <div class="hero"><div id="subIcon"></div><div><div class="eyebrow">Subtopic</div><h2 class="h2" id="subTitle"></h2><p id="subBlurb"></p></div></div>
+    <div class="big-actions">
+      <button id="subReviewBtn" type="button" class="action review" data-icon="play"><b>Start review</b><small id="subReviewLabel"></small></button>
+      <button id="subQuizBtn" type="button" class="action quiz" data-icon="quiz"><b>Take the quiz</b><small id="subQuizLabel"></small></button>
+    </div>
+  </section>
+
+  <!-- ===== MATH REVIEW (narrated long division) ===== -->
+  <section id="view-mathReview" class="view" hidden>
+    <div class="eyebrow">Review · watch the method</div>
+    <div class="meta" id="exMeta">Exercise 1 of 5</div>
+    <div class="stage"><div class="ld" id="board"></div></div>
+    <div class="narration" id="narration">Hey Max, let's get to work. Tap Start Audio / Unmute so sound can play.</div>
+    <audio id="nowPlaying" controls playsinline preload="auto"></audio>
+    <div class="controls">
+      <button id="startAudioBtn" type="button">Start Audio / Unmute</button>
+      <button id="startBtn" type="button">Start</button>
+      <button id="stepBackBtn" type="button" disabled>‹ Step back</button>
+      <button id="nextBtn" type="button" disabled>Next step ›</button>
+      <div class="audio-wrap">
+        <span class="audio-label" id="audioLabel">Audio ON</span>
+        <button type="button" class="switch on" id="audioToggle" aria-pressed="true" aria-label="Audio toggle"><span class="knob"></span></button>
+      </div>
+      <button id="testAudioBtn" type="button">Test audio</button>
+      <button id="prevExerciseBtn" type="button" disabled>‹ Prev exercise</button>
+      <button id="nextExerciseBtn" type="button" disabled>Next exercise ›</button>
+    </div>
+    <div class="progress" id="progress">Step 0</div>
+  </section>
+
+  <!-- ===== MATH QUIZ (keypad) ===== -->
+  <section id="view-mathQuiz" class="view" hidden>
+    <audio id="mqPlayer" playsinline preload="auto"></audio>
+    <div class="mq-top">
+      <div><div class="eyebrow" id="mqProgress">Problem 1 of 5</div><div class="h2">Long division quiz</div></div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button id="mqReplay" type="button">Hear it again</button>
+        <button id="mqSound" type="button" aria-pressed="true"><span id="mqSoundLabel">Sound on</span></button>
+        <span class="mq-score" id="mqScore">Score 0 / 5</span>
+      </div>
+    </div>
+    <div class="meter"><div id="mqBar"></div></div>
+    <div id="mqCard" style="margin-top:14px">
+      <div class="mq-grid">
+        <div class="glass-card mq-problem">
+          <div class="eq-label eyebrow">Solve</div>
+          <div class="mq-eq"><span id="mqDividend">613</span><span class="op">÷</span><span id="mqDivisor">14</span></div>
+          <div class="mq-ans">
+            <button type="button" class="mq-field sel" id="mqQBtn" aria-label="Quotient"><small>Quotient</small><span class="v" id="mqQ">–</span></button>
+            <span class="mq-R">R</span>
+            <button type="button" class="mq-field" id="mqRBtn" aria-label="Remainder"><small>Remainder</small><span class="v" id="mqR">–</span></button>
+          </div>
+          <div class="mq-feedback" id="mqFeedback" aria-live="polite"></div>
+          <div class="mq-how glass-card" id="mqHow" hidden><div class="eyebrow">Worked solution</div><ol id="mqHowSteps"></ol></div>
         </div>
-        <button id="testAudioBtn" type="button">Test Audio</button>
-        <button id="nextExerciseBtn" type="button" disabled>Next Exercise</button>
-      </div>
-      <div class="progress" id="progress">Step 0</div>
-    </section>
-    <section id="panel-spelling" class="tab-panel" hidden>
-      <div class="anatomy-card"><h2>Spelling</h2><p class="anatomy-clue">Spelling practice is Coming soon!</p></div>
-    </section>
-    <section id="panel-anatomy" class="tab-panel" hidden>
-      <p class="sub">Learn about your amazing body — listen, then tap your answer!</p>
-      <div class="anat-bar">
-        <button id="anatAudioBtn" type="button">🔊 Start Audio / Unmute</button>
-        <button id="anatSoundBtn" type="button" aria-pressed="true">Sound ON</button>
-        <button id="anatReplayBtn" type="button">🔁 Hear it again</button>
-        <span class="anat-score" id="anatScore">⭐ Score: 0</span>
-      </div>
-      <audio id="anatPlayer" playsinline preload="auto"></audio>
-      <div class="anatomy-card" id="anatPicker">
-        <h2>Pick a lesson</h2>
-        <div id="anatSets"></div>
-      </div>
-      <div class="anatomy-card" id="anatLesson" hidden>
-        <div class="anatomy-progress" id="anatomyProgress"></div>
-        <div class="organ-emoji" id="anatEmoji" aria-hidden="true"></div>
-        <h2 id="anatTitle"></h2>
-        <div class="organ-list" id="anatOrgans"></div>
-        <div class="anat-text" id="anatText" aria-live="polite"></div>
-        <div class="anatomy-options" id="anatomyOptions"></div>
-        <div class="anatomy-feedback" id="anatomyFeedback" aria-live="polite"></div>
-        <div class="anat-actions">
-          <button id="anatQuizBtn" type="button">I'm ready — quiz me! ❓</button>
-          <button id="anatNextBtn" type="button" disabled>Next ➡️</button>
-          <button id="anatBackBtn" type="button">📚 Lessons</button>
+        <div class="glass-card">
+          <div class="pad" id="mqPad"></div>
+          <div class="pad-actions">
+            <button id="mqHowBtn" type="button">Show me how</button>
+            <button id="mqCheck" type="button" class="btn-gold">Check</button>
+          </div>
         </div>
       </div>
-    </section>
+      <div class="mq-nav">
+        <button id="mqPrev" type="button">‹ Previous</button>
+        <button id="mqNext" type="button" class="btn-gold" disabled>Next problem</button>
+      </div>
+    </div>
+    <div id="mqEnd" class="glass-card mq-end" hidden>
+      <div class="eyebrow">Quiz complete</div>
+      <div class="big" id="mqEndScore">0 / 5</div>
+      <p id="mqEndMsg"></p>
+      <div class="row"><button id="mqAgain" type="button" class="btn-gold">Try again</button><button id="mqReview" type="button" class="btn-cyan">Back to review</button></div>
+    </div>
+  </section>
+
+  <!-- ===== ANATOMY: body scanner (review) ===== -->
+  <section id="view-anatExplore" class="view" hidden>
+    <div class="toolbar-slot"></div>
+    <div class="ex-head">
+      <div><div class="eyebrow">Body scanner · review</div><h2 class="h2" id="exploreTitle">Organ walkthrough</h2></div>
+      <button id="exploreQuizBtn" type="button" class="btn-gold" data-icon="quiz"> Take the quiz</button>
+    </div>
+    <div class="sys-btns" id="sysBtns" hidden></div>
+    <div class="scan-stage" id="scanStage">
+      <div id="scanSvgWrap"></div>
+      <div class="callout" id="scanCallout" aria-live="polite">
+        <div class="tag" id="cTag">TARGET</div><h3 id="cName"></h3><p id="cDoes"></p><p class="fact" id="cFact"></p>
+      </div>
+    </div>
+    <div id="walkCtl">
+      <div class="meter"><div id="walkBar"></div></div>
+      <div class="walk-ctl">
+        <button id="walkPrev" type="button">‹ Step back</button>
+        <span class="count" id="walkCount">1 / 13</span>
+        <button id="walkNext" type="button" class="btn-gold">Step forward ›</button>
+        <button id="bonesBtn" type="button" aria-pressed="false">Skeleton overlay</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ANATOMY: quizzes (existing lessons) ===== -->
+  <section id="view-anatQuiz" class="view" hidden>
+    <div class="toolbar-slot"></div>
+    <audio id="anatPlayer" playsinline preload="auto"></audio>
+    <div class="anatomy-card" id="anatPicker">
+      <h2>Pick a lesson</h2>
+      <div id="anatSets"></div>
+    </div>
+    <div class="anatomy-card" id="anatLesson" hidden>
+      <div class="anatomy-progress" id="anatomyProgress"></div>
+      <div class="organ-emoji" id="anatEmoji" aria-hidden="true"></div>
+      <h2 id="anatTitle"></h2>
+      <div class="organ-list" id="anatOrgans"></div>
+      <div class="anat-text" id="anatText" aria-live="polite"></div>
+      <div class="anatomy-options" id="anatomyOptions"></div>
+      <div class="anatomy-feedback" id="anatomyFeedback" aria-live="polite"></div>
+      <div class="anat-actions">
+        <button id="anatQuizBtn" type="button">I'm ready — quiz me</button>
+        <button id="anatNextBtn" type="button" disabled>Next ›</button>
+        <button id="anatBackBtn" type="button">‹ Back to subtopic</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ANATOMY: Max's Test Topics quiz ===== -->
+  <section id="view-maxQuiz" class="view" hidden>
+    <div class="toolbar-slot"></div>
+    <div class="eyebrow" id="mxProgress">Question 1 of 15</div>
+    <div class="h2">Max's test topics · quiz</div>
+    <div class="meter"><div id="mxBar"></div></div>
+    <div id="mxCard" class="glass-card" style="margin-top:14px">
+      <p class="mx-q" id="mxQ"></p>
+      <p class="mx-hint" id="mxHint"></p>
+      <div class="anatomy-options mx-opts" id="mxOpts"></div>
+      <div id="mxNumWrap" class="mx-num-wrap" hidden>
+        <div class="mq-field mx-num"><small>Your answer</small><span class="v" id="mxNum">–</span></div>
+        <div class="pad mx-pad" id="mxPad"></div>
+      </div>
+      <div style="text-align:center"><button id="mxCheck" type="button" class="btn-gold" style="min-width:180px">Check</button></div>
+      <div class="mq-feedback" id="mxFeedback" aria-live="polite"></div>
+      <div class="mq-nav">
+        <button id="mxPrev" type="button">‹ Previous</button>
+        <button id="mxNext" type="button" class="btn-gold" disabled>Next question</button>
+      </div>
+    </div>
+    <div id="mxEnd" class="glass-card mq-end" hidden>
+      <div class="eyebrow">Quiz complete</div>
+      <div class="big" id="mxEndScore">0 / 15</div>
+      <p id="mxEndMsg"></p>
+      <ul id="mxMissed" class="mx-missed"></ul>
+      <div class="row"><button id="mxAgain" type="button" class="btn-gold">Try again</button><button id="mxReview" type="button" class="btn-cyan">Back to review</button></div>
+    </div>
+  </section>
+
+  <!-- ===== Shared coming-soon screen ===== -->
+  <section id="view-comingSoon" class="view" hidden>
+    <div class="glass-card cs"><div data-icon="lock"></div><h2 class="h2 cs-title">Coming soon</h2><p class="cs-msg" style="color:var(--muted)"></p></div>
+  </section>
+
+  <!-- toolbars are moved into .toolbar-slot of the current view by core.js -->
+  <div id="toolbarHolder">
+    <div class="anat-bar" id="anatBar">
+      <button id="anatAudioBtn" type="button">Start Audio / Unmute</button>
+      <button id="anatSoundBtn" type="button" aria-pressed="true">Sound ON</button>
+      <button id="anatReplayBtn" type="button">Hear it again</button>
+      <span class="anat-score" id="anatScore">Score: 0</span>
+    </div>
   </div>
+</main>
   <div class="audio-bank" aria-hidden="true">
 <audio id="aud-greeting" preload="auto" playsinline controlsList="nodownload"><source src="audio/greeting.mp3" type="audio/mpeg"></audio>
 <audio id="aud-test" preload="auto" playsinline controlsList="nodownload"><source src="audio/test.mp3" type="audio/mpeg"></audio>
@@ -227,889 +539,18 @@
 <audio id="aud-ex4_step4" preload="auto" playsinline controlsList="nodownload"><source src="audio/ex4_step4.mp3" type="audio/mpeg"></audio>
 <audio id="aud-ex4_step5" preload="auto" playsinline controlsList="nodownload"><source src="audio/ex4_step5.mp3" type="audio/mpeg"></audio>
   </div>
-<script>
-const GREETING = "Hey Max, let's get to work.";
-const TEST_PHRASE = "Audio is working";
-const exercises = [{"label": "425 ÷ 18", "answer": "23 R 11", "cols": 3, "steps": [{"say": "Alright, here is a new problem. We are dividing four hundred twenty-five by eighteen.", "rows": [{"divisor": "", "showParen": false, "digits": ["", "", ""], "classes": ["", "", ""], "bar": ["qbar", "qbar", "qbar"]}, {"divisor": "18", "showParen": true, "digits": ["4", "2", "5"], "classes": ["sky", "sky", "sky"], "bar": null}], "audio": "audio/ex0_step0.mp3", "audioId": "aud-ex0_step0"}, {"say": "Start with the first part of the dividend. Eighteen goes into forty-two two times. Write two above the next digit. Two times eighteen is thirty-six.", "rows": [{"divisor": "", "showParen": false, "digits": ["", "2", ""], "classes": ["", "hl", ""], "bar": ["qbar", "qbar", "qbar"]}, {"divisor": "18", "showParen": true, "digits": ["4", "2", "5"], "classes": ["", "", ""], "bar": null}, {"divisor": "", "showParen": false, "digits": ["3", "6", ""], "classes": ["sky", "sky", "sky"], "bar": null}], "audio": "audio/ex0_step1.mp3", "audioId": "aud-ex0_step1"}, {"say": "Subtract thirty-six from forty-two, and you get six.", "rows": [{"divisor": "", "showParen": false, "digits": ["", "2", ""], "classes": ["", "hl", ""], "bar": ["qbar", "qbar", "qbar"]}, {"divisor": "18", "showParen": true, "digits": ["4", "2", "5"], "classes": ["", "", ""], "bar": null}, {"divisor": "", "showParen": false, "digits": ["3", "6", ""], "classes": ["muted", "muted", "muted"], "bar": null}, {"divisor": "", "showParen": false, "digits": ["", "6", ""], "classes": ["ok", "ok", "ok"], "bar": ["rule", "rule", "rule"]}], "audio": "audio/ex0_step2.mp3", "audioId": "aud-ex0_step2"}, {"say": "Bring down the five next to that six, so now you have sixty-five.", "rows": [{"divisor": "", "showParen": false, "digits": ["", "2", ""], "classes": ["", "hl", ""], "bar": ["qbar", "qbar", "qbar"]}, {"divisor": "18", "showParen": true, "digits": ["4", "2", "5"], "classes": ["", "", ""], "bar": null}, {"divisor": "", "showParen": false, "digits": ["3", "6", ""], "classes": ["muted", "muted", "muted"], "bar": null}, {"divisor": "", "showParen": false, "digits": ["", "6", "5"], "classes": ["ok", "ok", "ok"], "bar": ["rule", "rule", "rule"]}], "audio": "audio/ex0_step3.mp3", "audioId": "aud-ex0_step3"}, {"say": "How many times does eighteen fit into sixty-five? Three times, because three times eighteen is fifty-four. Write three next to the two in your quotient.", "rows": [{"divisor": "", "showParen": false, "digits": ["", "2", "3"], "classes": ["", "hl", "hl"], "bar": ["qbar", "qbar", "qbar"]}, {"divisor": "18", "showParen": true, "digits": ["4", "2", "5"], "classes": ["", "", ""], "bar": null}, {"divisor": "", "showParen": false, "digits": ["3", "6", ""], "classes": ["muted", "muted", "muted"], "bar": null}, {"divisor": "", "showParen": false, "digits": ["", "6", "5"], "classes": ["muted", "muted", "muted"], "bar": ["rule", "rule", "rule"]}, {"divisor": "", "showParen": false, "digits": ["", "5", "4"], "classes": ["sky", "sky", "sky"], "bar": null}], "audio": "audio/ex0_step4.mp3", "audioId": "aud-ex0_step4"}, {"say": "Subtract fifty-four from sixty-five, and you are left with eleven. There are no more digits to bring down, and eleven is smaller than eighteen, so eleven is our remainder. Four hundred twenty-five divided by eighteen equals twenty-three with a remainder of eleven. Awesome work!", "rows": [{"divisor": "", "showParen": false, "digits": ["", "2", "3"], "classes": ["", "hl", "hl"], "bar": ["qbar", "qbar", "qbar"]}, {"divisor": "18", "showParen": true, "digits": ["4", "2", "5"], "classes": ["", "", ""], "bar": null}, {"divisor": "", "showParen": false, "digits": ["3", "6", ""], "classes": ["muted", "muted", "muted"], "bar": null}, {"divisor": "", "showParen": false, "digits": ["", "6", "5"], "classes": ["muted", "muted", "muted"], "bar": ["rule", "rule", "rule"]}, {"divisor": "", "showParen": false, "digits": ["", "5", "4"], "classes": ["muted", "muted", "muted"], "bar": null}, {"divisor": "", "showParen": false, "digits": ["", "1", "1"], "classes": ["ok", "ok", "ok"], "bar": ["rule", "rule", "rule"]}], "audio": "audio/ex0_step5.mp3", "audioId": "aud-ex0_step5"}], "nextAudio": "audio/ex0_next.mp3", "nextAudioId": "aud-ex0_next"}, {"label": "458 ÷ 19", "answer": "24 R 2", "cols": 3, "steps": [{"say": "Alright, here is a new problem. We are dividing four hundred fifty-eight by nineteen.", "rows": [{"divisor": "", "showParen": false, "digits": ["", "", ""], "classes": ["", "", ""], "bar": ["qbar", "qbar", "qbar"]}, {"divisor": "19", "showParen": true, "digits": ["4", "5", "8"], "classes": ["sky", "sky", "sky"], "bar": null}], "audio": "audio/ex1_step0.mp3", "audioId": "aud-ex1_step0"}, {"say": "Start with the first part of the dividend. Nineteen goes into forty-five two times. Write two above the next digit. Two times nineteen is thirty-eight.", "rows": [{"divisor": "", "showParen": false, "digits": ["", "2", ""], "classes": ["", "hl", ""], "bar": ["qbar", "qbar", "qbar"]}, {"divisor": "19", "showParen": true, "digits": ["4", "5", "8"], "classes": ["", "", ""], "bar": null}, {"divisor": "", "showParen": false, "digits": ["3", "8", ""], "classes": ["sky", "sky", "sky"], "bar": null}], "audio": "audio/ex1_step1.mp3", "audioId": "aud-ex1_step1"}, {"say": "Subtract thirty-eight from forty-five, and you get seven.", "rows": [{"divisor": "", "showParen": false, "digits": ["", "2", ""], "classes": ["", "hl", ""], "bar": ["qbar", "qbar", "qbar"]}, {"divisor": "19", "showParen": true, "digits": ["4", "5", "8"], "classes": ["", "", ""], "bar": null}, {"divisor": "", "showParen": false, "digits": ["3", "8", ""], "classes": ["muted", "muted", "muted"], "bar": null}, {"divisor": "", "showParen": false, "digits": ["", "7", ""], "classes": ["ok", "ok", "ok"], "bar": ["rule", "rule", "rule"]}], "audio": "audio/ex1_step2.mp3", "audioId": "aud-ex1_step2"}, {"say": "Bring down the eight next to that seven, so now you have seventy-eight.", "rows": [{"divisor": "", "showParen": false, "digits": ["", "2", ""], "classes": ["", "hl", ""], "bar": ["qbar", "qbar", "qbar"]}, {"divisor": "19", "showParen": true, "digits": ["4", "5", "8"], "classes": ["", "", ""], "bar": null}, {"divisor": "", "showParen": false, "digits": ["3", "8", ""], "classes": ["muted", "muted", "muted"], "bar": null}, {"divisor": "", "showParen": false, "digits": ["", "7", "8"], "classes": ["ok", "ok", "ok"], "bar": ["rule", "rule", "rule"]}], "audio": "audio/ex1_step3.mp3", "audioId": "aud-ex1_step3"}, {"say": "How many times does nineteen fit into seventy-eight? Four times, because four times nineteen is seventy-six. Write four next to the two in your quotient.", "rows": [{"divisor": "", "showParen": false, "digits": ["", "2", "4"], "classes": ["", "hl", "hl"], "bar": ["qbar", "qbar", "qbar"]}, {"divisor": "19", "showParen": true, "digits": ["4", "5", "8"], "classes": ["", "", ""], "bar": null}, {"divisor": "", "showParen": false, "digits": ["3", "8", ""], "classes": ["muted", "muted", "muted"], "bar": null}, {"divisor": "", "showParen": false, "digits": ["", "7", "8"], "classes": ["muted", "muted", "muted"], "bar": ["rule", "rule", "rule"]}, {"divisor": "", "showParen": false, "digits": ["", "7", "6"], "classes": ["sky", "sky", "sky"], "bar": null}], "audio": "audio/ex1_step4.mp3", "audioId": "aud-ex1_step4"}, {"say": "Subtract seventy-six from seventy-eight, and you are left with two. There are no more digits to bring down, and two is smaller than nineteen, so two is our remainder. Four hundred fifty-eight divided by nineteen equals twenty-four with a remainder of two. Awesome work!", "rows": [{"divisor": "", "showParen": false, "digits": ["", "2", "4"], "classes": ["", "hl", "hl"], "bar": ["qbar", "qbar", "qbar"]}, {"divisor": "19", "showParen": true, "digits": ["4", "5", "8"], "classes": ["", "", ""], "bar": null}, {"divisor": "", "showParen": false, "digits": ["3", "8", ""], "classes": ["muted", "muted", "muted"], "bar": null}, {"divisor": "", "showParen": false, "digits": ["", "7", "8"], "classes": ["muted", "muted", "muted"], "bar": ["rule", "rule", "rule"]}, {"divisor": "", "showParen": false, "digits": ["", "7", "6"], "classes": ["muted", "muted", "muted"], "bar": null}, {"divisor": "", "showParen": false, "digits": ["", "", "2"], "classes": ["ok", "ok", "ok"], "bar": ["rule", "rule", "rule"]}], "audio": "audio/ex1_step5.mp3", "audioId": "aud-ex1_step5"}], "nextAudio": "audio/ex1_next.mp3", "nextAudioId": "aud-ex1_next"}, {"label": "492 ÷ 22", "answer": "22 R 8", "cols": 3, "steps": [{"say": "Alright, here is a new problem. We are dividing four hundred ninety-two by twenty-two.", "rows": [{"divisor": "", "showParen": false, "digits": ["", "", ""], "classes": ["", "", ""], "bar": ["qbar", "qbar", "qbar"]}, {"divisor": "22", "showParen": true, "digits": ["4", "9", "2"], "classes": ["sky", "sky", "sky"], "bar": null}], "audio": "audio/ex2_step0.mp3", "audioId": "aud-ex2_step0"}, {"say": "Start with the first part of the dividend. Twenty-two goes into forty-nine two times. Write two above the next digit. Two times twenty-two is forty-four.", "rows": [{"divisor": "", "showParen": false, "digits": ["", "2", ""], "classes": ["", "hl", ""], "bar": ["qbar", "qbar", "qbar"]}, {"divisor": "22", "showParen": true, "digits": ["4", "9", "2"], "classes": ["", "", ""], "bar": null}, {"divisor": "", "showParen": false, "digits": ["4", "4", ""], "classes": ["sky", "sky", "sky"], "bar": null}], "audio": "audio/ex2_step1.mp3", "audioId": "aud-ex2_step1"}, {"say": "Subtract forty-four from forty-nine, and you get five.", "rows": [{"divisor": "", "showParen": false, "digits": ["", "2", ""], "classes": ["", "hl", ""], "bar": ["qbar", "qbar", "qbar"]}, {"divisor": "22", "showParen": true, "digits": ["4", "9", "2"], "classes": ["", "", ""], "bar": null}, {"divisor": "", "showParen": false, "digits": ["4", "4", ""], "classes": ["muted", "muted", "muted"], "bar": null}, {"divisor": "", "showParen": false, "digits": ["", "5", ""], "classes": ["ok", "ok", "ok"], "bar": ["rule", "rule", "rule"]}], "audio": "audio/ex2_step2.mp3", "audioId": "aud-ex2_step2"}, {"say": "Bring down the two next to that five, so now you have fifty-two.", "rows": [{"divisor": "", "showParen": false, "digits": ["", "2", ""], "classes": ["", "hl", ""], "bar": ["qbar", "qbar", "qbar"]}, {"divisor": "22", "showParen": true, "digits": ["4", "9", "2"], "classes": ["", "", ""], "bar": null}, {"divisor": "", "showParen": false, "digits": ["4", "4", ""], "classes": ["muted", "muted", "muted"], "bar": null}, {"divisor": "", "showParen": false, "digits": ["", "5", "2"], "classes": ["ok", "ok", "ok"], "bar": ["rule", "rule", "rule"]}], "audio": "audio/ex2_step3.mp3", "audioId": "aud-ex2_step3"}, {"say": "How many times does twenty-two fit into fifty-two? Two times, because two times twenty-two is forty-four. Write two next to the two in your quotient.", "rows": [{"divisor": "", "showParen": false, "digits": ["", "2", "2"], "classes": ["", "hl", "hl"], "bar": ["qbar", "qbar", "qbar"]}, {"divisor": "22", "showParen": true, "digits": ["4", "9", "2"], "classes": ["", "", ""], "bar": null}, {"divisor": "", "showParen": false, "digits": ["4", "4", ""], "classes": ["muted", "muted", "muted"], "bar": null}, {"divisor": "", "showParen": false, "digits": ["", "5", "2"], "classes": ["muted", "muted", "muted"], "bar": ["rule", "rule", "rule"]}, {"divisor": "", "showParen": false, "digits": ["", "4", "4"], "classes": ["sky", "sky", "sky"], "bar": null}], "audio": "audio/ex2_step4.mp3", "audioId": "aud-ex2_step4"}, {"say": "Subtract forty-four from fifty-two, and you are left with eight. There are no more digits to bring down, and eight is smaller than twenty-two, so eight is our remainder. Four hundred ninety-two divided by twenty-two equals twenty-two with a remainder of eight. Awesome work!", "rows": [{"divisor": "", "showParen": false, "digits": ["", "2", "2"], "classes": ["", "hl", "hl"], "bar": ["qbar", "qbar", "qbar"]}, {"divisor": "22", "showParen": true, "digits": ["4", "9", "2"], "classes": ["", "", ""], "bar": null}, {"divisor": "", "showParen": false, "digits": ["4", "4", ""], "classes": ["muted", "muted", "muted"], "bar": null}, {"divisor": "", "showParen": false, "digits": ["", "5", "2"], "classes": ["muted", "muted", "muted"], "bar": ["rule", "rule", "rule"]}, {"divisor": "", "showParen": false, "digits": ["", "4", "4"], "classes": ["muted", "muted", "muted"], "bar": null}, {"divisor": "", "showParen": false, "digits": ["", "", "8"], "classes": ["ok", "ok", "ok"], "bar": ["rule", "rule", "rule"]}], "audio": "audio/ex2_step5.mp3", "audioId": "aud-ex2_step5"}], "nextAudio": "audio/ex2_next.mp3", "nextAudioId": "aud-ex2_next"}, {"label": "525 ÷ 23", "answer": "22 R 19", "cols": 3, "steps": [{"say": "Alright, here is a new problem. We are dividing five hundred twenty-five by twenty-three.", "rows": [{"divisor": "", "showParen": false, "digits": ["", "", ""], "classes": ["", "", ""], "bar": ["qbar", "qbar", "qbar"]}, {"divisor": "23", "showParen": true, "digits": ["5", "2", "5"], "classes": ["sky", "sky", "sky"], "bar": null}], "audio": "audio/ex3_step0.mp3", "audioId": "aud-ex3_step0"}, {"say": "Start with the first part of the dividend. Twenty-three goes into fifty-two two times. Write two above the next digit. Two times twenty-three is forty-six.", "rows": [{"divisor": "", "showParen": false, "digits": ["", "2", ""], "classes": ["", "hl", ""], "bar": ["qbar", "qbar", "qbar"]}, {"divisor": "23", "showParen": true, "digits": ["5", "2", "5"], "classes": ["", "", ""], "bar": null}, {"divisor": "", "showParen": false, "digits": ["4", "6", ""], "classes": ["sky", "sky", "sky"], "bar": null}], "audio": "audio/ex3_step1.mp3", "audioId": "aud-ex3_step1"}, {"say": "Subtract forty-six from fifty-two, and you get six.", "rows": [{"divisor": "", "showParen": false, "digits": ["", "2", ""], "classes": ["", "hl", ""], "bar": ["qbar", "qbar", "qbar"]}, {"divisor": "23", "showParen": true, "digits": ["5", "2", "5"], "classes": ["", "", ""], "bar": null}, {"divisor": "", "showParen": false, "digits": ["4", "6", ""], "classes": ["muted", "muted", "muted"], "bar": null}, {"divisor": "", "showParen": false, "digits": ["", "6", ""], "classes": ["ok", "ok", "ok"], "bar": ["rule", "rule", "rule"]}], "audio": "audio/ex3_step2.mp3", "audioId": "aud-ex3_step2"}, {"say": "Bring down the five next to that six, so now you have sixty-five.", "rows": [{"divisor": "", "showParen": false, "digits": ["", "2", ""], "classes": ["", "hl", ""], "bar": ["qbar", "qbar", "qbar"]}, {"divisor": "23", "showParen": true, "digits": ["5", "2", "5"], "classes": ["", "", ""], "bar": null}, {"divisor": "", "showParen": false, "digits": ["4", "6", ""], "classes": ["muted", "muted", "muted"], "bar": null}, {"divisor": "", "showParen": false, "digits": ["", "6", "5"], "classes": ["ok", "ok", "ok"], "bar": ["rule", "rule", "rule"]}], "audio": "audio/ex3_step3.mp3", "audioId": "aud-ex3_step3"}, {"say": "How many times does twenty-three fit into sixty-five? Two times, because two times twenty-three is forty-six. Write two next to the two in your quotient.", "rows": [{"divisor": "", "showParen": false, "digits": ["", "2", "2"], "classes": ["", "hl", "hl"], "bar": ["qbar", "qbar", "qbar"]}, {"divisor": "23", "showParen": true, "digits": ["5", "2", "5"], "classes": ["", "", ""], "bar": null}, {"divisor": "", "showParen": false, "digits": ["4", "6", ""], "classes": ["muted", "muted", "muted"], "bar": null}, {"divisor": "", "showParen": false, "digits": ["", "6", "5"], "classes": ["muted", "muted", "muted"], "bar": ["rule", "rule", "rule"]}, {"divisor": "", "showParen": false, "digits": ["", "4", "6"], "classes": ["sky", "sky", "sky"], "bar": null}], "audio": "audio/ex3_step4.mp3", "audioId": "aud-ex3_step4"}, {"say": "Subtract forty-six from sixty-five, and you are left with nineteen. There are no more digits to bring down, and nineteen is smaller than twenty-three, so nineteen is our remainder. Five hundred twenty-five divided by twenty-three equals twenty-two with a remainder of nineteen. Awesome work!", "rows": [{"divisor": "", "showParen": false, "digits": ["", "2", "2"], "classes": ["", "hl", "hl"], "bar": ["qbar", "qbar", "qbar"]}, {"divisor": "23", "showParen": true, "digits": ["5", "2", "5"], "classes": ["", "", ""], "bar": null}, {"divisor": "", "showParen": false, "digits": ["4", "6", ""], "classes": ["muted", "muted", "muted"], "bar": null}, {"divisor": "", "showParen": false, "digits": ["", "6", "5"], "classes": ["muted", "muted", "muted"], "bar": ["rule", "rule", "rule"]}, {"divisor": "", "showParen": false, "digits": ["", "4", "6"], "classes": ["muted", "muted", "muted"], "bar": null}, {"divisor": "", "showParen": false, "digits": ["", "1", "9"], "classes": ["ok", "ok", "ok"], "bar": ["rule", "rule", "rule"]}], "audio": "audio/ex3_step5.mp3", "audioId": "aud-ex3_step5"}], "nextAudio": "audio/ex3_next.mp3", "nextAudioId": "aud-ex3_next"}, {"label": "559 ÷ 24", "answer": "23 R 7", "cols": 3, "steps": [{"say": "Alright, here is a new problem. We are dividing five hundred fifty-nine by twenty-four.", "rows": [{"divisor": "", "showParen": false, "digits": ["", "", ""], "classes": ["", "", ""], "bar": ["qbar", "qbar", "qbar"]}, {"divisor": "24", "showParen": true, "digits": ["5", "5", "9"], "classes": ["sky", "sky", "sky"], "bar": null}], "audio": "audio/ex4_step0.mp3", "audioId": "aud-ex4_step0"}, {"say": "Start with the first part of the dividend. Twenty-four goes into fifty-five two times. Write two above the next digit. Two times twenty-four is forty-eight.", "rows": [{"divisor": "", "showParen": false, "digits": ["", "2", ""], "classes": ["", "hl", ""], "bar": ["qbar", "qbar", "qbar"]}, {"divisor": "24", "showParen": true, "digits": ["5", "5", "9"], "classes": ["", "", ""], "bar": null}, {"divisor": "", "showParen": false, "digits": ["4", "8", ""], "classes": ["sky", "sky", "sky"], "bar": null}], "audio": "audio/ex4_step1.mp3", "audioId": "aud-ex4_step1"}, {"say": "Subtract forty-eight from fifty-five, and you get seven.", "rows": [{"divisor": "", "showParen": false, "digits": ["", "2", ""], "classes": ["", "hl", ""], "bar": ["qbar", "qbar", "qbar"]}, {"divisor": "24", "showParen": true, "digits": ["5", "5", "9"], "classes": ["", "", ""], "bar": null}, {"divisor": "", "showParen": false, "digits": ["4", "8", ""], "classes": ["muted", "muted", "muted"], "bar": null}, {"divisor": "", "showParen": false, "digits": ["", "7", ""], "classes": ["ok", "ok", "ok"], "bar": ["rule", "rule", "rule"]}], "audio": "audio/ex4_step2.mp3", "audioId": "aud-ex4_step2"}, {"say": "Bring down the nine next to that seven, so now you have seventy-nine.", "rows": [{"divisor": "", "showParen": false, "digits": ["", "2", ""], "classes": ["", "hl", ""], "bar": ["qbar", "qbar", "qbar"]}, {"divisor": "24", "showParen": true, "digits": ["5", "5", "9"], "classes": ["", "", ""], "bar": null}, {"divisor": "", "showParen": false, "digits": ["4", "8", ""], "classes": ["muted", "muted", "muted"], "bar": null}, {"divisor": "", "showParen": false, "digits": ["", "7", "9"], "classes": ["ok", "ok", "ok"], "bar": ["rule", "rule", "rule"]}], "audio": "audio/ex4_step3.mp3", "audioId": "aud-ex4_step3"}, {"say": "How many times does twenty-four fit into seventy-nine? Three times, because three times twenty-four is seventy-two. Write three next to the two in your quotient.", "rows": [{"divisor": "", "showParen": false, "digits": ["", "2", "3"], "classes": ["", "hl", "hl"], "bar": ["qbar", "qbar", "qbar"]}, {"divisor": "24", "showParen": true, "digits": ["5", "5", "9"], "classes": ["", "", ""], "bar": null}, {"divisor": "", "showParen": false, "digits": ["4", "8", ""], "classes": ["muted", "muted", "muted"], "bar": null}, {"divisor": "", "showParen": false, "digits": ["", "7", "9"], "classes": ["muted", "muted", "muted"], "bar": ["rule", "rule", "rule"]}, {"divisor": "", "showParen": false, "digits": ["", "7", "2"], "classes": ["sky", "sky", "sky"], "bar": null}], "audio": "audio/ex4_step4.mp3", "audioId": "aud-ex4_step4"}, {"say": "Subtract seventy-two from seventy-nine, and you are left with seven. There are no more digits to bring down, and seven is smaller than twenty-four, so seven is our remainder. Five hundred fifty-nine divided by twenty-four equals twenty-three with a remainder of seven. Awesome work!", "rows": [{"divisor": "", "showParen": false, "digits": ["", "2", "3"], "classes": ["", "hl", "hl"], "bar": ["qbar", "qbar", "qbar"]}, {"divisor": "24", "showParen": true, "digits": ["5", "5", "9"], "classes": ["", "", ""], "bar": null}, {"divisor": "", "showParen": false, "digits": ["4", "8", ""], "classes": ["muted", "muted", "muted"], "bar": null}, {"divisor": "", "showParen": false, "digits": ["", "7", "9"], "classes": ["muted", "muted", "muted"], "bar": ["rule", "rule", "rule"]}, {"divisor": "", "showParen": false, "digits": ["", "7", "2"], "classes": ["muted", "muted", "muted"], "bar": null}, {"divisor": "", "showParen": false, "digits": ["", "", "7"], "classes": ["ok", "ok", "ok"], "bar": ["rule", "rule", "rule"]}], "audio": "audio/ex4_step5.mp3", "audioId": "aud-ex4_step5"}], "nextAudio": null, "nextAudioId": null}];
-
-let exIndex = 0;
-let stepIndex = -1;
-let audioEnabled = true;
-let audioUnlocked = false;
-let currentAudio = null;
-
-const board = document.getElementById("board");
-const narration = document.getElementById("narration");
-const progress = document.getElementById("progress");
-const exMeta = document.getElementById("exMeta");
-const startBtn = document.getElementById("startBtn");
-const nextBtn = document.getElementById("nextBtn");
-const audioToggle = document.getElementById("audioToggle");
-const audioLabel = document.getElementById("audioLabel");
-const testAudioBtn = document.getElementById("testAudioBtn");
-const nextExerciseBtn = document.getElementById("nextExerciseBtn");
-const startAudioBtn = document.getElementById("startAudioBtn");
-const nowPlaying = document.getElementById("nowPlaying");
-
-function current() { return exercises[exIndex]; }
-
-function stopAll() {
-  document.querySelectorAll("audio").forEach(a => {
-    try { a.pause(); a.currentTime = 0; } catch (e) {}
-  });
-  currentAudio = null;
-}
-
-function playAudioEl(el) {
-  if (!el) {
-    console.error("[audio] missing element");
-    return Promise.resolve(false);
-  }
-  if (!audioEnabled) {
-    console.log("[audio] toggle OFF");
-    return Promise.resolve(false);
-  }
-  stopAll();
-  currentAudio = el;
-  // Mirror into visible controls for debugging/confirmation
-  try {
-    nowPlaying.src = el.querySelector("source") ? el.querySelector("source").src : el.currentSrc || el.src;
-    nowPlaying.load();
-  } catch (e) {}
-  el.muted = false;
-  el.volume = 1.0;
-  const p = el.play();
-  if (p && typeof p.then === "function") {
-    return p.then(() => {
-      console.log("[audio] play OK", el.id, el.currentSrc);
-      // also attempt visible player (same file) for browsers that prefer a visible control
-      try { nowPlaying.play().catch(() => {}); } catch (e) {}
-      return true;
-    }).catch(err => {
-      console.error("[audio] play failed", el.id, err);
-      return false;
-    });
-  }
-  return Promise.resolve(true);
-}
-
-function playById(id) {
-  return playAudioEl(document.getElementById(id));
-}
-
-function setAudioEnabled(on) {
-  audioEnabled = !!on;
-  audioToggle.classList.toggle("on", audioEnabled);
-  audioToggle.setAttribute("aria-pressed", audioEnabled ? "true" : "false");
-  audioLabel.textContent = audioEnabled ? "Audio ON" : "Audio OFF";
-  if (!audioEnabled) stopAll();
-}
-
-function renderGrid(rows) {
-  const cols = current().cols;
-  board.style.gridTemplateColumns = `auto auto repeat(${cols}, 1.6rem)`;
-  board.innerHTML = "";
-  for (const row of rows) {
-    const d = document.createElement("div");
-    d.className = "cell span-div";
-    d.textContent = row.divisor || "";
-    board.appendChild(d);
-    const p = document.createElement("div");
-    p.className = "cell paren";
-    if (!row.showParen) { p.style.border = "none"; p.style.borderRadius = "0"; }
-    board.appendChild(p);
-    for (let i = 0; i < cols; i++) {
-      const c = document.createElement("div");
-      const digit = (row.digits && row.digits[i]) || "";
-      const klass = (row.classes && row.classes[i]) || "";
-      c.className = "cell " + klass;
-      if (row.bar && row.bar[i]) c.classList.add(row.bar[i]);
-      c.textContent = digit || "·";
-      if (!digit) c.style.color = "transparent";
-      board.appendChild(c);
-    }
-  }
-}
-
-function updateMeta() {
-  exMeta.textContent = `Exercise ${exIndex + 1} of ${exercises.length}: ${current().label}`;
-}
-
-function showStep(i) {
-  stepIndex = i;
-  const step = current().steps[i];
-  renderGrid(step.rows);
-  narration.textContent = step.say;
-  progress.textContent = `Step ${i + 1} of ${current().steps.length}`;
-  nextBtn.disabled = i >= current().steps.length - 1;
-  nextExerciseBtn.disabled = !(i >= current().steps.length - 1 && exIndex < exercises.length - 1);
-  startBtn.textContent = "Restart exercise";
-  if (audioEnabled && audioUnlocked) playById(step.audioId);
-}
-
-function loadExercise(i) {
-  exIndex = i;
-  stepIndex = -1;
-  updateMeta();
-  board.innerHTML = "";
-  narration.textContent = `Ready for ${current().label}. Press Start when you are ready.`;
-  progress.textContent = "Step 0";
-  nextBtn.disabled = true;
-  nextExerciseBtn.disabled = true;
-  startBtn.textContent = "Start";
-}
-
-// Direct handlers — play() happens inside the click gesture
-startAudioBtn.onclick = function () {
-  audioUnlocked = true;
-  setAudioEnabled(true);
-  startAudioBtn.textContent = "🔊 Audio Ready";
-  startAudioBtn.classList.add("ready");
-  narration.textContent = GREETING;
-  return playById("aud-greeting");
-};
-
-testAudioBtn.onclick = function () {
-  audioUnlocked = true;
-  startAudioBtn.textContent = "🔊 Audio Ready";
-  startAudioBtn.classList.add("ready");
-  narration.textContent = TEST_PHRASE;
-  return playById("aud-test");
-};
-
-audioToggle.onclick = function () {
-  setAudioEnabled(!audioEnabled);
-  if (audioEnabled) {
-    audioUnlocked = true;
-    if (stepIndex >= 0) playById(current().steps[stepIndex].audioId);
-    else playById("aud-greeting");
-  }
-};
-
-startBtn.onclick = function () {
-  if (audioEnabled) audioUnlocked = true;
-  showStep(0);
-  nextBtn.disabled = false;
-};
-
-nextBtn.onclick = function () {
-  if (stepIndex < current().steps.length - 1) showStep(stepIndex + 1);
-};
-
-nextExerciseBtn.onclick = function () {
-  if (exIndex < exercises.length - 1) {
-    const nextId = current().nextAudioId;
-    loadExercise(exIndex + 1);
-    narration.textContent = `Great job! Let's try the next exercise. This one is ${current().label}.`;
-    if (audioEnabled && audioUnlocked && nextId) playById(nextId);
-  }
-};
-
-const tabs = document.querySelectorAll(".tab");
-const tabPanels = document.querySelectorAll(".tab-panel");
-tabs.forEach(tab => tab.addEventListener("click", () => {
-  const target = tab.dataset.tab;
-  tabs.forEach(t => {
-    const active = t === tab;
-    t.classList.toggle("active", active);
-    t.setAttribute("aria-selected", active ? "true" : "false");
-  });
-  tabPanels.forEach(panel => { panel.hidden = panel.id !== `panel-${target}`; });
-}));
-
-setAudioEnabled(true);
-loadExercise(0);
-narration.textContent = GREETING + " Tap Start Audio / Unmute so sound can play.";
-console.log("[audio] fixed <audio><source type=audio/mpeg> elements ready:", document.querySelectorAll(".audio-bank audio").length);
-</script>
-<script>
-// Generated by build_anatomy.py — edit anatomy_content.py instead.
-window.ANATOMY = {
- "sets": [
-  {
-   "id": "set1",
-   "title": "Lesson Set 1: My Amazing Body",
-   "lessons": [
-    {
-     "id": "organs",
-     "title": "Lesson 1: Organs",
-     "emoji": "❤️",
-     "welcome": "Lesson one, organs! I will tell you about a body part, then ask you a question. Let's go!",
-     "welcomeAudio": "audio/anatomy/set1_organs_welcome.mp3",
-     "items": [
-      {
-       "key": "heart",
-       "emoji": "❤️",
-       "name": "Heart",
-       "question": "I pump blood all around your body. What am I?",
-       "options": [
-        "Heart",
-        "Lungs",
-        "Brain",
-        "Stomach"
-       ],
-       "answer": "Heart",
-       "fact": "Your heart beats about one hundred thousand times every day!",
-       "organs": "",
-       "intro": "This is your heart. It is a strong muscle about the size of your fist, and it sits in your chest.",
-       "introAudio": "audio/anatomy/set1_organs_heart_intro.mp3",
-       "questionAudio": "audio/anatomy/set1_organs_heart_q.mp3",
-       "rightText": "Great job, Max! It is Heart. Fun fact! Your heart beats about one hundred thousand times every day!",
-       "wrongText": "Good try, Max! The answer is Heart. Fun fact! Your heart beats about one hundred thousand times every day!",
-       "rightAudio": "audio/anatomy/set1_organs_heart_right.mp3",
-       "wrongAudio": "audio/anatomy/set1_organs_heart_wrong.mp3"
-      },
-      {
-       "key": "lungs",
-       "emoji": "🫁",
-       "name": "Lungs",
-       "question": "I take in oxygen when you breathe in, and push air out when you breathe out. What am I?",
-       "options": [
-        "Liver",
-        "Lungs",
-        "Kidneys",
-        "Skin"
-       ],
-       "answer": "Lungs",
-       "fact": "Your left lung is a little smaller than your right lung, to make room for your heart!",
-       "organs": "",
-       "intro": "These are your lungs. You have two of them, and they fill up with air like balloons when you breathe in.",
-       "introAudio": "audio/anatomy/set1_organs_lungs_intro.mp3",
-       "questionAudio": "audio/anatomy/set1_organs_lungs_q.mp3",
-       "rightText": "You got it, Max! Awesome! It is Lungs. Fun fact! Your left lung is a little smaller than your right lung, to make room for your heart!",
-       "wrongText": "Nice try, Max! Let's learn it together. The answer is Lungs. Fun fact! Your left lung is a little smaller than your right lung, to make room for your heart!",
-       "rightAudio": "audio/anatomy/set1_organs_lungs_right.mp3",
-       "wrongAudio": "audio/anatomy/set1_organs_lungs_wrong.mp3"
-      },
-      {
-       "key": "brain",
-       "emoji": "🧠",
-       "name": "Brain",
-       "question": "I help you think, learn, remember and dream. What am I?",
-       "options": [
-        "Stomach",
-        "Heart",
-        "Brain",
-        "Muscles"
-       ],
-       "answer": "Brain",
-       "fact": "Your brain sends messages faster than a race car!",
-       "organs": "",
-       "intro": "This is your brain. It lives inside your skull and is the boss of your whole body.",
-       "introAudio": "audio/anatomy/set1_organs_brain_intro.mp3",
-       "questionAudio": "audio/anatomy/set1_organs_brain_q.mp3",
-       "rightText": "Yes! That's right! Super smart! It is Brain. Fun fact! Your brain sends messages faster than a race car!",
-       "wrongText": "Ooh, so close! The answer is Brain. Fun fact! Your brain sends messages faster than a race car!",
-       "rightAudio": "audio/anatomy/set1_organs_brain_right.mp3",
-       "wrongAudio": "audio/anatomy/set1_organs_brain_wrong.mp3"
-      },
-      {
-       "key": "stomach",
-       "emoji": "🍽️",
-       "name": "Stomach",
-       "question": "I mix and squish your food with special juices to break it down. What am I?",
-       "options": [
-        "Stomach",
-        "Lungs",
-        "Bones",
-        "Brain"
-       ],
-       "answer": "Stomach",
-       "fact": "Your stomach can stretch to hold a big meal, then shrink back down!",
-       "organs": "",
-       "intro": "This is your stomach. It is a stretchy bag in your tummy where food goes after you swallow.",
-       "introAudio": "audio/anatomy/set1_organs_stomach_intro.mp3",
-       "questionAudio": "audio/anatomy/set1_organs_stomach_q.mp3",
-       "rightText": "Great job, Max! It is Stomach. Fun fact! Your stomach can stretch to hold a big meal, then shrink back down!",
-       "wrongText": "Good try, Max! The answer is Stomach. Fun fact! Your stomach can stretch to hold a big meal, then shrink back down!",
-       "rightAudio": "audio/anatomy/set1_organs_stomach_right.mp3",
-       "wrongAudio": "audio/anatomy/set1_organs_stomach_wrong.mp3"
-      },
-      {
-       "key": "liver",
-       "emoji": "🟤",
-       "name": "Liver",
-       "question": "I clean your blood and help your body use the good stuff from food. What am I?",
-       "options": [
-        "Heart",
-        "Liver",
-        "Eyes",
-        "Muscles"
-       ],
-       "answer": "Liver",
-       "fact": "Your liver is the biggest organ inside your body, and it can even grow back if part of it is hurt!",
-       "organs": "",
-       "intro": "This is your liver. It is a big, reddish brown organ on the right side of your tummy.",
-       "introAudio": "audio/anatomy/set1_organs_liver_intro.mp3",
-       "questionAudio": "audio/anatomy/set1_organs_liver_q.mp3",
-       "rightText": "You got it, Max! Awesome! It is Liver. Fun fact! Your liver is the biggest organ inside your body, and it can even grow back if part of it is hurt!",
-       "wrongText": "Nice try, Max! Let's learn it together. The answer is Liver. Fun fact! Your liver is the biggest organ inside your body, and it can even grow back if part of it is hurt!",
-       "rightAudio": "audio/anatomy/set1_organs_liver_right.mp3",
-       "wrongAudio": "audio/anatomy/set1_organs_liver_wrong.mp3"
-      },
-      {
-       "key": "kidneys",
-       "emoji": "🫘",
-       "name": "Kidneys",
-       "question": "I filter your blood and turn the waste into pee. What am I?",
-       "options": [
-        "Kidneys",
-        "Bones",
-        "Lungs",
-        "Stomach"
-       ],
-       "answer": "Kidneys",
-       "fact": "Your kidneys clean all of your blood many times every single day!",
-       "organs": "",
-       "intro": "These are your kidneys. You have two of them, shaped like beans, near your lower back.",
-       "introAudio": "audio/anatomy/set1_organs_kidneys_intro.mp3",
-       "questionAudio": "audio/anatomy/set1_organs_kidneys_q.mp3",
-       "rightText": "Yes! That's right! Super smart! It is Kidneys. Fun fact! Your kidneys clean all of your blood many times every single day!",
-       "wrongText": "Ooh, so close! The answer is Kidneys. Fun fact! Your kidneys clean all of your blood many times every single day!",
-       "rightAudio": "audio/anatomy/set1_organs_kidneys_right.mp3",
-       "wrongAudio": "audio/anatomy/set1_organs_kidneys_wrong.mp3"
-      },
-      {
-       "key": "intestines",
-       "emoji": "🌀",
-       "name": "Intestines",
-       "question": "I am a long twisty tube that soaks up the goodness from your food. What am I?",
-       "options": [
-        "Skin",
-        "Intestines",
-        "Heart",
-        "Brain"
-       ],
-       "answer": "Intestines",
-       "fact": "If you stretched out your small intestine, it would be longer than a big car!",
-       "organs": "",
-       "intro": "These are your intestines. They are long, twisty tubes curled up inside your tummy.",
-       "introAudio": "audio/anatomy/set1_organs_intestines_intro.mp3",
-       "questionAudio": "audio/anatomy/set1_organs_intestines_q.mp3",
-       "rightText": "Great job, Max! It is Intestines. Fun fact! If you stretched out your small intestine, it would be longer than a big car!",
-       "wrongText": "Good try, Max! The answer is Intestines. Fun fact! If you stretched out your small intestine, it would be longer than a big car!",
-       "rightAudio": "audio/anatomy/set1_organs_intestines_right.mp3",
-       "wrongAudio": "audio/anatomy/set1_organs_intestines_wrong.mp3"
-      },
-      {
-       "key": "skin",
-       "emoji": "🖐️",
-       "name": "Skin",
-       "question": "I cover your whole body and protect you from germs. What am I?",
-       "options": [
-        "Bones",
-        "Liver",
-        "Skin",
-        "Lungs"
-       ],
-       "answer": "Skin",
-       "fact": "Skin is the biggest organ of your whole body!",
-       "organs": "",
-       "intro": "This is your skin. It covers your whole body like a stretchy, waterproof coat.",
-       "introAudio": "audio/anatomy/set1_organs_skin_intro.mp3",
-       "questionAudio": "audio/anatomy/set1_organs_skin_q.mp3",
-       "rightText": "You got it, Max! Awesome! It is Skin. Fun fact! Skin is the biggest organ of your whole body!",
-       "wrongText": "Nice try, Max! Let's learn it together. The answer is Skin. Fun fact! Skin is the biggest organ of your whole body!",
-       "rightAudio": "audio/anatomy/set1_organs_skin_right.mp3",
-       "wrongAudio": "audio/anatomy/set1_organs_skin_wrong.mp3"
-      },
-      {
-       "key": "bones",
-       "emoji": "🦴",
-       "name": "Bones",
-       "question": "I am hard and strong, I give your body its shape, and I protect your brain and heart. What am I?",
-       "options": [
-        "Muscles",
-        "Bones",
-        "Kidneys",
-        "Eyes"
-       ],
-       "answer": "Bones",
-       "fact": "Grown ups have two hundred and six bones, but babies are born with even more!",
-       "organs": "",
-       "intro": "These are your bones. They are hard and strong, and they hold your body up.",
-       "introAudio": "audio/anatomy/set1_organs_bones_intro.mp3",
-       "questionAudio": "audio/anatomy/set1_organs_bones_q.mp3",
-       "rightText": "Yes! That's right! Super smart! It is Bones. Fun fact! Grown ups have two hundred and six bones, but babies are born with even more!",
-       "wrongText": "Ooh, so close! The answer is Bones. Fun fact! Grown ups have two hundred and six bones, but babies are born with even more!",
-       "rightAudio": "audio/anatomy/set1_organs_bones_right.mp3",
-       "wrongAudio": "audio/anatomy/set1_organs_bones_wrong.mp3"
-      },
-      {
-       "key": "muscles",
-       "emoji": "💪",
-       "name": "Muscles",
-       "question": "I pull on your bones so you can run, jump and smile. What am I?",
-       "options": [
-        "Muscles",
-        "Skin",
-        "Liver",
-        "Heart"
-       ],
-       "answer": "Muscles",
-       "fact": "You use more than ten muscles just to smile!",
-       "organs": "",
-       "intro": "These are your muscles. They are attached to your bones and pull on them so you can move.",
-       "introAudio": "audio/anatomy/set1_organs_muscles_intro.mp3",
-       "questionAudio": "audio/anatomy/set1_organs_muscles_q.mp3",
-       "rightText": "Great job, Max! It is Muscles. Fun fact! You use more than ten muscles just to smile!",
-       "wrongText": "Good try, Max! The answer is Muscles. Fun fact! You use more than ten muscles just to smile!",
-       "rightAudio": "audio/anatomy/set1_organs_muscles_right.mp3",
-       "wrongAudio": "audio/anatomy/set1_organs_muscles_wrong.mp3"
-      },
-      {
-       "key": "eyes",
-       "emoji": "👀",
-       "name": "Eyes",
-       "question": "I help you see colours, shapes and your favourite cartoons. What am I?",
-       "options": [
-        "Eyes",
-        "Lungs",
-        "Stomach",
-        "Bones"
-       ],
-       "answer": "Eyes",
-       "fact": "You blink about fifteen times every minute without even thinking about it!",
-       "organs": "",
-       "intro": "These are your eyes. They catch light and send pictures to your brain.",
-       "introAudio": "audio/anatomy/set1_organs_eyes_intro.mp3",
-       "questionAudio": "audio/anatomy/set1_organs_eyes_q.mp3",
-       "rightText": "You got it, Max! Awesome! It is Eyes. Fun fact! You blink about fifteen times every minute without even thinking about it!",
-       "wrongText": "Nice try, Max! Let's learn it together. The answer is Eyes. Fun fact! You blink about fifteen times every minute without even thinking about it!",
-       "rightAudio": "audio/anatomy/set1_organs_eyes_right.mp3",
-       "wrongAudio": "audio/anatomy/set1_organs_eyes_wrong.mp3"
-      }
-     ],
-     "doneAudioPrefix": "audio/anatomy/set1_organs_done_"
-    },
-    {
-     "id": "systems",
-     "title": "Lesson 2: Body Systems",
-     "emoji": "🧩",
-     "welcome": "Lesson two, body systems! Organs work together in teams called systems. Listen to each one, then answer the question.",
-     "welcomeAudio": "audio/anatomy/set1_systems_welcome.mp3",
-     "items": [
-      {
-       "key": "circulatory",
-       "emoji": "❤️",
-       "name": "Circulatory system",
-       "question": "Which system does the heart belong to?",
-       "options": [
-        "Circulatory",
-        "Digestive",
-        "Skeletal",
-        "Nervous"
-       ],
-       "answer": "Circulatory",
-       "fact": "If you laid all your blood vessels end to end, they would go around the Earth more than two times!",
-       "organs": "Heart, blood vessels, blood",
-       "intro": "The circulatory system moves blood all around your body. The heart pumps the blood, and tubes called blood vessels carry it everywhere, bringing oxygen and food to every part of you.",
-       "introAudio": "audio/anatomy/set1_systems_circulatory_intro.mp3",
-       "questionAudio": "audio/anatomy/set1_systems_circulatory_q.mp3",
-       "rightText": "Great job, Max! It is the circulatory system. Fun fact! If you laid all your blood vessels end to end, they would go around the Earth more than two times!",
-       "wrongText": "Good try, Max! The answer is the circulatory system. Fun fact! If you laid all your blood vessels end to end, they would go around the Earth more than two times!",
-       "rightAudio": "audio/anatomy/set1_systems_circulatory_right.mp3",
-       "wrongAudio": "audio/anatomy/set1_systems_circulatory_wrong.mp3"
-      },
-      {
-       "key": "respiratory",
-       "emoji": "🫁",
-       "name": "Respiratory system",
-       "question": "Which system do the lungs belong to?",
-       "options": [
-        "Muscular",
-        "Respiratory",
-        "Urinary",
-        "Digestive"
-       ],
-       "answer": "Respiratory",
-       "fact": "You breathe in and out about twenty thousand times every day!",
-       "organs": "Nose, windpipe, lungs",
-       "intro": "The respiratory system helps you breathe. Air goes in through your nose and mouth, down your windpipe, and into your lungs, where your body grabs the oxygen it needs.",
-       "introAudio": "audio/anatomy/set1_systems_respiratory_intro.mp3",
-       "questionAudio": "audio/anatomy/set1_systems_respiratory_q.mp3",
-       "rightText": "You got it, Max! Awesome! It is the respiratory system. Fun fact! You breathe in and out about twenty thousand times every day!",
-       "wrongText": "Nice try, Max! Let's learn it together. The answer is the respiratory system. Fun fact! You breathe in and out about twenty thousand times every day!",
-       "rightAudio": "audio/anatomy/set1_systems_respiratory_right.mp3",
-       "wrongAudio": "audio/anatomy/set1_systems_respiratory_wrong.mp3"
-      },
-      {
-       "key": "digestive",
-       "emoji": "🍎",
-       "name": "Digestive system",
-       "question": "Which system does the stomach belong to?",
-       "options": [
-        "Nervous",
-        "Skeletal",
-        "Digestive",
-        "Circulatory"
-       ],
-       "answer": "Digestive",
-       "fact": "Food can take a whole day or more to travel all the way through your digestive system!",
-       "organs": "Mouth, stomach, liver, intestines",
-       "intro": "The digestive system turns your food into energy. Your mouth chews, your stomach mixes, your liver helps, and your intestines soak up all the goodness.",
-       "introAudio": "audio/anatomy/set1_systems_digestive_intro.mp3",
-       "questionAudio": "audio/anatomy/set1_systems_digestive_q.mp3",
-       "rightText": "Yes! That's right! Super smart! It is the digestive system. Fun fact! Food can take a whole day or more to travel all the way through your digestive system!",
-       "wrongText": "Ooh, so close! The answer is the digestive system. Fun fact! Food can take a whole day or more to travel all the way through your digestive system!",
-       "rightAudio": "audio/anatomy/set1_systems_digestive_right.mp3",
-       "wrongAudio": "audio/anatomy/set1_systems_digestive_wrong.mp3"
-      },
-      {
-       "key": "nervous",
-       "emoji": "🧠",
-       "name": "Nervous system",
-       "question": "Which system does the brain belong to?",
-       "options": [
-        "Nervous",
-        "Respiratory",
-        "Muscular",
-        "Urinary"
-       ],
-       "answer": "Nervous",
-       "fact": "When you touch something hot, your nerves tell you to pull away in a split second!",
-       "organs": "Brain, spinal cord, nerves",
-       "intro": "The nervous system is your body's message team. Your brain is the boss, and nerves carry messages up and down your spinal cord to every part of your body.",
-       "introAudio": "audio/anatomy/set1_systems_nervous_intro.mp3",
-       "questionAudio": "audio/anatomy/set1_systems_nervous_q.mp3",
-       "rightText": "Great job, Max! It is the nervous system. Fun fact! When you touch something hot, your nerves tell you to pull away in a split second!",
-       "wrongText": "Good try, Max! The answer is the nervous system. Fun fact! When you touch something hot, your nerves tell you to pull away in a split second!",
-       "rightAudio": "audio/anatomy/set1_systems_nervous_right.mp3",
-       "wrongAudio": "audio/anatomy/set1_systems_nervous_wrong.mp3"
-      },
-      {
-       "key": "skeletal",
-       "emoji": "🦴",
-       "name": "Skeletal system",
-       "question": "Which system do your bones and ribs belong to?",
-       "options": [
-        "Digestive",
-        "Skeletal",
-        "Circulatory",
-        "Respiratory"
-       ],
-       "answer": "Skeletal",
-       "fact": "The smallest bone in your body is inside your ear, and it is smaller than a grain of rice!",
-       "organs": "Bones, skull, ribs, spine",
-       "intro": "The skeletal system is all of your bones together. It holds you up, gives you your shape, and protects soft parts like your brain, heart and lungs.",
-       "introAudio": "audio/anatomy/set1_systems_skeletal_intro.mp3",
-       "questionAudio": "audio/anatomy/set1_systems_skeletal_q.mp3",
-       "rightText": "You got it, Max! Awesome! It is the skeletal system. Fun fact! The smallest bone in your body is inside your ear, and it is smaller than a grain of rice!",
-       "wrongText": "Nice try, Max! Let's learn it together. The answer is the skeletal system. Fun fact! The smallest bone in your body is inside your ear, and it is smaller than a grain of rice!",
-       "rightAudio": "audio/anatomy/set1_systems_skeletal_right.mp3",
-       "wrongAudio": "audio/anatomy/set1_systems_skeletal_wrong.mp3"
-      },
-      {
-       "key": "muscular",
-       "emoji": "💪",
-       "name": "Muscular system",
-       "question": "Which system helps you run and jump by pulling on your bones?",
-       "options": [
-        "Urinary",
-        "Nervous",
-        "Muscular",
-        "Digestive"
-       ],
-       "answer": "Muscular",
-       "fact": "Your heart is a muscle that never takes a break!",
-       "organs": "Muscles (and the heart is a muscle too!)",
-       "intro": "The muscular system is made of all your muscles. Muscles pull on your bones so you can walk, run, jump, wiggle and smile.",
-       "introAudio": "audio/anatomy/set1_systems_muscular_intro.mp3",
-       "questionAudio": "audio/anatomy/set1_systems_muscular_q.mp3",
-       "rightText": "Yes! That's right! Super smart! It is the muscular system. Fun fact! Your heart is a muscle that never takes a break!",
-       "wrongText": "Ooh, so close! The answer is the muscular system. Fun fact! Your heart is a muscle that never takes a break!",
-       "rightAudio": "audio/anatomy/set1_systems_muscular_right.mp3",
-       "wrongAudio": "audio/anatomy/set1_systems_muscular_wrong.mp3"
-      },
-      {
-       "key": "urinary",
-       "emoji": "💧",
-       "name": "Urinary system",
-       "question": "Which system do the kidneys belong to?",
-       "options": [
-        "Skeletal",
-        "Urinary",
-        "Respiratory",
-        "Muscular"
-       ],
-       "answer": "Urinary",
-       "fact": "Drinking water helps your kidneys do their job!",
-       "organs": "Kidneys, bladder",
-       "intro": "The urinary system cleans waste out of your blood. Your kidneys filter the blood and make pee, and your bladder holds the pee until you go to the bathroom.",
-       "introAudio": "audio/anatomy/set1_systems_urinary_intro.mp3",
-       "questionAudio": "audio/anatomy/set1_systems_urinary_q.mp3",
-       "rightText": "Great job, Max! It is the urinary system. Fun fact! Drinking water helps your kidneys do their job!",
-       "wrongText": "Good try, Max! The answer is the urinary system. Fun fact! Drinking water helps your kidneys do their job!",
-       "rightAudio": "audio/anatomy/set1_systems_urinary_right.mp3",
-       "wrongAudio": "audio/anatomy/set1_systems_urinary_wrong.mp3"
-      },
-      {
-       "key": "match_intestines",
-       "emoji": "🌀",
-       "name": "Match it!",
-       "question": "Match it! The intestines belong to which system?",
-       "options": [
-        "Digestive",
-        "Nervous",
-        "Circulatory",
-        "Skeletal"
-       ],
-       "answer": "Digestive",
-       "fact": "The intestines are part of the digestive system, along with the stomach and liver.",
-       "organs": "",
-       "intro": "",
-       "introAudio": "",
-       "questionAudio": "audio/anatomy/set1_systems_match_intestines_q.mp3",
-       "rightText": "You got it, Max! Awesome! It is the digestive system. Fun fact! The intestines are part of the digestive system, along with the stomach and liver.",
-       "wrongText": "Nice try, Max! Let's learn it together. The answer is the digestive system. Fun fact! The intestines are part of the digestive system, along with the stomach and liver.",
-       "rightAudio": "audio/anatomy/set1_systems_match_intestines_right.mp3",
-       "wrongAudio": "audio/anatomy/set1_systems_match_intestines_wrong.mp3"
-      },
-      {
-       "key": "match_nerves",
-       "emoji": "⚡",
-       "name": "Match it!",
-       "question": "Match it! Nerves and the spinal cord belong to which system?",
-       "options": [
-        "Muscular",
-        "Nervous",
-        "Urinary",
-        "Respiratory"
-       ],
-       "answer": "Nervous",
-       "fact": "Nerves are like telephone wires that carry messages to and from your brain.",
-       "organs": "",
-       "intro": "",
-       "introAudio": "",
-       "questionAudio": "audio/anatomy/set1_systems_match_nerves_q.mp3",
-       "rightText": "Yes! That's right! Super smart! It is the nervous system. Fun fact! Nerves are like telephone wires that carry messages to and from your brain.",
-       "wrongText": "Ooh, so close! The answer is the nervous system. Fun fact! Nerves are like telephone wires that carry messages to and from your brain.",
-       "rightAudio": "audio/anatomy/set1_systems_match_nerves_right.mp3",
-       "wrongAudio": "audio/anatomy/set1_systems_match_nerves_wrong.mp3"
-      },
-      {
-       "key": "match_bladder",
-       "emoji": "💧",
-       "name": "Match it!",
-       "question": "Match it! The bladder belongs to which system?",
-       "options": [
-        "Digestive",
-        "Skeletal",
-        "Urinary",
-        "Circulatory"
-       ],
-       "answer": "Urinary",
-       "fact": "The bladder is a stretchy bag that can hold about two cups of pee.",
-       "organs": "",
-       "intro": "",
-       "introAudio": "",
-       "questionAudio": "audio/anatomy/set1_systems_match_bladder_q.mp3",
-       "rightText": "Great job, Max! It is the urinary system. Fun fact! The bladder is a stretchy bag that can hold about two cups of pee.",
-       "wrongText": "Good try, Max! The answer is the urinary system. Fun fact! The bladder is a stretchy bag that can hold about two cups of pee.",
-       "rightAudio": "audio/anatomy/set1_systems_match_bladder_right.mp3",
-       "wrongAudio": "audio/anatomy/set1_systems_match_bladder_wrong.mp3"
-      },
-      {
-       "key": "match_blood",
-       "emoji": "🩸",
-       "name": "Match it!",
-       "question": "Match it! Blood vessels belong to which system?",
-       "options": [
-        "Respiratory",
-        "Circulatory",
-        "Muscular",
-        "Nervous"
-       ],
-       "answer": "Circulatory",
-       "fact": "Blood vessels come in big ones called arteries and veins, and teeny tiny ones called capillaries.",
-       "organs": "",
-       "intro": "",
-       "introAudio": "",
-       "questionAudio": "audio/anatomy/set1_systems_match_blood_q.mp3",
-       "rightText": "You got it, Max! Awesome! It is the circulatory system. Fun fact! Blood vessels come in big ones called arteries and veins, and teeny tiny ones called capillaries.",
-       "wrongText": "Nice try, Max! Let's learn it together. The answer is the circulatory system. Fun fact! Blood vessels come in big ones called arteries and veins, and teeny tiny ones called capillaries.",
-       "rightAudio": "audio/anatomy/set1_systems_match_blood_right.mp3",
-       "wrongAudio": "audio/anatomy/set1_systems_match_blood_wrong.mp3"
-      }
-     ],
-     "doneAudioPrefix": "audio/anatomy/set1_systems_done_"
-    }
-   ]
-  }
- ],
- "helloAudio": "audio/anatomy/anat_hello.mp3"
-};
-</script>
-<script>
-// Anatomy lessons. Data lives in window.ANATOMY (built by build_anatomy.py).
-// Every play() call happens directly inside a button tap; MP3s only, no speech APIs.
-(function () {
-  const A = window.ANATOMY;
-  const $ = id => document.getElementById(id);
-  const player = $("anatPlayer");
-  const els = {
-    audioBtn: $("anatAudioBtn"), soundBtn: $("anatSoundBtn"), replayBtn: $("anatReplayBtn"), score: $("anatScore"),
-    picker: $("anatPicker"), sets: $("anatSets"), lesson: $("anatLesson"), progress: $("anatomyProgress"),
-    emoji: $("anatEmoji"), title: $("anatTitle"), organs: $("anatOrgans"), text: $("anatText"),
-    options: $("anatomyOptions"), feedback: $("anatomyFeedback"), quizBtn: $("anatQuizBtn"),
-    nextBtn: $("anatNextBtn"), backBtn: $("anatBackBtn")
-  };
-  const st = { sound: true, lesson: null, idx: 0, phase: "pick", score: 0, lastClip: "" };
-
-  function play(src) {
-    st.lastClip = src || "";
-    if (!src || !st.sound) return;
-    try { if (typeof stopAll === "function") stopAll(); } catch (e) {}
-    try {
-      player.pause();
-      player.src = src;
-      player.muted = false; player.volume = 1.0;
-      const p = player.play();
-      if (p && p.catch) p.catch(err => console.error("[anatomy audio] play failed", src, err));
-    } catch (e) { console.error("[anatomy audio]", e); }
-  }
-
-  function setScore() {
-    const n = st.lesson ? st.lesson.items.length : 0;
-    els.score.textContent = st.lesson ? `⭐ Score: ${st.score} / ${n}` : "⭐ Score: 0";
-  }
-
-  function renderPicker() {
-    els.sets.innerHTML = "";
-    A.sets.forEach(set => {
-      const h = document.createElement("div");
-      h.className = "anat-set-title"; h.textContent = set.title;
-      els.sets.appendChild(h);
-      const grid = document.createElement("div");
-      grid.className = "lesson-grid";
-      set.lessons.forEach(lesson => {
-        const b = document.createElement("button");
-        b.type = "button"; b.className = "lesson-btn";
-        b.innerHTML = `<span class="big">${lesson.emoji}</span>${lesson.title}`;
-        b.onclick = () => startLesson(lesson);
-        grid.appendChild(b);
-      });
-      els.sets.appendChild(grid);
-    });
-  }
-
-  function showPicker() {
-    st.phase = "pick"; st.lesson = null; player.pause();
-    els.lesson.hidden = true; els.picker.hidden = false; setScore();
-  }
-
-  function startLesson(lesson) {
-    st.lesson = lesson; st.idx = 0; st.score = 0; st.phase = "welcome";
-    els.picker.hidden = true; els.lesson.hidden = false;
-    els.progress.textContent = lesson.title;
-    els.emoji.textContent = lesson.emoji;
-    els.title.textContent = lesson.title.split(": ")[1] || lesson.title;
-    els.organs.textContent = "";
-    els.text.textContent = lesson.welcome;
-    els.options.innerHTML = ""; els.feedback.textContent = "";
-    els.quizBtn.hidden = true;
-    els.nextBtn.disabled = false; els.nextBtn.textContent = "Let's start ▶️";
-    setScore();
-    play(lesson.welcomeAudio);
-  }
-
-  function item() { return st.lesson.items[st.idx]; }
-
-  function showItem() {
-    const it = item(), n = st.lesson.items.length;
-    els.progress.textContent = `${st.lesson.title} — ${st.idx + 1} of ${n}`;
-    els.emoji.textContent = it.emoji;
-    els.options.innerHTML = ""; els.feedback.textContent = "";
-    els.nextBtn.disabled = true; els.nextBtn.textContent = "Next ➡️";
-    if (it.intro) {
-      st.phase = "intro";
-      els.title.textContent = it.name;
-      els.organs.textContent = it.organs ? "Team members: " + it.organs : "";
-      els.text.textContent = it.intro;
-      els.quizBtn.hidden = false;
-      play(it.introAudio);
-    } else {
-      showQuestion();
-    }
-  }
-
-  function showQuestion() {
-    const it = item();
-    st.phase = "question";
-    els.quizBtn.hidden = true;
-    if (!it.intro) { els.title.textContent = it.name; els.organs.textContent = ""; }
-    else { els.title.textContent = "Quiz time! ❓"; els.organs.textContent = ""; }
-    els.text.textContent = it.question;
-    els.feedback.textContent = "Tap your answer, Max!";
-    els.options.innerHTML = "";
-    it.options.forEach(opt => {
-      const b = document.createElement("button");
-      b.type = "button"; b.className = "anatomy-option"; b.textContent = opt;
-      b.onclick = () => answer(opt, b);
-      els.options.appendChild(b);
-    });
-    play(it.questionAudio);
-  }
-
-  function answer(opt, btn) {
-    if (st.phase !== "question") return;
-    const it = item();
-    st.phase = "answered";
-    els.options.querySelectorAll("button").forEach(b => {
-      b.disabled = true;
-      if (b.textContent === it.answer) b.classList.add("correct");
-    });
-    const ok = opt === it.answer;
-    if (ok) { st.score++; btn.classList.add("correct"); }
-    else btn.classList.add("incorrect");
-    els.feedback.textContent = (ok ? "🌟 " : "💡 ") + (ok ? it.rightText : it.wrongText);
-    setScore();
-    const last = st.idx === st.lesson.items.length - 1;
-    els.nextBtn.disabled = false;
-    els.nextBtn.textContent = last ? "See my score 🏆" : "Next ➡️";
-    play(ok ? it.rightAudio : it.wrongAudio);
-  }
-
-  function finish() {
-    const n = st.lesson.items.length;
-    st.phase = "done";
-    els.progress.textContent = st.lesson.title;
-    els.emoji.textContent = st.score === n ? "🏆" : "🎉";
-    els.title.textContent = "Lesson complete!";
-    els.organs.textContent = "";
-    els.text.textContent = `You got ${st.score} out of ${n}! ` + (st.score === n ? "A perfect score — you are a body expert!" : "Great work — play again to learn even more!");
-    els.options.innerHTML = ""; els.feedback.textContent = "";
-    els.quizBtn.hidden = true;
-    els.nextBtn.disabled = false; els.nextBtn.textContent = "Play again 🔄";
-    play(st.lesson.doneAudioPrefix + st.score + ".mp3");
-  }
-
-  els.nextBtn.onclick = () => {
-    if (!st.lesson) return;
-    if (st.phase === "welcome") { st.idx = 0; showItem(); }
-    else if (st.phase === "answered") {
-      if (st.idx < st.lesson.items.length - 1) { st.idx++; showItem(); } else finish();
-    } else if (st.phase === "done") startLesson(st.lesson);
-  };
-  els.quizBtn.onclick = () => { if (st.phase === "intro") showQuestion(); };
-  els.backBtn.onclick = showPicker;
-  els.replayBtn.onclick = () => { if (st.lastClip) play(st.lastClip); };
-  els.audioBtn.onclick = () => {
-    st.sound = true;
-    els.soundBtn.textContent = "Sound ON"; els.soundBtn.setAttribute("aria-pressed", "true");
-    els.audioBtn.textContent = "🔊 Audio Ready"; els.audioBtn.classList.add("ready");
-    play(st.lesson ? (st.lastClip || A.helloAudio) : A.helloAudio);
-  };
-  els.soundBtn.onclick = () => {
-    st.sound = !st.sound;
-    els.soundBtn.textContent = st.sound ? "Sound ON" : "Sound OFF";
-    els.soundBtn.setAttribute("aria-pressed", st.sound ? "true" : "false");
-    if (!st.sound) player.pause();
-  };
-
-  renderPicker();
-  showPicker();
-})();
-</script>
+<script src="topics.js"></script>
+<script src="core.js"></script>
+<script src="math_review.js"></script>
+<script src="math_quiz_data.js"></script>
+<script src="math_quiz.js"></script>
+<script src="anatomy_data.js"></script>
+<script src="anatomy_app.js"></script>
+<script src="explore_data.js"></script>
+<script src="maxtopics_data.js"></script>
+<script src="explore_app.js"></script>
+<script src="maxquiz.js"></script>
+<script src="spelling.js"></script>
+<script>HB.start();</script>
 </body>
 </html>

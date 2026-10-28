@@ -1,5 +1,6 @@
 // Anatomy lessons. Data lives in window.ANATOMY (built by build_anatomy.py).
 // Every play() call happens directly inside a button tap; MP3s only, no speech APIs.
+// Registered as the "anatQuiz" module (Anatomy › <subtopic> › Quiz). The shared audio bar (#anatBar) is also used by explore_app.js.
 (function () {
   const A = window.ANATOMY;
   const $ = id => document.getElementById(id);
@@ -28,7 +29,7 @@
 
   function setScore() {
     const n = st.lesson ? st.lesson.items.length : 0;
-    els.score.textContent = st.lesson ? `⭐ Score: ${st.score} / ${n}` : "⭐ Score: 0";
+    els.score.textContent = st.lesson ? `Score: ${st.score} / ${n}` : "Score: 0";
   }
 
   function renderPicker() {
@@ -65,7 +66,7 @@
     els.text.textContent = lesson.welcome;
     els.options.innerHTML = ""; els.feedback.textContent = "";
     els.quizBtn.hidden = true;
-    els.nextBtn.disabled = false; els.nextBtn.textContent = "Let's start ▶️";
+    els.nextBtn.disabled = false; els.nextBtn.textContent = "Start ›";
     setScore();
     play(lesson.welcomeAudio);
   }
@@ -77,7 +78,7 @@
     els.progress.textContent = `${st.lesson.title} — ${st.idx + 1} of ${n}`;
     els.emoji.textContent = it.emoji;
     els.options.innerHTML = ""; els.feedback.textContent = "";
-    els.nextBtn.disabled = true; els.nextBtn.textContent = "Next ➡️";
+    els.nextBtn.disabled = true; els.nextBtn.textContent = "Next ›";
     if (it.intro) {
       st.phase = "intro";
       els.title.textContent = it.name;
@@ -95,7 +96,7 @@
     st.phase = "question";
     els.quizBtn.hidden = true;
     if (!it.intro) { els.title.textContent = it.name; els.organs.textContent = ""; }
-    else { els.title.textContent = "Quiz time! ❓"; els.organs.textContent = ""; }
+    else { els.title.textContent = "Quiz time"; els.organs.textContent = ""; }
     els.text.textContent = it.question;
     els.feedback.textContent = "Tap your answer, Max!";
     els.options.innerHTML = "";
@@ -119,11 +120,11 @@
     const ok = opt === it.answer;
     if (ok) { st.score++; btn.classList.add("correct"); }
     else btn.classList.add("incorrect");
-    els.feedback.textContent = (ok ? "🌟 " : "💡 ") + (ok ? it.rightText : it.wrongText);
+    els.feedback.textContent = (ok ? "✓ " : "✗ ") + (ok ? it.rightText : it.wrongText);
     setScore();
     const last = st.idx === st.lesson.items.length - 1;
     els.nextBtn.disabled = false;
-    els.nextBtn.textContent = last ? "See my score 🏆" : "Next ➡️";
+    els.nextBtn.textContent = last ? "See results" : "Next ›";
     play(ok ? it.rightAudio : it.wrongAudio);
   }
 
@@ -137,7 +138,7 @@
     els.text.textContent = `You got ${st.score} out of ${n}! ` + (st.score === n ? "A perfect score — you are a body expert!" : "Great work — play again to learn even more!");
     els.options.innerHTML = ""; els.feedback.textContent = "";
     els.quizBtn.hidden = true;
-    els.nextBtn.disabled = false; els.nextBtn.textContent = "Play again 🔄";
+    els.nextBtn.disabled = false; els.nextBtn.textContent = "Play again";
     play(st.lesson.doneAudioPrefix + st.score + ".mp3");
   }
 
@@ -149,13 +150,14 @@
     } else if (st.phase === "done") startLesson(st.lesson);
   };
   els.quizBtn.onclick = () => { if (st.phase === "intro") showQuestion(); };
-  els.backBtn.onclick = showPicker;
+  els.backBtn.onclick = () => (window.HB ? HB.back() : showPicker());
   els.replayBtn.onclick = () => { if (st.lastClip) play(st.lastClip); };
   els.audioBtn.onclick = () => {
     st.sound = true;
     els.soundBtn.textContent = "Sound ON"; els.soundBtn.setAttribute("aria-pressed", "true");
-    els.audioBtn.textContent = "🔊 Audio Ready"; els.audioBtn.classList.add("ready");
-    play(st.lesson ? (st.lastClip || A.helloAudio) : A.helloAudio);
+    els.audioBtn.textContent = "Audio ready"; els.audioBtn.classList.add("ready");
+    const ex = window.ANAT_EXPLORE_DATA;
+    play(st.lastClip || (st.lesson ? A.helloAudio : (ex ? ex.helloAudio : A.helloAudio)));
   };
   els.soundBtn.onclick = () => {
     st.sound = !st.sound;
@@ -166,4 +168,19 @@
 
   renderPicker();
   showPicker();
+
+  window.ANAT = { play, isSound: () => st.sound, setScoreText: t => { els.score.textContent = t; } };
+  function findLesson(id) {
+    for (const set of A.sets) for (const L of set.lessons) if (L.id === id) return L;
+    return null;
+  }
+  if (window.HB) HB.registerModule("anatQuiz", {
+    view: "view-anatQuiz",
+    enter(ctx) {
+      els.score.hidden = false;
+      const L = findLesson(ctx.opts.lesson);
+      if (L) startLesson(L); else showPicker();
+    },
+    leave() { player.pause(); showPicker(); st.lastClip = ""; }
+  });
 })();
