@@ -1,0 +1,66 @@
+{
+  "greeting": "greeting.mp3",
+  "test": "test.mp3",
+  "exercises": [
+    {
+      "label": "425 \u00f7 18",
+      "steps": [
+        "ex0_step0.mp3",
+        "ex0_step1.mp3",
+        "ex0_step2.mp3",
+        "ex0_step3.mp3",
+        "ex0_step4.mp3",
+        "ex0_step5.mp3"
+      ],
+      "next": "ex0_next.mp3"
+    },
+    {
+      "label": "458 \u00f7 19",
+      "steps": [
+        "ex1_step0.mp3",
+        "ex1_step1.mp3",
+        "ex1_step2.mp3",
+        "ex1_step3.mp3",
+        "ex1_step4.mp3",
+        "ex1_step5.mp3"
+      ],
+      "next": "ex1_next.mp3"
+    },
+    {
+      "label": "492 \u00f7 22",
+      "steps": [
+        "ex2_step0.mp3",
+        "ex2_step1.mp3",
+        "ex2_step2.mp3",
+        "ex2_step3.mp3",
+        "ex2_step4.mp3",
+        "ex2_step5.mp3"
+      ],
+      "next": "ex2_next.mp3"
+    },
+    {
+      "label": "525 \u00f7 23",
+      "steps": [
+        "ex3_step0.mp3",
+        "ex3_step1.mp3",
+        "ex3_step2.mp3",
+        "ex3_step3.mp3",
+        "ex3_step4.mp3",
+        "ex3_step5.mp3"
+      ],
+      "next": "ex3_next.mp3"
+    },
+    {
+      "label": "559 \u00f7 24",
+      "steps": [
+        "ex4_step0.mp3",
+        "ex4_step1.mp3",
+        "ex4_step2.mp3",
+        "ex4_step3.mp3",
+        "ex4_step4.mp3",
+        "ex4_step5.mp3"
+      ],
+      "next": null
+    }
+  ]
+}
