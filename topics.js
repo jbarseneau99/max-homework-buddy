@@ -79,6 +79,20 @@
           moreComingSoon: true }
       ],
       moreComingSoon: true
+    },
+    {
+      id: "social", title: "Social Studies", icon: "globe", homeIcon: "social", blurb: "Canada: provinces, maps, Indigenous peoples and early history.",
+      subtopics: ((window.SOCIAL_DATA && SOCIAL_DATA.subtopics) || []).map(t => ({
+        id: t.id, title: t.title, icon: "globe", blurb: t.blurb, toolbar: "anatBar",
+        sessions: [{
+          id: t.id, title: t.session, icon: "globe", blurb: t.sessionBlurb,
+          review: { module: "factWalk", opts: { set: t.id }, label: ((SOCIAL_DATA.reviews[t.id] || []).length) + "-step narrated walkthrough" },
+          quiz: { module: "maxQuiz", opts: { set: "ss_" + t.id }, label: ((window.QUIZ_SETS && QUIZ_SETS["ss_" + t.id]) ? QUIZ_SETS["ss_" + t.id].questions.length : 6) + " questions — tap, pick, or type" },
+          componentModule: "factWalk", components: (SOCIAL_DATA.components[t.id] || []).map(c => ({ id: c.id, title: c.title }))
+        }],
+        moreComingSoon: false
+      })),
+      moreComingSoon: true
     }
   ];
 })();

@@ -2,6 +2,7 @@
 //   math     — "Sigil of Division": glowing magic circle (rune ring + hexagram) with a gold ÷ core.
 //   science  — "Power-up Orb": energy orb with three atom orbits and a gold lightning spark.
 //   language — "Word Scroll": open scroll with gold rods and a brush-stroke kanji 言 ("word / to say").
+//   social   — "Compass-Rose Globe": glowing latitude/longitude globe with a gold compass-rose star and an orbiting N/E/S/W ring.
 window.ANIME_ICONS = (function () {
   const defs = id => `<defs>
     <filter id="${id}-glow" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="1.6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
@@ -39,6 +40,19 @@ window.ANIME_ICONS = (function () {
           <path d="M25,34.2 C29,33.8 35,33.8 39,34.2"/>
           <path d="M25.5,39 L26,47.5 M25.8,39.2 C30,38.8 35,38.8 38.5,39.2 L38,47.5 M26.2,46.8 C30,46.4 34,46.4 37.6,46.8"/>
         </g>
+      </g></svg>`,
+    social: `<svg class="anime-ic am-social" viewBox="0 0 64 64" aria-hidden="true">${defs("amg")}
+      <g filter="url(#amg-glow)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <g class="am-spin"><circle cx="32" cy="32" r="29.5" stroke="#ffc23d" stroke-width="1" stroke-dasharray="1.5 3.2"/>
+          <path d="M32,1.5 L33.6,5 L30.4,5 Z M62.5,32 L59,33.6 L59,30.4 Z M32,62.5 L30.4,59 L33.6,59 Z M1.5,32 L5,30.4 L5,33.6 Z" fill="#ffc23d" stroke="none"/></g>
+        <circle class="am-pulse" cx="32" cy="32" r="21" fill="url(#amg-core)" opacity=".35" stroke="none"/>
+        <circle cx="32" cy="32" r="21" stroke="#4cc9f0" stroke-width="1.6"/>
+        <ellipse cx="32" cy="32" rx="9" ry="21" stroke="#7fe7ff" stroke-width=".9" opacity=".8"/>
+        <ellipse cx="32" cy="32" rx="17" ry="21" stroke="#7fe7ff" stroke-width=".7" opacity=".55"/>
+        <path d="M11,32 H53 M14.2,21.5 H49.8 M14.2,42.5 H49.8" stroke="#7fe7ff" stroke-width=".9" opacity=".8"/>
+        <path d="M32,13 L35.2,28.8 L48,32 L35.2,35.2 L32,51 L28.8,35.2 L16,32 L28.8,28.8 Z" fill="url(#amg-gold)" stroke="#fff3c4" stroke-width=".6"/>
+        <path d="M32,13 L32,51 M16,32 L48,32" stroke="#8a5a00" stroke-width=".5" opacity=".6"/>
+        <circle cx="32" cy="32" r="2.2" fill="#ffffff" stroke="none"/>
       </g></svg>`
   };
 })();

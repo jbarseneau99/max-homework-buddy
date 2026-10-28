@@ -54,6 +54,20 @@ and its narration MP3.
 - math: "Sigil of Division", a rotating rune ring around a hexagram with a gold ÷ core
 - science: "Power-up Orb", a pulsing energy core with three atom orbits and a gold lightning bolt
 - language: "Word Scroll", an open scroll with gold rods and the kanji 言 ("word / to say")
+- social: "Compass-Rose Globe", a glowing latitude/longitude globe with a gold compass-rose star and an orbiting N/E/S/W ring
+
+Home is a 2x2 grid (Math, Science, Language, Social Studies), and it stays 2x2 on phones.
+
+## Social Studies (grade 5, Canada)
+- The content lives in `social_content.py`. `build_social.py` generates `social_data.js` (`window.SOCIAL_DATA`) and merges the quizzes into `window.QUIZ_SETS` as `ss_<id>`. It also writes the gTTS MP3s to `audio/social/`, building only the missing clips unless you pass `--force`.
+- There are four subtopics, each with one session:
+  - Provinces & Territories, with the 13 provinces and territories as component chips
+  - Maps & Globes
+  - Indigenous Peoples of Canada
+  - Early Canadian History
+- The Review is the `factWalk` module in `social_app.js`: a step walkthrough with short facts, a visual, and Previous / Hear it / Next. The MP3 always plays on a tap.
+- The Quiz uses the `maxQuiz` engine (6 questions, spoken feedback, score, end screen with Email my results).
+- Run the build with: `/workspace/division-exercises/.venv/bin/python build_social.py`
 
 ## Settings, Correspondence and Outbox (`settings.js`)
 - The top bar has an Outbox (envelope) button and a Settings (gear) button. Both screens sit off the tree, and Back returns to where you were.

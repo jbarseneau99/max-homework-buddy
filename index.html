@@ -76,7 +76,7 @@
   /* ---------- home ---------- */
   .home-head { text-align:center; margin-bottom:18px; }
   .greet { color:var(--muted); margin:6px 0 0; font-size:1.05rem; }
-  .tiles { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; }
+  .tiles { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; }
   .tile {
     display:flex; flex-direction:column; align-items:flex-start; gap:8px; text-align:left; min-height:170px; padding:20px;
     background:linear-gradient(160deg, rgba(20,42,84,.85), rgba(8,16,36,.85)); border:1px solid rgba(76,201,240,.35); border-radius:14px;
@@ -95,7 +95,24 @@
   .tile-title { font-size:1.45rem; font-weight:800; }
   .tile-blurb { font-weight:500; color:var(--muted); font-size:.95rem; line-height:1.35; }
   .home-foot { display:flex; justify-content:center; margin-top:16px; }
-  @media (max-width:700px) { .tiles { grid-template-columns:1fr; } .tile { min-height:0; } }
+  @media (max-width:700px) { .tiles { gap:10px; } .tile { min-height:0; padding:14px 12px; gap:6px; } .tile .anime-ic { width:52px; height:52px; } .tile-title { font-size:1.12rem; line-height:1.15; } .tile-blurb { font-size:.8rem; } }
+  /* ---------- social studies walkthrough ---------- */
+  .fw-card { display:grid; grid-template-columns:220px minmax(0,1fr); gap:20px; align-items:center; margin-top:12px; }
+  @media (max-width:700px) { .fw-card { grid-template-columns:1fr; gap:10px; } .fw-visual { max-width:200px; margin:0 auto; } }
+  .fw-visual { width:100%; }
+  .fw-svg { width:100%; height:auto; display:block; filter:drop-shadow(0 0 6px rgba(76,201,240,.45)); }
+  .fw-badge { display:flex; flex-direction:column; align-items:center; gap:6px; text-align:center; }
+  .fw-badge-ic .anime-ic { width:150px; height:150px; overflow:visible; }
+  .fw-badge-k { font-size:.74rem; letter-spacing:.16em; text-transform:uppercase; color:var(--cyan); font-weight:700; }
+  .fw-badge-cap { font-weight:800; color:var(--gold); font-size:1.15rem; }
+  .fw-title { font-size:1.5rem; margin:4px 0 6px; }
+  .fw-kicker { color:var(--gold); font-weight:700; margin-bottom:6px; }
+  .fw-facts { margin:0; padding-left:20px; display:grid; gap:10px; font-size:1.08rem; line-height:1.45; }
+  .fw-facts li::marker { color:var(--cyan); }
+  .fw-ctl { margin-top:14px; }
+  .fw-ctl button { white-space:nowrap; }
+  @media (max-width:420px) { .fw-ctl { gap:8px; } .fw-ctl button { padding-left:12px; padding-right:12px; } }
+  #fwBar { height:100%; width:0; background:linear-gradient(90deg,var(--cyan),var(--gold)); border-radius:inherit; transition:width .3s; }
 
   /* ---------- topic / subtopic screens ---------- */
   .hero { display:flex; align-items:center; gap:16px; margin-bottom:16px; }
@@ -544,6 +561,29 @@
     </div>
   </section>
 
+  <!-- ===== SOCIAL STUDIES review / components (factWalk) ===== -->
+  <section id="view-factWalk" class="view" hidden>
+    <div class="toolbar-slot"></div>
+    <div class="eyebrow" id="fwEyebrow">Review</div>
+    <h2 class="h2" id="fwTitle"></h2>
+    <div class="meter"><div id="fwBar"></div></div>
+    <div class="comp-chips" id="fwChips" hidden></div>
+    <div class="glass-card fw-card">
+      <div class="fw-visual" id="fwVisual"></div>
+      <div class="fw-text">
+        <div class="eyebrow" id="fwCount">1 / 1</div>
+        <h3 class="fw-title" id="fwStepTitle"></h3>
+        <div class="fw-kicker" id="fwKicker" hidden></div>
+        <ul class="fw-facts" id="fwFacts"></ul>
+      </div>
+    </div>
+    <div class="walk-ctl fw-ctl">
+      <button id="fwPrev" type="button">‹ Previous</button>
+      <button id="fwHear" type="button" class="btn-cyan" data-icon="sound"> Hear it</button>
+      <button id="fwNext" type="button" class="btn-gold">Next ›</button>
+    </div>
+  </section>
+
   <!-- ===== SETTINGS (schema-driven, localStorage only) ===== -->
   <section id="view-settings" class="view" hidden>
     <div class="eyebrow">Settings</div>
@@ -641,6 +681,7 @@
 <script src="explore_data.js"></script>
 <script src="maxtopics_data.js"></script>
 <script src="sessions_data.js"></script>
+<script src="social_data.js"></script>
 <script src="anime_icons.js"></script>
 <script src="topics.js"></script>
 <script src="core.js"></script>
@@ -650,6 +691,7 @@
 <script src="explore_app.js"></script>
 <script src="maxquiz.js"></script>
 <script src="spelling.js"></script>
+<script src="social_app.js"></script>
 <script src="settings.js"></script>
 <script>HB.start();</script>
 </body>
