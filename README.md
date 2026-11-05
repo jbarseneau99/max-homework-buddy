@@ -117,6 +117,18 @@ python build_fractions.py           # fractions (4 sessions)           -> audio/
 Builders only create missing clips. Add `--force` to regenerate everything, or delete one MP3 to remake just that clip.
 Edit the `*_content.py` files, never the generated `*_data.js` files.
 
+## AI grading of scratch-pad work (`ai_grade.js`)
+
+Settings › **AI grading**: `ai.apiKey` (xAI key, password field), `ai.model` (blank = `grok-4.7`), `ai.enabled` (on by default).
+All three live only in this browser's `localStorage` (`hb.settings.v1`) — never commit a key; the repo is public.
+
+When the key is set and enabled, **Submit work** on the long-division and fractions quizzes sends the scratch-pad PNG
+(`image_url`, detail high) to `https://api.x.ai/v1/chat/completions` with the answer key in the prompt. The model returns
+`{ ok, written, feedback }`; the drawing is the submission (keypad/tap hidden behind "Type answer instead").
+If the model id is rejected it falls back through `grok-4.7, grok-4.6, grok-4.5, grok-4, grok-2-vision-1212`.
+No key, AI off, or any API/network error → the normal keypad / tap flow ("Turn on AI grading in Settings to check handwriting.").
+Outbox › Work submissions shows "AI checked" vs "Keypad" and what the AI read. Tests mock `fetch` (`_tools/test_ai.js`).
+
 ## Local test
 
 ```bash

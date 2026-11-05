@@ -6,7 +6,8 @@
   const EMAIL_RE = /^[^\s@,;<>"]+@[^\s@,;<>"]+\.[^\s@,;<>"]{2,}$/;
 
   // ---- Extensible schema: add a section or field here and the Settings screen renders it. ----
-  // field: { key, label, type: "email" | "text" | "toggle", placeholder, help, recipient?: { id, name, results } }
+  // field: { key, label, type: "email" | "text" | "password" | "toggle", placeholder, help, recipient?: { id, name, results } }
+  // section.status(): optional live status line (e.g. AI grading Ready / Missing key).
   window.SETTINGS_SCHEMA = [
     { id: "correspondence", title: "Correspondence", blurb: "Addresses the Outbox can send to. Saved on this device only.",
       fields: [
@@ -15,7 +16,19 @@
         { key: "email.mom", label: "Mom's email (Max's mom / Parent 2)", type: "email", placeholder: "parent2@example.com", recipient: { id: "mom", name: "Mom", results: true } }
       ] },
     { id: "outbox", title: "Outbox", blurb: "How composed messages are signed.",
-      fields: [ { key: "outbox.signature", label: "Signature", type: "text", placeholder: "— Max" } ] }
+      fields: [ { key: "outbox.signature", label: "Signature", type: "text", placeholder: "— Max" } ] },
+    { id: "ai", title: "AI grading", blurb: "The key stays on this device (never sent anywhere except xAI) and is used only to grade Max's scratch-pad drawings when he taps Submit work.",
+      fields: [
+        { key: "ai.apiKey", label: "xAI API key", type: "password", placeholder: "xai-…", help: "Paste a key from console.x.ai. Leave blank to grade with the keypad instead." },
+        { key: "ai.model", label: "Model", type: "text", placeholder: "grok-4.7", help: "Vision-capable Grok model. Blank = grok-4.7 (falls back to other vision models automatically)." },
+        { key: "ai.enabled", label: "Check Max's handwriting with AI on Submit work", type: "toggle", default: "on" }
+      ],
+      status() {
+        const s = HB.ai ? HB.ai.status() : { state: "missing_key" };
+        return s.state === "ready" ? { text: `AI grading: Ready (${s.model})`, cls: "ok" }
+          : s.state === "off" ? { text: "AI grading: Off — keypad grading is used", cls: "warn" }
+          : { text: "AI grading: Missing key — keypad grading is used", cls: "warn" };
+      } }
   ];
 
   const load = (k, d) => { try { const v = JSON.parse(localStorage.getItem(k)); return v == null ? d : v; } catch (e) { return d; } };
@@ -36,19 +49,30 @@
       const card = document.createElement("form");
       card.className = "glass-card set-sec"; card.dataset.section = sec.id; card.noValidate = true;
       card.innerHTML = `<div class="eyebrow">${esc(sec.title)}</div><p class="set-blurb">${esc(sec.blurb || "")}</p>` +
-        sec.fields.map(f => `<label class="set-field"><span>${esc(f.label)}</span>
-          <input type="${f.type === "email" ? "email" : "text"}" inputmode="${f.type === "email" ? "email" : "text"}" autocomplete="off" autocapitalize="off" spellcheck="false"
-            data-key="${f.key}" placeholder="${esc(f.placeholder || "")}" value="${esc(vals[f.key] || "")}"><small class="set-err" data-err="${f.key}"></small></label>`).join("") +
+        (sec.status ? `<div class="set-ai-status" data-status="${sec.id}"></div>` : "") +
+        sec.fields.map(f => f.type === "toggle"
+          ? `<label class="set-field set-toggle"><input type="checkbox" data-key="${f.key}" ${(vals[f.key] || f.default || "off") === "on" ? "checked" : ""}><span>${esc(f.label)}</span></label>`
+          : `<label class="set-field"><span>${esc(f.label)}</span>
+          <input type="${f.type === "email" ? "email" : f.type === "password" ? "password" : "text"}" inputmode="${f.type === "email" ? "email" : "text"}" autocomplete="${f.type === "password" ? "new-password" : "off"}" autocapitalize="off" spellcheck="false"
+            data-key="${f.key}" placeholder="${esc(f.placeholder || "")}" value="${f.type === "password" ? "" : esc(vals[f.key] || "")}">${f.help ? `<small class="set-help">${esc(f.help)}</small>` : ""}<small class="set-err" data-err="${f.key}"></small></label>`).join("") +
         `<div class="set-actions"><button type="submit" class="btn-gold">Save ${esc(sec.title)}</button><span class="set-status" aria-live="polite"></span></div>`;
+      // secrets are set as a DOM property, never written into the HTML
+      sec.fields.filter(f => f.type === "password").forEach(f => { card.querySelector(`[data-key="${f.key}"]`).value = vals[f.key] || ""; });
       card.onsubmit = e => { e.preventDefault(); saveSection(sec, card); };
       box.appendChild(card);
+      renderStatus(sec, card);
     });
     renderSentInfo();
+  }
+  function renderStatus(sec, card) {
+    const el = card.querySelector("[data-status]"); if (!el || !sec.status) return;
+    const s = sec.status(); el.textContent = s.text; el.className = "set-ai-status " + (s.cls || "");
   }
   function saveSection(sec, card) {
     const vals = settings(); let okAll = true;
     sec.fields.forEach(f => {
       const inp = card.querySelector(`[data-key="${f.key}"]`), err = card.querySelector(`[data-err="${f.key}"]`);
+      if (f.type === "toggle") { vals[f.key] = inp.checked ? "on" : "off"; return; }
       const v = inp.value.trim();
       if (f.type === "email" && v && !EMAIL_RE.test(v)) { err.textContent = "That doesn't look like an email address."; inp.classList.add("bad"); okAll = false; return; }
       err.textContent = ""; inp.classList.remove("bad");
@@ -59,6 +83,7 @@
     else if (!okAll) st.textContent = "Fix the highlighted field.";
     else st.textContent = "Couldn't save (storage blocked).";
     st.classList.toggle("err", !okAll);
+    renderStatus(sec, card);
   }
   function renderSentInfo() {
     const n = load(SENT, []).length;
@@ -105,7 +130,11 @@
       (w.pngDataUrl ? `<img src="${w.pngDataUrl}" alt="Max's scratch-pad work for ${esc(w.question)}">` : '<div class="nopng">drawing removed (storage full)</div>') +
       `<div><div class="wk-h"><span class="${w.ok ? "wk-ok" : "wk-bad"}">${w.ok ? "✓" : "✗"}</span><b>${esc(w.question)}</b></div>` +
       `<small>${esc(w.subject || "")} · ${esc(w.quiz || "")}</small>` +
-      `<small>Max answered: ${esc(w.given)}${w.ok ? "" : ` · correct: ${esc(w.answerSummary)}`}${w.attempt > 1 ? ` · try ${w.attempt}` : ""}</small>` +
+      `<small class="wk-grader">${w.grader === "ai" ? `<span class="wk-tag ai">AI checked${w.model ? " · " + esc(w.model) : ""}</span>` : '<span class="wk-tag kp">Keypad</span>'}</small>` +
+      (w.grader === "ai"
+        ? `<small>AI read: “${esc(w.written || w.given || "")}”${w.ok ? "" : ` · correct: ${esc(w.answerSummary)}`}${w.attempt > 1 ? ` · try ${w.attempt}` : ""}</small>` +
+          (w.feedback ? `<small>AI said: ${esc(w.feedback)}</small>` : "")
+        : `<small>Max answered: ${esc(w.given)}${w.ok ? "" : ` · correct: ${esc(w.answerSummary)}`}${w.attempt > 1 ? ` · try ${w.attempt}` : ""}</small>`) +
       `<small>${new Date(w.ts).toLocaleString()}</small>` +
       (w.pngDataUrl ? `<button type="button" class="btn-cyan wk-dl" data-dl="${esc(w.id)}">Download PNG</button>` : "") + `</div></li>`).join("")
       : '<li class="ob-empty">No scratch-pad work saved on this device yet.</li>';

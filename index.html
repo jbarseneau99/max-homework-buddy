@@ -397,6 +397,20 @@
   .sp.sp-off .sp-stage { border-color:rgba(255,194,61,.55); }
   .sp.sp-off .sp-canvas { cursor:default; }
   .mq-feedback.need { border-left-color:var(--gold); color:#ffe7a8; }
+  .mq-feedback.looking { border-left-color:var(--cyan); color:#cfefff; animation: aiPulse 1.2s ease-in-out infinite; }
+  @keyframes aiPulse { 50% { background:rgba(76,201,240,.16); } }
+  #mqCard.ai-mode .mq-ans, #mqCard.ai-mode #mqPad { display:none; }
+  .ai-type-toggle { margin-top:10px; background:transparent; border:1px dashed rgba(76,201,240,.5); color:var(--cyan); font-size:.9rem; padding:8px 14px; border-radius:10px; }
+  .ai-hint { margin:8px 0 0; font-size:.88rem; opacity:.8; text-align:center; }
+  .ai-hint:empty { display:none; }
+  .mx-opts.ai-ref button { pointer-events:none; opacity:.85; }
+  .set-ai-status { margin:0 0 12px; padding:8px 12px; border-radius:10px; font-weight:700; background:rgba(4,10,24,.6); border-left:3px solid var(--gold); }
+  .set-ai-status.ok { border-left-color:var(--ok); color:#c9ffe2; } .set-ai-status.warn { color:#ffe7a8; }
+  .set-help { opacity:.7; font-size:.82rem; }
+  .set-toggle { flex-direction:row; align-items:center; gap:12px; }
+  .set-toggle input { width:26px; height:26px; min-height:0; accent-color:var(--gold); }
+  .wk-tag { display:inline-block; padding:1px 8px; border-radius:999px; font-weight:700; font-size:.78rem; }
+  .wk-tag.ai { background:rgba(76,201,240,.18); color:var(--cyan); } .wk-tag.kp { background:rgba(255,255,255,.1); }
   .ob-work-card { margin-top:16px; }
   .ob-work { list-style:none; margin:0; padding:0; display:grid; gap:10px; }
   .ob-work li { display:grid; grid-template-columns:150px minmax(0,1fr); gap:12px; align-items:center; padding:10px; border:1px solid var(--line); border-radius:10px; background:rgba(4,10,24,.5); }
@@ -516,6 +530,8 @@
             <button id="mqHowBtn" type="button">Show me how</button>
             <button id="mqCheck" type="button" class="btn-gold">Submit work</button>
           </div>
+          <button id="mqTypeToggle" type="button" class="ai-type-toggle" hidden>Type answer instead</button>
+          <p class="ai-hint" id="mqAiHint"></p>
         </div>
       </div>
       <div id="mqScratch" class="glass-card"></div>
@@ -606,6 +622,8 @@
         <div class="pad mx-pad" id="mxPad"></div>
       </div>
       <div style="text-align:center"><button id="mxCheck" type="button" class="btn-gold" style="min-width:180px">Check</button></div>
+      <div style="text-align:center"><button id="mxTypeToggle" type="button" class="ai-type-toggle" hidden>Type answer instead</button></div>
+      <p class="ai-hint" id="mxAiHint" hidden></p>
       <div class="mq-feedback" id="mxFeedback" aria-live="polite"></div>
       <div class="mq-nav">
         <button id="mxPrev" type="button">‹ Previous</button>
@@ -775,6 +793,7 @@
 <script src="topics.js"></script>
 <script src="core.js"></script>
 <script src="scratchpad.js"></script>
+<script src="ai_grade.js"></script>
 <script src="math_review.js"></script>
 <script src="math_quiz.js"></script>
 <script src="anatomy_app.js"></script>
