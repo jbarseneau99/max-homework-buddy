@@ -5,7 +5,12 @@
   // opts.set picks a question set from window.QUIZ_SETS (per-system quizzes); default = Max's Test Topics.
   let Q = window.MAX_TOPICS_DATA.quiz;
   const $ = id => document.getElementById(id);
-  const st = { i: 0, score: 0, results: [], picked: [], num: "" };
+  const st = { i: 0, score: 0, results: [], picked: [], num: "", work: false, set: "", ink: [] };
+  // Work questions (fractions sets frac_*): scratch pad on every question; ink required before grading.
+  const pad = HB.ScratchPad.mount($("mxScratch"));
+  const NEED_INK = "✎ Write your work on the scratch pad first.";
+  const isWorkSet = id => /^frac_/.test(id || "");
+  function need(msg) { $("mxFeedback").textContent = msg; $("mxFeedback").className = "mq-feedback need"; }
   const play = src => { if (window.ANAT) ANAT.play(src); };
   const n = () => Q.questions.length;
   const setScore = () => { if (window.ANAT) ANAT.setScoreText(`Score: ${st.score} / ${n()}`); };
@@ -19,7 +24,12 @@
     $("mxBar").style.width = ((st.i + 1) / n() * 100) + "%";
     $("mxQ").textContent = q.q;
     showVis(q.vis);
-    $("mxHint").textContent = q.type === "pick" ? `Pick ${q.n}, then tap Check.` : q.type === "number" ? "Use the keypad, then tap Check." : "Tap your answer.";
+    $("mxHint").textContent = st.work
+      ? (q.type === "pick" ? `Write your work on the scratch pad, pick ${q.n}, then tap Submit work.` : q.type === "number" ? "Write your work on the scratch pad, type your answer on the keypad, then tap Submit work." : "Write your work on the scratch pad, then tap your answer.")
+      : (q.type === "pick" ? `Pick ${q.n}, then tap Check.` : q.type === "number" ? "Use the keypad, then tap Check." : "Tap your answer.");
+    $("mxScratch").hidden = !st.work;
+    if (st.work) { if (res) { pad.loadImage(st.ink[st.i]); pad.setEnabled(false); } else pad.loadBlank(); }
+    $("mxCheck").textContent = st.work ? "Submit work" : "Check";
     const opts = $("mxOpts"); opts.innerHTML = "";
     $("mxNumWrap").hidden = q.type !== "number";
     $("mxCheck").hidden = q.type === "mc";
@@ -28,7 +38,7 @@
         const b = document.createElement("button");
         b.type = "button"; b.className = "anatomy-option mx-opt"; b.textContent = o; b.dataset.opt = o;
         if (q.optVis && q.optVis[o] && window.FRAC_VIS) { b.classList.add("has-vis"); b.innerHTML = FRAC_VIS.render(q.optVis[o]) + `<span>${o}</span>`; }
-        b.onclick = () => q.type === "mc" ? grade([o]) : togglePick(o, b);
+        b.onclick = () => { if (q.type !== "mc") return togglePick(o, b); if (st.work && !pad.hasInk()) return need(NEED_INK); grade([o]); };
         opts.appendChild(b);
       });
     }
@@ -37,7 +47,7 @@
     $("mxPrev").disabled = st.i === 0;
     $("mxNext").textContent = st.i === n() - 1 ? "See results" : "Next question";
     $("mxNext").disabled = !res;
-    $("mxCheck").disabled = true;
+    $("mxCheck").disabled = !st.work;
     if (res) showResult(q, res, false);
     setScore();
     if (speak && !res) play(st.i === 0 && st.results.length === 0 ? Q.introAudio : q.qAudio);
@@ -51,7 +61,7 @@
     const q = Q.questions[st.i], k = st.picked.indexOf(o);
     if (k >= 0) st.picked.splice(k, 1); else if (st.picked.length < q.n) st.picked.push(o);
     $("mxOpts").querySelectorAll("button").forEach(x => x.classList.toggle("picked", st.picked.includes(x.dataset.opt)));
-    $("mxCheck").disabled = st.picked.length !== q.n;
+    $("mxCheck").disabled = !st.work && st.picked.length !== q.n;
   }
 
   function grade(given) {
@@ -63,6 +73,11 @@
     else ok = Number(given[0]) === q.answer;
     const res = { ok, given };
     st.results[st.i] = res;
+    if (st.work) {   // graded on the final answer; the drawing is kept as proof of work
+      const png = pad.toDataURL("image/png"); st.ink[st.i] = png; pad.setEnabled(false);
+      const key = q.type === "mc" ? q.answer : q.type === "pick" ? q.answers.join(", ") : String(q.answer);
+      if (HB.work) HB.work.save({ subject: "Math › Fractions", quiz: Q.title || st.set, question: q.q, ok, given: given.join(", "), answerSummary: key, pngDataUrl: png });
+    }
     if (ok) st.score++;
     showResult(q, res, true);
     setScore();
@@ -98,7 +113,7 @@
     play(d.audio);
   }
 
-  function reset() { st.i = 0; st.score = 0; st.results = []; }
+  function reset() { st.i = 0; st.score = 0; st.results = []; st.ink = []; }
 
   ["1","2","3","4","5","6","7","8","9","clr","0","del"].forEach(k => {
     const b = document.createElement("button");
@@ -107,12 +122,19 @@
     b.onclick = () => {
       if (k === "del") st.num = st.num.slice(0, -1); else if (k === "clr") st.num = "";
       else if (st.num.length < 4) st.num = (st.num + k).replace(/^0+(?=\d)/, "");
-      renderNum(); $("mxCheck").disabled = !st.num;
+      renderNum(); $("mxCheck").disabled = !st.work && !st.num;
     };
     $("mxPad").appendChild(b);
   });
   $("mxCheck").onclick = () => {
     const q = Q.questions[st.i];
+    if (st.results[st.i]) return;
+    if (st.work) {
+      if (!pad.hasInk()) return need(NEED_INK);
+      if (q.type === "pick" && st.picked.length !== q.n) return need(`Great work! Now tap ${q.n} answers, then Submit work.`);
+      if (q.type === "number" && !st.num) return need("Great work! Now type your final answer on the keypad, then tap Submit work.");
+      if (q.type === "mc") return need("Great work! Now tap your answer.");
+    }
     if (q.type === "pick" && st.picked.length === q.n) grade(st.picked.slice());
     if (q.type === "number" && st.num) grade([st.num]);
   };
@@ -126,6 +148,7 @@
     view: "view-maxQuiz",
     enter(ctx) {
       Q = (ctx.opts.set && window.QUIZ_SETS && QUIZ_SETS[ctx.opts.set]) || window.MAX_TOPICS_DATA.quiz;
+      st.set = ctx.opts.set || ""; st.work = isWorkSet(st.set) && Q !== window.MAX_TOPICS_DATA.quiz;
       $("mxTitle").textContent = Q.title || "Max's test topics · quiz";
       $("anatScore").hidden = false; reset(); document.querySelectorAll("#mxPad button").forEach(b => b.disabled = false); render(true); },
     leave() { reset(); }

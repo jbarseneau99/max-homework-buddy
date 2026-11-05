@@ -62,7 +62,8 @@
   }
   function renderSentInfo() {
     const n = load(SENT, []).length;
-    $("settingsSentInfo").textContent = `${n} message${n === 1 ? "" : "s"} in the Sent log on this device.`;
+    const w = HB.work ? HB.work.list().length : 0;
+    $("settingsSentInfo").textContent = `${n} message${n === 1 ? "" : "s"} in the Sent log on this device. ${w} scratch-pad work submission${w === 1 ? "" : "s"} saved (see Outbox).`;
   }
 
   // ---------- Outbox ----------
@@ -93,8 +94,31 @@
     });
     $("obSubject").value = ""; $("obBody").value = ""; $("obStatus").textContent = "";
     if (opts && opts.template) applyTemplate(opts.template);
-    renderSent();
+    renderSent(); renderWork();
   }
+  // ---------- Work submissions (scratch-pad drawings saved by HB.work in scratchpad.js) ----------
+  function renderWork() {
+    const W = HB.work ? HB.work.list() : [];
+    $("obWorkCount").textContent = `${W.length}`;
+    $("obWorkClear").disabled = !W.length;
+    $("obWork").innerHTML = W.length ? W.map(w => `<li data-work="${esc(w.id)}">` +
+      (w.pngDataUrl ? `<img src="${w.pngDataUrl}" alt="Max's scratch-pad work for ${esc(w.question)}">` : '<div class="nopng">drawing removed (storage full)</div>') +
+      `<div><div class="wk-h"><span class="${w.ok ? "wk-ok" : "wk-bad"}">${w.ok ? "✓" : "✗"}</span><b>${esc(w.question)}</b></div>` +
+      `<small>${esc(w.subject || "")} · ${esc(w.quiz || "")}</small>` +
+      `<small>Max answered: ${esc(w.given)}${w.ok ? "" : ` · correct: ${esc(w.answerSummary)}`}${w.attempt > 1 ? ` · try ${w.attempt}` : ""}</small>` +
+      `<small>${new Date(w.ts).toLocaleString()}</small>` +
+      (w.pngDataUrl ? `<button type="button" class="btn-cyan wk-dl" data-dl="${esc(w.id)}">Download PNG</button>` : "") + `</div></li>`).join("")
+      : '<li class="ob-empty">No scratch-pad work saved on this device yet.</li>';
+    $("obWork").querySelectorAll("[data-dl]").forEach(b => b.onclick = () => downloadWork(b.dataset.dl));
+  }
+  function downloadWork(id) {
+    const w = HB.work && HB.work.get(id); if (!w || !w.pngDataUrl) return;
+    const slug = String(w.question).replace(/[^a-z0-9]+/gi, "-").replace(/^-|-$/g, "").slice(0, 40) || "work";
+    const a = document.createElement("a");
+    a.href = w.pngDataUrl; a.download = `max-work-${w.ts.slice(0, 10)}-${slug}.png`;
+    document.body.appendChild(a); a.click(); a.remove();
+  }
+  HB.renderWork = renderWork;
   function applyTemplate(name) {
     const t = TEMPLATES[name](ob);
     $("obSubject").value = t.subject; $("obBody").value = t.body; status("");
@@ -145,6 +169,7 @@
   $("obTplResults").onclick = () => applyTemplate("results");
   $("obTplQuestion").onclick = () => applyTemplate("question");
   $("obClear").onclick = () => { save(SENT, []); renderSent(); };
+  $("obWorkClear").onclick = () => { if (HB.work) HB.work.clear(); renderWork(); };
   $("obToSettings").onclick = () => HB.go({ level: "settings" });
   $("settingsToOutbox").onclick = () => HB.go({ level: "outbox" });
 })();

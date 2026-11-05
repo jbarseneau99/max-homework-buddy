@@ -4,7 +4,11 @@
   const D = window.MATH_QUIZ_DATA;
   const $ = id => document.getElementById(id);
   const player = $("mqPlayer");
-  const st = { i: 0, score: 0, tries: 0, field: "q", vals: { q: "", r: "" }, done: false, answered: [], sound: true, last: "" };
+  const st = { i: 0, score: 0, tries: 0, field: "q", vals: { q: "", r: "" }, done: false, answered: [], ink: [], sound: true, last: "" };
+  // Scratch pad (scratchpad.js): Max writes his work with the pen; Submit work needs ink + both answer fields.
+  const sp = HB.ScratchPad.mount($("mqScratch"));
+  const INTRO = "Quiz time, Max. Write your work on the scratch pad, enter the quotient and the remainder, then tap Submit work.";
+  const NEED_INK = "✎ Write your work on the scratch pad first.";
 
   function play(src) {
     st.last = src || "";
@@ -33,8 +37,8 @@
     $("mqDividend").textContent = p.dividend; $("mqDivisor").textContent = p.divisor;
     $("mqHow").hidden = true; $("mqHowSteps").innerHTML = "";
     $("mqPrev").disabled = i === 0;
-    if (a) { st.vals = { q: String(p.quotient), r: String(p.remainder) }; lock(a.ok ? "✓ Solved" : "Answer shown", a.ok); }
-    else { unlock(); $("mqFeedback").textContent = i === 0 ? D.intro : "Enter the quotient and remainder, then tap Check."; $("mqFeedback").className = "mq-feedback"; }
+    if (a) { st.vals = { q: String(p.quotient), r: String(p.remainder) }; lock(a.ok ? "✓ Solved" : "Answer shown", a.ok); sp.loadImage(st.ink[i]); }
+    else { sp.loadBlank(); unlock(); $("mqFeedback").textContent = i === 0 ? INTRO : "Write your work on the scratch pad, enter the quotient and remainder, then tap Submit work."; $("mqFeedback").className = "mq-feedback"; }
     $("mqNext").disabled = !a;
     $("mqNext").textContent = i === D.problems.length - 1 ? "See results" : "Next problem";
     renderFields(); setScore();
@@ -42,10 +46,10 @@
   }
   function lock(msg, ok) {
     document.querySelectorAll("#mqPad button").forEach(b => b.disabled = true);
-    $("mqCheck").disabled = true;
+    $("mqCheck").disabled = true; sp.setEnabled(false);
     if (msg) { $("mqFeedback").textContent = msg; $("mqFeedback").className = "mq-feedback " + (ok ? "ok" : "bad"); }
   }
-  function unlock() { document.querySelectorAll("#mqPad button").forEach(b => b.disabled = false); $("mqCheck").disabled = false; }
+  function unlock() { document.querySelectorAll("#mqPad button").forEach(b => b.disabled = false); $("mqCheck").disabled = false; sp.setEnabled(true); }
 
   function key(k) {
     const f = st.field;
@@ -57,11 +61,17 @@
 
   function check() {
     const p = prob();
+    if (!sp.hasInk()) { $("mqFeedback").textContent = NEED_INK; $("mqFeedback").className = "mq-feedback need"; return; }
     if (st.vals.q === "" || st.vals.r === "") {
-      $("mqFeedback").textContent = "Fill in both the quotient and the remainder first."; $("mqFeedback").className = "mq-feedback";
+      $("mqFeedback").textContent = "Great work! Now enter your final answer: fill in both the quotient and the remainder, then tap Submit work."; $("mqFeedback").className = "mq-feedback";
       st.field = st.vals.q === "" ? "q" : "r"; renderFields(); return;
     }
     const ok = +st.vals.q === p.quotient && +st.vals.r === p.remainder;
+    // keep the drawing as proof of work (graded on the final answer; the drawing is stored for a parent / Buddy review)
+    const png = sp.toDataURL("image/png");
+    if (HB.work) HB.work.save({ subject: "Math › Division", quiz: "Long division quiz", question: p.label, ok,
+      given: `${+st.vals.q} R ${+st.vals.r}`, answerSummary: `${p.quotient} R ${p.remainder}`, attempt: st.tries + 1, pngDataUrl: png });
+    if (ok || st.tries > 0) st.ink[st.i] = png;
     if (ok) {
       if (!st.answered[st.i]) st.score++;
       st.answered[st.i] = { ok: true };
@@ -99,7 +109,7 @@
   }
 
   function reset() {
-    st.i = 0; st.score = 0; st.answered = []; st.last = "";
+    st.i = 0; st.score = 0; st.answered = []; st.ink = []; st.last = "";
     try { player.pause(); } catch (e) {}
   }
 
