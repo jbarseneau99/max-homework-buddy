@@ -96,6 +96,32 @@
   .tile-blurb { font-weight:500; color:var(--muted); font-size:.95rem; line-height:1.35; }
   .home-foot { display:flex; justify-content:center; margin-top:16px; }
   @media (max-width:700px) { .tiles { gap:10px; } .tile { min-height:0; padding:14px 12px; gap:6px; } .tile .anime-ic { width:52px; height:52px; } .tile-title { font-size:1.12rem; line-height:1.15; } .tile-blurb { font-size:.8rem; } }
+  /* ---------- math: equivalent fractions ---------- */
+  .fw-card.fr-card { grid-template-columns:minmax(260px,340px) minmax(0,1fr); }
+  @media (max-width:700px) { .fw-card.fr-card { grid-template-columns:1fr; } .fr-card .fw-visual { max-width:340px; } }
+  .fw-facts.numbered { list-style:decimal; }
+  .fv .fv-fill, .fv .fv-pop { animation:fvIn .45s ease-out both; animation-delay:var(--d,0s); transform-box:fill-box; transform-origin:center; }
+  .fv .fv-draw { stroke-dasharray:100; animation:fvDraw .7s ease-out both; animation-delay:var(--d,0s); }
+  .fv path.fv-draw[stroke-dasharray="5 4"] { stroke-dasharray:5 4; animation:fvFade .6s ease-out both; animation-delay:var(--d,0s); }
+  @keyframes fvIn { from { opacity:0; transform:scale(.6); } to { opacity:1; transform:none; } }
+  @keyframes fvDraw { from { stroke-dashoffset:100; } to { stroke-dashoffset:0; } }
+  @keyframes fvFade { from { opacity:0; } to { opacity:1; } }
+  @media (prefers-reduced-motion: reduce) { .fv .fv-fill, .fv .fv-pop, .fv .fv-draw, .fv path.fv-draw[stroke-dasharray="5 4"] { animation:none; } }
+  .mx-vis { max-width:340px; margin:4px auto 12px; }
+  .fv .fv-rise { transform-box:fill-box; transform-origin:50% 100%; animation:fvRise var(--t,1s) ease-in-out both; animation-delay:var(--d,0s); }
+  .fv .fv-cup { transform-box:view-box; animation:fvTip 3.2s ease-in-out var(--n,1); }
+  .fv .fv-cupw { transform-box:fill-box; transform-origin:50% 100%; animation:fvCupw 3.2s ease-in-out var(--n,1); }
+  .fv .fv-stream { opacity:0; animation:fvStream 3.2s linear var(--n,1); }
+  .fv .fv-scoop { animation:fvScoop .5s ease-out both; animation-delay:var(--d,0s); }
+  @keyframes fvRise { from { transform:scaleY(0); } to { transform:scaleY(1); } }
+  @keyframes fvTip { 0%,38% { transform:rotate(0); } 50%,76% { transform:rotate(80deg); } 90%,100% { transform:rotate(0); } }
+  @keyframes fvCupw { 0% { transform:scaleY(0); } 30%,50% { transform:scaleY(1); } 76%,100% { transform:scaleY(0); } }
+  @keyframes fvStream { 0%,50% { opacity:0; } 54%,74% { opacity:.9; } 78%,100% { opacity:0; } }
+  @keyframes fvScoop { from { opacity:.12; transform:none; } 60% { opacity:1; filter:brightness(1.6); } to { opacity:1; } }
+  @media (prefers-reduced-motion: reduce) { .fv .fv-rise, .fv .fv-cup, .fv .fv-cupw, .fv .fv-stream, .fv .fv-scoop { animation:none; } }
+  .mx-opt .fw-svg { width:130px; margin:0 auto 4px; }
+  .mx-opt.has-vis { display:flex; flex-direction:column; align-items:center; gap:4px; }
+  #frBar { height:100%; width:0; background:linear-gradient(90deg,var(--cyan),var(--gold)); border-radius:inherit; transition:width .3s; }
   /* ---------- social studies walkthrough ---------- */
   .fw-card { display:grid; grid-template-columns:220px minmax(0,1fr); gap:20px; align-items:center; margin-top:12px; }
   @media (max-width:700px) { .fw-card { grid-template-columns:1fr; gap:10px; } .fw-visual { max-width:200px; margin:0 auto; } }
@@ -539,6 +565,7 @@
     <div class="meter"><div id="mxBar"></div></div>
     <div id="mxCard" class="glass-card" style="margin-top:14px">
       <p class="mx-q" id="mxQ"></p>
+      <div class="mx-vis" id="mxVis" hidden></div>
       <p class="mx-hint" id="mxHint"></p>
       <div class="anatomy-options mx-opts" id="mxOpts"></div>
       <div id="mxNumWrap" class="mx-num-wrap" hidden>
@@ -558,6 +585,29 @@
       <p id="mxEndMsg"></p>
       <ul id="mxMissed" class="mx-missed"></ul>
       <div class="row"><button id="mxEmail" type="button" class="btn-cyan" data-icon="mail"> Email my results</button><button id="mxAgain" type="button" class="btn-gold">Try again</button><button id="mxReview" type="button" class="btn-cyan">Back to review</button></div>
+    </div>
+  </section>
+
+  <!-- ===== MATH › Equivalent Fractions review / worked examples (fracWalk) ===== -->
+  <section id="view-fracWalk" class="view" hidden>
+    <div class="toolbar-slot"></div>
+    <div class="eyebrow" id="frEyebrow">Review</div>
+    <h2 class="h2" id="frTitle"></h2>
+    <div class="meter"><div id="frBar"></div></div>
+    <div class="comp-chips" id="frChips" hidden></div>
+    <div class="glass-card fw-card fr-card">
+      <div class="fw-visual" id="frVisual"></div>
+      <div class="fw-text">
+        <div class="eyebrow" id="frCount">Step 1 of 1</div>
+        <h3 class="fw-title" id="frStepTitle"></h3>
+        <div class="fw-kicker" id="frKicker" hidden></div>
+        <ul class="fw-facts" id="frFacts"></ul>
+      </div>
+    </div>
+    <div class="walk-ctl fw-ctl">
+      <button id="frPrev" type="button">‹ Previous</button>
+      <button id="frHear" type="button" class="btn-cyan" data-icon="sound"> Hear it</button>
+      <button id="frNext" type="button" class="btn-gold">Next ›</button>
     </div>
   </section>
 
@@ -682,6 +732,7 @@
 <script src="maxtopics_data.js"></script>
 <script src="sessions_data.js"></script>
 <script src="social_data.js"></script>
+<script src="fractions_data.js"></script>
 <script src="anime_icons.js"></script>
 <script src="topics.js"></script>
 <script src="core.js"></script>
@@ -692,6 +743,7 @@
 <script src="maxquiz.js"></script>
 <script src="spelling.js"></script>
 <script src="social_app.js"></script>
+<script src="fractions_app.js"></script>
 <script src="settings.js"></script>
 <script>HB.start();</script>
 </body>

@@ -6,6 +6,7 @@
     home: '<path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v9.5h5v-6h3v6h5V10"/>',
     back: '<path d="M15 5 8 12l7 7"/>',
     next: '<path d="M9 5l7 7-7 7"/>',
+    fraction: '<path d="M7 9.5h4M9 7.5v4M5 12h14"/><rect x="7" y="14.5" width="10" height="5" rx="1"/><path d="M12 14.5v5"/><path d="M14.5 4.5l2.5 5"/>',
     divide: '<circle cx="12" cy="6" r="1.6"/><circle cx="12" cy="18" r="1.6"/><path d="M5 12h14"/>',
     book: '<path d="M4 5.5C6.5 4 9.5 4 12 6c2.5-2 5.5-2 8-.5V19c-2.5-1.5-5.5-1.5-8 .5-2.5-2-5.5-2-8-.5z"/><path d="M12 6v13.5"/>',
     body: '<circle cx="12" cy="4.5" r="2.3"/><path d="M12 7v7M7 9.5l5-1.5 5 1.5M12 14l-3 6.5M12 14l3 6.5"/>',

@@ -8,7 +8,11 @@ Every path is relative, so it works from the GitHub Pages subpath `/max-homework
 **Subject › Subtopic › Session › Component.** Every session has a **Review** and a **Quiz**.
 
 ```
-Math ── Division ── Long Division with Remainders ── components: 5 worked problems + 5 quiz problems
+Math ─┬ Division ── Long Division with Remainders ── components: 5 worked problems + 5 quiz problems
+      └ Fractions ─┬ Equivalent Fractions ── 7-step review, 6 worked examples, 8-question quiz
+                   ├ Comparing Fractions ── 6-step review, 4 worked examples, 8-question quiz (<, >, = and ordering)
+                   ├ Mixed Numbers ── 6-step review, 4 worked examples, 8-question quiz (keypad both ways + pick the picture)
+                   └ Multiplying & Dividing Fractions ── 6-step review, 7 cup-and-bowl worked examples, 8-question quiz
 Science ── Anatomy ── Max's Test Topics (12 topics, 15-question quiz)
                     ├─ Organs (13 organs)
                     ├─ Circulatory · Respiratory · Digestive · Nervous · Skeletal · Muscular · Urinary
@@ -69,6 +73,21 @@ Home is a 2x2 grid (Math, Science, Language, Social Studies), and it stays 2x2 o
 - The Quiz uses the `maxQuiz` engine (6 questions, spoken feedback, score, end screen with Email my results).
 - Run the build with: `/workspace/division-exercises/.venv/bin/python build_social.py`
 
+## Math › Fractions
+- The content lives in `fractions_content.py` (one block per session, listed in `SESSIONS`). `build_fractions.py` checks every
+  fraction fact with Python's `Fraction` (arithmetic, `=` chains, `<`/`>` claims, remainders, quiz answers, option uniqueness,
+  picture values) and stops if anything is wrong. Then it writes `fractions_data.js` (`window.FRACTIONS_DATA`, plus quiz sets
+  `frac_equiv`, `frac_compare`, `frac_mixed`, `frac_muldiv` in `window.QUIZ_SETS`) and the gTTS MP3s under `audio/fractions/`
+  (sub-folders `compare/`, `mixed/`, `muldiv/`). Narration turns `2/3` into "two thirds", `1 3/4` into "one and three fourths".
+- `fractions_app.js` holds `window.FRAC_VIS.render(spec)` (animated SVG: fraction bars, pies, the ×/÷ rule, cross-multiplication,
+  number lines, comparisons with a 1/2 benchmark, mixed-number pies, and the **cup and bowl model**) and the `fracWalk` module
+  (Review walkthrough and worked-example chips, Previous / Hear it / Next; Hear it also replays the animation).
+- Cup and bowl: for `a × b` the cup is `b` of a bowl, filled to `a`, then tipped into a same-size bowl whose level is marked
+  (e.g. 1/2 × 1/3 = 1/6). For `a ÷ b` the bowls hold `a` and are cut into numbered `b`-sized scoops (e.g. 2 ÷ 1/4 = 8).
+- The quizzes use `maxQuiz`. It accepts optional `vis` (picture with the question), `after` (picture shown once answered) and
+  `optVis` (picture answer buttons), all drawn by `FRAC_VIS`.
+- Run the build with: `/workspace/division-exercises/.venv/bin/python build_fractions.py`
+
 ## Settings, Correspondence and Outbox (`settings.js`)
 - The top bar has an Outbox (envelope) button and a Settings (gear) button. Both screens sit off the tree, and Back returns to where you were.
 - `window.SETTINGS_SCHEMA` is extensible. It is a list of sections, each with fields `{key, label, type: email|text, placeholder, recipient?}`. Add a section or field there and the Settings screen renders and validates it.
@@ -92,6 +111,7 @@ python build_explore.py             # body scanner clips               -> audio/
 python build_maxtopics.py           # Max's Test Topics                -> audio/anatomy/maxtopics/
 python build_sessions.py            # components + system quizzes      -> audio/anatomy/components/, audio/anatomy/sessions/
 python build_math_quiz.py           # math quiz                        -> audio/math_quiz/
+python build_fractions.py           # fractions (4 sessions)           -> audio/fractions/
 ```
 
 Builders only create missing clips. Add `--force` to regenerate everything, or delete one MP3 to remake just that clip.

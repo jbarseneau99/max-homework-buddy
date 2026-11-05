@@ -18,6 +18,7 @@
     $("mxProgress").textContent = `Question ${st.i + 1} of ${n()}`;
     $("mxBar").style.width = ((st.i + 1) / n() * 100) + "%";
     $("mxQ").textContent = q.q;
+    showVis(q.vis);
     $("mxHint").textContent = q.type === "pick" ? `Pick ${q.n}, then tap Check.` : q.type === "number" ? "Use the keypad, then tap Check." : "Tap your answer.";
     const opts = $("mxOpts"); opts.innerHTML = "";
     $("mxNumWrap").hidden = q.type !== "number";
@@ -26,6 +27,7 @@
       q.options.forEach(o => {
         const b = document.createElement("button");
         b.type = "button"; b.className = "anatomy-option mx-opt"; b.textContent = o; b.dataset.opt = o;
+        if (q.optVis && q.optVis[o] && window.FRAC_VIS) { b.classList.add("has-vis"); b.innerHTML = FRAC_VIS.render(q.optVis[o]) + `<span>${o}</span>`; }
         b.onclick = () => q.type === "mc" ? grade([o]) : togglePick(o, b);
         opts.appendChild(b);
       });
@@ -40,6 +42,8 @@
     setScore();
     if (speak && !res) play(st.i === 0 && st.results.length === 0 ? Q.introAudio : q.qAudio);
   }
+  // Optional visual (Equivalent Fractions): q.vis with the question, q.after once it is answered. Drawn by window.FRAC_VIS.
+  function showVis(spec) { const h = spec && window.FRAC_VIS ? FRAC_VIS.render(spec) : ""; $("mxVis").innerHTML = h; $("mxVis").hidden = !h; }
   function renderNum() { $("mxNum").textContent = st.num || "–"; $("mxNum").parentElement.classList.toggle("empty", !st.num); }
 
   function togglePick(o, b) {
@@ -72,6 +76,7 @@
       else if (res.given.includes(b.dataset.opt)) b.classList.add("incorrect");
     });
     if (q.type === "number") { st.num = String(res.given[0]); renderNum(); }
+    if (q.after) showVis(q.after);
     document.querySelectorAll("#mxPad button").forEach(b => b.disabled = true);
     $("mxCheck").disabled = true;
     $("mxFeedback").textContent = (res.ok ? "✓ " + q.rightText : "✗ " + q.wrongText + (q.type === "number" ? ` (Answer: ${q.answer})` : ""));

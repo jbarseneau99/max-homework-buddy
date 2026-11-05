@@ -22,7 +22,7 @@
 
   window.TOPICS = [
     {
-      id: "math", title: "Math", icon: "divide", homeIcon: "math", blurb: "Long division, worked step by step, then on your own.",
+      id: "math", title: "Math", icon: "divide", homeIcon: "math", blurb: "Long division and fractions, step by step.",
       subtopics: [
         { id: "division", title: "Division", icon: "divide", blurb: "Long division with remainders.",
           sessions: [
@@ -33,6 +33,15 @@
               components: mathWorked.map(([t], i) => ({ id: "ex" + (i + 1), title: "Worked: " + t, module: "mathReview", opts: { start: i } }))
                 .concat(mathQuiz.map((t, i) => ({ id: "q" + (i + 1), title: "Quiz: " + t, module: "mathQuiz", opts: { start: i } }))) }
           ],
+          moreComingSoon: true },
+        { id: "fractions", title: "Fractions", icon: "fraction", blurb: "Equivalent, comparing, mixed numbers, multiplying and dividing.", toolbar: "anatBar",
+          sessions: ((window.FRACTIONS_DATA && FRACTIONS_DATA.order) || []).map(id => {
+            const S = FRACTIONS_DATA.sessions[id], Q = (window.QUIZ_SETS && QUIZ_SETS[S.quiz]) || { questions: [] };
+            return { id, title: S.title, icon: "fraction", blurb: S.blurb,
+              review: { module: "fracWalk", label: S.review.length + "-step narrated walkthrough with pictures" },
+              quiz: { module: "maxQuiz", opts: { set: S.quiz }, label: Q.questions.length + " questions with spoken feedback" },
+              componentModule: "fracWalk", components: S.components.map(c => ({ id: c.id, title: c.title })) };
+          }),
           moreComingSoon: true }
       ],
       moreComingSoon: true
