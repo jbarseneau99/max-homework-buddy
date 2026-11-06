@@ -129,6 +129,11 @@
     $("mxEndScore").textContent = `${st.score} / ${n()}`;
     $("mxEndMsg").textContent = d.text;
     if (HB.recordResult) HB.recordResult({ score: st.score, total: n(),
+      title: Q.title || HB.pathTitle(), subject: (HB.state.subject && HB.state.subject.title) || "", topic: [HB.state.subtopic, HB.state.session].filter(Boolean).map(x => x.title).join(" › "),
+      mode: st.work ? (aiReady() ? "scratch+ai" : "scratch") : "standard",
+      questions: Q.questions.map((q, i) => { const r = st.results[i] || {}; const ans = q.type === "mc" ? q.answer : q.type === "pick" ? (q.answers || []).join(", ") : String(q.answer);
+        const given = r.ai && r.ai.written ? r.ai.written : (Array.isArray(r.given) ? r.given.join(", ") : (r.given || ""));
+        return { q: q.q, given, answer: ans, ok: !!r.ok, written: (r.ai && r.ai.written) || "" }; }),
       details: Q.questions.map((q, i) => `${st.results[i] && st.results[i].ok ? "✓" : "✗"} ${q.q}`) });
     $("mxBar").style.width = "100%";
     const missed = Q.questions.map((q, i) => ({ q, r: st.results[i] })).filter(x => x.r && !x.r.ok);

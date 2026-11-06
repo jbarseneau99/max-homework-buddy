@@ -311,8 +311,10 @@ window.SPELLING_DATA = {
   ],
   "quiz": {
    "title": "Week 7 Vocabulary · quiz",
-   "intro": "Week 7 spelling quiz. 20 words. Listen carefully, then type each letter into its box.",
+   "intro": "Week 7 Vocabulary letter-box quiz. 20 words. Listen carefully, then type each letter into its box.",
    "introAudio": "audio/spelling/quiz/intro.mp3",
+   "introNotepad": "Week 7 Vocabulary notepad quiz. 20 words. Listen carefully, then write the whole word on the scratch pad. No letter count is shown.",
+   "introNotepadAudio": "audio/spelling/quiz/intro_notepad.mp3",
    "done": [
     {
      "text": "Quiz complete. You got 0 out of 20. Run through the review again, then have another go.",

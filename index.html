@@ -437,6 +437,25 @@
   .set-toggle input { width:26px; height:26px; min-height:0; accent-color:var(--gold); }
   .wk-tag { display:inline-block; padding:1px 8px; border-radius:999px; font-weight:700; font-size:.78rem; }
   .wk-tag.ai { background:rgba(76,201,240,.18); color:var(--cyan); } .wk-tag.kp { background:rgba(255,255,255,.1); }
+
+  .sp-fallback { margin:14px auto 0; max-width:420px; text-align:left; }
+  .sp-fallback input { width:100%; font-size:1.4rem; font-weight:700; letter-spacing:.06em; padding:12px 14px;
+    border-radius:10px; border:2px solid rgba(76,201,240,.45); background:rgba(4,10,24,.75); color:#fff; }
+  .sp-scratch { margin:14px 0 0; text-align:left; }
+  .home-tools { display:flex; gap:10px; flex-wrap:wrap; justify-content:center; margin-top:14px; }
+  .qh-filters { display:flex; gap:8px; flex-wrap:wrap; margin:10px 0 14px; }
+  .qh-filters button { min-height:44px; }
+  .qh-filters button.on { border-color:var(--gold); color:var(--gold); box-shadow:0 0 12px rgba(255,194,61,.35); }
+  .qh-list { list-style:none; margin:0; padding:0; display:grid; gap:10px; }
+  .qh-list li { padding:12px 14px; border:1px solid var(--line); border-radius:12px; background:rgba(8,16,36,.7); cursor:pointer; text-align:left; }
+  .qh-list li:hover, .qh-list li:focus { border-color:var(--cyan); }
+  .qh-list .qh-h { display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap; align-items:baseline; }
+  .qh-list b { font-size:1.05rem; }
+  .qh-list small { color:var(--muted); display:block; margin-top:2px; }
+  .qh-score { font-weight:800; color:var(--gold); font-family:ui-monospace,Menlo,Consolas,monospace; }
+  .qh-detail .qh-miss { margin:10px 0 0; padding-left:18px; display:grid; gap:6px; }
+  .qh-actions { display:flex; gap:10px; flex-wrap:wrap; margin-top:14px; }
+  .qh-empty { color:var(--muted); padding:18px; text-align:center; }
   .ob-work-card { margin-top:16px; }
   .ob-work { list-style:none; margin:0; padding:0; display:grid; gap:10px; }
   .ob-work li { display:grid; grid-template-columns:150px minmax(0,1fr); gap:12px; align-items:center; padding:10px; border:1px solid var(--line); border-radius:10px; background:rgba(4,10,24,.5); }
@@ -470,7 +489,7 @@
       <p class="greet">Hey Max, let's get to work. Pick a subject.</p>
     </div>
     <div class="tiles" id="homeTiles"></div>
-    <div class="home-foot"><button id="homeHelloBtn" type="button" class="btn-cyan" data-icon="sound"> Play greeting</button></div>
+    <div class="home-foot home-tools"><button id="homeHelloBtn" type="button" class="btn-cyan" data-icon="sound"> Play greeting</button><button id="homeHistoryBtn" type="button" class="btn-gold" data-icon="quiz"> Quiz History</button></div>
   </section>
 
   <!-- ===== SUBJECT (list of subtopics) ===== -->
@@ -785,13 +804,18 @@
   <!-- ===== SPELLING QUIZ (letter boxes) ===== -->
   <section id="view-spellingQuiz" class="view" hidden>
     <div class="toolbar-slot"></div>
-    <div class="eyebrow">Quiz · type the letters you hear</div>
+    <div class="eyebrow" id="spqEyebrow">Quiz · Letter boxes (easier)</div>
     <h2 class="h2" id="spqTitle">Spelling quiz</h2>
     <div class="meter"><div id="spqBar"></div></div>
     <div id="spqCard" class="glass-card" style="margin-top:14px;text-align:center">
       <div class="eyebrow" id="spqProgress">Word 1 of 20</div>
       <p id="spqHint" style="color:var(--muted);margin:8px 0 0">Listen, then type each letter.</p>
       <div class="sp-boxes" id="spBoxes"></div>
+      <div id="spScratch" class="sp-scratch" hidden></div>
+      <div id="spFallback" class="sp-fallback" hidden>
+        <label class="sp-label" for="spFallbackInput">Type the whole word (no length hint)</label>
+        <input id="spFallbackInput" type="text" autocomplete="off" autocapitalize="none" spellcheck="false" inputmode="text">
+      </div>
       <div id="spReveal" class="sp-reveal" hidden></div>
       <div id="spFeedback" class="mq-feedback" aria-live="polite"></div>
       <div class="sp-quiz-ctl">
@@ -813,6 +837,32 @@
         <button id="spqReview" type="button">‹ Review words</button>
         <button id="spqEmail" type="button" class="btn-cyan" data-icon="mail"> Email my results</button>
       </div>
+    </div>
+  </section>
+
+
+  <!-- ===== QUIZ HISTORY ===== -->
+  <section id="view-quizHistory" class="view" hidden>
+    <div class="eyebrow">Quiz History · saved on this device</div>
+    <h2 class="h2">Quiz History</h2>
+    <p class="set-blurb">Every finished quiz is kept here forever (on this device). Filter by subject, open an attempt for details, or Export a backup JSON.</p>
+    <div class="qh-filters" id="qhFilters"></div>
+    <div class="qh-actions">
+      <button id="qhExport" type="button" class="btn-cyan">Export JSON</button>
+      <button id="qhImport" type="button">Import JSON</button>
+      <input id="qhImportFile" type="file" accept="application/json,.json" hidden>
+      <button id="qhClear" type="button">Clear all</button>
+      <span id="qhStatus" class="set-status" aria-live="polite"></span>
+    </div>
+    <ul id="qhList" class="qh-list" style="margin-top:14px"></ul>
+    <div id="qhDetail" class="glass-card qh-detail" hidden style="margin-top:14px">
+      <div class="eyebrow" id="qhDetailWhen"></div>
+      <h3 class="h2" id="qhDetailTitle" style="font-size:1.35rem;margin:4px 0"></h3>
+      <p id="qhDetailMeta" style="color:var(--muted)"></p>
+      <div class="big" id="qhDetailScore" style="font-size:2.2rem;color:var(--gold);margin:8px 0"></div>
+      <div class="eyebrow">Questions</div>
+      <ul id="qhDetailQs" class="qh-miss"></ul>
+      <div class="qh-actions"><button id="qhDetailBack" type="button">‹ Back to list</button></div>
     </div>
   </section>
 
@@ -891,6 +941,8 @@
 <script src="social_app.js"></script>
 <script src="fractions_app.js"></script>
 <script src="settings.js"></script>
+<script src="quiz_history.js"></script>
+<script src="quiz_history_ui.js"></script>
 <script>HB.start();</script>
 </body>
 </html>

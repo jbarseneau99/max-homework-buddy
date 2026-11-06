@@ -113,7 +113,7 @@
     if (ok || st.tries > 0) st.ink[st.i] = png;
     if (ok) {
       if (!st.answered[st.i]) st.score++;
-      st.answered[st.i] = { ok: true };
+      st.answered[st.i] = { ok: true, given: x.given || `${st.vals.q} R ${st.vals.r}`, written: x.written || "" };
       const c = D.cheers[st.i % D.cheers.length];
       st.vals = { q: String(p.quotient), r: String(p.remainder) }; renderFields();
       lock(`✓ ${ai ? x.feedback : c.text} ${p.label} = ${p.quotient} R ${p.remainder}`, true);
@@ -124,7 +124,7 @@
       $("mqFeedback").textContent = "✗ " + (ai ? x.feedback + " Fix your work on the pad and tap Submit work again." : D.tryAgain); $("mqFeedback").className = "mq-feedback bad";
       play(D.tryAgainAudio);
     } else {
-      st.answered[st.i] = { ok: false };
+      st.answered[st.i] = { ok: false, given: x.given || `${st.vals.q} R ${st.vals.r}`, written: x.written || "" };
       st.vals = { q: String(p.quotient), r: String(p.remainder) }; renderFields();
       lock("✗ " + (ai && x.feedback ? x.feedback + " " : "") + p.revealText, false);
       $("mqNext").disabled = false; play(p.revealAudio);
@@ -144,6 +144,8 @@
     $("mqEndScore").textContent = `${st.score} / ${n}`;
     $("mqEndMsg").textContent = d.text;
     if (HB.recordResult) HB.recordResult({ score: st.score, total: n,
+      title: "Long Division quiz", subject: "Math", topic: "Division › Long Division with Remainders", mode: "keypad",
+      questions: D.problems.map((p, k) => { const a = st.answered[k] || {}; return { q: p.label, given: a.given || "", answer: `${p.quotient} R ${p.remainder}`, ok: !!a.ok, written: a.written || "" }; }),
       details: D.problems.map((p, k) => `${st.answered[k] && st.answered[k].ok ? "✓" : "✗"} ${p.label} = ${p.quotient} R ${p.remainder}`) });
     $("mqBar").style.width = "100%";
     play(d.audio);

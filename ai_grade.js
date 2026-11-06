@@ -22,7 +22,7 @@
     return { ready: true, state: "ready", model };
   }
 
-  const SYSTEM = [
+  const SYSTEM_MATH = [
     "You are a kind, careful math tutor checking the handwritten work of Max, a Canadian grade-5 student.",
     "You get a picture of his scratch pad: light (white) pen strokes on a dark navy background with a faint grid.",
     "1. Look closely at the handwriting/drawing and read what Max wrote: numbers, fractions, long-division layout (bracket, quotient on top, subtraction steps, remainder 'R'), comparison symbols (<, >, =), circled or boxed answers.",
@@ -33,12 +33,28 @@
     "feedback rules: speak to Max directly, at most 25 words, kid-friendly. If ok, cheer and name one thing he did well. If not ok, give a gentle nudge about where to look again (e.g. check the subtraction step) and do NOT state the correct answer or the full solution."
   ].join("\n");
 
+  const SYSTEM_SPELLING = [
+    "You are a kind spelling checker for Max, a Canadian grade-5 student.",
+    "You get a picture of his scratch pad: light (white) pen strokes on a dark navy background with a faint grid.",
+    "1. Read the single English word Max wrote. Ignore neatness, size, slant, and letter case.",
+    "2. Compare what you read to the expected spelling case-insensitively. Every letter must match exactly (no extras, no missing letters).",
+    "3. Put the letters you actually read into \"written\" (preferably lowercase, letters only). Do not invent letters you cannot see.",
+    "4. If you cannot read any word, ok is false and written is empty.",
+    "Reply with ONLY a JSON object, no markdown, exactly: {\"ok\": true|false, \"written\": \"<the word you read>\", \"feedback\": \"<one short warm sentence for Max>\"}",
+    "feedback rules: speak to Max directly, at most 25 words, kid-friendly. If ok, cheer briefly. If not ok, encourage him to listen again and rewrite carefully — NEVER reveal or hint the correct spelling in feedback."
+  ].join("\n");
+
+  function systemFor(o) {
+    return (o && (o.kind === "spelling" || /spelling/i.test(o.subject || ""))) ? SYSTEM_SPELLING : SYSTEM_MATH;
+  }
+
   function userText(o) {
+    const spelling = o.kind === "spelling" || /spelling/i.test(o.subject || "");
     return [
       `Subject: ${o.subject || "Math"}${o.quiz ? " · " + o.quiz : ""}`,
-      `Question: ${o.question}`,
-      o.choices && o.choices.length ? `Answer choices shown to Max: ${o.choices.join(" | ")}` : "",
-      `Expected correct answer (for grading only — never reveal it in feedback when he is wrong): ${o.expected}`,
+      spelling ? "Task: spell the word you hear. Max wrote one word on the pad." : `Question: ${o.question}`,
+      !spelling && o.choices && o.choices.length ? `Answer choices shown to Max: ${o.choices.join(" | ")}` : "",
+      `Expected correct ${spelling ? "spelling" : "answer"} (for grading only — never reveal it in feedback when he is wrong): ${o.expected}`,
       o.attempt ? `This is try number ${o.attempt}.` : "",
       "Grade the attached scratch-pad picture now. JSON only."
     ].filter(Boolean).join("\n");
@@ -81,7 +97,7 @@
     if (!/^data:image\/(png|jpe?g);base64,/.test(o.pngDataUrl || "")) throw { mode: "fallback", reason: "no_image" };
     const key = String(cfg()["ai.apiKey"]).trim();
     const body = { temperature: 0, stream: false, messages: [
-      { role: "system", content: SYSTEM },
+      { role: "system", content: systemFor(o) },
       { role: "user", content: [
         { type: "image_url", image_url: { url: o.pngDataUrl, detail: "high" } },
         { type: "text", text: userText(o) } ] } ] };

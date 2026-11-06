@@ -12,7 +12,7 @@
     options: $("anatomyOptions"), feedback: $("anatomyFeedback"), quizBtn: $("anatQuizBtn"),
     nextBtn: $("anatNextBtn"), backBtn: $("anatBackBtn")
   };
-  const st = { sound: true, lesson: null, idx: 0, phase: "pick", score: 0, lastClip: "" };
+  const st = { sound: true, lesson: null, idx: 0, phase: "pick", score: 0, lastClip: "", answers: [] };
 
   function play(src) {
     st.lastClip = src || "";
@@ -58,7 +58,7 @@
 
   function startLesson(lesson) {
     $("anatEmailBtn").hidden = true;
-    st.lesson = lesson; st.idx = 0; st.score = 0; st.phase = "welcome";
+    st.lesson = lesson; st.idx = 0; st.score = 0; st.answers = []; st.phase = "welcome";
     els.picker.hidden = true; els.lesson.hidden = false;
     els.progress.textContent = lesson.title;
     els.emoji.textContent = lesson.emoji;
@@ -119,6 +119,7 @@
       if (b.textContent === it.answer) b.classList.add("correct");
     });
     const ok = opt === it.answer;
+    st.answers[st.idx] = { q: it.question || it.prompt || els.title.textContent, given: opt, answer: it.answer, ok };
     if (ok) { st.score++; btn.classList.add("correct"); }
     else btn.classList.add("incorrect");
     els.feedback.textContent = (ok ? "✓ " : "✗ ") + (ok ? it.rightText : it.wrongText);
@@ -140,7 +141,11 @@
     els.options.innerHTML = ""; els.feedback.textContent = "";
     els.quizBtn.hidden = true;
     els.nextBtn.disabled = false; els.nextBtn.textContent = "Play again";
-    if (window.HB && HB.recordResult) HB.recordResult({ score: st.score, total: n });
+    if (window.HB && HB.recordResult) HB.recordResult({ score: st.score, total: n,
+      title: (st.lesson && st.lesson.title) || "Anatomy quiz", subject: "Science", topic: "Anatomy › " + ((st.lesson && st.lesson.title) || ""),
+      mode: "tap",
+      questions: (st.answers || []).map(a => ({ q: a.q, given: a.given, answer: a.answer, ok: a.ok, written: "" })),
+      details: (st.answers || []).map(a => `${a.ok ? "✓" : "✗"} ${a.q}`) });
     $("anatEmailBtn").hidden = false;
     play(st.lesson.doneAudioPrefix + st.score + ".mp3");
   }

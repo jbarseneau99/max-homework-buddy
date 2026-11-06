@@ -79,18 +79,30 @@
       subtopics: [
         { id: "spelling", title: "Spelling", icon: "book", blurb: "Weekly word lists.", toolbar: "anatBar",
           sessions: ((() => {
-            const W = (window.SPELLING_DATA && SPELLING_DATA.week7) || null;
-            const words = (W && W.words) || [];
-            return [{
-              id: "week7", title: "Week 7 Vocabulary", icon: "book",
-              blurb: W ? W.week.blurb : "Prefix pre- and the letter blends thr and spl.",
-              review: { module: "spellingReview", opts: { list: "week7" },
-                label: (words.length || 20) + " words — meaning, example, and a fun fact each" },
-              quiz: { module: "spellingQuiz", opts: { list: "week7" },
-                label: "Hear the word, then type each letter into its box" },
-              componentModule: "spellingReview",
-              components: words.map(w => ({ id: w.id, title: w.word }))
-            }];
+            // Every week in SPELLING_DATA automatically gets Letter boxes (easier) + Notepad (harder).
+            const data = window.SPELLING_DATA || {};
+            return Object.keys(data).sort().flatMap(id => {
+              const W = data[id] || {}, words = W.words || [], week = W.week || {};
+              const title = week.title || id, blurb = week.blurb || "";
+              const comps = words.map(w => ({ id: w.id, title: w.word }));
+              const n = words.length || 0;
+              return [
+                { id: id + "-letters", title: title + " · Letter boxes", icon: "book",
+                  blurb: "Easier — letter boxes show how many letters. " + blurb,
+                  review: { module: "spellingReview", opts: { list: id },
+                    label: n + " words — meaning, example, and a fun fact each" },
+                  quiz: { module: "spellingQuiz", opts: { list: id, mode: "letters" },
+                    label: "Easier — hear the word, type each letter into its box" },
+                  componentModule: "spellingReview", components: comps },
+                { id: id + "-notepad", title: title + " · Notepad", icon: "book",
+                  blurb: "Harder — write the whole word on the scratch pad. No letter count. " + blurb,
+                  review: { module: "spellingReview", opts: { list: id },
+                    label: n + " words — meaning, example, and a fun fact each" },
+                  quiz: { module: "spellingQuiz", opts: { list: id, mode: "notepad" },
+                    label: "Harder — write on the notepad; AI checks your spelling" },
+                  componentModule: "spellingReview", components: comps }
+              ];
+            });
           })()),
           moreComingSoon: true }
       ],

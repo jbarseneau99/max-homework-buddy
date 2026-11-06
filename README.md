@@ -18,7 +18,7 @@ Science ── Anatomy ── Max's Test Topics (12 topics, 15-question quiz)
                     ├─ Circulatory · Respiratory · Digestive · Nervous · Skeletal · Muscular · Urinary
                     │     (components = that system's parts, e.g. Circulatory: heart, arteries, capillaries, veins, blood)
                     └─ All Systems (overview + full Body Systems quiz)
-Language ── Spelling ── Week 7 Vocabulary (20 words: pre- / thr / spl; narrated review + letter-box quiz)
+Language ── Spelling ── Week 7 · Letter boxes (easier) + Week 7 · Notepad (harder); auto-dual modes for every week in SPELLING_DATA
 ```
 
 The fixed top bar on every screen has **Home**, **Back** (one level up), a full breadcrumb
@@ -76,7 +76,7 @@ Home is a 2x2 grid (Math, Science, Language, Social Studies), and it stays 2x2 o
 
 ## Language › Spelling
 - Content lives in `spelling_content.py`. `build_spelling.py` writes `spelling_data.js` (`window.SPELLING_DATA.week7`) and gTTS MP3s under `audio/spelling/` (review per word, quiz prompts, right/wrong, done scores). Only missing clips are built unless you pass `--force`.
-- **Week 7 Vocabulary** (prefix `pre-` and blends `thr`, `spl`): 20 words. Review shows the word with the blend highlighted, a kid-friendly meaning, an example sentence, and an accurate fun fact / etymology, narrated on tap. Quiz shuffles the list, plays word → sentence → word, and Max types one letter per box (auto-advance, backspace goes back). Wrong answers reveal the correct spelling with differences highlighted. Score is saved via `HB.recordResult` for the Outbox "Send my latest quiz results" template.
+- **Week 7 Vocabulary** (prefix `pre-` and blends `thr`, `spl`): 20 words. Review is shared. Each week in `SPELLING_DATA` automatically creates two sessions: **Letter boxes (easier)** — one box per letter with length shown; **Notepad (harder)** — same audio, no letter count, write on `HB.ScratchPad`, graded by `HB.gradeScratch` with a spelling-specific prompt (exact letters, ignore case/neatness). No AI key → plain text input with no length hint. Wrong answers show correct spelling vs what the AI read. Scores go to Quiz History + Outbox.
 - Run: `/workspace/division-exercises/.venv/bin/python build_spelling.py`
 
 ## Math › Fractions
@@ -142,3 +142,8 @@ PORT=8798 python3 serve.py          # then open http://127.0.0.1:8798/
 ```
 
 `_screens/` holds local test screenshots. The `*.py` files and `serve.py` are not published.
+
+## Quiz History
+- Every finished quiz (math, fractions, spelling letter boxes + notepad, anatomy, social studies) is saved permanently in `localStorage` key `hb.quizHistory.v1` with date/time, subject, topic, mode, score, and per-question given/correct/ok.
+- Open **Quiz History** from the Home screen. Filter by subject, tap an attempt for details, Export JSON backup, or Import a previous export. Existing `hb.lastResult.v1` (Outbox template) is kept and seeded into history if history was empty.
+- Scratch-pad drawings in Outbox still use `hb.work.v1` (last 20 drawings); quiz scores themselves are uncapped in Quiz History.

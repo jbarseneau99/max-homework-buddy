@@ -27,7 +27,7 @@
   const modules = {};
   // level: home | subject | subtopic | session | review | quiz | component
   const st = { level: "home", subject: null, subtopic: null, session: null, comp: null, active: null, returnTo: null };
-  const PANELS = ["settings", "outbox"];   // off-tree screens (top bar); Back returns to where you were
+  const PANELS = ["settings", "outbox", "quizHistory"];   // off-tree screens (top bar); Back returns to where you were
   const HB = window.HB = { icon, modules, state: st };
 
   HB.registerModule = (name, mod) => { modules[name] = mod; };
@@ -77,7 +77,7 @@
       case "subtopic": return { level: "subject", subject: st.subject };
       case "session": return { level: "subtopic", subject: st.subject, subtopic: st.subtopic };
       case "review": case "quiz": case "component": return { level: "session", ...here() };
-      case "settings": case "outbox": return st.returnTo || { level: "home" };
+      case "settings": case "outbox": case "quizHistory": return st.returnTo || { level: "home" };
       default: return null;
     }
   }
@@ -90,6 +90,7 @@
     if (st.level === "component") parts.push(st.session.components[st.comp].title.replace(/^\d+\.\s*/, ""));
     if (st.level === "settings") parts.push("Settings");
     if (st.level === "outbox") parts.push("Outbox");
+    if (st.level === "quizHistory") parts.push("Quiz History");
     return parts;
   }
 
