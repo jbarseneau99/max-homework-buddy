@@ -92,4 +92,5 @@
     HB.quizHistory.clear(); st.openId = null; status("History cleared."); render();
   };
   if ($("homeHistoryBtn")) $("homeHistoryBtn").onclick = () => HB.go({ level: "quizHistory" });
+  if ($("homeMasteryBtn")) $("homeMasteryBtn").onclick = () => HB.go({ level: "multMastery" });
 })();

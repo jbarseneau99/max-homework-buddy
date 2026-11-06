@@ -8,7 +8,8 @@ Every path is relative, so it works from the GitHub Pages subpath `/max-homework
 **Subject › Subtopic › Session › Component.** Every session has a **Review** and a **Quiz**.
 
 ```
-Math ─┬ Division ── Long Division with Remainders ── components: 5 worked problems + 5 quiz problems
+Math ─┬ Division ── Long Division with Remainders
+      ├ Multiplication ── 8 lessons × Typed + Notepad (adaptive mastery, Math Heroes)
       └ Fractions ─┬ Equivalent Fractions ── 7-step review, 6 worked examples, 8-question quiz
                    ├ Comparing Fractions ── 6-step review, 4 worked examples, 8-question quiz (<, >, = and ordering)
                    ├ Mixed Numbers ── 6-step review, 4 worked examples, 8-question quiz (keypad both ways + pick the picture)
@@ -147,3 +148,8 @@ PORT=8798 python3 serve.py          # then open http://127.0.0.1:8798/
 - Every finished quiz (math, fractions, spelling letter boxes + notepad, anatomy, social studies) is saved permanently in `localStorage` key `hb.quizHistory.v1` with date/time, subject, topic, mode, score, and per-question given/correct/ok.
 - Open **Quiz History** from the Home screen. Filter by subject, tap an attempt for details, Export JSON backup, or Import a previous export. Existing `hb.lastResult.v1` (Outbox template) is kept and seeded into history if history was empty.
 - Scratch-pad drawings in Outbox still use `hb.work.v1` (last 20 drawings); quiz scores themselves are uncapped in Quiz History.
+
+## Math › Multiplication (year-long)
+- Content: `mult_content.py` → `build_mult.py` → `mult_data.js` + `audio/mult/` (gTTS). Visuals in `mult_vis.js`. App: `mult_app.js` (`multWalk`, `multQuiz`). Mastery: `mult_mastery.js` (`hb.multMastery.v1`).
+- Eight lessons, each with Review (diagrams + Math Hero) and dual quizzes (Typed / Notepad). Problems are generated and weighted toward weak times-table facts; lesson level 1–3.
+- Home › **× Mastery** shows the 12×12 heatmap and per-lesson levels. Quiz History Export/Import includes `mastery.multiplication`.

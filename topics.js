@@ -22,7 +22,7 @@
 
   window.TOPICS = [
     {
-      id: "math", title: "Math", icon: "divide", homeIcon: "math", blurb: "Long division and fractions, step by step.",
+      id: "math", title: "Math", icon: "divide", homeIcon: "math", blurb: "Long division, fractions, and a year-long Multiplication unit.",
       subtopics: [
         { id: "division", title: "Division", icon: "divide", blurb: "Long division with remainders.",
           sessions: [
@@ -42,7 +42,26 @@
               quiz: { module: "maxQuiz", opts: { set: S.quiz }, label: Q.questions.length + " questions with spoken feedback" },
               componentModule: "fracWalk", components: S.components.map(c => ({ id: c.id, title: c.title })) };
           }),
-          moreComingSoon: true }
+          moreComingSoon: true },
+        { id: "multiplication", title: "Multiplication", icon: "divide", blurb: "Year-long unit: tables, area, lattice, and more — with mastery tracking.", toolbar: "anatBar",
+          sessions: ((() => {
+            const M = window.MULT_DATA || { order: [], sessions: {} };
+            return (M.order || []).flatMap(id => {
+              const S = M.sessions[id]; if (!S) return [];
+              const comps = (S.components || []).map(c => ({ id: c.id, title: c.title }));
+              return [
+                { id: id + "-typed", title: S.title + " · Typed", icon: "divide", blurb: S.blurb + " Easier — type the product.",
+                  review: { module: "multWalk", opts: { lesson: id }, label: (S.review.length + 1) + "-step review with diagrams + Math Hero" },
+                  quiz: { module: "multQuiz", opts: { lesson: id, mode: "typed" }, label: "Easier — type the product (adaptive)" },
+                  componentModule: "multWalk", components: comps },
+                { id: id + "-notepad", title: S.title + " · Notepad", icon: "divide", blurb: S.blurb + " Harder — write on the scratch pad.",
+                  review: { module: "multWalk", opts: { lesson: id }, label: (S.review.length + 1) + "-step review with diagrams + Math Hero" },
+                  quiz: { module: "multQuiz", opts: { lesson: id, mode: "notepad" }, label: "Harder — notepad + AI check (adaptive)" },
+                  componentModule: "multWalk", components: comps }
+              ];
+            });
+          })()),
+          moreComingSoon: false }
       ],
       moreComingSoon: true
     },
