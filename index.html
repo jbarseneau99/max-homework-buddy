@@ -137,6 +137,32 @@
   .fw-facts li::marker { color:var(--cyan); }
   .fw-ctl { margin-top:14px; }
   .fw-ctl button { white-space:nowrap; }
+
+  /* Spelling review + letter-box quiz */
+  .sp-word-wrap { text-align:center; margin:4px 0 10px; }
+  .sp-word { font-size:clamp(2.2rem,8vw,3.6rem); font-weight:900; letter-spacing:.04em; color:#fff; text-shadow:0 0 18px rgba(76,201,240,.45); }
+  .sp-hl { color:var(--gold); text-shadow:0 0 14px rgba(255,194,61,.55); }
+  .sp-blend { display:inline-block; margin-top:4px; padding:4px 12px; border-radius:999px; border:1px solid rgba(255,194,61,.45);
+    color:var(--gold); font-weight:800; letter-spacing:.18em; font-size:.78rem; text-transform:uppercase; }
+  .sp-meta { display:grid; gap:12px; margin-top:8px; }
+  .sp-meta .sp-label { font-size:.72rem; letter-spacing:.16em; text-transform:uppercase; color:var(--cyan); font-weight:700; margin-bottom:2px; }
+  .sp-meta p { margin:0; font-size:1.08rem; line-height:1.45; color:#e8f0ff; }
+  .sp-fact { border-left:3px solid var(--gold); padding-left:12px; color:#ffe7a8; }
+  .sp-boxes { display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin:18px 0 8px; }
+  .sp-box { width:46px; height:56px; text-align:center; font-size:1.6rem; font-weight:800; font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+    text-transform:lowercase; border-radius:10px; border:2px solid rgba(76,201,240,.45); background:rgba(4,10,24,.75); color:#fff;
+    caret-color:var(--gold); outline:none; }
+  .sp-box.focus, .sp-box:focus { border-color:var(--gold); box-shadow:0 0 14px rgba(255,194,61,.45); }
+  .sp-box.ok { border-color:var(--ok); background:rgba(40,160,100,.2); }
+  .sp-box.bad { border-color:var(--bad); background:rgba(180,40,70,.2); }
+  .sp-reveal { margin-top:10px; font-size:1.35rem; font-weight:800; letter-spacing:.12em; font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace; }
+  .sp-rev { display:inline-block; padding:2px 4px; border-radius:6px; margin:0 1px; }
+  .sp-rev.ok { color:#c9ffe2; } .sp-rev.bad { color:#ffd3da; background:rgba(180,40,70,.25); text-decoration:underline; }
+  .sp-miss { color:#ffd3da; font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace; }
+  .sp-quiz-ctl { display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:10px; }
+  .sp-quiz-ctl button { min-height:50px; min-width:120px; }
+  @media (max-width:420px) { .sp-box { width:38px; height:48px; font-size:1.35rem; } }
+
   @media (max-width:420px) { .fw-ctl { gap:8px; } .fw-ctl button { padding-left:12px; padding-right:12px; } }
   #fwBar { height:100%; width:0; background:linear-gradient(90deg,var(--cyan),var(--gold)); border-radius:inherit; transition:width .3s; }
 
@@ -729,6 +755,67 @@
     </div>
   </section>
 
+
+  <!-- ===== SPELLING REVIEW ===== -->
+  <section id="view-spellingReview" class="view" hidden>
+    <div class="toolbar-slot"></div>
+    <div class="eyebrow" id="spEyebrow">Review</div>
+    <h2 class="h2" id="spTitle"></h2>
+    <div class="meter"><div id="spBar"></div></div>
+    <div class="comp-chips" id="spChips" hidden></div>
+    <div class="glass-card">
+      <div class="eyebrow" id="spCount">1 / 1</div>
+      <div class="sp-word-wrap">
+        <div id="spWord" class="sp-word"></div>
+        <div class="sp-blend" id="spBlend"></div>
+      </div>
+      <div class="sp-meta">
+        <div><div class="sp-label">Meaning</div><p id="spMeaning"></p></div>
+        <div><div class="sp-label">Example</div><p id="spSentence"></p></div>
+        <div class="sp-fact"><div class="sp-label">Interesting fact</div><p id="spFact"></p></div>
+      </div>
+    </div>
+    <div class="walk-ctl fw-ctl">
+      <button id="spPrev" type="button">‹ Previous</button>
+      <button id="spHear" type="button" class="btn-cyan" data-icon="sound"> Hear it</button>
+      <button id="spNext" type="button" class="btn-gold">Next ›</button>
+    </div>
+  </section>
+
+  <!-- ===== SPELLING QUIZ (letter boxes) ===== -->
+  <section id="view-spellingQuiz" class="view" hidden>
+    <div class="toolbar-slot"></div>
+    <div class="eyebrow">Quiz · type the letters you hear</div>
+    <h2 class="h2" id="spqTitle">Spelling quiz</h2>
+    <div class="meter"><div id="spqBar"></div></div>
+    <div id="spqCard" class="glass-card" style="margin-top:14px;text-align:center">
+      <div class="eyebrow" id="spqProgress">Word 1 of 20</div>
+      <p id="spqHint" style="color:var(--muted);margin:8px 0 0">Listen, then type each letter.</p>
+      <div class="sp-boxes" id="spBoxes"></div>
+      <div id="spReveal" class="sp-reveal" hidden></div>
+      <div id="spFeedback" class="mq-feedback" aria-live="polite"></div>
+      <div class="sp-quiz-ctl">
+        <button id="spReplay" type="button" class="btn-cyan" data-icon="sound"> Replay</button>
+        <button id="spCheck" type="button" class="btn-gold" disabled>Check</button>
+      </div>
+      <div class="mq-nav" style="margin-top:16px">
+        <button id="spqPrev" type="button">‹ Previous</button>
+        <button id="spqNext" type="button" disabled>Next word</button>
+      </div>
+    </div>
+    <div id="spqEnd" class="glass-card mq-end" hidden>
+      <div class="eyebrow">Quiz complete</div>
+      <div class="big" id="spqEndScore">0 / 0</div>
+      <p id="spqEndMsg"></p>
+      <ul id="spqMissed" style="text-align:left;max-width:480px;margin:12px auto;padding-left:20px;display:grid;gap:6px"></ul>
+      <div class="row">
+        <button id="spqAgain" type="button" class="btn-gold">Try again</button>
+        <button id="spqReview" type="button">‹ Review words</button>
+        <button id="spqEmail" type="button" class="btn-cyan" data-icon="mail"> Email my results</button>
+      </div>
+    </div>
+  </section>
+
   <!-- ===== Shared coming-soon screen ===== -->
   <section id="view-comingSoon" class="view" hidden>
     <div class="glass-card cs"><div data-icon="lock"></div><h2 class="h2 cs-title">Coming soon</h2><p class="cs-msg" style="color:var(--muted)"></p></div>
@@ -789,6 +876,7 @@
 <script src="sessions_data.js"></script>
 <script src="social_data.js"></script>
 <script src="fractions_data.js"></script>
+<script src="spelling_data.js"></script>
 <script src="anime_icons.js"></script>
 <script src="topics.js"></script>
 <script src="core.js"></script>

@@ -18,7 +18,7 @@ Science ── Anatomy ── Max's Test Topics (12 topics, 15-question quiz)
                     ├─ Circulatory · Respiratory · Digestive · Nervous · Skeletal · Muscular · Urinary
                     │     (components = that system's parts, e.g. Circulatory: heart, arteries, capillaries, veins, blood)
                     └─ All Systems (overview + full Body Systems quiz)
-Language ── Spelling ── Word List 1 (review, quiz and components coming soon)
+Language ── Spelling ── Week 7 Vocabulary (20 words: pre- / thr / spl; narrated review + letter-box quiz)
 ```
 
 The fixed top bar on every screen has **Home**, **Back** (one level up), a full breadcrumb
@@ -40,7 +40,7 @@ and its narration MP3.
 | `anatomy_app.js` + `anatomy_data.js` | Original Organs and Body Systems quizzes (`anatQuiz`) |
 | `maxquiz.js` + `maxtopics_data.js` | Mixed-type quiz engine (`maxQuiz`): Max's 15 questions, or a system set via `opts.set` |
 | `math_review.js`, `math_quiz.js` + `math_quiz_data.js` | Math review and keypad quiz (`opts.start` opens a given problem) |
-| `spelling.js` | Spelling placeholders |
+| `spelling.js` + `spelling_data.js` | Spelling review + letter-box quiz (`spellingReview` / `spellingQuiz`) |
 | `img/bg.jpg` | Background image |
 
 ## Add things
@@ -72,6 +72,12 @@ Home is a 2x2 grid (Math, Science, Language, Social Studies), and it stays 2x2 o
 - The Review is the `factWalk` module in `social_app.js`: a step walkthrough with short facts, a visual, and Previous / Hear it / Next. The MP3 always plays on a tap.
 - The Quiz uses the `maxQuiz` engine (6 questions, spoken feedback, score, end screen with Email my results).
 - Run the build with: `/workspace/division-exercises/.venv/bin/python build_social.py`
+
+
+## Language › Spelling
+- Content lives in `spelling_content.py`. `build_spelling.py` writes `spelling_data.js` (`window.SPELLING_DATA.week7`) and gTTS MP3s under `audio/spelling/` (review per word, quiz prompts, right/wrong, done scores). Only missing clips are built unless you pass `--force`.
+- **Week 7 Vocabulary** (prefix `pre-` and blends `thr`, `spl`): 20 words. Review shows the word with the blend highlighted, a kid-friendly meaning, an example sentence, and an accurate fun fact / etymology, narrated on tap. Quiz shuffles the list, plays word → sentence → word, and Max types one letter per box (auto-advance, backspace goes back). Wrong answers reveal the correct spelling with differences highlighted. Score is saved via `HB.recordResult` for the Outbox "Send my latest quiz results" template.
+- Run: `/workspace/division-exercises/.venv/bin/python build_spelling.py`
 
 ## Math › Fractions
 - The content lives in `fractions_content.py` (one block per session, listed in `SESSIONS`). `build_fractions.py` checks every

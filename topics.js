@@ -77,14 +77,21 @@
     {
       id: "language", title: "Language", icon: "book", homeIcon: "language", blurb: "Spelling lists and word challenges.",
       subtopics: [
-        { id: "spelling", title: "Spelling", icon: "book", blurb: "Weekly word lists.",
-          sessions: [
-            // Drop a list into window.SPELLING_DATA.week1 (see spelling.js) and these come alive.
-            { id: "week1", title: "Word List 1", icon: "book", blurb: "Coming soon.",
-              review: { module: "spellingReview", opts: { list: "week1" }, label: "Hear and see each word" },
-              quiz: { module: "spellingQuiz", opts: { list: "week1" }, label: "Spell each word you hear" },
-              components: [], componentsSoon: true }
-          ],
+        { id: "spelling", title: "Spelling", icon: "book", blurb: "Weekly word lists.", toolbar: "anatBar",
+          sessions: ((() => {
+            const W = (window.SPELLING_DATA && SPELLING_DATA.week7) || null;
+            const words = (W && W.words) || [];
+            return [{
+              id: "week7", title: "Week 7 Vocabulary", icon: "book",
+              blurb: W ? W.week.blurb : "Prefix pre- and the letter blends thr and spl.",
+              review: { module: "spellingReview", opts: { list: "week7" },
+                label: (words.length || 20) + " words — meaning, example, and a fun fact each" },
+              quiz: { module: "spellingQuiz", opts: { list: "week7" },
+                label: "Hear the word, then type each letter into its box" },
+              componentModule: "spellingReview",
+              components: words.map(w => ({ id: w.id, title: w.word }))
+            }];
+          })()),
           moreComingSoon: true }
       ],
       moreComingSoon: true
