@@ -4,13 +4,17 @@ window.FRACTIONS_DATA = {
   "equivfrac",
   "compare",
   "mixed",
-  "muldiv"
+  "muldiv",
+  "u4_addsub",
+  "u4_unitfrac",
+  "u4_practice"
  ],
  "sessions": {
   "equivfrac": {
    "title": "Equivalent Fractions",
    "blurb": "Fraction bars, pies and number lines: multiply, simplify and cross-check.",
    "quiz": "frac_equiv",
+   "dual": false,
    "review": [
     {
      "id": "what",
@@ -380,6 +384,7 @@ window.FRACTIONS_DATA = {
    "title": "Comparing Fractions",
    "blurb": "Same denominators, same numerators, common denominators, the 1/2 benchmark, and ordering.",
    "quiz": "frac_compare",
+   "dual": false,
    "review": [
     {
      "id": "samedenom",
@@ -664,6 +669,7 @@ window.FRACTIONS_DATA = {
    "title": "Mixed Numbers",
    "blurb": "Whole numbers plus fractions, and converting to and from improper fractions.",
    "quiz": "frac_mixed",
+   "dual": false,
    "review": [
     {
      "id": "what",
@@ -890,6 +896,7 @@ window.FRACTIONS_DATA = {
    "title": "Multiplying & Dividing Fractions",
    "blurb": "The cup and bowl model: pour part of a cup to multiply, count cupfuls to divide.",
    "quiz": "frac_muldiv",
+   "dual": false,
    "review": [
     {
      "id": "cupmodel",
@@ -1221,6 +1228,802 @@ window.FRACTIONS_DATA = {
       "8 ÷ 3 = 2 remainder 2, so 4 × 2/3 = 2 2/3: two full bowls and 2/3 of a third bowl."
      ],
      "audio": "audio/fractions/muldiv/k7.mp3"
+    }
+   ]
+  },
+  "u4_addsub": {
+   "title": "Unit 4.1 · Add & Subtract Like Fractions",
+   "blurb": "Like fractions, bar and number-line models, rename mixed numbers. Typed + Notepad quizzes.",
+   "quiz": "frac_u4_41",
+   "dual": true,
+   "review": [
+    {
+     "id": "like",
+     "title": "Like fractions",
+     "vis": {
+      "kind": "bars",
+      "rows": [
+       [
+        3,
+        5
+       ],
+       [
+        1,
+        5
+       ]
+      ],
+      "noGuide": true
+     },
+     "facts": [
+      "Like fractions have the same denominator, so the pieces are the same size.",
+      "3/5 and 1/5 are like fractions: both are cut into fifths.",
+      "When the pieces match, you add or subtract by counting how many pieces you have."
+     ],
+     "audio": "audio/fractions/u4_41/review_like.mp3"
+    },
+    {
+     "id": "addrule",
+     "title": "Add the numerators",
+     "vis": {
+      "kind": "bars",
+      "rows": [
+       [
+        3,
+        5
+       ],
+       [
+        1,
+        5
+       ],
+       [
+        4,
+        5
+       ]
+      ],
+      "noGuide": true
+     },
+     "facts": [
+      "To add like fractions, add the numerators and keep the denominator.",
+      "3/5 + 1/5 = 4/5, because 3 fifths + 1 fifth = 4 fifths.",
+      "Chloe ate 3/5 of a lemon loaf and Ling ate 1/5: together they ate 4/5."
+     ],
+     "audio": "audio/fractions/u4_41/review_addrule.mp3"
+    },
+    {
+     "id": "beyond",
+     "title": "Sums beyond 1 whole",
+     "vis": {
+      "kind": "mixed",
+      "w": 1,
+      "n": 1,
+      "d": 3,
+      "improper": true,
+      "imp": 4
+     },
+     "facts": [
+      "The sum can be more than one whole. Write it as an improper fraction, then as a mixed number.",
+      "2/3 + 2/3 = 4/3.",
+      "4 ÷ 3 = 1 remainder 1, so 4/3 = 1 1/3."
+     ],
+     "audio": "audio/fractions/u4_41/review_beyond.mp3"
+    },
+    {
+     "id": "numline",
+     "title": "Add on a number line",
+     "vis": {
+      "kind": "mixed",
+      "w": 1,
+      "n": 1,
+      "d": 3,
+      "improper": true,
+      "imp": 4
+     },
+     "facts": [
+      "Start at 0. Jump the first fraction, then jump the second from where you landed.",
+      "A jump of 2/3 plus another jump of 2/3 lands on 4/3.",
+      "4/3 is the same point as 1 1/3."
+     ],
+     "audio": "audio/fractions/u4_41/review_numline.mp3"
+    },
+    {
+     "id": "subrule",
+     "title": "Subtract the numerators",
+     "vis": {
+      "kind": "bars",
+      "rows": [
+       [
+        2,
+        3
+       ],
+       [
+        1,
+        3
+       ]
+      ],
+      "noGuide": true
+     },
+     "facts": [
+      "To subtract like fractions, subtract the numerators and keep the denominator.",
+      "2/3 − 1/3 = 1/3, because 2 thirds minus 1 third leaves 1 third.",
+      "Amit ate 2/3 of a granola bar and Mike ate 1/3 of another the same size: Amit ate 1/3 more."
+     ],
+     "audio": "audio/fractions/u4_41/review_subrule.mp3"
+    },
+    {
+     "id": "rename",
+     "title": "Rename to subtract",
+     "vis": {
+      "kind": "mixed",
+      "w": 1,
+      "n": 2,
+      "d": 5,
+      "improper": true,
+      "imp": 7
+     },
+     "facts": [
+      "When you cannot subtract the fraction parts, rename the mixed number as an improper fraction.",
+      "1 2/5 = 7/5, because 1 × 5 + 2 = 7.",
+      "Then 7/5 − 4/5 = 3/5."
+     ],
+     "audio": "audio/fractions/u4_41/review_rename.mp3"
+    }
+   ],
+   "components": [
+    {
+     "id": "a1",
+     "title": "3/5 + 1/5",
+     "kind": "add",
+     "vis": {
+      "kind": "bars",
+      "rows": [
+       [
+        3,
+        5
+       ],
+       [
+        1,
+        5
+       ],
+       [
+        4,
+        5
+       ]
+      ],
+      "noGuide": true
+     },
+     "facts": [
+      "Same denominator: fifths.",
+      "Add the numerators: 3 + 1 = 4.",
+      "So 3/5 + 1/5 = 4/5."
+     ],
+     "audio": "audio/fractions/u4_41/a1.mp3"
+    },
+    {
+     "id": "a2",
+     "title": "2/3 + 2/3",
+     "kind": "add",
+     "vis": {
+      "kind": "mixed",
+      "w": 1,
+      "n": 1,
+      "d": 3,
+      "improper": true,
+      "imp": 4
+     },
+     "facts": [
+      "Add the numerators: 2 + 2 = 4, so 4/3.",
+      "4 ÷ 3 = 1 remainder 1.",
+      "So 2/3 + 2/3 = 4/3 = 1 1/3."
+     ],
+     "audio": "audio/fractions/u4_41/a2.mp3"
+    },
+    {
+     "id": "a3",
+     "title": "5/9 + 8/9",
+     "kind": "add",
+     "vis": {
+      "kind": "mixed",
+      "w": 1,
+      "n": 4,
+      "d": 9,
+      "improper": true,
+      "imp": 13
+     },
+     "facts": [
+      "5 + 8 = 13, so 13/9.",
+      "13 ÷ 9 = 1 remainder 4.",
+      "So 5/9 + 8/9 = 13/9 = 1 4/9."
+     ],
+     "audio": "audio/fractions/u4_41/a3.mp3"
+    },
+    {
+     "id": "a4",
+     "title": "2/3 − 1/3",
+     "kind": "sub",
+     "vis": {
+      "kind": "bars",
+      "rows": [
+       [
+        2,
+        3
+       ],
+       [
+        1,
+        3
+       ]
+      ],
+      "noGuide": true
+     },
+     "facts": [
+      "Same denominator: thirds.",
+      "Subtract the numerators: 2 − 1 = 1.",
+      "So 2/3 − 1/3 = 1/3."
+     ],
+     "audio": "audio/fractions/u4_41/a4.mp3"
+    },
+    {
+     "id": "a5",
+     "title": "1 2/5 − 4/5",
+     "kind": "sub",
+     "vis": {
+      "kind": "bars",
+      "rows": [
+       [
+        3,
+        5
+       ]
+      ],
+      "noGuide": true
+     },
+     "facts": [
+      "Rename 1 2/5 as 7/5.",
+      "7/5 − 4/5 = 3/5.",
+      "So 1 2/5 − 4/5 = 3/5."
+     ],
+     "audio": "audio/fractions/u4_41/a5.mp3"
+    },
+    {
+     "id": "a6",
+     "title": "2 3/5 + 1 4/5",
+     "kind": "add",
+     "vis": {
+      "kind": "mixed",
+      "w": 4,
+      "n": 2,
+      "d": 5,
+      "improper": true,
+      "imp": 22
+     },
+     "facts": [
+      "Rename: 2 3/5 = 13/5 and 1 4/5 = 9/5.",
+      "13/5 + 9/5 = 22/5.",
+      "22 ÷ 5 = 4 remainder 2, so 22/5 = 4 2/5."
+     ],
+     "audio": "audio/fractions/u4_41/a6.mp3"
+    }
+   ]
+  },
+  "u4_unitfrac": {
+   "title": "Unit 4.2 · Whole ×÷ Unit Fraction",
+   "blurb": "Unit fractions, repeated addition & subtraction, reciprocals, unit counting. Typed + Notepad quizzes.",
+   "quiz": "frac_u4_42",
+   "dual": true,
+   "review": [
+    {
+     "id": "unit",
+     "title": "What is a unit fraction?",
+     "vis": {
+      "kind": "pies",
+      "items": [
+       [
+        1,
+        6
+       ]
+      ]
+     },
+     "facts": [
+      "A unit fraction has 1 as its numerator, like 1/6 or 1/4.",
+      "It names one equal part of a whole.",
+      "Each slice of a pie cut into 6 equal pieces is 1/6 — a unit fraction."
+     ],
+     "audio": "audio/fractions/u4_42/review_unit.mp3"
+    },
+    {
+     "id": "mulgroups",
+     "title": "Multiply: groups of a unit fraction",
+     "vis": {
+      "kind": "cup",
+      "mode": "mul",
+      "cup": [
+       1,
+       6
+      ],
+      "fill": [
+       1,
+       1
+      ],
+      "times": 5,
+      "res": [
+       5,
+       6
+      ]
+     },
+     "facts": [
+      "5 × 1/6 means Five groups of one sixth.",
+      "Add them: 1/6 + 1/6 + 1/6 + 1/6 + 1/6 = 5/6.",
+      "A bakery sold 1 slice from each of 5 pies cut into sixths: 5/6 of a whole pie."
+     ],
+     "audio": "audio/fractions/u4_42/review_mulgroups.mp3"
+    },
+    {
+     "id": "recip",
+     "title": "Reciprocals",
+     "vis": {
+      "kind": "cup",
+      "mode": "mul",
+      "cup": [
+       1,
+       4
+      ],
+      "fill": [
+       1,
+       1
+      ],
+      "times": 4,
+      "res": [
+       1,
+       1
+      ]
+     },
+     "facts": [
+      "The reciprocal of a number switches numerator and denominator.",
+      "The reciprocal of 4, or 4/1, is 1/4.",
+      "A whole number times its reciprocal is 1: 4 × 1/4 = 1."
+     ],
+     "audio": "audio/fractions/u4_42/review_recip.mp3"
+    },
+    {
+     "id": "divsub",
+     "title": "Divide: repeated subtraction",
+     "vis": {
+      "kind": "cup",
+      "mode": "div",
+      "total": [
+       1,
+       1
+      ],
+      "cup": [
+       1,
+       4
+      ],
+      "count": 4
+     },
+     "facts": [
+      "1 ÷ 1/4 asks: how many groups of 1/4 can you take from 1?",
+      "Subtract 1/4 four times until nothing is left.",
+      "So 1 ÷ 1/4 = 4."
+     ],
+     "audio": "audio/fractions/u4_42/review_divsub.mp3"
+    },
+    {
+     "id": "divcount",
+     "title": "Divide: count the unit parts",
+     "vis": {
+      "kind": "cup",
+      "mode": "div",
+      "total": [
+       2,
+       1
+      ],
+      "cup": [
+       1,
+       4
+      ],
+      "count": 8
+     },
+     "facts": [
+      "Each whole holds as many unit fractions as the denominator.",
+      "1 whole holds 4 fourths, so 2 wholes hold 2 × 4 = 8 fourths.",
+      "So 2 ÷ 1/4 = 8."
+     ],
+     "audio": "audio/fractions/u4_42/review_divcount.mp3"
+    },
+    {
+     "id": "choose",
+     "title": "Multiply or divide?",
+     "vis": {
+      "kind": "cup",
+      "mode": "mul",
+      "cup": [
+       1,
+       4
+      ],
+      "fill": [
+       1,
+       1
+      ],
+      "times": 3,
+      "res": [
+       3,
+       4
+      ]
+     },
+     "facts": [
+      "Multiply when you combine equal groups: 3 scoops of 1/4 cup is 3 × 1/4 = 3/4 cup.",
+      "Divide when you ask how many scoops fit: 2 cups ÷ 1/4 cup = 8 scoops.",
+      "Read the story: groups of a size → multiply; how many of a size → divide."
+     ],
+     "audio": "audio/fractions/u4_42/review_choose.mp3"
+    }
+   ],
+   "components": [
+    {
+     "id": "b1",
+     "title": "5 × 1/6",
+     "kind": "mul",
+     "vis": {
+      "kind": "cup",
+      "mode": "mul",
+      "cup": [
+       1,
+       6
+      ],
+      "fill": [
+       1,
+       1
+      ],
+      "times": 5,
+      "res": [
+       5,
+       6
+      ]
+     },
+     "facts": [
+      "Five groups of one sixth.",
+      "1/6 + 1/6 + 1/6 + 1/6 + 1/6 = 5/6.",
+      "So 5 × 1/6 = 5/6."
+     ],
+     "audio": "audio/fractions/u4_42/b1.mp3"
+    },
+    {
+     "id": "b2",
+     "title": "5 × 1/4",
+     "kind": "mul",
+     "vis": {
+      "kind": "cup",
+      "mode": "mul",
+      "cup": [
+       1,
+       4
+      ],
+      "fill": [
+       1,
+       1
+      ],
+      "times": 5,
+      "res": [
+       5,
+       4
+      ]
+     },
+     "facts": [
+      "5 groups of 1/4.",
+      "5/4 as a mixed number: 5 ÷ 4 = 1 remainder 1.",
+      "So 5 × 1/4 = 5/4 = 1 1/4."
+     ],
+     "audio": "audio/fractions/u4_42/b2.mp3"
+    },
+    {
+     "id": "b3",
+     "title": "3 × 1/3",
+     "kind": "mul",
+     "vis": {
+      "kind": "cup",
+      "mode": "mul",
+      "cup": [
+       1,
+       3
+      ],
+      "fill": [
+       1,
+       1
+      ],
+      "times": 3,
+      "res": [
+       1,
+       1
+      ]
+     },
+     "facts": [
+      "3 and 1/3 are reciprocals.",
+      "3 × 1/3 = 3/3 = 1.",
+      "A whole number times its reciprocal is always 1."
+     ],
+     "audio": "audio/fractions/u4_42/b3.mp3"
+    },
+    {
+     "id": "b4",
+     "title": "3 ÷ 1/5",
+     "kind": "div",
+     "vis": {
+      "kind": "cup",
+      "mode": "div",
+      "total": [
+       3,
+       1
+      ],
+      "cup": [
+       1,
+       5
+      ],
+      "count": 15
+     },
+     "facts": [
+      "How many 1/5 cups in 3 wholes?",
+      "Each whole holds 5 fifths, so 3 × 5 = 15.",
+      "So 3 ÷ 1/5 = 15."
+     ],
+     "audio": "audio/fractions/u4_42/b4.mp3"
+    },
+    {
+     "id": "b5",
+     "title": "4 ÷ 1/3",
+     "kind": "div",
+     "vis": {
+      "kind": "cup",
+      "mode": "div",
+      "total": [
+       4,
+       1
+      ],
+      "cup": [
+       1,
+       3
+      ],
+      "count": 12
+     },
+     "facts": [
+      "How many 1/3 jumps fit from 0 to 4?",
+      "4 wholes × 3 thirds each = 12.",
+      "So 4 ÷ 1/3 = 12."
+     ],
+     "audio": "audio/fractions/u4_42/b5.mp3"
+    },
+    {
+     "id": "b6",
+     "title": "3 × 1/2",
+     "kind": "mul",
+     "vis": {
+      "kind": "cup",
+      "mode": "mul",
+      "cup": [
+       1,
+       2
+      ],
+      "fill": [
+       1,
+       1
+      ],
+      "times": 3,
+      "res": [
+       3,
+       2
+      ]
+     },
+     "facts": [
+      "3 groups of 1/2 litre.",
+      "3/2 = 1 1/2.",
+      "So 3 × 1/2 = 1 1/2."
+     ],
+     "audio": "audio/fractions/u4_42/b6.mp3"
+    }
+   ]
+  },
+  "u4_practice": {
+   "title": "Unit 4 · Practice Test",
+   "blurb": "Chapter wrap-up practise: add/subtract like fractions and whole ×÷ unit fractions. Check against the answer key.",
+   "quiz": "frac_u4_practice",
+   "dual": true,
+   "review": [
+    {
+     "id": "map",
+     "title": "Unit 4 at a glance",
+     "vis": {
+      "kind": "mixed",
+      "w": 1,
+      "n": 1,
+      "d": 3,
+      "improper": true,
+      "imp": 4
+     },
+     "facts": [
+      "Like fractions: add or subtract the numerators; keep the denominator.",
+      "Unit fractions: n × 1/d = n/d, and n ÷ 1/d = n × d.",
+      "Sketch a bar, pie, or number line to check — a picture is worth a thousand words."
+     ],
+     "audio": "audio/fractions/u4_practice/review_map.mp3"
+    },
+    {
+     "id": "addcheck",
+     "title": "Check an addition",
+     "vis": {
+      "kind": "mixed",
+      "w": 1,
+      "n": 4,
+      "d": 7,
+      "improper": true,
+      "imp": 11
+     },
+     "facts": [
+      "5/7 + 6/7 = 11/7.",
+      "11 ÷ 7 = 1 remainder 4, so 11/7 = 1 4/7.",
+      "Sketch fifths or sevenths bars to see the sum past one whole."
+     ],
+     "audio": "audio/fractions/u4_practice/review_addcheck.mp3"
+    },
+    {
+     "id": "subcheck",
+     "title": "Check a subtraction",
+     "vis": {
+      "kind": "bars",
+      "rows": [
+       [
+        7,
+        10
+       ]
+      ],
+      "noGuide": true
+     },
+     "facts": [
+      "Rename when needed: 1 3/10 = 13/10.",
+      "13/10 − 6/10 = 7/10.",
+      "The leftover bar shows the difference."
+     ],
+     "audio": "audio/fractions/u4_practice/review_subcheck.mp3"
+    },
+    {
+     "id": "mulcheck",
+     "title": "Check a multiplication",
+     "vis": {
+      "kind": "cup",
+      "mode": "mul",
+      "cup": [
+       1,
+       8
+      ],
+      "fill": [
+       1,
+       1
+      ],
+      "times": 9,
+      "res": [
+       9,
+       8
+      ]
+     },
+     "facts": [
+      "9 × 1/8 means 9 groups of 1/8.",
+      "9/8 = 1 1/8.",
+      "Express improper fractions as mixed numbers."
+     ],
+     "audio": "audio/fractions/u4_practice/review_mulcheck.mp3"
+    },
+    {
+     "id": "divcheck",
+     "title": "Check a division",
+     "vis": {
+      "kind": "cup",
+      "mode": "div",
+      "total": [
+       5,
+       1
+      ],
+      "cup": [
+       1,
+       6
+      ],
+      "count": 30
+     },
+     "facts": [
+      "5 ÷ 1/6 asks how many sixths fit in 5 wholes.",
+      "5 × 6 = 30.",
+      "So 5 ÷ 1/6 = 30."
+     ],
+     "audio": "audio/fractions/u4_practice/review_divcheck.mp3"
+    }
+   ],
+   "components": [
+    {
+     "id": "p1",
+     "title": "1/5 + 2/5",
+     "kind": "add",
+     "vis": {
+      "kind": "bars",
+      "rows": [
+       [
+        3,
+        5
+       ]
+      ],
+      "noGuide": true
+     },
+     "facts": [
+      "Add numerators: 1 + 2 = 3.",
+      "Keep the 5.",
+      "1/5 + 2/5 = 3/5."
+     ],
+     "audio": "audio/fractions/u4_practice/p1.mp3"
+    },
+    {
+     "id": "p2",
+     "title": "1 2/9 + 8/9",
+     "kind": "add",
+     "vis": {
+      "kind": "mixed",
+      "w": 2,
+      "n": 1,
+      "d": 9,
+      "improper": true,
+      "imp": 19
+     },
+     "facts": [
+      "1 2/9 + 8/9 = 11/9 + 8/9 = 19/9.",
+      "19 ÷ 9 = 2 remainder 1.",
+      "So 2 1/9."
+     ],
+     "audio": "audio/fractions/u4_practice/p2.mp3"
+    },
+    {
+     "id": "p3",
+     "title": "9 × 1/7",
+     "kind": "mul",
+     "vis": {
+      "kind": "cup",
+      "mode": "mul",
+      "cup": [
+       1,
+       7
+      ],
+      "fill": [
+       1,
+       1
+      ],
+      "times": 9,
+      "res": [
+       9,
+       7
+      ]
+     },
+     "facts": [
+      "Nine groups of one seventh make nine sevenths.",
+      "9 ÷ 7 = 1 remainder 2.",
+      "So 9 × 1/7 = 1 2/7."
+     ],
+     "audio": "audio/fractions/u4_practice/p3.mp3"
+    },
+    {
+     "id": "p4",
+     "title": "5 ÷ 1/6",
+     "kind": "div",
+     "vis": {
+      "kind": "cup",
+      "mode": "div",
+      "total": [
+       5,
+       1
+      ],
+      "cup": [
+       1,
+       6
+      ],
+      "count": 30
+     },
+     "facts": [
+      "Fifths of sixths: 5 wholes × 6 sixths each.",
+      "5 × 6 = 30.",
+      "So 5 ÷ 1/6 = 30."
+     ],
+     "audio": "audio/fractions/u4_practice/p4.mp3"
     }
    ]
   }
@@ -2324,6 +3127,1326 @@ window.QUIZ_SETS = Object.assign(window.QUIZ_SETS || {}, {
    {
     "text": "Quiz complete. You got 8 out of 8. Perfect score.",
     "audio": "audio/fractions/muldiv/quiz_done_8.mp3"
+   }
+  ]
+ },
+ "frac_u4_41": {
+  "title": "Unit 4.1 · Add & Subtract Like Fractions · quiz",
+  "intro": "Unit 4.1 · Add & Subtract Like Fractions quiz. 8 questions. Type the missing number, or tap your answer.",
+  "introAudio": "audio/fractions/u4_41/quiz_intro.mp3",
+  "questions": [
+   {
+    "type": "number",
+    "q": "3/5 + 1/5 = ?/5. What is the missing numerator?",
+    "answer": 4,
+    "after": {
+     "kind": "bars",
+     "rows": [
+      [
+       4,
+       5
+      ]
+     ],
+     "noGuide": true
+    },
+    "explain": "Add the numerators: 3 + 1 = 4. Keep the 5. 3/5 + 1/5 = 4/5.",
+    "qAudio": "audio/fractions/u4_41/quiz_q1.mp3",
+    "rightText": "Correct. Nice work. Add the numerators: 3 + 1 = 4. Keep the 5. 3/5 + 1/5 = 4/5.",
+    "wrongText": "Not quite. Add the numerators: 3 + 1 = 4. Keep the 5. 3/5 + 1/5 = 4/5.",
+    "rightAudio": "audio/fractions/u4_41/quiz_q1_right.mp3",
+    "wrongAudio": "audio/fractions/u4_41/quiz_q1_wrong.mp3"
+   },
+   {
+    "type": "mc",
+    "q": "2/3 + 2/3 = ?",
+    "options": [
+     "4/6",
+     "2/3",
+     "1 1/3",
+     "2/6"
+    ],
+    "answer": "1 1/3",
+    "after": {
+     "kind": "mixed",
+     "w": 1,
+     "n": 1,
+     "d": 3,
+     "improper": true,
+     "imp": 4
+    },
+    "explain": "2 + 2 = 4, so 4/3. 4 ÷ 3 = 1 remainder 1, so 4/3 = 1 1/3.",
+    "qAudio": "audio/fractions/u4_41/quiz_q2.mp3",
+    "rightText": "That's right. 2 + 2 = 4, so 4/3. 4 ÷ 3 = 1 remainder 1, so 4/3 = 1 1/3.",
+    "wrongText": "Not quite. 2 + 2 = 4, so 4/3. 4 ÷ 3 = 1 remainder 1, so 4/3 = 1 1/3.",
+    "rightAudio": "audio/fractions/u4_41/quiz_q2_right.mp3",
+    "wrongAudio": "audio/fractions/u4_41/quiz_q2_wrong.mp3"
+   },
+   {
+    "type": "mc",
+    "q": "5/9 + 8/9 = ?",
+    "options": [
+     "13/18",
+     "1 4/9",
+     "1 3/9",
+     "40/9"
+    ],
+    "answer": "1 4/9",
+    "after": {
+     "kind": "mixed",
+     "w": 1,
+     "n": 4,
+     "d": 9,
+     "improper": true,
+     "imp": 13
+    },
+    "explain": "5 + 8 = 13, so 13/9 = 1 4/9.",
+    "qAudio": "audio/fractions/u4_41/quiz_q3.mp3",
+    "rightText": "Yes, exactly. 5 + 8 = 13, so 13/9 = 1 4/9.",
+    "wrongText": "Not quite. 5 + 8 = 13, so 13/9 = 1 4/9.",
+    "rightAudio": "audio/fractions/u4_41/quiz_q3_right.mp3",
+    "wrongAudio": "audio/fractions/u4_41/quiz_q3_wrong.mp3"
+   },
+   {
+    "type": "number",
+    "q": "4/5 − 2/5 = ?/5. What is the missing numerator?",
+    "answer": 2,
+    "after": {
+     "kind": "bars",
+     "rows": [
+      [
+       2,
+       5
+      ]
+     ],
+     "noGuide": true
+    },
+    "explain": "Subtract the numerators: 4 − 2 = 2. 4/5 − 2/5 = 2/5.",
+    "qAudio": "audio/fractions/u4_41/quiz_q4.mp3",
+    "rightText": "Spot on, Max. Subtract the numerators: 4 − 2 = 2. 4/5 − 2/5 = 2/5.",
+    "wrongText": "Not quite. Subtract the numerators: 4 − 2 = 2. 4/5 − 2/5 = 2/5.",
+    "rightAudio": "audio/fractions/u4_41/quiz_q4_right.mp3",
+    "wrongAudio": "audio/fractions/u4_41/quiz_q4_wrong.mp3"
+   },
+   {
+    "type": "number",
+    "q": "1 2/5 − 4/5 = ?/5. What is the missing numerator?",
+    "answer": 3,
+    "after": {
+     "kind": "bars",
+     "rows": [
+      [
+       3,
+       5
+      ]
+     ],
+     "noGuide": true
+    },
+    "explain": "Rename 1 2/5 as 7/5. 7/5 − 4/5 = 3/5.",
+    "qAudio": "audio/fractions/u4_41/quiz_q5.mp3",
+    "rightText": "Correct. Nice work. Rename 1 2/5 as 7/5. 7/5 − 4/5 = 3/5.",
+    "wrongText": "Not quite. Rename 1 2/5 as 7/5. 7/5 − 4/5 = 3/5.",
+    "rightAudio": "audio/fractions/u4_41/quiz_q5_right.mp3",
+    "wrongAudio": "audio/fractions/u4_41/quiz_q5_wrong.mp3"
+   },
+   {
+    "type": "mc",
+    "q": "2 1/3 + 1 2/3 = ?",
+    "options": [
+     "3",
+     "3 1/3",
+     "4",
+     "2 3/3"
+    ],
+    "answer": "4",
+    "after": {
+     "kind": "mixed",
+     "w": 4,
+     "n": 0,
+     "d": 3,
+     "improper": true,
+     "imp": 12
+    },
+    "explain": "2 1/3 = 7/3 and 1 2/3 = 5/3. 7/3 + 5/3 = 12/3 = 4.",
+    "qAudio": "audio/fractions/u4_41/quiz_q6.mp3",
+    "rightText": "That's right. 2 1/3 = 7/3 and 1 2/3 = 5/3. 7/3 + 5/3 = 12/3 = 4.",
+    "wrongText": "Not quite. 2 1/3 = 7/3 and 1 2/3 = 5/3. 7/3 + 5/3 = 12/3 = 4.",
+    "rightAudio": "audio/fractions/u4_41/quiz_q6_right.mp3",
+    "wrongAudio": "audio/fractions/u4_41/quiz_q6_wrong.mp3"
+   },
+   {
+    "type": "number",
+    "q": "2 5/6 − 4/6 = 2 ?/6. What is the missing numerator?",
+    "answer": 1,
+    "after": {
+     "kind": "mixed",
+     "w": 2,
+     "n": 1,
+     "d": 6,
+     "imp": 13
+    },
+    "explain": "Subtract the fraction parts: 5 − 4 = 1. So 2 5/6 − 4/6 = 2 1/6.",
+    "qAudio": "audio/fractions/u4_41/quiz_q7.mp3",
+    "rightText": "Yes, exactly. Subtract the fraction parts: 5 − 4 = 1. So 2 5/6 − 4/6 = 2 1/6.",
+    "wrongText": "Not quite. Subtract the fraction parts: 5 − 4 = 1. So 2 5/6 − 4/6 = 2 1/6.",
+    "rightAudio": "audio/fractions/u4_41/quiz_q7_right.mp3",
+    "wrongAudio": "audio/fractions/u4_41/quiz_q7_wrong.mp3"
+   },
+   {
+    "type": "mc",
+    "q": "4 1/3 − 2/3 = ?",
+    "options": [
+     "4 1/3",
+     "3 2/3",
+     "2 2/3",
+     "3 1/3"
+    ],
+    "answer": "3 2/3",
+    "after": {
+     "kind": "mixed",
+     "w": 3,
+     "n": 2,
+     "d": 3,
+     "improper": true,
+     "imp": 11
+    },
+    "explain": "Rename 4 1/3 as 13/3. 13/3 − 2/3 = 11/3 = 3 2/3.",
+    "qAudio": "audio/fractions/u4_41/quiz_q8.mp3",
+    "rightText": "Spot on, Max. Rename 4 1/3 as 13/3. 13/3 − 2/3 = 11/3 = 3 2/3.",
+    "wrongText": "Not quite. Rename 4 1/3 as 13/3. 13/3 − 2/3 = 11/3 = 3 2/3.",
+    "rightAudio": "audio/fractions/u4_41/quiz_q8_right.mp3",
+    "wrongAudio": "audio/fractions/u4_41/quiz_q8_wrong.mp3"
+   }
+  ],
+  "done": [
+   {
+    "text": "Quiz complete. You got 0 out of 8. Run through the review again, then have another go.",
+    "audio": "audio/fractions/u4_41/quiz_done_0.mp3"
+   },
+   {
+    "text": "Quiz complete. You got 1 out of 8. Run through the review again, then have another go.",
+    "audio": "audio/fractions/u4_41/quiz_done_1.mp3"
+   },
+   {
+    "text": "Quiz complete. You got 2 out of 8. Run through the review again, then have another go.",
+    "audio": "audio/fractions/u4_41/quiz_done_2.mp3"
+   },
+   {
+    "text": "Quiz complete. You got 3 out of 8. Run through the review again, then have another go.",
+    "audio": "audio/fractions/u4_41/quiz_done_3.mp3"
+   },
+   {
+    "text": "Quiz complete. You got 4 out of 8. Run through the review again, then have another go.",
+    "audio": "audio/fractions/u4_41/quiz_done_4.mp3"
+   },
+   {
+    "text": "Quiz complete. You got 5 out of 8. Run through the review again, then have another go.",
+    "audio": "audio/fractions/u4_41/quiz_done_5.mp3"
+   },
+   {
+    "text": "Quiz complete. You got 6 out of 8. Run through the review again, then have another go.",
+    "audio": "audio/fractions/u4_41/quiz_done_6.mp3"
+   },
+   {
+    "text": "Quiz complete. You got 7 out of 8. Nice work.",
+    "audio": "audio/fractions/u4_41/quiz_done_7.mp3"
+   },
+   {
+    "text": "Quiz complete. You got 8 out of 8. Perfect score.",
+    "audio": "audio/fractions/u4_41/quiz_done_8.mp3"
+   }
+  ]
+ },
+ "frac_u4_42": {
+  "title": "Unit 4.2 · Whole ×÷ Unit Fraction · quiz",
+  "intro": "Unit 4.2 · Whole ×÷ Unit Fraction quiz. 8 questions. Type the missing number, or tap your answer.",
+  "introAudio": "audio/fractions/u4_42/quiz_intro.mp3",
+  "questions": [
+   {
+    "type": "number",
+    "q": "3 × 1/8 = ?/8. What is the missing numerator?",
+    "answer": 3,
+    "after": {
+     "kind": "cup",
+     "mode": "mul",
+     "cup": [
+      1,
+      8
+     ],
+     "fill": [
+      1,
+      1
+     ],
+     "times": 3,
+     "res": [
+      3,
+      8
+     ]
+    },
+    "explain": "3 groups of 1/8: 3 × 1 = 3, so 3/8.",
+    "qAudio": "audio/fractions/u4_42/quiz_q1.mp3",
+    "rightText": "Correct. Nice work. 3 groups of 1/8: 3 × 1 = 3, so 3/8.",
+    "wrongText": "Not quite. 3 groups of 1/8: 3 × 1 = 3, so 3/8.",
+    "rightAudio": "audio/fractions/u4_42/quiz_q1_right.mp3",
+    "wrongAudio": "audio/fractions/u4_42/quiz_q1_wrong.mp3"
+   },
+   {
+    "type": "mc",
+    "q": "5 × 1/4 = ?",
+    "options": [
+     "5/8",
+     "1 1/4",
+     "4/5",
+     "1/20"
+    ],
+    "answer": "1 1/4",
+    "after": {
+     "kind": "cup",
+     "mode": "mul",
+     "cup": [
+      1,
+      4
+     ],
+     "fill": [
+      1,
+      1
+     ],
+     "times": 5,
+     "res": [
+      5,
+      4
+     ]
+    },
+    "explain": "5 × 1/4 = 5/4. 5 ÷ 4 = 1 remainder 1, so 1 1/4.",
+    "qAudio": "audio/fractions/u4_42/quiz_q2.mp3",
+    "rightText": "That's right. 5 × 1/4 = 5/4. 5 ÷ 4 = 1 remainder 1, so 1 1/4.",
+    "wrongText": "Not quite. 5 × 1/4 = 5/4. 5 ÷ 4 = 1 remainder 1, so 1 1/4.",
+    "rightAudio": "audio/fractions/u4_42/quiz_q2_right.mp3",
+    "wrongAudio": "audio/fractions/u4_42/quiz_q2_wrong.mp3"
+   },
+   {
+    "type": "number",
+    "q": "3 ÷ 1/5 = ?. How many fifths in 3 wholes?",
+    "answer": 15,
+    "after": {
+     "kind": "cup",
+     "mode": "div",
+     "total": [
+      3,
+      1
+     ],
+     "cup": [
+      1,
+      5
+     ],
+     "count": 15
+    },
+    "explain": "3 × 5 = 15, so 3 ÷ 1/5 = 15.",
+    "qAudio": "audio/fractions/u4_42/quiz_q3.mp3",
+    "rightText": "Yes, exactly. 3 × 5 = 15, so 3 ÷ 1/5 = 15.",
+    "wrongText": "Not quite. 3 × 5 = 15, so 3 ÷ 1/5 = 15.",
+    "rightAudio": "audio/fractions/u4_42/quiz_q3_right.mp3",
+    "wrongAudio": "audio/fractions/u4_42/quiz_q3_wrong.mp3"
+   },
+   {
+    "type": "number",
+    "q": "4 ÷ 1/3 = ?. How many thirds in 4 wholes?",
+    "answer": 12,
+    "after": {
+     "kind": "cup",
+     "mode": "div",
+     "total": [
+      4,
+      1
+     ],
+     "cup": [
+      1,
+      3
+     ],
+     "count": 12
+    },
+    "explain": "4 × 3 = 12, so 4 ÷ 1/3 = 12.",
+    "qAudio": "audio/fractions/u4_42/quiz_q4.mp3",
+    "rightText": "Spot on, Max. 4 × 3 = 12, so 4 ÷ 1/3 = 12.",
+    "wrongText": "Not quite. 4 × 3 = 12, so 4 ÷ 1/3 = 12.",
+    "rightAudio": "audio/fractions/u4_42/quiz_q4_right.mp3",
+    "wrongAudio": "audio/fractions/u4_42/quiz_q4_wrong.mp3"
+   },
+   {
+    "type": "number",
+    "q": "2 ÷ 1/4 = ?. How many fourths in 2 wholes?",
+    "answer": 8,
+    "after": {
+     "kind": "cup",
+     "mode": "div",
+     "total": [
+      2,
+      1
+     ],
+     "cup": [
+      1,
+      4
+     ],
+     "count": 8
+    },
+    "explain": "2 × 4 = 8, so 2 ÷ 1/4 = 8.",
+    "qAudio": "audio/fractions/u4_42/quiz_q5.mp3",
+    "rightText": "Correct. Nice work. 2 × 4 = 8, so 2 ÷ 1/4 = 8.",
+    "wrongText": "Not quite. 2 × 4 = 8, so 2 ÷ 1/4 = 8.",
+    "rightAudio": "audio/fractions/u4_42/quiz_q5_right.mp3",
+    "wrongAudio": "audio/fractions/u4_42/quiz_q5_wrong.mp3"
+   },
+   {
+    "type": "number",
+    "q": "3 × 1/4 = ?/4. What is the missing numerator?",
+    "answer": 3,
+    "after": {
+     "kind": "cup",
+     "mode": "mul",
+     "cup": [
+      1,
+      4
+     ],
+     "fill": [
+      1,
+      1
+     ],
+     "times": 3,
+     "res": [
+      3,
+      4
+     ]
+    },
+    "explain": "3 scoops of 1/4 cup: 3/4 of a cup.",
+    "qAudio": "audio/fractions/u4_42/quiz_q6.mp3",
+    "rightText": "That's right. 3 scoops of 1/4 cup: 3/4 of a cup.",
+    "wrongText": "Not quite. 3 scoops of 1/4 cup: 3/4 of a cup.",
+    "rightAudio": "audio/fractions/u4_42/quiz_q6_right.mp3",
+    "wrongAudio": "audio/fractions/u4_42/quiz_q6_wrong.mp3"
+   },
+   {
+    "type": "number",
+    "q": "2 ÷ 1/4 = ?. How many 1/4-cup scoops in 2 cups?",
+    "answer": 8,
+    "after": {
+     "kind": "cup",
+     "mode": "div",
+     "total": [
+      2,
+      1
+     ],
+     "cup": [
+      1,
+      4
+     ],
+     "count": 8
+    },
+    "explain": "2 × 4 = 8 scoops.",
+    "qAudio": "audio/fractions/u4_42/quiz_q7.mp3",
+    "rightText": "Yes, exactly. 2 × 4 = 8 scoops.",
+    "wrongText": "Not quite. 2 × 4 = 8 scoops.",
+    "rightAudio": "audio/fractions/u4_42/quiz_q7_right.mp3",
+    "wrongAudio": "audio/fractions/u4_42/quiz_q7_wrong.mp3"
+   },
+   {
+    "type": "mc",
+    "q": "6 × 1/6 = ?",
+    "options": [
+     "0",
+     "1",
+     "6",
+     "1/36"
+    ],
+    "answer": "1",
+    "after": {
+     "kind": "cup",
+     "mode": "mul",
+     "cup": [
+      1,
+      6
+     ],
+     "fill": [
+      1,
+      1
+     ],
+     "times": 6,
+     "res": [
+      1,
+      1
+     ]
+    },
+    "explain": "6 and 1/6 are reciprocals: 6 × 1/6 = 1.",
+    "qAudio": "audio/fractions/u4_42/quiz_q8.mp3",
+    "rightText": "Spot on, Max. 6 and 1/6 are reciprocals: 6 × 1/6 = 1.",
+    "wrongText": "Not quite. 6 and 1/6 are reciprocals: 6 × 1/6 = 1.",
+    "rightAudio": "audio/fractions/u4_42/quiz_q8_right.mp3",
+    "wrongAudio": "audio/fractions/u4_42/quiz_q8_wrong.mp3"
+   }
+  ],
+  "done": [
+   {
+    "text": "Quiz complete. You got 0 out of 8. Run through the review again, then have another go.",
+    "audio": "audio/fractions/u4_42/quiz_done_0.mp3"
+   },
+   {
+    "text": "Quiz complete. You got 1 out of 8. Run through the review again, then have another go.",
+    "audio": "audio/fractions/u4_42/quiz_done_1.mp3"
+   },
+   {
+    "text": "Quiz complete. You got 2 out of 8. Run through the review again, then have another go.",
+    "audio": "audio/fractions/u4_42/quiz_done_2.mp3"
+   },
+   {
+    "text": "Quiz complete. You got 3 out of 8. Run through the review again, then have another go.",
+    "audio": "audio/fractions/u4_42/quiz_done_3.mp3"
+   },
+   {
+    "text": "Quiz complete. You got 4 out of 8. Run through the review again, then have another go.",
+    "audio": "audio/fractions/u4_42/quiz_done_4.mp3"
+   },
+   {
+    "text": "Quiz complete. You got 5 out of 8. Run through the review again, then have another go.",
+    "audio": "audio/fractions/u4_42/quiz_done_5.mp3"
+   },
+   {
+    "text": "Quiz complete. You got 6 out of 8. Run through the review again, then have another go.",
+    "audio": "audio/fractions/u4_42/quiz_done_6.mp3"
+   },
+   {
+    "text": "Quiz complete. You got 7 out of 8. Nice work.",
+    "audio": "audio/fractions/u4_42/quiz_done_7.mp3"
+   },
+   {
+    "text": "Quiz complete. You got 8 out of 8. Perfect score.",
+    "audio": "audio/fractions/u4_42/quiz_done_8.mp3"
+   }
+  ]
+ },
+ "frac_u4_practice": {
+  "title": "Unit 4 · Practice Test · quiz",
+  "intro": "Unit 4 · Practice Test quiz. 26 questions. Type the missing number, or tap your answer.",
+  "introAudio": "audio/fractions/u4_practice/quiz_intro.mp3",
+  "questions": [
+   {
+    "type": "mc",
+    "q": "1/5 + 2/5 = ?",
+    "options": [
+     "3/10",
+     "3/5",
+     "2/5",
+     "1/5"
+    ],
+    "answer": "3/5",
+    "after": {
+     "kind": "bars",
+     "rows": [
+      [
+       3,
+       5
+      ]
+     ],
+     "noGuide": true
+    },
+    "explain": "1 + 2 = 3, so 3/5.",
+    "qAudio": "audio/fractions/u4_practice/quiz_q1.mp3",
+    "rightText": "Correct. Nice work. 1 + 2 = 3, so 3/5.",
+    "wrongText": "Not quite. 1 + 2 = 3, so 3/5.",
+    "rightAudio": "audio/fractions/u4_practice/quiz_q1_right.mp3",
+    "wrongAudio": "audio/fractions/u4_practice/quiz_q1_wrong.mp3"
+   },
+   {
+    "type": "mc",
+    "q": "1/6 + 5/6 = ?",
+    "options": [
+     "6/12",
+     "1",
+     "5/6",
+     "1/6"
+    ],
+    "answer": "1",
+    "after": {
+     "kind": "bars",
+     "rows": [
+      [
+       6,
+       6
+      ]
+     ],
+     "noGuide": true
+    },
+    "explain": "1 + 5 = 6, so 6/6 = 1.",
+    "qAudio": "audio/fractions/u4_practice/quiz_q2.mp3",
+    "rightText": "That's right. 1 + 5 = 6, so 6/6 = 1.",
+    "wrongText": "Not quite. 1 + 5 = 6, so 6/6 = 1.",
+    "rightAudio": "audio/fractions/u4_practice/quiz_q2_right.mp3",
+    "wrongAudio": "audio/fractions/u4_practice/quiz_q2_wrong.mp3"
+   },
+   {
+    "type": "mc",
+    "q": "5/7 + 6/7 = ?",
+    "options": [
+     "11/14",
+     "1 4/7",
+     "1 3/7",
+     "30/7"
+    ],
+    "answer": "1 4/7",
+    "after": {
+     "kind": "mixed",
+     "w": 1,
+     "n": 4,
+     "d": 7,
+     "improper": true,
+     "imp": 11
+    },
+    "explain": "5 + 6 = 11, so 11/7 = 1 4/7.",
+    "qAudio": "audio/fractions/u4_practice/quiz_q3.mp3",
+    "rightText": "Yes, exactly. 5 + 6 = 11, so 11/7 = 1 4/7.",
+    "wrongText": "Not quite. 5 + 6 = 11, so 11/7 = 1 4/7.",
+    "rightAudio": "audio/fractions/u4_practice/quiz_q3_right.mp3",
+    "wrongAudio": "audio/fractions/u4_practice/quiz_q3_wrong.mp3"
+   },
+   {
+    "type": "mc",
+    "q": "6/8 + 7/8 = ?",
+    "options": [
+     "13/16",
+     "1 5/8",
+     "1 6/8",
+     "42/8"
+    ],
+    "answer": "1 5/8",
+    "after": {
+     "kind": "mixed",
+     "w": 1,
+     "n": 5,
+     "d": 8,
+     "improper": true,
+     "imp": 13
+    },
+    "explain": "6 + 7 = 13, so 13/8 = 1 5/8.",
+    "qAudio": "audio/fractions/u4_practice/quiz_q4.mp3",
+    "rightText": "Spot on, Max. 6 + 7 = 13, so 13/8 = 1 5/8.",
+    "wrongText": "Not quite. 6 + 7 = 13, so 13/8 = 1 5/8.",
+    "rightAudio": "audio/fractions/u4_practice/quiz_q4_right.mp3",
+    "wrongAudio": "audio/fractions/u4_practice/quiz_q4_wrong.mp3"
+   },
+   {
+    "type": "mc",
+    "q": "1 2/9 + 8/9 = ?",
+    "options": [
+     "1 8/9",
+     "2 1/9",
+     "2 2/9",
+     "9/9"
+    ],
+    "answer": "2 1/9",
+    "after": {
+     "kind": "mixed",
+     "w": 2,
+     "n": 1,
+     "d": 9,
+     "improper": true,
+     "imp": 19
+    },
+    "explain": "11/9 + 8/9 = 19/9 = 2 1/9.",
+    "qAudio": "audio/fractions/u4_practice/quiz_q5.mp3",
+    "rightText": "Correct. Nice work. 11/9 + 8/9 = 19/9 = 2 1/9.",
+    "wrongText": "Not quite. 11/9 + 8/9 = 19/9 = 2 1/9.",
+    "rightAudio": "audio/fractions/u4_practice/quiz_q5_right.mp3",
+    "wrongAudio": "audio/fractions/u4_practice/quiz_q5_wrong.mp3"
+   },
+   {
+    "type": "mc",
+    "q": "2 10/11 + 7/11 = ?",
+    "options": [
+     "2 6/11",
+     "3 6/11",
+     "3 7/11",
+     "17/11"
+    ],
+    "answer": "3 6/11",
+    "after": {
+     "kind": "mixed",
+     "w": 3,
+     "n": 6,
+     "d": 11,
+     "improper": true,
+     "imp": 39
+    },
+    "explain": "32/11 + 7/11 = 39/11 = 3 6/11.",
+    "qAudio": "audio/fractions/u4_practice/quiz_q6.mp3",
+    "rightText": "That's right. 32/11 + 7/11 = 39/11 = 3 6/11.",
+    "wrongText": "Not quite. 32/11 + 7/11 = 39/11 = 3 6/11.",
+    "rightAudio": "audio/fractions/u4_practice/quiz_q6_right.mp3",
+    "wrongAudio": "audio/fractions/u4_practice/quiz_q6_wrong.mp3"
+   },
+   {
+    "type": "mc",
+    "q": "4/5 − 1/5 = ?",
+    "options": [
+     "3/5",
+     "5/5",
+     "3/10",
+     "4/5"
+    ],
+    "answer": "3/5",
+    "after": {
+     "kind": "bars",
+     "rows": [
+      [
+       3,
+       5
+      ]
+     ],
+     "noGuide": true
+    },
+    "explain": "4 − 1 = 3, so 3/5.",
+    "qAudio": "audio/fractions/u4_practice/quiz_q7.mp3",
+    "rightText": "Yes, exactly. 4 − 1 = 3, so 3/5.",
+    "wrongText": "Not quite. 4 − 1 = 3, so 3/5.",
+    "rightAudio": "audio/fractions/u4_practice/quiz_q7_right.mp3",
+    "wrongAudio": "audio/fractions/u4_practice/quiz_q7_wrong.mp3"
+   },
+   {
+    "type": "mc",
+    "q": "7/8 − 6/8 = ?",
+    "options": [
+     "1/8",
+     "13/8",
+     "1/16",
+     "6/8"
+    ],
+    "answer": "1/8",
+    "after": {
+     "kind": "bars",
+     "rows": [
+      [
+       1,
+       8
+      ]
+     ],
+     "noGuide": true
+    },
+    "explain": "7 − 6 = 1, so 1/8.",
+    "qAudio": "audio/fractions/u4_practice/quiz_q8.mp3",
+    "rightText": "Spot on, Max. 7 − 6 = 1, so 1/8.",
+    "wrongText": "Not quite. 7 − 6 = 1, so 1/8.",
+    "rightAudio": "audio/fractions/u4_practice/quiz_q8_right.mp3",
+    "wrongAudio": "audio/fractions/u4_practice/quiz_q8_wrong.mp3"
+   },
+   {
+    "type": "mc",
+    "q": "1 4/7 − 4/7 = ?",
+    "options": [
+     "1",
+     "4/7",
+     "0",
+     "8/7"
+    ],
+    "answer": "1",
+    "after": {
+     "kind": "mixed",
+     "w": 1,
+     "n": 0,
+     "d": 7,
+     "improper": true,
+     "imp": 7
+    },
+    "explain": "11/7 − 4/7 = 7/7 = 1.",
+    "qAudio": "audio/fractions/u4_practice/quiz_q9.mp3",
+    "rightText": "Correct. Nice work. 11/7 − 4/7 = 7/7 = 1.",
+    "wrongText": "Not quite. 11/7 − 4/7 = 7/7 = 1.",
+    "rightAudio": "audio/fractions/u4_practice/quiz_q9_right.mp3",
+    "wrongAudio": "audio/fractions/u4_practice/quiz_q9_wrong.mp3"
+   },
+   {
+    "type": "mc",
+    "q": "1 3/10 − 6/10 = ?",
+    "options": [
+     "1 3/10",
+     "7/10",
+     "9/10",
+     "3/10"
+    ],
+    "answer": "7/10",
+    "after": {
+     "kind": "bars",
+     "rows": [
+      [
+       7,
+       10
+      ]
+     ],
+     "noGuide": true
+    },
+    "explain": "Rename 1 3/10 as 13/10. 13/10 − 6/10 = 7/10.",
+    "qAudio": "audio/fractions/u4_practice/quiz_q10.mp3",
+    "rightText": "That's right. Rename 1 3/10 as 13/10. 13/10 − 6/10 = 7/10.",
+    "wrongText": "Not quite. Rename 1 3/10 as 13/10. 13/10 − 6/10 = 7/10.",
+    "rightAudio": "audio/fractions/u4_practice/quiz_q10_right.mp3",
+    "wrongAudio": "audio/fractions/u4_practice/quiz_q10_wrong.mp3"
+   },
+   {
+    "type": "number",
+    "q": "Mia ate 1 1/4 bannocks and Connie ate 1 3/4. How many in all? 1 1/4 + 1 3/4 = ?",
+    "answer": 3,
+    "after": {
+     "kind": "mixed",
+     "w": 3,
+     "n": 0,
+     "d": 4,
+     "improper": true,
+     "imp": 12
+    },
+    "explain": "5/4 + 7/4 = 12/4 = 3 bannocks.",
+    "qAudio": "audio/fractions/u4_practice/quiz_q11.mp3",
+    "rightText": "Yes, exactly. 5/4 + 7/4 = 12/4 = 3 bannocks.",
+    "wrongText": "Not quite. 5/4 + 7/4 = 12/4 = 3 bannocks.",
+    "rightAudio": "audio/fractions/u4_practice/quiz_q11_right.mp3",
+    "wrongAudio": "audio/fractions/u4_practice/quiz_q11_wrong.mp3"
+   },
+   {
+    "type": "mc",
+    "q": "Xavier ran 3 2/10 km. Keith ran 2 7/10 km. How much farther did Xavier run?",
+    "options": [
+     "5/10",
+     "1 5/10",
+     "6/10",
+     "1"
+    ],
+    "answer": "5/10",
+    "after": {
+     "kind": "bars",
+     "rows": [
+      [
+       5,
+       10
+      ]
+     ],
+     "noGuide": true
+    },
+    "explain": "32/10 − 27/10 = 5/10 km.",
+    "qAudio": "audio/fractions/u4_practice/quiz_q12.mp3",
+    "rightText": "Spot on, Max. 32/10 − 27/10 = 5/10 km.",
+    "wrongText": "Not quite. 32/10 − 27/10 = 5/10 km.",
+    "rightAudio": "audio/fractions/u4_practice/quiz_q12_right.mp3",
+    "wrongAudio": "audio/fractions/u4_practice/quiz_q12_wrong.mp3"
+   },
+   {
+    "type": "mc",
+    "q": "3 × 1/4 = ?",
+    "options": [
+     "3/4",
+     "1 1/4",
+     "4/3",
+     "1/12"
+    ],
+    "answer": "3/4",
+    "after": {
+     "kind": "cup",
+     "mode": "mul",
+     "cup": [
+      1,
+      4
+     ],
+     "fill": [
+      1,
+      1
+     ],
+     "times": 3,
+     "res": [
+      3,
+      4
+     ]
+    },
+    "explain": "3 groups of 1/4 make 3/4.",
+    "qAudio": "audio/fractions/u4_practice/quiz_q13.mp3",
+    "rightText": "Correct. Nice work. 3 groups of 1/4 make 3/4.",
+    "wrongText": "Not quite. 3 groups of 1/4 make 3/4.",
+    "rightAudio": "audio/fractions/u4_practice/quiz_q13_right.mp3",
+    "wrongAudio": "audio/fractions/u4_practice/quiz_q13_wrong.mp3"
+   },
+   {
+    "type": "mc",
+    "q": "5 × 1/5 = ?",
+    "options": [
+     "5",
+     "1",
+     "1/25",
+     "0"
+    ],
+    "answer": "1",
+    "after": {
+     "kind": "cup",
+     "mode": "mul",
+     "cup": [
+      1,
+      5
+     ],
+     "fill": [
+      1,
+      1
+     ],
+     "times": 5,
+     "res": [
+      1,
+      1
+     ]
+    },
+    "explain": "Reciprocals: 5 × 1/5 = 1.",
+    "qAudio": "audio/fractions/u4_practice/quiz_q14.mp3",
+    "rightText": "That's right. Reciprocals: 5 × 1/5 = 1.",
+    "wrongText": "Not quite. Reciprocals: 5 × 1/5 = 1.",
+    "rightAudio": "audio/fractions/u4_practice/quiz_q14_right.mp3",
+    "wrongAudio": "audio/fractions/u4_practice/quiz_q14_wrong.mp3"
+   },
+   {
+    "type": "mc",
+    "q": "9 × 1/7 = ?",
+    "options": [
+     "9/14",
+     "1 2/7",
+     "7/9",
+     "1 1/7"
+    ],
+    "answer": "1 2/7",
+    "after": {
+     "kind": "cup",
+     "mode": "mul",
+     "cup": [
+      1,
+      7
+     ],
+     "fill": [
+      1,
+      1
+     ],
+     "times": 9,
+     "res": [
+      9,
+      7
+     ]
+    },
+    "explain": "9/7 = 1 2/7.",
+    "qAudio": "audio/fractions/u4_practice/quiz_q15.mp3",
+    "rightText": "Yes, exactly. 9/7 = 1 2/7.",
+    "wrongText": "Not quite. 9/7 = 1 2/7.",
+    "rightAudio": "audio/fractions/u4_practice/quiz_q15_right.mp3",
+    "wrongAudio": "audio/fractions/u4_practice/quiz_q15_wrong.mp3"
+   },
+   {
+    "type": "mc",
+    "q": "2 × 1/9 = ?",
+    "options": [
+     "2/9",
+     "1 1/9",
+     "9/2",
+     "1/18"
+    ],
+    "answer": "2/9",
+    "after": {
+     "kind": "cup",
+     "mode": "mul",
+     "cup": [
+      1,
+      9
+     ],
+     "fill": [
+      1,
+      1
+     ],
+     "times": 2,
+     "res": [
+      2,
+      9
+     ]
+    },
+    "explain": "2 groups of 1/9 make 2/9.",
+    "qAudio": "audio/fractions/u4_practice/quiz_q16.mp3",
+    "rightText": "Spot on, Max. 2 groups of 1/9 make 2/9.",
+    "wrongText": "Not quite. 2 groups of 1/9 make 2/9.",
+    "rightAudio": "audio/fractions/u4_practice/quiz_q16_right.mp3",
+    "wrongAudio": "audio/fractions/u4_practice/quiz_q16_wrong.mp3"
+   },
+   {
+    "type": "mc",
+    "q": "7 × 1/10 = ?",
+    "options": [
+     "7/10",
+     "1 3/10",
+     "10/7",
+     "1/70"
+    ],
+    "answer": "7/10",
+    "after": {
+     "kind": "cup",
+     "mode": "mul",
+     "cup": [
+      1,
+      10
+     ],
+     "fill": [
+      1,
+      1
+     ],
+     "times": 7,
+     "res": [
+      7,
+      10
+     ]
+    },
+    "explain": "7 × 1/10 = 7/10.",
+    "qAudio": "audio/fractions/u4_practice/quiz_q17.mp3",
+    "rightText": "Correct. Nice work. 7 × 1/10 = 7/10.",
+    "wrongText": "Not quite. 7 × 1/10 = 7/10.",
+    "rightAudio": "audio/fractions/u4_practice/quiz_q17_right.mp3",
+    "wrongAudio": "audio/fractions/u4_practice/quiz_q17_wrong.mp3"
+   },
+   {
+    "type": "mc",
+    "q": "9 × 1/8 = ?",
+    "options": [
+     "9/16",
+     "1 1/8",
+     "8/9",
+     "1 2/8"
+    ],
+    "answer": "1 1/8",
+    "after": {
+     "kind": "cup",
+     "mode": "mul",
+     "cup": [
+      1,
+      8
+     ],
+     "fill": [
+      1,
+      1
+     ],
+     "times": 9,
+     "res": [
+      9,
+      8
+     ]
+    },
+    "explain": "9/8 = 1 1/8.",
+    "qAudio": "audio/fractions/u4_practice/quiz_q18.mp3",
+    "rightText": "That's right. 9/8 = 1 1/8.",
+    "wrongText": "Not quite. 9/8 = 1 1/8.",
+    "rightAudio": "audio/fractions/u4_practice/quiz_q18_right.mp3",
+    "wrongAudio": "audio/fractions/u4_practice/quiz_q18_wrong.mp3"
+   },
+   {
+    "type": "number",
+    "q": "2 ÷ 1/3 = ?",
+    "answer": 6,
+    "after": {
+     "kind": "cup",
+     "mode": "div",
+     "total": [
+      2,
+      1
+     ],
+     "cup": [
+      1,
+      3
+     ],
+     "count": 6
+    },
+    "explain": "2 × 3 = 6.",
+    "qAudio": "audio/fractions/u4_practice/quiz_q19.mp3",
+    "rightText": "Yes, exactly. 2 × 3 = 6.",
+    "wrongText": "Not quite. 2 × 3 = 6.",
+    "rightAudio": "audio/fractions/u4_practice/quiz_q19_right.mp3",
+    "wrongAudio": "audio/fractions/u4_practice/quiz_q19_wrong.mp3"
+   },
+   {
+    "type": "number",
+    "q": "5 ÷ 1/6 = ?",
+    "answer": 30,
+    "after": {
+     "kind": "cup",
+     "mode": "div",
+     "total": [
+      5,
+      1
+     ],
+     "cup": [
+      1,
+      6
+     ],
+     "count": 30
+    },
+    "explain": "5 × 6 = 30.",
+    "qAudio": "audio/fractions/u4_practice/quiz_q20.mp3",
+    "rightText": "Spot on, Max. 5 × 6 = 30.",
+    "wrongText": "Not quite. 5 × 6 = 30.",
+    "rightAudio": "audio/fractions/u4_practice/quiz_q20_right.mp3",
+    "wrongAudio": "audio/fractions/u4_practice/quiz_q20_wrong.mp3"
+   },
+   {
+    "type": "number",
+    "q": "3 ÷ 1/8 = ?",
+    "answer": 24,
+    "after": {
+     "kind": "cup",
+     "mode": "div",
+     "total": [
+      3,
+      1
+     ],
+     "cup": [
+      1,
+      8
+     ],
+     "count": 24
+    },
+    "explain": "3 × 8 = 24.",
+    "qAudio": "audio/fractions/u4_practice/quiz_q21.mp3",
+    "rightText": "Correct. Nice work. 3 × 8 = 24.",
+    "wrongText": "Not quite. 3 × 8 = 24.",
+    "rightAudio": "audio/fractions/u4_practice/quiz_q21_right.mp3",
+    "wrongAudio": "audio/fractions/u4_practice/quiz_q21_wrong.mp3"
+   },
+   {
+    "type": "number",
+    "q": "2 ÷ 1/9 = ?",
+    "answer": 18,
+    "after": {
+     "kind": "cup",
+     "mode": "div",
+     "total": [
+      2,
+      1
+     ],
+     "cup": [
+      1,
+      9
+     ],
+     "count": 18
+    },
+    "explain": "2 × 9 = 18.",
+    "qAudio": "audio/fractions/u4_practice/quiz_q22.mp3",
+    "rightText": "That's right. 2 × 9 = 18.",
+    "wrongText": "Not quite. 2 × 9 = 18.",
+    "rightAudio": "audio/fractions/u4_practice/quiz_q22_right.mp3",
+    "wrongAudio": "audio/fractions/u4_practice/quiz_q22_wrong.mp3"
+   },
+   {
+    "type": "number",
+    "q": "9 ÷ 1/7 = ?",
+    "answer": 63,
+    "after": {
+     "kind": "cup",
+     "mode": "div",
+     "total": [
+      9,
+      1
+     ],
+     "cup": [
+      1,
+      7
+     ],
+     "count": 63
+    },
+    "explain": "9 × 7 = 63.",
+    "qAudio": "audio/fractions/u4_practice/quiz_q23.mp3",
+    "rightText": "Yes, exactly. 9 × 7 = 63.",
+    "wrongText": "Not quite. 9 × 7 = 63.",
+    "rightAudio": "audio/fractions/u4_practice/quiz_q23_right.mp3",
+    "wrongAudio": "audio/fractions/u4_practice/quiz_q23_wrong.mp3"
+   },
+   {
+    "type": "number",
+    "q": "4 ÷ 1/12 = ?",
+    "answer": 48,
+    "after": {
+     "kind": "cup",
+     "mode": "div",
+     "total": [
+      4,
+      1
+     ],
+     "cup": [
+      1,
+      12
+     ],
+     "count": 48
+    },
+    "explain": "4 × 12 = 48.",
+    "qAudio": "audio/fractions/u4_practice/quiz_q24.mp3",
+    "rightText": "Spot on, Max. 4 × 12 = 48.",
+    "wrongText": "Not quite. 4 × 12 = 48.",
+    "rightAudio": "audio/fractions/u4_practice/quiz_q24_right.mp3",
+    "wrongAudio": "audio/fractions/u4_practice/quiz_q24_wrong.mp3"
+   },
+   {
+    "type": "mc",
+    "q": "Owen had 5 packages of popcorn, each 1/4 kg. How many kg in all?",
+    "options": [
+     "5/8",
+     "1 1/4",
+     "4/5",
+     "1/20"
+    ],
+    "answer": "1 1/4",
+    "after": {
+     "kind": "cup",
+     "mode": "mul",
+     "cup": [
+      1,
+      4
+     ],
+     "fill": [
+      1,
+      1
+     ],
+     "times": 5,
+     "res": [
+      5,
+      4
+     ]
+    },
+    "explain": "5 × 1/4 = 5/4 = 1 1/4 kg.",
+    "qAudio": "audio/fractions/u4_practice/quiz_q25.mp3",
+    "rightText": "Correct. Nice work. 5 × 1/4 = 5/4 = 1 1/4 kg.",
+    "wrongText": "Not quite. 5 × 1/4 = 5/4 = 1 1/4 kg.",
+    "rightAudio": "audio/fractions/u4_practice/quiz_q25_right.mp3",
+    "wrongAudio": "audio/fractions/u4_practice/quiz_q25_wrong.mp3"
+   },
+   {
+    "type": "number",
+    "q": "Layla cut 4 pies into 1/6 slices. How many slices? 4 ÷ 1/6 = ?",
+    "answer": 24,
+    "after": {
+     "kind": "cup",
+     "mode": "div",
+     "total": [
+      4,
+      1
+     ],
+     "cup": [
+      1,
+      6
+     ],
+     "count": 24
+    },
+    "explain": "4 ÷ 1/6 = 4 × 6 = 24 slices.",
+    "qAudio": "audio/fractions/u4_practice/quiz_q26.mp3",
+    "rightText": "That's right. 4 ÷ 1/6 = 4 × 6 = 24 slices.",
+    "wrongText": "Not quite. 4 ÷ 1/6 = 4 × 6 = 24 slices.",
+    "rightAudio": "audio/fractions/u4_practice/quiz_q26_right.mp3",
+    "wrongAudio": "audio/fractions/u4_practice/quiz_q26_wrong.mp3"
+   }
+  ],
+  "done": [
+   {
+    "text": "Quiz complete. You got 0 out of 26. Run through the review again, then have another go.",
+    "audio": "audio/fractions/u4_practice/quiz_done_0.mp3"
+   },
+   {
+    "text": "Quiz complete. You got 1 out of 26. Run through the review again, then have another go.",
+    "audio": "audio/fractions/u4_practice/quiz_done_1.mp3"
+   },
+   {
+    "text": "Quiz complete. You got 2 out of 26. Run through the review again, then have another go.",
+    "audio": "audio/fractions/u4_practice/quiz_done_2.mp3"
+   },
+   {
+    "text": "Quiz complete. You got 3 out of 26. Run through the review again, then have another go.",
+    "audio": "audio/fractions/u4_practice/quiz_done_3.mp3"
+   },
+   {
+    "text": "Quiz complete. You got 4 out of 26. Run through the review again, then have another go.",
+    "audio": "audio/fractions/u4_practice/quiz_done_4.mp3"
+   },
+   {
+    "text": "Quiz complete. You got 5 out of 26. Run through the review again, then have another go.",
+    "audio": "audio/fractions/u4_practice/quiz_done_5.mp3"
+   },
+   {
+    "text": "Quiz complete. You got 6 out of 26. Run through the review again, then have another go.",
+    "audio": "audio/fractions/u4_practice/quiz_done_6.mp3"
+   },
+   {
+    "text": "Quiz complete. You got 7 out of 26. Run through the review again, then have another go.",
+    "audio": "audio/fractions/u4_practice/quiz_done_7.mp3"
+   },
+   {
+    "text": "Quiz complete. You got 8 out of 26. Run through the review again, then have another go.",
+    "audio": "audio/fractions/u4_practice/quiz_done_8.mp3"
+   },
+   {
+    "text": "Quiz complete. You got 9 out of 26. Run through the review again, then have another go.",
+    "audio": "audio/fractions/u4_practice/quiz_done_9.mp3"
+   },
+   {
+    "text": "Quiz complete. You got 10 out of 26. Run through the review again, then have another go.",
+    "audio": "audio/fractions/u4_practice/quiz_done_10.mp3"
+   },
+   {
+    "text": "Quiz complete. You got 11 out of 26. Run through the review again, then have another go.",
+    "audio": "audio/fractions/u4_practice/quiz_done_11.mp3"
+   },
+   {
+    "text": "Quiz complete. You got 12 out of 26. Run through the review again, then have another go.",
+    "audio": "audio/fractions/u4_practice/quiz_done_12.mp3"
+   },
+   {
+    "text": "Quiz complete. You got 13 out of 26. Run through the review again, then have another go.",
+    "audio": "audio/fractions/u4_practice/quiz_done_13.mp3"
+   },
+   {
+    "text": "Quiz complete. You got 14 out of 26. Run through the review again, then have another go.",
+    "audio": "audio/fractions/u4_practice/quiz_done_14.mp3"
+   },
+   {
+    "text": "Quiz complete. You got 15 out of 26. Run through the review again, then have another go.",
+    "audio": "audio/fractions/u4_practice/quiz_done_15.mp3"
+   },
+   {
+    "text": "Quiz complete. You got 16 out of 26. Run through the review again, then have another go.",
+    "audio": "audio/fractions/u4_practice/quiz_done_16.mp3"
+   },
+   {
+    "text": "Quiz complete. You got 17 out of 26. Run through the review again, then have another go.",
+    "audio": "audio/fractions/u4_practice/quiz_done_17.mp3"
+   },
+   {
+    "text": "Quiz complete. You got 18 out of 26. Run through the review again, then have another go.",
+    "audio": "audio/fractions/u4_practice/quiz_done_18.mp3"
+   },
+   {
+    "text": "Quiz complete. You got 19 out of 26. Run through the review again, then have another go.",
+    "audio": "audio/fractions/u4_practice/quiz_done_19.mp3"
+   },
+   {
+    "text": "Quiz complete. You got 20 out of 26. Run through the review again, then have another go.",
+    "audio": "audio/fractions/u4_practice/quiz_done_20.mp3"
+   },
+   {
+    "text": "Quiz complete. You got 21 out of 26. Run through the review again, then have another go.",
+    "audio": "audio/fractions/u4_practice/quiz_done_21.mp3"
+   },
+   {
+    "text": "Quiz complete. You got 22 out of 26. Run through the review again, then have another go.",
+    "audio": "audio/fractions/u4_practice/quiz_done_22.mp3"
+   },
+   {
+    "text": "Quiz complete. You got 23 out of 26. Run through the review again, then have another go.",
+    "audio": "audio/fractions/u4_practice/quiz_done_23.mp3"
+   },
+   {
+    "text": "Quiz complete. You got 24 out of 26. Run through the review again, then have another go.",
+    "audio": "audio/fractions/u4_practice/quiz_done_24.mp3"
+   },
+   {
+    "text": "Quiz complete. You got 25 out of 26. Nice work.",
+    "audio": "audio/fractions/u4_practice/quiz_done_25.mp3"
+   },
+   {
+    "text": "Quiz complete. You got 26 out of 26. Perfect score.",
+    "audio": "audio/fractions/u4_practice/quiz_done_26.mp3"
    }
   ]
  }

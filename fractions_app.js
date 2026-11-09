@@ -185,12 +185,18 @@
 
   // ---------- fracWalk module ----------
   const D = window.FRACTIONS_DATA || { sessions: {} };
-  const sess = id => D.sessions[id] || { review: [], components: [] };
+  const sess = id => {
+    if (D.sessions[id]) return D.sessions[id];
+    // dual Typed/Notepad nav ids end in -typed / -notepad
+    const base = String(id || "").replace(/-typed$|-notepad$/, "");
+    return D.sessions[base] || { review: [], components: [] };
+  };
   const play = src => { if (window.ANAT && src) ANAT.play(src); };
   const st = { list: [], i: 0, mode: "review" };
   const KICK = { multiply: "Make an equivalent fraction · multiply", simplify: "Simplify · divide", check: "Check · cross-multiply",
     compare: "Compare · <, > or =", toMixed: "Improper → mixed · divide", toImproper: "Mixed → improper · multiply and add",
-    mul: "Multiply · pour part of a cup", div: "Divide · count the cupfuls" };
+    mul: "Multiply · pour part of a cup", div: "Divide · count the cupfuls",
+    add: "Add like fractions · same denominator", sub: "Subtract like fractions · same denominator" };
   const esc = s => s.replace(/&/g, "&amp;").replace(/</g, "&lt;");
 
   function render(speak) {
@@ -225,7 +231,7 @@
       $("anatScore").hidden = true;
       const chips = $("frChips"); chips.innerHTML = "";
       if (ctx.kind === "component") {
-        st.mode = "component"; st.list = sess(ctx.session.id).components; st.i = ctx.comp || 0;
+        st.mode = "component"; st.list = sess((ctx.opts && ctx.opts.session) || ctx.session.id).components; st.i = ctx.comp || 0;
         $("frEyebrow").textContent = "Worked examples";
         st.list.forEach((c, k) => {
           const b = document.createElement("button");
@@ -233,7 +239,7 @@
           b.onclick = () => HB.goComponent(k); chips.appendChild(b);
         });
       } else {
-        st.mode = "review"; st.list = sess(ctx.session.id).review; st.i = ctx.opts.start || 0;
+        st.mode = "review"; st.list = sess((ctx.opts && ctx.opts.session) || ctx.session.id).review; st.i = (ctx.opts && ctx.opts.start) || 0;
         $("frEyebrow").textContent = "Review · tap Next to step through";
       }
       chips.hidden = st.mode !== "component";

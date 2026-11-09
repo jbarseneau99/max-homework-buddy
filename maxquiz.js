@@ -5,11 +5,15 @@
   // opts.set picks a question set from window.QUIZ_SETS (per-system quizzes); default = Max's Test Topics.
   let Q = window.MAX_TOPICS_DATA.quiz;
   const $ = id => document.getElementById(id);
-  const st = { i: 0, score: 0, results: [], picked: [], num: "", work: false, set: "", ink: [], manualI: -1, busy: 0 };
+  const st = { i: 0, score: 0, results: [], picked: [], num: "", work: false, set: "", ink: [], manualI: -1, busy: 0, forceTyped: false, forceNotepad: false };
   // Work questions (fractions sets frac_*): scratch pad on every question; ink required before grading.
   const pad = HB.ScratchPad.mount($("mxScratch"));
   const NEED_INK = "✎ Write your work on the scratch pad first.";
-  const isWorkSet = id => /^frac_/.test(id || "");
+  const isWorkSet = id => {
+    if (st.forceTyped) return false;
+    if (st.forceNotepad) return true;
+    return /^frac_/.test(id || "");
+  };
   // AI grading (ai_grade.js): when Ready, the drawing is the submission — no keypad / tap needed on work questions.
   const aiReady = () => !!(HB.ai && HB.ai.ready());
   const aiMode = () => st.work && aiReady() && st.manualI !== st.i;
@@ -194,7 +198,10 @@
     view: "view-maxQuiz",
     enter(ctx) {
       Q = (ctx.opts.set && window.QUIZ_SETS && QUIZ_SETS[ctx.opts.set]) || window.MAX_TOPICS_DATA.quiz;
-      st.set = ctx.opts.set || ""; st.work = isWorkSet(st.set) && Q !== window.MAX_TOPICS_DATA.quiz;
+      st.set = ctx.opts.set || "";
+      st.forceTyped = !!(ctx.opts && ctx.opts.mode === "typed");
+      st.forceNotepad = !!(ctx.opts && ctx.opts.mode === "notepad");
+      st.work = isWorkSet(st.set) && Q !== window.MAX_TOPICS_DATA.quiz;
       $("mxTitle").textContent = Q.title || "Max's test topics · quiz";
       $("anatScore").hidden = false; reset(); document.querySelectorAll("#mxPad button").forEach(b => b.disabled = false); render(true); },
     leave() { reset(); }

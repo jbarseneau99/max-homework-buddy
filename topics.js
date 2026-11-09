@@ -34,15 +34,27 @@
                 .concat(mathQuiz.map((t, i) => ({ id: "q" + (i + 1), title: "Quiz: " + t, module: "mathQuiz", opts: { start: i } }))) }
           ],
           moreComingSoon: true },
-        { id: "fractions", title: "Fractions", icon: "fraction", blurb: "Equivalent, comparing, mixed numbers, multiplying and dividing.", toolbar: "anatBar",
-          sessions: ((window.FRACTIONS_DATA && FRACTIONS_DATA.order) || []).map(id => {
+        { id: "fractions", title: "Fractions", icon: "fraction", blurb: "Equivalent, comparing, mixed numbers, multiplying and dividing — plus Unit 4 operations.", toolbar: "anatBar",
+          sessions: ((window.FRACTIONS_DATA && FRACTIONS_DATA.order) || []).flatMap(id => {
             const S = FRACTIONS_DATA.sessions[id], Q = (window.QUIZ_SETS && QUIZ_SETS[S.quiz]) || { questions: [] };
-            return { id, title: S.title, icon: "fraction", blurb: S.blurb,
+            const comps = (S.components || []).map(c => ({ id: c.id, title: c.title }));
+            const review = { module: "fracWalk", opts: { session: id }, label: S.review.length + "-step narrated walkthrough with pictures" };
+            if (S.dual) {
+              return [
+                { id: id + "-typed", title: S.title + " · Typed", icon: "fraction", blurb: S.blurb + " Easier — tap or type.",
+                  review, quiz: { module: "maxQuiz", opts: { set: S.quiz, mode: "typed" }, label: Q.questions.length + " questions · type or tap (no pad required)" },
+                  componentModule: "fracWalk", components: comps },
+                { id: id + "-notepad", title: S.title + " · Notepad", icon: "fraction", blurb: S.blurb + " Harder — scratch pad + AI check.",
+                  review, quiz: { module: "maxQuiz", opts: { set: S.quiz, mode: "notepad" }, label: Q.questions.length + " questions · scratch pad (AI if Ready)" },
+                  componentModule: "fracWalk", components: comps }
+              ];
+            }
+            return [{ id, title: S.title, icon: "fraction", blurb: S.blurb,
               review: { module: "fracWalk", label: S.review.length + "-step narrated walkthrough with pictures" },
               quiz: { module: "maxQuiz", opts: { set: S.quiz }, label: Q.questions.length + " questions with spoken feedback" },
-              componentModule: "fracWalk", components: S.components.map(c => ({ id: c.id, title: c.title })) };
+              componentModule: "fracWalk", components: comps }];
           }),
-          moreComingSoon: true },
+          moreComingSoon: false },
         { id: "multiplication", title: "Multiplication", icon: "divide", blurb: "Year-long unit: tables, area, lattice, and more — with mastery tracking.", toolbar: "anatBar",
           sessions: ((() => {
             const M = window.MULT_DATA || { order: [], sessions: {} };
