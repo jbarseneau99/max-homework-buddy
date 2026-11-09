@@ -154,14 +154,22 @@
     $("mvFeedback").textContent = ""; $("mvFeedback").className = "mq-feedback";
     $("mvReveal").hidden = true;
     $("mvAnswer").value = ""; $("mvFallbackInput").value = "";
+    // Critical: showResult() disables inputs after Q1 — always clear that for a fresh unanswered question.
+    const answered = !!qz.results[qz.i];
+    $("mvAnswer").disabled = answered;
+    $("mvFallbackInput").disabled = answered;
     setModeUI();
     if (qz.mode === "notepad") {
       if (!aiReady()) { qz.fallback = true; setModeUI(); }
-      if (qz.pad) { qz.pad.loadBlank(); qz.pad.setEnabled(!qz.results[qz.i]); }
-      $("mvCheck").disabled = !!qz.results[qz.i];
+      if (qz.pad) {
+        if (answered && qz.results[qz.i].png) { qz.pad.loadImage(qz.results[qz.i].png); qz.pad.setEnabled(false); }
+        else { qz.pad.loadBlank(); qz.pad.setEnabled(!answered); }
+      }
+      $("mvCheck").disabled = answered;
+      if (!answered && qz.fallback) setTimeout(() => { try { $("mvFallbackInput").focus(); } catch (e) {} }, 40);
     } else {
-      $("mvCheck").disabled = true;
-      setTimeout(() => $("mvAnswer").focus(), 40);
+      $("mvCheck").disabled = true; // enabled again when Max types
+      if (!answered) setTimeout(() => { try { $("mvAnswer").focus(); } catch (e) {} }, 40);
     }
     $("mvqPrev").disabled = qz.i === 0;
     $("mvqNext").textContent = qz.i === NQ - 1 ? "See results" : "Next";
@@ -188,7 +196,8 @@
   }
 
   function showResult(p, res, speak) {
-    $("mvCheck").disabled = true;
+    qz.busy = 0;
+    $("mvCheck").disabled = true; $("mvCheck").textContent = qz.mode === "notepad" ? SUBMIT : "Check";
     if (qz.pad) qz.pad.setEnabled(false);
     $("mvAnswer").disabled = true; $("mvFallbackInput").disabled = true;
     if (!res.ok) {

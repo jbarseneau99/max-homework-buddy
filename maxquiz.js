@@ -44,7 +44,7 @@
       ? (q.type === "pick" ? `Write your work on the scratch pad, pick ${q.n}, then tap Submit work.` : q.type === "number" ? "Write your work on the scratch pad, type your answer on the keypad, then tap Submit work." : "Write your work on the scratch pad, then tap your answer.")
       : (q.type === "pick" ? `Pick ${q.n}, then tap Check.` : q.type === "number" ? "Use the keypad, then tap Check." : "Tap your answer.");
     $("mxScratch").hidden = !st.work;
-    if (st.work) { if (res) { pad.loadImage(st.ink[st.i]); pad.setEnabled(false); } else pad.loadBlank(); }
+    if (st.work) { if (res) { pad.loadImage(st.ink[st.i]); pad.setEnabled(false); } else { pad.loadBlank(); pad.setEnabled(true); } }
     $("mxCheck").textContent = st.work ? "Submit work" : "Check";
     const opts = $("mxOpts"); opts.innerHTML = "";
     $("mxNumWrap").hidden = q.type !== "number";

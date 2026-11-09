@@ -176,18 +176,21 @@
     $("spFeedback").textContent = ""; $("spFeedback").className = "mq-feedback";
     $("spReveal").hidden = true; $("spReveal").innerHTML = "";
     $("spFallbackInput").value = "";
+    const answered = !!qz.results[qz.i];
+    $("spFallbackInput").disabled = answered;
     setModeUI();
     if (isNotepad()) {
       $("spqHint").textContent = aiReady()
         ? "Listen, write the whole word on the scratch pad, then tap Submit work. No letter count is shown."
         : "AI grading needs a key in Settings. Listen, then type the whole word below (no length hint).";
       if (!aiReady()) { qz.fallbackText = true; setModeUI(); }
-      if (qz.pad) { if (qz.results[qz.i] && qz.results[qz.i].png) { qz.pad.loadImage(qz.results[qz.i].png); qz.pad.setEnabled(false); } else { qz.pad.loadBlank(); qz.pad.setEnabled(!qz.results[qz.i]); } }
-      $("spCheck").disabled = !!qz.results[qz.i];
+      if (qz.pad) { if (answered && qz.results[qz.i].png) { qz.pad.loadImage(qz.results[qz.i].png); qz.pad.setEnabled(false); } else { qz.pad.loadBlank(); qz.pad.setEnabled(!answered); } }
+      $("spCheck").disabled = answered; $("spCheck").textContent = SUBMIT;
       $("spBoxes").innerHTML = "";
+      if (!answered && qz.fallbackText) setTimeout(() => { try { $("spFallbackInput").focus(); } catch (e) {} }, 40);
     } else {
       $("spqHint").textContent = "Listen, then type each letter into its box. Tap Replay to hear it again.";
-      buildBoxes(w.word.length);
+      buildBoxes(w.word.length); // fresh inputs — not disabled
       $("spCheck").disabled = true;
     }
     $("spCheck").hidden = false;

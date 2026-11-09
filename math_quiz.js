@@ -62,7 +62,12 @@
     $("mqCheck").disabled = true; sp.setEnabled(false);
     if (msg) { $("mqFeedback").textContent = msg; $("mqFeedback").className = "mq-feedback " + (ok ? "ok" : "bad"); }
   }
-  function unlock() { document.querySelectorAll("#mqPad button").forEach(b => b.disabled = false); $("mqCheck").disabled = false; sp.setEnabled(true); }
+  function unlock() {
+    document.querySelectorAll("#mqPad button").forEach(b => b.disabled = false);
+    $("mqCheck").disabled = false; $("mqCheck").textContent = SUBMIT;
+    sp.setEnabled(true);
+    $("mqPrev").disabled = st.i === 0;
+  }
 
   function key(k) {
     const f = st.field;
