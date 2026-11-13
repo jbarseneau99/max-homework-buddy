@@ -407,6 +407,39 @@
   /* ---------- scratch pad (scratchpad.js) ---------- */
   #mqScratch { margin-top:16px; padding:14px; }
   .mx-scratch { margin:0 0 14px; }
+  /* ---------- school-test question types (quiz_types.js) ---------- */
+  .mx-kind { text-align:center; color:var(--gold); margin-bottom:4px; }
+  .mx-tf { min-width:140px; }
+  #mxRich { margin:4px auto 12px; max-width:760px; }
+  .qt-bank { display:flex; flex-wrap:wrap; gap:8px; justify-content:center; padding:10px; border:1px dashed rgba(255,194,61,.55); border-radius:12px; background:rgba(255,194,61,.06); margin-bottom:12px; }
+  .qt-word { padding:8px 14px; border-radius:999px; font-weight:700; background:rgba(76,201,240,.12); border-color:var(--cyan); color:var(--ink); min-height:44px; }
+  .qt-word.used { opacity:.3; text-decoration:line-through; }
+  .qt-items, .qt-terms { margin:0; padding-left:26px; display:grid; gap:12px; line-height:2.1; font-size:1.06rem; }
+  .qt-blank { display:inline-block; min-width:120px; min-height:40px; margin:0 6px; padding:4px 12px; border:0; border-bottom:2px solid var(--cyan2); border-radius:6px 6px 0 0; background:rgba(76,201,240,.08); color:var(--gold2); font-weight:800; vertical-align:middle; }
+  .qt-blank.active { border-bottom-color:var(--gold); box-shadow:0 0 12px rgba(255,194,61,.45); background:rgba(255,194,61,.12); }
+  .qt-blank.correct, .qt-letter.correct, .qt-choice.correct { border-color:#5be3a0 !important; background:rgba(91,227,160,.18) !important; color:#c9ffe4 !important; }
+  .qt-blank.incorrect, .qt-letter.incorrect, .qt-choice.incorrect { border-color:#ff7a8a !important; background:rgba(255,122,138,.16) !important; color:#ffd0d6 !important; text-decoration:line-through; }
+  .qt-fix { color:#5be3a0; font-weight:800; margin-right:6px; }
+  .qt-defs { list-style:none; margin:0 0 12px; padding:10px 12px; display:grid; gap:6px; border:1px solid var(--line); border-radius:12px; background:rgba(76,201,240,.05); }
+  .qt-defs b { display:inline-block; width:26px; height:26px; line-height:26px; text-align:center; border-radius:50%; background:var(--gold); color:#1a1200; margin-right:8px; }
+  .qt-terms li { display:flex; flex-wrap:wrap; align-items:center; gap:8px 12px; }
+  .qt-term { font-weight:800; min-width:150px; }
+  .qt-letters { display:flex; gap:6px; flex-wrap:wrap; }
+  .qt-letter { width:44px; height:44px; padding:0; border-radius:50%; font-weight:800; }
+  .qt-letter.on { background:var(--gold); color:#1a1200; border-color:var(--gold); }
+  .qt-sentence { font-size:1.15rem; line-height:2.4; text-align:center; margin:0; }
+  .qt-choices { display:inline-flex; align-items:center; gap:2px; margin:0 4px; }
+  .qt-choice { padding:4px 12px; min-height:40px; border-radius:999px; font-weight:700; }
+  .qt-choice.on { border:2px solid var(--gold); box-shadow:0 0 0 3px rgba(255,194,61,.25); background:rgba(255,194,61,.14); }
+  .qt-slash { color:var(--muted); margin:0 2px; }
+  .qt-text { width:100%; min-height:96px; padding:12px; border-radius:12px; border:1px solid var(--cyan); background:rgba(8,18,42,.85); color:var(--ink); font:inherit; font-size:1.08rem; resize:vertical; }
+  .qt-self { margin:12px auto 0; max-width:720px; padding:12px 14px; border:1px solid rgba(255,194,61,.5); border-radius:12px; background:rgba(255,194,61,.06); }
+  .qt-self.done { border-color:var(--line); background:rgba(76,201,240,.05); }
+  .qt-model { color:#ffe7a8; margin:6px 0; }
+  .qt-small { color:var(--muted); margin:4px 0; font-size:.95rem; }
+  .qt-tick { display:flex; gap:10px; align-items:flex-start; margin:8px 0; cursor:pointer; }
+  .qt-tick input { width:24px; height:24px; flex:none; accent-color:var(--gold); }
+
   .sp-head { display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; margin-bottom:8px; }
   .sp-label { color:var(--gold2); font-weight:700; letter-spacing:.02em; }
   .sp-tools { display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
@@ -481,6 +514,26 @@
   .ob-work small { color:var(--muted); display:block; margin-top:2px; }
   .ob-work .wk-dl { margin-top:8px; display:inline-flex; min-height:44px; align-items:center; }
   @media (max-width:560px) { .ob-work li { grid-template-columns:1fr; } .ob-work img, .ob-work .nopng { width:100%; } }
+  /* curriculum panel */
+  .cur-list { display:grid; gap:12px; margin-top:12px; }
+  .cur-summary { margin-top:10px; font-size:1.05rem; }
+  .cur-head { all:unset; cursor:pointer; display:grid; gap:6px; width:100%; }
+  .cur-title { font-size:1.3rem; font-weight:800; } .cur-title small { color:var(--muted); font-weight:600; }
+  .cur-prog { color:var(--muted); font-size:.95rem; }
+  .cur-bar { display:flex; height:10px; border-radius:6px; background:rgba(255,255,255,.08); overflow:hidden; margin-top:6px; }
+  .cur-bar .t { background:var(--gold); } .cur-bar .l { background:var(--cyan2); }
+  .cur-strand { margin-top:14px; } .cur-strand h3 { margin:2px 0 8px; font-size:1.08rem; }
+  .cur-strand ul { list-style:none; margin:0; padding:0; display:grid; gap:8px; }
+  .cur-item { display:grid; grid-template-columns:58px 1fr auto auto; gap:10px; align-items:center; padding:10px; border:1px solid var(--line); border-radius:10px; background:rgba(255,255,255,.03); }
+  .cur-code { font-weight:800; color:var(--cyan2); }
+  .cur-say small { display:block; color:var(--muted); font-size:.85rem; margin-top:2px; }
+  .cur-tag { display:inline-block; font-size:.78rem; font-weight:700; padding:3px 8px; border-radius:999px; border:1px solid var(--line); white-space:nowrap; }
+  .cur-tag.tested { color:#1a1200; background:var(--gold); border-color:var(--gold); }
+  .cur-tag.lessons { color:#001a22; background:var(--cyan2); border-color:var(--cyan2); }
+  .cur-tag.soon { color:var(--muted); }
+  .cur-go { padding:6px 12px; min-height:0; }
+  .cur-src { color:var(--muted); font-size:.88rem; margin-top:12px; } .cur-src a { color:var(--cyan2); }
+  @media (max-width:700px) { .cur-item { grid-template-columns:52px 1fr; } .cur-tag, .cur-go { grid-column:2; justify-self:start; } }
 </style>
 </head>
 <body>
@@ -504,7 +557,7 @@
     </div>
     <div class="tiles" id="homeTiles"></div>
     <div class="home-foot home-tools"><button id="homeHelloBtn" type="button" class="btn-cyan" data-icon="sound"> Play greeting</button><button id="homeHistoryBtn" type="button" class="btn-gold" data-icon="quiz"> Quiz History</button>
-<button id="homeMasteryBtn" type="button" class="btn-cyan" data-icon="divide"> × Mastery</button></div>
+<button id="homeMasteryBtn" type="button" class="btn-cyan" data-icon="divide"> × Mastery</button><button id="homeCurriculumBtn" type="button" class="btn-gold" data-icon="book"> Curriculum</button></div>
   </section>
 
   <!-- ===== SUBJECT (list of subtopics) ===== -->
@@ -672,19 +725,22 @@
     <div class="h2" id="mxTitle">Max's test topics · quiz</div>
     <div class="meter"><div id="mxBar"></div></div>
     <div id="mxCard" class="glass-card" style="margin-top:14px">
+      <div class="eyebrow mx-kind" id="mxKind" hidden></div>
       <p class="mx-q" id="mxQ"></p>
       <div class="mx-vis" id="mxVis" hidden></div>
       <p class="mx-hint" id="mxHint"></p>
       <div id="mxScratch" class="mx-scratch" hidden></div>
       <div class="anatomy-options mx-opts" id="mxOpts"></div>
+      <div id="mxRich" hidden></div>
       <div id="mxNumWrap" class="mx-num-wrap" hidden>
         <div class="mq-field mx-num"><small>Your answer</small><span class="v" id="mxNum">–</span></div>
         <div class="pad mx-pad" id="mxPad"></div>
       </div>
       <div style="text-align:center"><button id="mxCheck" type="button" class="btn-gold" style="min-width:180px">Check</button></div>
-      <div style="text-align:center"><button id="mxTypeToggle" type="button" class="ai-type-toggle" hidden>Type answer instead</button></div>
+      <div style="text-align:center"><button id="mxTypeToggle" type="button" class="ai-type-toggle" hidden>Type answer instead</button><button id="mxPadToggle" type="button" class="ai-type-toggle" hidden>✎ Write it on the notepad instead</button></div>
       <p class="ai-hint" id="mxAiHint" hidden></p>
       <div class="mq-feedback" id="mxFeedback" aria-live="polite"></div>
+      <div id="mxSelf"></div>
       <div class="mq-nav">
         <button id="mxPrev" type="button">‹ Previous</button>
         <button id="mxNext" type="button" class="btn-gold" disabled>Next question</button>
@@ -882,6 +938,16 @@
   </section>
 
 
+  <!-- ===== CURRICULUM (Ontario Grade 5 map; data in curriculum.js) ===== -->
+  <section id="view-curriculum" class="view" hidden>
+    <div class="eyebrow">Ontario · Grade 5</div>
+    <h2 class="h2">Curriculum</h2>
+    <p class="set-blurb">What Grade 5 covers in Ontario, and where Max is. Tap a subject to see its strands. <span class="cur-tag tested">Covered in class (tested)</span> <span class="cur-tag lessons">Has lessons</span> <span class="cur-tag soon">Coming up</span></p>
+    <div class="glass-card cur-summary" id="curSummary"></div>
+    <div id="curSubjects" class="cur-list"></div>
+    <p class="cur-src" id="curSource"></p>
+  </section>
+
   <!-- ===== MULTIPLICATION REVIEW ===== -->
   <section id="view-multWalk" class="view" hidden>
     <div class="toolbar-slot"></div>
@@ -1016,34 +1082,37 @@
 <audio id="aud-ex4_step4" preload="auto" playsinline controlsList="nodownload"><source src="audio/ex4_step4.mp3" type="audio/mpeg"></audio>
 <audio id="aud-ex4_step5" preload="auto" playsinline controlsList="nodownload"><source src="audio/ex4_step5.mp3" type="audio/mpeg"></audio>
   </div>
-<script src="math_quiz_data.js?v=20261109c"></script>
-<script src="anatomy_data.js?v=20261109c"></script>
-<script src="explore_data.js?v=20261109c"></script>
-<script src="maxtopics_data.js?v=20261109c"></script>
-<script src="sessions_data.js?v=20261109c"></script>
-<script src="social_data.js?v=20261109c"></script>
-<script src="fractions_data.js?v=20261109c"></script>
-<script src="spelling_data.js?v=20261109c"></script>
-<script src="mult_data.js?v=20261109c"></script>
-<script src="anime_icons.js?v=20261109c"></script>
-<script src="topics.js?v=20261109c"></script>
-<script src="core.js?v=20261109c"></script>
-<script src="scratchpad.js?v=20261109c"></script>
-<script src="ai_grade.js?v=20261109c"></script>
-<script src="math_review.js?v=20261109c"></script>
-<script src="math_quiz.js?v=20261109c"></script>
-<script src="anatomy_app.js?v=20261109c"></script>
-<script src="explore_app.js?v=20261109c"></script>
-<script src="maxquiz.js?v=20261109c"></script>
-<script src="spelling.js?v=20261109c"></script>
-<script src="social_app.js?v=20261109c"></script>
-<script src="fractions_app.js?v=20261109c"></script>
-<script src="mult_vis.js?v=20261109c"></script>
-<script src="mult_mastery.js?v=20261109c"></script>
-<script src="mult_app.js?v=20261109c"></script>
-<script src="settings.js?v=20261109c"></script>
-<script src="quiz_history.js?v=20261109c"></script>
-<script src="quiz_history_ui.js?v=20261109c"></script>
+<script src="math_quiz_data.js?v=20261113a"></script>
+<script src="anatomy_data.js?v=20261113a"></script>
+<script src="explore_data.js?v=20261113a"></script>
+<script src="maxtopics_data.js?v=20261113a"></script>
+<script src="sessions_data.js?v=20261113a"></script>
+<script src="social_data.js?v=20261113a"></script>
+<script src="fractions_data.js?v=20261113a"></script>
+<script src="spelling_data.js?v=20261113a"></script>
+<script src="mult_data.js?v=20261113a"></script>
+<script src="anime_icons.js?v=20261113a"></script>
+<script src="quiz_types.js?v=20261113a"></script>
+<script src="topics.js?v=20261113a"></script>
+<script src="core.js?v=20261113a"></script>
+<script src="scratchpad.js?v=20261113a"></script>
+<script src="ai_grade.js?v=20261113a"></script>
+<script src="math_review.js?v=20261113a"></script>
+<script src="math_quiz.js?v=20261113a"></script>
+<script src="anatomy_app.js?v=20261113a"></script>
+<script src="explore_app.js?v=20261113a"></script>
+<script src="maxquiz.js?v=20261113a"></script>
+<script src="spelling.js?v=20261113a"></script>
+<script src="social_app.js?v=20261113a"></script>
+<script src="fractions_app.js?v=20261113a"></script>
+<script src="mult_vis.js?v=20261113a"></script>
+<script src="mult_mastery.js?v=20261113a"></script>
+<script src="mult_app.js?v=20261113a"></script>
+<script src="settings.js?v=20261113a"></script>
+<script src="quiz_history.js?v=20261113a"></script>
+<script src="quiz_history_ui.js?v=20261113a"></script>
+<script src="curriculum.js?v=20261113a"></script>
+<script src="curriculum_ui.js?v=20261113a"></script>
 <script>HB.start();</script>
 </body>
 </html>

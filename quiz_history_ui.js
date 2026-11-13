@@ -3,6 +3,7 @@
   const $ = id => document.getElementById(id);
   const esc = s => String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
   const st = { filter: "all", openId: null };
+  const fmt = x => (HB.QT ? HB.QT.fmt(Number(x) || 0) : String(x));
 
   function status(t, err) { const e = $("qhStatus"); if (!e) return; e.textContent = t || ""; e.classList.toggle("err", !!err); }
 
@@ -28,7 +29,7 @@
     ul.innerHTML = items.map(a => {
       const when = new Date(a.at).toLocaleString();
       const mode = a.mode ? ` · ${a.mode}` : "";
-      return `<li tabindex="0" data-id="${esc(a.id)}"><div class="qh-h"><b>${esc(a.title)}</b><span class="qh-score">${a.score}/${a.total}</span></div>` +
+      return `<li tabindex="0" data-id="${esc(a.id)}"><div class="qh-h"><b>${esc(a.title)}</b><span class="qh-score">${fmt(a.score)}/${a.total}</span></div>` +
         `<small>${esc(a.subject)}${a.topic ? " › " + esc(a.topic) : ""}${esc(mode)}</small>` +
         `<small>${esc(when)}</small></li>`;
     }).join("");
@@ -45,11 +46,13 @@
     $("qhDetailWhen").textContent = new Date(a.at).toLocaleString();
     $("qhDetailTitle").textContent = a.title;
     $("qhDetailMeta").textContent = [a.subject, a.topic, a.mode].filter(Boolean).join(" · ");
-    $("qhDetailScore").textContent = `${a.score} / ${a.total}`;
+    $("qhDetailScore").textContent = `${fmt(a.score)} / ${a.total}`;
     const qs = a.questions || [];
     $("qhDetailQs").innerHTML = qs.length
-      ? qs.map(q => `<li><span class="${q.ok ? "wk-ok" : "wk-bad"}">${q.ok ? "✓" : "✗"}</span> <b>${esc(q.q)}</b>` +
-          `<small>Max: ${esc(q.written || q.given || "—")}${q.ok ? "" : ` · correct: ${esc(q.answer)}`}</small></li>`).join("")
+      ? qs.map(q => { const part = !q.ok && q.earned > 0, marks = q.pts != null && (q.pts > 1 || part) ? ` <span class="qh-score">${fmt(q.earned)}/${q.pts}</span>` : "";
+          return `<li><span class="${q.ok ? "wk-ok" : "wk-bad"}">${q.ok ? "✓" : part ? "◐" : "✗"}</span> <b>${esc(q.q)}</b>${marks}` +
+          `<small>Max: ${esc(q.written || q.given || "—")}${q.ok ? "" : ` · correct: ${esc(q.answer)}`}${q.grader ? ` · graded: ${esc(q.grader)}` : ""}</small>` +
+          (q.feedback ? `<small>${esc(q.feedback)}</small>` : "") + `</li>`; }).join("")
       : (a.details || []).map(d => `<li>${esc(d)}</li>`).join("") || "<li>No per-question details were saved for this attempt.</li>";
   }
 

@@ -20,6 +20,11 @@
   const mathWorked = [["425 ÷ 18"], ["458 ÷ 19"], ["492 ÷ 22"], ["525 ÷ 23"], ["559 ÷ 24"]];
   const mathQuiz = (window.MATH_QUIZ_DATA ? window.MATH_QUIZ_DATA.problems : []).map(p => p.label);
 
+  // "12 questions · 20 marks — word bank, matching, true/false, sentences"
+  const quizLabel = (k, tail) => { const Q = typeof k === "object" ? k : window.QUIZ_SETS && QUIZ_SETS[k]; if (!Q || !Q.questions) return "Quiz";
+    const n = Q.questions.length, m = window.HB && HB.QT ? Q.questions.reduce((a, q) => a + HB.QT.pts(q), 0) : n;
+    const kinds = [...new Set(Q.questions.map(q => ({ wordbank: "word bank", match: "matching", tf: "true/false", inline: "circle the word", sentence: "sentences" })[q.type]).filter(Boolean))];
+    return `${n} questions${m !== n ? ` · ${m} marks` : ""}${kinds.length ? " — " + kinds.join(", ") : tail || " with spoken feedback"}`; };
   window.TOPICS = [
     {
       id: "math", title: "Math", icon: "divide", homeIcon: "math", blurb: "Long division, fractions, and a year-long Multiplication unit.",
@@ -42,16 +47,16 @@
             if (S.dual) {
               return [
                 { id: id + "-typed", title: S.title + " · Typed", icon: "fraction", blurb: S.blurb + " Easier — tap or type.",
-                  review, quiz: { module: "maxQuiz", opts: { set: S.quiz, mode: "typed" }, label: Q.questions.length + " questions · type or tap (no pad required)" },
+                  review, quiz: { module: "maxQuiz", opts: { set: S.quiz, mode: "typed" }, label: quizLabel(S.quiz, " · type or tap") + " · Typed (no pad required)" },
                   componentModule: "fracWalk", components: comps },
                 { id: id + "-notepad", title: S.title + " · Notepad", icon: "fraction", blurb: S.blurb + " Harder — scratch pad + AI check.",
-                  review, quiz: { module: "maxQuiz", opts: { set: S.quiz, mode: "notepad" }, label: Q.questions.length + " questions · scratch pad (AI if Ready)" },
+                  review, quiz: { module: "maxQuiz", opts: { set: S.quiz, mode: "notepad" }, label: quizLabel(S.quiz, "") + " · Notepad: show your work (AI if Ready)" },
                   componentModule: "fracWalk", components: comps }
               ];
             }
             return [{ id, title: S.title, icon: "fraction", blurb: S.blurb,
               review: { module: "fracWalk", label: S.review.length + "-step narrated walkthrough with pictures" },
-              quiz: { module: "maxQuiz", opts: { set: S.quiz }, label: Q.questions.length + " questions with spoken feedback" },
+              quiz: { module: "maxQuiz", opts: { set: S.quiz }, label: quizLabel(S.quiz) },
               componentModule: "fracWalk", components: comps }];
           }),
           moreComingSoon: false },
@@ -84,7 +89,7 @@
           sessions: [
             { id: "maxtopics", title: "Max's Test Topics", icon: "quiz", blurb: "The 12 topics from your teacher's list, ready for the test.",
               review: { module: "anatExplore", opts: { mode: "walk", source: "maxtopics", title: "Max's test topics" }, label: "12 topics on the body scanner" },
-              quiz: { module: "maxQuiz", label: "15 questions — tap, pick three, or type" },
+              quiz: { module: "maxQuiz", label: quizLabel(window.MAX_TOPICS_DATA && MAX_TOPICS_DATA.quiz) },
               componentModule: "anatComponent", components: C.maxtopics || [] },
             { id: "organs", title: "Organs", icon: "heart", blurb: "Step through 13 organs and body parts.",
               review: { module: "anatExplore", opts: { mode: "walk" }, label: "Organ walkthrough on the body scanner" },
@@ -93,7 +98,7 @@
           ].concat(SYS.map(([k, t, ic, blurb]) => ({
             id: k, title: t, icon: ic, blurb,
             review: { module: "anatExplore", opts: { mode: "systems", sys: k, title: t + " system" }, label: "Live flow on the body scanner" },
-            quiz: { module: "maxQuiz", opts: { set: k }, label: (window.QUIZ_SETS && QUIZ_SETS[k] ? QUIZ_SETS[k].questions.length : 4) + " questions" },
+            quiz: { module: "maxQuiz", opts: { set: k }, label: quizLabel(k) },
             componentModule: "anatComponent", components: C[k] || []
           }))).concat([
             { id: "allsystems", title: "All Systems", icon: "flow", blurb: "Compare all 7 systems, then the full Body Systems quiz.",
@@ -132,7 +137,13 @@
                   quiz: { module: "spellingQuiz", opts: { list: id, mode: "notepad" },
                     label: "Harder — write on the notepad; AI checks your spelling" },
                   componentModule: "spellingReview", components: comps }
-              ];
+              ].concat(window.QUIZ_SETS && QUIZ_SETS["spell_" + id + "_work"] ? [
+                { id: id + "-work", title: title + " · Word Work", icon: "quiz",
+                  blurb: "Test-style: word bank, matching meanings, circle the spelling, and complete sentences.",
+                  review: { module: "spellingReview", opts: { list: id },
+                    label: n + " words — meaning, example, and a fun fact each" },
+                  quiz: { module: "maxQuiz", opts: { set: "spell_" + id + "_work" }, label: quizLabel("spell_" + id + "_work") },
+                  componentModule: "spellingReview", components: comps }] : []);
             });
           })()),
           moreComingSoon: true }
@@ -143,12 +154,12 @@
       id: "social", title: "Social Studies", icon: "globe", homeIcon: "social", blurb: "Canada: provinces, maps, Indigenous peoples and early history.",
       subtopics: ((window.SOCIAL_DATA && SOCIAL_DATA.subtopics) || []).map(t => ({
         id: t.id, title: t.title, icon: "globe", blurb: t.blurb, toolbar: "anatBar",
-        sessions: [{
-          id: t.id, title: t.session, icon: "globe", blurb: t.sessionBlurb,
-          review: { module: "factWalk", opts: { set: t.id }, label: ((SOCIAL_DATA.reviews[t.id] || []).length) + "-step narrated walkthrough" },
-          quiz: { module: "maxQuiz", opts: { set: "ss_" + t.id }, label: ((window.QUIZ_SETS && QUIZ_SETS["ss_" + t.id]) ? QUIZ_SETS["ss_" + t.id].questions.length : 6) + " questions — tap, pick, or type" },
-          componentModule: "factWalk", components: (SOCIAL_DATA.components[t.id] || []).map(c => ({ id: c.id, title: c.title }))
-        }],
+        sessions: (t.sessions || [{ id: t.id, title: t.session, blurb: t.sessionBlurb, review: t.id, quiz: "ss_" + t.id }]).map(x => ({
+          id: x.id, title: x.title, icon: x.id === t.id ? "globe" : "quiz", blurb: x.blurb,
+          review: { module: "factWalk", opts: { set: x.review }, label: ((SOCIAL_DATA.reviews[x.review] || []).length) + "-step narrated walkthrough" },
+          quiz: { module: "maxQuiz", opts: { set: x.quiz }, label: quizLabel(x.quiz) },
+          componentModule: "factWalk", components: (SOCIAL_DATA.components[x.id] || []).map(c => ({ id: c.id, title: c.title }))
+        })),
         moreComingSoon: false
       })),
       moreComingSoon: true

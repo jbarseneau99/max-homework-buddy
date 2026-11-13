@@ -39,6 +39,7 @@
   const svg = (w, h, body, label) => `<svg viewBox="0 0 ${w} ${h}" class="fw-svg fv" role="img" aria-label="${label}">${body}</svg>`;
   const txt = (x, y, t, o = {}) => `<text class="fv-pop" ${dl()} x="${fx(x)}" y="${fx(y)}" text-anchor="${o.a || "middle"}" font-size="${o.s || 12}" font-weight="${o.w || 700}" fill="${o.c || CY2}">${t}</text>`;
   const F = p => `${p[0]}/${p[1]}`;
+  const ORDW = d => ({ 2: "halves", 3: "thirds", 4: "fourths", 5: "fifths", 6: "sixths", 8: "eighths", 9: "ninths", 10: "tenths", 12: "twelfths" })[d] || d + "ths";
 
   const KINDS = {
     anatomy: v => svg(260, 190,
@@ -66,8 +67,10 @@
         `<path class="fv-draw" ${dl()} d="M70,36 Q130,4 190,36" fill="none" stroke="${GD}" stroke-width="2" pathLength="100" marker-end="url(#fvArr)"/>` +
         `<path class="fv-draw" ${dl()} d="M70,74 Q130,106 190,74" fill="none" stroke="${GD}" stroke-width="2" pathLength="100" marker-end="url(#fvArr)"/>` +
         txt(130, 22, o, { s: 15, c: GD2, w: 800 }) + txt(130, 100, o, { s: 15, c: GD2, w: 800 }) + txt(130, 62, "=", { s: 24, c: CY2, w: 800 });
-      s += bar(a[0], a[1], 16, 124, 228, 26) + bar(b[0], b[1], 16, 158, 228, 26, { col: GD }) + guide(16 + 228 * a[0] / a[1], 118, 190, CY2);
-      return svg(260, 196, `<defs><marker id="fvArr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="${GD}"/></marker></defs>` + s,
+      const imp = a[0] > a[1];   // improper fractions: no bars, just the rule
+      if (!imp) s += bar(a[0], a[1], 16, 124, 228, 26) + bar(b[0], b[1], 16, 158, 228, 26, { col: GD }) + guide(16 + 228 * a[0] / a[1], 118, 190, CY2);
+      else s += txt(130, 140, `${v.op === "×" ? "multiplied" : "divided"} top and bottom by ${v.k}`, { s: 13, c: CY2 });
+      return svg(260, imp ? 156 : 196, `<defs><marker id="fvArr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="${GD}"/></marker></defs>` + s,
         `${F(a)} ${o} on top and bottom gives ${F(b)}`);
     },
     cross: v => {
@@ -120,6 +123,68 @@
         if (v.improper) s += txt(130, 132, "=", { s: 22, c: CY2, w: 800 }) + frac(v.w * v.d + v.n, v.d, 180, 118, 16);
       }
       return svg(W, v.bare ? 100 : 160, s, v.bare ? "Pie picture" : `${v.w}${v.n ? " " + F([v.n, v.d]) : ""} = ${F([v.w * v.d + v.n, v.d])}`);
+    },
+    // shapes {items:[{shape:"square"|"rect"|"triangle"|"circle", n, d}]} cut into d equal parts, n shaded; "=" between
+    shapes: v => {
+      const k = v.items.length, W = 300, step = W / k, R = Math.min(46, step / 2 - 12);
+      let s = "";
+      v.items.forEach((it, i) => {
+        const cx = step * i + step / 2, cy = 62, n = it.n, d = it.d;
+        if (it.shape === "circle") s += pie(n, d, cx, cy, R);
+        else if (it.shape === "triangle") {
+          const top = [cx, cy - R], L = cx - R * 1.1, Rt = cx + R * 1.1, by = cy + R * 0.85;
+          for (let j = 0; j < d; j++) { const x0 = L + (Rt - L) * j / d, x1 = L + (Rt - L) * (j + 1) / d, on = j < n;
+            s += `<path class="${on ? "fv-fill" : ""}" ${on ? dl() : ""} d="M${fx(top[0])},${fx(top[1])} L${fx(x0)},${fx(by)} L${fx(x1)},${fx(by)} Z" fill="${on ? CY : "rgba(76,201,240,.06)"}" fill-opacity=".8" stroke="${CY2}" stroke-opacity=".6" stroke-width="1"/>`; }
+          s += `<path d="M${fx(top[0])},${fx(top[1])} L${fx(L)},${fx(by)} L${fx(Rt)},${fx(by)} Z" fill="none" stroke="${CY2}" stroke-width="1.6"/>`;
+        } else {
+          let cols = d, rows = 1; for (let r = Math.floor(Math.sqrt(d)); r >= 1; r--) if (d % r === 0) { rows = r; cols = d / r; break; }
+          if (it.shape === "rect") { rows = 1; cols = d; }
+          const w = it.shape === "rect" ? R * 2.4 : R * 1.8, h = it.shape === "rect" ? R * 1.0 : R * 1.8, x0 = cx - w / 2, y0 = cy - h / 2;
+          for (let j = 0; j < d; j++) { const c = j % cols, r = Math.floor(j / cols), on = j < n;
+            s += `<rect class="${on ? "fv-fill" : ""}" ${on ? dl() : ""} x="${fx(x0 + c * w / cols + 1)}" y="${fx(y0 + r * h / rows + 1)}" width="${fx(w / cols - 2)}" height="${fx(h / rows - 2)}" rx="2" fill="${on ? CY : "rgba(76,201,240,.06)"}" fill-opacity=".8" stroke="${CY2}" stroke-opacity=".55"/>`; }
+          s += `<rect x="${fx(x0)}" y="${fx(y0)}" width="${fx(w)}" height="${fx(h)}" rx="3" fill="none" stroke="${CY2}" stroke-width="1.6"/>`;
+        }
+        if (!v.bare) s += frac(n, d, cx, 138, 17);
+        if (i && !v.bare) s += txt(step * i, 70, v.eq === false ? "≠" : "=", { s: 24, c: GD, w: 800 });
+      });
+      return svg(W, v.bare ? 120 : 180, s, "Shapes: " + v.items.map(it => `${it.shape} ${it.n}/${it.d}`).join(", "));
+    },
+    // number line nline {d, max, marks:[{v:[n,d], label?, up?}], show:"both"|"improper"|"mixed"|"none"} 0..max cut into 1/d steps
+    nline: v => {
+      const x0 = 18, x1 = 302, y = 66, W = 320, N = v.d * v.max, X = t => x0 + (x1 - x0) * t / N;
+      let s = `<path d="M${x0},${y} H${x1}" stroke="${CY2}" stroke-width="2"/>`;
+      for (let t = 0; t <= N; t++) { const whole = t % v.d === 0;
+        s += `<path d="M${fx(X(t))},${y - (whole ? 10 : 6)} V${y + (whole ? 10 : 6)}" stroke="${whole ? GD2 : CY2}" stroke-width="${whole ? 2.4 : 1.2}"/>`;
+        if (whole) s += txt(X(t), y + 26, String(t / v.d), { s: 13, c: GD2, w: 800 }) + (v.show === "both" || v.show === "improper" ? txt(X(t), y + 40, `${t}/${v.d}`, { s: 9, c: CY2 }) : ""); }
+      (v.marks || []).forEach((m, i) => { const t = m.v[0] * v.d / m.v[1], x = X(t), up = i % 2 === 0, ly = up ? y - 22 : y - 40;
+        const w = Math.floor(m.v[0] / m.v[1]), r = m.v[0] - w * m.v[1];
+        const lab = m.label || (v.show === "mixed" ? (r ? `${w ? w + " " : ""}${r}/${m.v[1]}` : String(w)) : v.show === "both" ? `${m.v[0]}/${m.v[1]} = ${w ? w + " " : ""}${r}/${m.v[1]}` : `${m.v[0]}/${m.v[1]}`);
+        s += `<circle class="fv-pop" ${dl()} cx="${fx(x)}" cy="${y}" r="6.5" fill="${GD}" stroke="#fff" stroke-width="1.5"/>` +
+          `<path class="fv-pop" ${dl()} d="M${fx(x)},${y - 8} V${ly + 4}" stroke="${GD}" stroke-width="1.2" stroke-dasharray="2 2"/>` + txt(x, ly, lab, { s: 13, c: GD2, w: 800 }); });
+      return svg(W, 112, s, `Number line from 0 to ${v.max} in ${ORDW(v.d)}`);
+    },
+    // mixed → improper: w d/n → (w × d + n)/d, with the steps drawn
+    mix2imp: v => {
+      const N = v.w * v.d + v.n;
+      let s = `<g class="fv-pop" ${dl()}><text x="46" y="70" text-anchor="middle" font-size="40" font-weight="900" fill="${GD2}">${v.w}</text></g>` + frac(v.n, v.d, 84, 46, 22) +
+        `<path class="fv-draw" ${dl()} d="M84,96 Q70,124 50,82" fill="none" stroke="${CY}" stroke-width="2.2" pathLength="100" marker-end="url(#fvArr2)"/>` +
+        `<path class="fv-draw" ${dl()} d="M58,58 Q74,20 84,36" fill="none" stroke="${GD}" stroke-width="2.2" pathLength="100" marker-end="url(#fvArr2)"/>` +
+        txt(30, 118, "① multiply", { s: 11, c: CY2, a: "start" }) + txt(56, 16, "② add", { s: 11, c: GD2, a: "start" }) +
+        txt(196, 56, `${v.w} × ${v.d} + ${v.n} = ${N}`, { s: 17, c: GD2, w: 800 }) +
+        frac(N, v.d, 196, 88, 22) + txt(196, 152, `same denominator: ${v.d}`, { s: 12, c: CY2 });
+      return svg(270, 160, `<defs><marker id="fvArr2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="${GD}"/></marker></defs>` + s,
+        `${v.w} ${v.n}/${v.d}: ${v.w} times ${v.d} plus ${v.n} = ${N}, so ${N}/${v.d}`);
+    },
+    // improper → mixed: N/d → N ÷ d = q R r → q r/d (the denominator stays d)
+    imp2mix: v => {
+      const q = Math.floor(v.N / v.d), r = v.N - q * v.d;
+      let s = frac(v.N, v.d, 36, 44, 24) + txt(78, 62, "→", { s: 24, c: CY2, w: 800 }) +
+        txt(170, 50, `${v.N} ÷ ${v.d} = ${q} R ${r}`, { s: 18, c: GD2, w: 800 }) +
+        txt(170, 76, `${q} whole${q === 1 ? "" : "s"}, ${r} left over`, { s: 12, c: CY2 }) +
+        `<g class="fv-pop" ${dl()}><text x="132" y="132" text-anchor="middle" font-size="34" font-weight="900" fill="${GD2}">${q}</text></g>` + (r ? frac(r, v.d, 162, 110, 20) : "") +
+        `<g class="fv-pop" ${dl()}><rect x="146" y="128" width="32" height="30" rx="6" fill="none" stroke="${GD}" stroke-width="2" stroke-dasharray="4 3"/></g>` +
+        txt(236, 140, `stays ${v.d}`, { s: 12, c: GD2, w: 800 }) + txt(236, 156, `not ${v.N}!`, { s: 11, c: BAD, w: 800 });
+      return svg(280, 166, s, `${v.N}/${v.d}: ${v.N} divided by ${v.d} is ${q} remainder ${r}, so ${q} ${r}/${v.d}`);
     },
     cup: v => cupVis(v)
   };
@@ -196,7 +261,9 @@
   const KICK = { multiply: "Make an equivalent fraction · multiply", simplify: "Simplify · divide", check: "Check · cross-multiply",
     compare: "Compare · <, > or =", toMixed: "Improper → mixed · divide", toImproper: "Mixed → improper · multiply and add",
     mul: "Multiply · pour part of a cup", div: "Divide · count the cupfuls",
-    add: "Add like fractions · same denominator", sub: "Subtract like fractions · same denominator" };
+    add: "Add like fractions · same denominator", sub: "Subtract like fractions · same denominator",
+    mixedEq: "Equivalent mixed number · the whole stays", model: "Same amount, different shapes", chain: "Show your work · step by step",
+    order: "Order · convert first, then sort" };
   const esc = s => s.replace(/&/g, "&amp;").replace(/</g, "&lt;");
 
   function render(speak) {

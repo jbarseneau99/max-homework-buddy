@@ -740,8 +740,9 @@ window.COMPONENTS = {
 window.QUIZ_SETS = {
  "circulatory": {
   "title": "Circulatory system · quiz",
-  "intro": "Circulatory system quiz. 4 questions. Pick or type your answer, then check it.",
-  "introAudio": "audio/anatomy/sessions/circulatory_intro.mp3",
+  "subject": "Science",
+  "intro": "Circulatory system quiz. 8 questions. Tap, match, fill in the blanks, and write a complete sentence.",
+  "introAudio": "audio/anatomy/sessions/circulatory_intro_v2.mp3",
   "questions": [
    {
     "type": "mc",
@@ -817,35 +818,126 @@ window.QUIZ_SETS = {
     "wrongText": "Not quite. The three types of blood vessels are arteries, veins and capillaries.",
     "rightAudio": "audio/anatomy/sessions/circulatory_q4_right.mp3",
     "wrongAudio": "audio/anatomy/sessions/circulatory_q4_wrong.mp3"
+   },
+   {
+    "type": "tf",
+    "q": "Arteries carry blood away from the heart.",
+    "options": [
+     "True",
+     "False"
+    ],
+    "answer": "True",
+    "explain": "True. Arteries carry blood away from the heart; veins bring it back.",
+    "qAudio": "audio/anatomy/sessions/circulatory_q5_tf.mp3",
+    "rightText": "Correct. Nice work. True. Arteries carry blood away from the heart; veins bring it back.",
+    "wrongText": "Not quite. True. Arteries carry blood away from the heart; veins bring it back.",
+    "rightAudio": "audio/anatomy/sessions/circulatory_q5_right.mp3",
+    "wrongAudio": "audio/anatomy/sessions/circulatory_q5_wrong.mp3"
+   },
+   {
+    "type": "wordbank",
+    "q": "Fill in the blanks with words from the word bank. Each word is used once.",
+    "bank": [
+     "heart",
+     "arteries",
+     "veins",
+     "capillaries",
+     "lungs"
+    ],
+    "items": [
+     {
+      "pre": "The ",
+      "answer": "heart",
+      "post": " pumps blood around the body."
+     },
+     {
+      "pre": "Blood leaves the heart through the ",
+      "answer": "arteries",
+      "post": "."
+     },
+     {
+      "pre": "Blood comes back to the heart through the ",
+      "answer": "veins",
+      "post": "."
+     },
+     {
+      "pre": "Tiny ",
+      "answer": "capillaries",
+      "post": " connect arteries to veins."
+     }
+    ],
+    "explain": "Heart pumps, arteries carry blood away, veins bring it back, and capillaries connect them.",
+    "qAudio": "audio/anatomy/sessions/circulatory_q6_wordbank.mp3",
+    "rightText": "That's right. Heart pumps, arteries carry blood away, veins bring it back, and capillaries connect them.",
+    "wrongText": "Not quite. Heart pumps, arteries carry blood away, veins bring it back, and capillaries connect them.",
+    "rightAudio": "audio/anatomy/sessions/circulatory_q6_right.mp3",
+    "wrongAudio": "audio/anatomy/sessions/circulatory_q6_wrong.mp3"
+   },
+   {
+    "type": "inline",
+    "q": "Circle the correct word.",
+    "parts": [
+     "The heart is a ",
+     {
+      "choices": [
+       "bone",
+       "muscle",
+       "nerve"
+      ],
+      "answer": "muscle"
+     },
+     "."
+    ],
+    "explain": "The heart is a strong muscle.",
+    "qAudio": "audio/anatomy/sessions/circulatory_q7_inline.mp3",
+    "rightText": "Yes, exactly. The heart is a strong muscle.",
+    "wrongText": "Not quite. The heart is a strong muscle.",
+    "rightAudio": "audio/anatomy/sessions/circulatory_q7_right.mp3",
+    "wrongAudio": "audio/anatomy/sessions/circulatory_q7_wrong.mp3"
+   },
+   {
+    "type": "sentence",
+    "q": "Explain how the heart and the blood vessels work together.",
+    "rubric": [
+     {
+      "idea": "The heart pumps the blood",
+      "pts": 1
+     },
+     {
+      "idea": "The blood vessels carry the blood around the body and back (arteries away, veins back)",
+      "pts": 1
+     }
+    ],
+    "model": "The heart pumps blood, and the blood vessels carry it around the body and back to the heart.",
+    "explain": "The heart pumps blood. Arteries carry it away, and veins bring it back.",
+    "qAudio": "audio/anatomy/sessions/circulatory_q8_sentence.mp3",
+    "rightText": "Spot on, Max. The heart pumps blood. Arteries carry it away, and veins bring it back.",
+    "wrongText": "Not quite. The heart pumps blood. Arteries carry it away, and veins bring it back.",
+    "rightAudio": "audio/anatomy/sessions/circulatory_q8_right.mp3",
+    "wrongAudio": "audio/anatomy/sessions/circulatory_q8_wrong.mp3"
    }
   ],
-  "done": [
-   {
-    "text": "Circulatory quiz complete. You got 0 out of 4. Run through the review again, then have another go.",
-    "audio": "audio/anatomy/sessions/circulatory_done_0.mp3"
+  "done": [],
+  "doneTiers": {
+   "perfect": {
+    "text": "Circulatory quiz complete. Perfect score! Every mark.",
+    "audio": "audio/anatomy/sessions/circulatory_done_perfect.mp3"
    },
-   {
-    "text": "Circulatory quiz complete. You got 1 out of 4. Run through the review again, then have another go.",
-    "audio": "audio/anatomy/sessions/circulatory_done_1.mp3"
+   "good": {
+    "text": "Circulatory quiz complete. Nice work. Check the ones you missed, then you're set.",
+    "audio": "audio/anatomy/sessions/circulatory_done_good.mp3"
    },
-   {
-    "text": "Circulatory quiz complete. You got 2 out of 4. Run through the review again, then have another go.",
-    "audio": "audio/anatomy/sessions/circulatory_done_2.mp3"
-   },
-   {
-    "text": "Circulatory quiz complete. You got 3 out of 4. Nice work.",
-    "audio": "audio/anatomy/sessions/circulatory_done_3.mp3"
-   },
-   {
-    "text": "Circulatory quiz complete. You got 4 out of 4. Perfect score.",
-    "audio": "audio/anatomy/sessions/circulatory_done_4.mp3"
+   "review": {
+    "text": "Circulatory quiz complete. Good effort. Run through the review again, then have another go.",
+    "audio": "audio/anatomy/sessions/circulatory_done_review.mp3"
    }
-  ]
+  }
  },
  "respiratory": {
   "title": "Respiratory system · quiz",
-  "intro": "Respiratory system quiz. 4 questions. Pick or type your answer, then check it.",
-  "introAudio": "audio/anatomy/sessions/respiratory_intro.mp3",
+  "subject": "Science",
+  "intro": "Respiratory system quiz. 8 questions. Tap, match, fill in the blanks, and write a complete sentence.",
+  "introAudio": "audio/anatomy/sessions/respiratory_intro_v2.mp3",
   "questions": [
    {
     "type": "mc",
@@ -914,35 +1006,127 @@ window.QUIZ_SETS = {
     "wrongText": "Not quite. The epiglottis covers the windpipe when you swallow.",
     "rightAudio": "audio/anatomy/sessions/respiratory_q4_right.mp3",
     "wrongAudio": "audio/anatomy/sessions/respiratory_q4_wrong.mp3"
+   },
+   {
+    "type": "tf",
+    "q": "You breathe in carbon dioxide and breathe out oxygen.",
+    "options": [
+     "True",
+     "False"
+    ],
+    "answer": "False",
+    "explain": "False. You breathe in oxygen and breathe out carbon dioxide.",
+    "qAudio": "audio/anatomy/sessions/respiratory_q5_tf.mp3",
+    "rightText": "Correct. Nice work. False. You breathe in oxygen and breathe out carbon dioxide.",
+    "wrongText": "Not quite. False. You breathe in oxygen and breathe out carbon dioxide.",
+    "rightAudio": "audio/anatomy/sessions/respiratory_q5_right.mp3",
+    "wrongAudio": "audio/anatomy/sessions/respiratory_q5_wrong.mp3"
+   },
+   {
+    "type": "match",
+    "q": "Match each part to its job.",
+    "terms": [
+     "Nose and mouth",
+     "Trachea",
+     "Lungs",
+     "Epiglottis"
+    ],
+    "defs": [
+     {
+      "letter": "A",
+      "text": "Swap oxygen and carbon dioxide with the blood"
+     },
+     {
+      "letter": "B",
+      "text": "Where air comes in"
+     },
+     {
+      "letter": "C",
+      "text": "A flap that covers the windpipe when you swallow"
+     },
+     {
+      "letter": "D",
+      "text": "The windpipe that carries air to the lungs"
+     }
+    ],
+    "answers": [
+     "B",
+     "D",
+     "A",
+     "C"
+    ],
+    "explain": "Nose and mouth: air comes in. Trachea: windpipe. Lungs: swap gases. Epiglottis: flap over the windpipe.",
+    "qAudio": "audio/anatomy/sessions/respiratory_q6_match.mp3",
+    "rightText": "That's right. Nose and mouth: air comes in. Trachea: windpipe. Lungs: swap gases. Epiglottis: flap over the windpipe.",
+    "wrongText": "Not quite. Nose and mouth: air comes in. Trachea: windpipe. Lungs: swap gases. Epiglottis: flap over the windpipe.",
+    "rightAudio": "audio/anatomy/sessions/respiratory_q6_right.mp3",
+    "wrongAudio": "audio/anatomy/sessions/respiratory_q6_wrong.mp3"
+   },
+   {
+    "type": "inline",
+    "q": "Circle the correct word.",
+    "parts": [
+     "Air travels down the ",
+     {
+      "choices": [
+       "esophagus",
+       "trachea",
+       "ureter"
+      ],
+      "answer": "trachea"
+     },
+     " to the lungs."
+    ],
+    "explain": "Air travels down the trachea, the windpipe.",
+    "qAudio": "audio/anatomy/sessions/respiratory_q7_inline.mp3",
+    "rightText": "Yes, exactly. Air travels down the trachea, the windpipe.",
+    "wrongText": "Not quite. Air travels down the trachea, the windpipe.",
+    "rightAudio": "audio/anatomy/sessions/respiratory_q7_right.mp3",
+    "wrongAudio": "audio/anatomy/sessions/respiratory_q7_wrong.mp3"
+   },
+   {
+    "type": "sentence",
+    "q": "Explain how the respiratory and circulatory systems work together.",
+    "rubric": [
+     {
+      "idea": "The lungs take in oxygen, and it passes into the blood",
+      "pts": 1
+     },
+     {
+      "idea": "The blood carries oxygen to the body and brings carbon dioxide back to be breathed out",
+      "pts": 1
+     }
+    ],
+    "model": "The lungs put oxygen into the blood, and the blood carries it to the body and brings carbon dioxide back to breathe out.",
+    "explain": "Lungs put oxygen into the blood; the blood carries it around and brings carbon dioxide back.",
+    "qAudio": "audio/anatomy/sessions/respiratory_q8_sentence.mp3",
+    "rightText": "Spot on, Max. Lungs put oxygen into the blood; the blood carries it around and brings carbon dioxide back.",
+    "wrongText": "Not quite. Lungs put oxygen into the blood; the blood carries it around and brings carbon dioxide back.",
+    "rightAudio": "audio/anatomy/sessions/respiratory_q8_right.mp3",
+    "wrongAudio": "audio/anatomy/sessions/respiratory_q8_wrong.mp3"
    }
   ],
-  "done": [
-   {
-    "text": "Respiratory quiz complete. You got 0 out of 4. Run through the review again, then have another go.",
-    "audio": "audio/anatomy/sessions/respiratory_done_0.mp3"
+  "done": [],
+  "doneTiers": {
+   "perfect": {
+    "text": "Respiratory quiz complete. Perfect score! Every mark.",
+    "audio": "audio/anatomy/sessions/respiratory_done_perfect.mp3"
    },
-   {
-    "text": "Respiratory quiz complete. You got 1 out of 4. Run through the review again, then have another go.",
-    "audio": "audio/anatomy/sessions/respiratory_done_1.mp3"
+   "good": {
+    "text": "Respiratory quiz complete. Nice work. Check the ones you missed, then you're set.",
+    "audio": "audio/anatomy/sessions/respiratory_done_good.mp3"
    },
-   {
-    "text": "Respiratory quiz complete. You got 2 out of 4. Run through the review again, then have another go.",
-    "audio": "audio/anatomy/sessions/respiratory_done_2.mp3"
-   },
-   {
-    "text": "Respiratory quiz complete. You got 3 out of 4. Nice work.",
-    "audio": "audio/anatomy/sessions/respiratory_done_3.mp3"
-   },
-   {
-    "text": "Respiratory quiz complete. You got 4 out of 4. Perfect score.",
-    "audio": "audio/anatomy/sessions/respiratory_done_4.mp3"
+   "review": {
+    "text": "Respiratory quiz complete. Good effort. Run through the review again, then have another go.",
+    "audio": "audio/anatomy/sessions/respiratory_done_review.mp3"
    }
-  ]
+  }
  },
  "digestive": {
   "title": "Digestive system · quiz",
-  "intro": "Digestive system quiz. 4 questions. Pick or type your answer, then check it.",
-  "introAudio": "audio/anatomy/sessions/digestive_intro.mp3",
+  "subject": "Science",
+  "intro": "Digestive system quiz. 8 questions. Tap, match, fill in the blanks, and write a complete sentence.",
+  "introAudio": "audio/anatomy/sessions/digestive_intro_v2.mp3",
   "questions": [
    {
     "type": "pick",
@@ -1018,35 +1202,131 @@ window.QUIZ_SETS = {
     "wrongText": "Not quite. The stomach uses acid to break food down.",
     "rightAudio": "audio/anatomy/sessions/digestive_q4_right.mp3",
     "wrongAudio": "audio/anatomy/sessions/digestive_q4_wrong.mp3"
+   },
+   {
+    "type": "tf",
+    "q": "Most nutrients are absorbed in the large intestine.",
+    "options": [
+     "True",
+     "False"
+    ],
+    "answer": "False",
+    "explain": "False. Most nutrients are absorbed in the small intestine. The large intestine soaks up water.",
+    "qAudio": "audio/anatomy/sessions/digestive_q5_tf.mp3",
+    "rightText": "Correct. Nice work. False. Most nutrients are absorbed in the small intestine. The large intestine soaks up water.",
+    "wrongText": "Not quite. False. Most nutrients are absorbed in the small intestine. The large intestine soaks up water.",
+    "rightAudio": "audio/anatomy/sessions/digestive_q5_right.mp3",
+    "wrongAudio": "audio/anatomy/sessions/digestive_q5_wrong.mp3"
+   },
+   {
+    "type": "wordbank",
+    "q": "Fill in the blanks with words from the word bank. Each word is used once.",
+    "bank": [
+     "mouth",
+     "esophagus",
+     "stomach",
+     "small intestine",
+     "large intestine"
+    ],
+    "items": [
+     {
+      "pre": "Food is chewed in the ",
+      "answer": "mouth",
+      "post": "."
+     },
+     {
+      "pre": "The ",
+      "answer": "esophagus",
+      "post": " carries food down to the stomach."
+     },
+     {
+      "pre": "The ",
+      "answer": "stomach",
+      "post": " mixes food with strong acid."
+     },
+     {
+      "pre": "Most nutrients are absorbed in the ",
+      "answer": "small intestine",
+      "post": "."
+     },
+     {
+      "pre": "The ",
+      "answer": "large intestine",
+      "post": " soaks up water."
+     }
+    ],
+    "explain": "Mouth, esophagus, stomach, small intestine, large intestine: that's the path food takes.",
+    "qAudio": "audio/anatomy/sessions/digestive_q6_wordbank.mp3",
+    "rightText": "That's right. Mouth, esophagus, stomach, small intestine, large intestine: that's the path food takes.",
+    "wrongText": "Not quite. Mouth, esophagus, stomach, small intestine, large intestine: that's the path food takes.",
+    "rightAudio": "audio/anatomy/sessions/digestive_q6_right.mp3",
+    "wrongAudio": "audio/anatomy/sessions/digestive_q6_wrong.mp3"
+   },
+   {
+    "type": "inline",
+    "q": "Circle the correct word.",
+    "parts": [
+     "The liver is part of the ",
+     {
+      "choices": [
+       "skeletal",
+       "urinary",
+       "digestive"
+      ],
+      "answer": "digestive"
+     },
+     " system."
+    ],
+    "explain": "The liver helps digestion, so it is part of the digestive system.",
+    "qAudio": "audio/anatomy/sessions/digestive_q7_inline.mp3",
+    "rightText": "Yes, exactly. The liver helps digestion, so it is part of the digestive system.",
+    "wrongText": "Not quite. The liver helps digestion, so it is part of the digestive system.",
+    "rightAudio": "audio/anatomy/sessions/digestive_q7_right.mp3",
+    "wrongAudio": "audio/anatomy/sessions/digestive_q7_wrong.mp3"
+   },
+   {
+    "type": "sentence",
+    "q": "Why does your body need the digestive system?",
+    "rubric": [
+     {
+      "idea": "It breaks food down into nutrients",
+      "pts": 1
+     },
+     {
+      "idea": "The nutrients go into the blood to give the body energy and help it grow",
+      "pts": 1
+     }
+    ],
+    "model": "The digestive system breaks food down into nutrients that go into the blood to give the body energy.",
+    "explain": "It breaks food into nutrients that the blood carries to the body for energy and growth.",
+    "qAudio": "audio/anatomy/sessions/digestive_q8_sentence.mp3",
+    "rightText": "Spot on, Max. It breaks food into nutrients that the blood carries to the body for energy and growth.",
+    "wrongText": "Not quite. It breaks food into nutrients that the blood carries to the body for energy and growth.",
+    "rightAudio": "audio/anatomy/sessions/digestive_q8_right.mp3",
+    "wrongAudio": "audio/anatomy/sessions/digestive_q8_wrong.mp3"
    }
   ],
-  "done": [
-   {
-    "text": "Digestive quiz complete. You got 0 out of 4. Run through the review again, then have another go.",
-    "audio": "audio/anatomy/sessions/digestive_done_0.mp3"
+  "done": [],
+  "doneTiers": {
+   "perfect": {
+    "text": "Digestive quiz complete. Perfect score! Every mark.",
+    "audio": "audio/anatomy/sessions/digestive_done_perfect.mp3"
    },
-   {
-    "text": "Digestive quiz complete. You got 1 out of 4. Run through the review again, then have another go.",
-    "audio": "audio/anatomy/sessions/digestive_done_1.mp3"
+   "good": {
+    "text": "Digestive quiz complete. Nice work. Check the ones you missed, then you're set.",
+    "audio": "audio/anatomy/sessions/digestive_done_good.mp3"
    },
-   {
-    "text": "Digestive quiz complete. You got 2 out of 4. Run through the review again, then have another go.",
-    "audio": "audio/anatomy/sessions/digestive_done_2.mp3"
-   },
-   {
-    "text": "Digestive quiz complete. You got 3 out of 4. Nice work.",
-    "audio": "audio/anatomy/sessions/digestive_done_3.mp3"
-   },
-   {
-    "text": "Digestive quiz complete. You got 4 out of 4. Perfect score.",
-    "audio": "audio/anatomy/sessions/digestive_done_4.mp3"
+   "review": {
+    "text": "Digestive quiz complete. Good effort. Run through the review again, then have another go.",
+    "audio": "audio/anatomy/sessions/digestive_done_review.mp3"
    }
-  ]
+  }
  },
  "nervous": {
   "title": "Nervous system · quiz",
-  "intro": "Nervous system quiz. 4 questions. Pick or type your answer, then check it.",
-  "introAudio": "audio/anatomy/sessions/nervous_intro.mp3",
+  "subject": "Science",
+  "intro": "Nervous system quiz. 8 questions. Tap, match, fill in the blanks, and write a complete sentence.",
+  "introAudio": "audio/anatomy/sessions/nervous_intro_v2.mp3",
   "questions": [
    {
     "type": "mc",
@@ -1115,35 +1395,127 @@ window.QUIZ_SETS = {
     "wrongText": "Not quite. The cerebrum handles thinking and voluntary movement.",
     "rightAudio": "audio/anatomy/sessions/nervous_q4_right.mp3",
     "wrongAudio": "audio/anatomy/sessions/nervous_q4_wrong.mp3"
+   },
+   {
+    "type": "tf",
+    "q": "The spinal cord carries messages between the brain and the body.",
+    "options": [
+     "True",
+     "False"
+    ],
+    "answer": "True",
+    "explain": "True. The spinal cord is the message highway between the brain and the body.",
+    "qAudio": "audio/anatomy/sessions/nervous_q5_tf.mp3",
+    "rightText": "Correct. Nice work. True. The spinal cord is the message highway between the brain and the body.",
+    "wrongText": "Not quite. True. The spinal cord is the message highway between the brain and the body.",
+    "rightAudio": "audio/anatomy/sessions/nervous_q5_right.mp3",
+    "wrongAudio": "audio/anatomy/sessions/nervous_q5_wrong.mp3"
+   },
+   {
+    "type": "match",
+    "q": "Match each part to its job.",
+    "terms": [
+     "Brain",
+     "Spinal cord",
+     "Sensory nerves",
+     "Motor nerves"
+    ],
+    "defs": [
+     {
+      "letter": "A",
+      "text": "Carry messages to the muscles so you move"
+     },
+     {
+      "letter": "B",
+      "text": "The message highway inside your spine"
+     },
+     {
+      "letter": "C",
+      "text": "The control centre"
+     },
+     {
+      "letter": "D",
+      "text": "Tell the brain what is happening around you"
+     }
+    ],
+    "answers": [
+     "C",
+     "B",
+     "D",
+     "A"
+    ],
+    "explain": "Brain: control centre. Spinal cord: message highway. Sensory nerves: tell the brain. Motor nerves: tell the muscles.",
+    "qAudio": "audio/anatomy/sessions/nervous_q6_match.mp3",
+    "rightText": "That's right. Brain: control centre. Spinal cord: message highway. Sensory nerves: tell the brain. Motor nerves: tell the muscles.",
+    "wrongText": "Not quite. Brain: control centre. Spinal cord: message highway. Sensory nerves: tell the brain. Motor nerves: tell the muscles.",
+    "rightAudio": "audio/anatomy/sessions/nervous_q6_right.mp3",
+    "wrongAudio": "audio/anatomy/sessions/nervous_q6_wrong.mp3"
+   },
+   {
+    "type": "inline",
+    "q": "Circle the correct word.",
+    "parts": [
+     "The ",
+     {
+      "choices": [
+       "cerebrum",
+       "cerebellum",
+       "brain stem"
+      ],
+      "answer": "cerebellum"
+     },
+     " helps with balance and coordination."
+    ],
+    "explain": "The cerebellum, the little brain, helps with balance and coordination.",
+    "qAudio": "audio/anatomy/sessions/nervous_q7_inline.mp3",
+    "rightText": "Yes, exactly. The cerebellum, the little brain, helps with balance and coordination.",
+    "wrongText": "Not quite. The cerebellum, the little brain, helps with balance and coordination.",
+    "rightAudio": "audio/anatomy/sessions/nervous_q7_right.mp3",
+    "wrongAudio": "audio/anatomy/sessions/nervous_q7_wrong.mp3"
+   },
+   {
+    "type": "sentence",
+    "q": "What happens in your nervous system when you touch something hot?",
+    "rubric": [
+     {
+      "idea": "Sensory nerves send a message to the spinal cord or brain",
+      "pts": 1
+     },
+     {
+      "idea": "A message goes back through motor nerves to the muscles, so you pull your hand away",
+      "pts": 1
+     }
+    ],
+    "model": "Sensory nerves send a message to the spinal cord and brain, and motor nerves send a message back to my muscles to pull my hand away.",
+    "explain": "Sensory nerves send the message in; motor nerves send the message out to the muscles.",
+    "qAudio": "audio/anatomy/sessions/nervous_q8_sentence.mp3",
+    "rightText": "Spot on, Max. Sensory nerves send the message in; motor nerves send the message out to the muscles.",
+    "wrongText": "Not quite. Sensory nerves send the message in; motor nerves send the message out to the muscles.",
+    "rightAudio": "audio/anatomy/sessions/nervous_q8_right.mp3",
+    "wrongAudio": "audio/anatomy/sessions/nervous_q8_wrong.mp3"
    }
   ],
-  "done": [
-   {
-    "text": "Nervous quiz complete. You got 0 out of 4. Run through the review again, then have another go.",
-    "audio": "audio/anatomy/sessions/nervous_done_0.mp3"
+  "done": [],
+  "doneTiers": {
+   "perfect": {
+    "text": "Nervous quiz complete. Perfect score! Every mark.",
+    "audio": "audio/anatomy/sessions/nervous_done_perfect.mp3"
    },
-   {
-    "text": "Nervous quiz complete. You got 1 out of 4. Run through the review again, then have another go.",
-    "audio": "audio/anatomy/sessions/nervous_done_1.mp3"
+   "good": {
+    "text": "Nervous quiz complete. Nice work. Check the ones you missed, then you're set.",
+    "audio": "audio/anatomy/sessions/nervous_done_good.mp3"
    },
-   {
-    "text": "Nervous quiz complete. You got 2 out of 4. Run through the review again, then have another go.",
-    "audio": "audio/anatomy/sessions/nervous_done_2.mp3"
-   },
-   {
-    "text": "Nervous quiz complete. You got 3 out of 4. Nice work.",
-    "audio": "audio/anatomy/sessions/nervous_done_3.mp3"
-   },
-   {
-    "text": "Nervous quiz complete. You got 4 out of 4. Perfect score.",
-    "audio": "audio/anatomy/sessions/nervous_done_4.mp3"
+   "review": {
+    "text": "Nervous quiz complete. Good effort. Run through the review again, then have another go.",
+    "audio": "audio/anatomy/sessions/nervous_done_review.mp3"
    }
-  ]
+  }
  },
  "skeletal": {
   "title": "Skeletal system · quiz",
-  "intro": "Skeletal system quiz. 4 questions. Pick or type your answer, then check it.",
-  "introAudio": "audio/anatomy/sessions/skeletal_intro.mp3",
+  "subject": "Science",
+  "intro": "Skeletal system quiz. 8 questions. Tap, match, fill in the blanks, and write a complete sentence.",
+  "introAudio": "audio/anatomy/sessions/skeletal_intro_v2.mp3",
   "questions": [
    {
     "type": "number",
@@ -1206,35 +1578,126 @@ window.QUIZ_SETS = {
     "wrongText": "Not quite. The femur, in your thigh, is the longest bone.",
     "rightAudio": "audio/anatomy/sessions/skeletal_q4_right.mp3",
     "wrongAudio": "audio/anatomy/sessions/skeletal_q4_wrong.mp3"
+   },
+   {
+    "type": "tf",
+    "q": "Bones are living tissue and can heal when they break.",
+    "options": [
+     "True",
+     "False"
+    ],
+    "answer": "True",
+    "explain": "True. Bones are alive and can heal.",
+    "qAudio": "audio/anatomy/sessions/skeletal_q5_tf.mp3",
+    "rightText": "Correct. Nice work. True. Bones are alive and can heal.",
+    "wrongText": "Not quite. True. Bones are alive and can heal.",
+    "rightAudio": "audio/anatomy/sessions/skeletal_q5_right.mp3",
+    "wrongAudio": "audio/anatomy/sessions/skeletal_q5_wrong.mp3"
+   },
+   {
+    "type": "wordbank",
+    "q": "Fill in the blanks with words from the word bank. Each word is used once.",
+    "bank": [
+     "skull",
+     "ribs",
+     "femur",
+     "spine",
+     "pelvis"
+    ],
+    "items": [
+     {
+      "pre": "The ",
+      "answer": "skull",
+      "post": " protects your brain."
+     },
+     {
+      "pre": "Your ",
+      "answer": "ribs",
+      "post": " protect your heart and lungs."
+     },
+     {
+      "pre": "The ",
+      "answer": "femur",
+      "post": " in your thigh is the longest bone."
+     },
+     {
+      "pre": "Your ",
+      "answer": "spine",
+      "post": " is made of small bones called vertebrae."
+     }
+    ],
+    "explain": "Skull: brain. Ribs: heart and lungs. Femur: longest bone. Spine: vertebrae.",
+    "qAudio": "audio/anatomy/sessions/skeletal_q6_wordbank.mp3",
+    "rightText": "That's right. Skull: brain. Ribs: heart and lungs. Femur: longest bone. Spine: vertebrae.",
+    "wrongText": "Not quite. Skull: brain. Ribs: heart and lungs. Femur: longest bone. Spine: vertebrae.",
+    "rightAudio": "audio/anatomy/sessions/skeletal_q6_right.mp3",
+    "wrongAudio": "audio/anatomy/sessions/skeletal_q6_wrong.mp3"
+   },
+   {
+    "type": "inline",
+    "q": "Circle the correct number.",
+    "parts": [
+     "An adult has ",
+     {
+      "choices": [
+       "106",
+       "206",
+       "306"
+      ],
+      "answer": "206"
+     },
+     " bones."
+    ],
+    "explain": "An adult has two hundred and six bones.",
+    "qAudio": "audio/anatomy/sessions/skeletal_q7_inline.mp3",
+    "rightText": "Yes, exactly. An adult has two hundred and six bones.",
+    "wrongText": "Not quite. An adult has two hundred and six bones.",
+    "rightAudio": "audio/anatomy/sessions/skeletal_q7_right.mp3",
+    "wrongAudio": "audio/anatomy/sessions/skeletal_q7_wrong.mp3"
+   },
+   {
+    "type": "sentence",
+    "q": "Name two jobs of the skeletal system.",
+    "rubric": [
+     {
+      "idea": "Names one correct job: supports the body and gives it shape, protects organs, helps the body move with muscles, or makes blood cells",
+      "pts": 1
+     },
+     {
+      "idea": "Names a second, different correct job",
+      "pts": 1
+     }
+    ],
+    "model": "The skeletal system supports the body and gives it shape, and it protects organs like the brain and heart.",
+    "explain": "The skeleton supports the body, protects organs, helps us move and makes blood cells.",
+    "qAudio": "audio/anatomy/sessions/skeletal_q8_sentence.mp3",
+    "rightText": "Spot on, Max. The skeleton supports the body, protects organs, helps us move and makes blood cells.",
+    "wrongText": "Not quite. The skeleton supports the body, protects organs, helps us move and makes blood cells.",
+    "rightAudio": "audio/anatomy/sessions/skeletal_q8_right.mp3",
+    "wrongAudio": "audio/anatomy/sessions/skeletal_q8_wrong.mp3"
    }
   ],
-  "done": [
-   {
-    "text": "Skeletal quiz complete. You got 0 out of 4. Run through the review again, then have another go.",
-    "audio": "audio/anatomy/sessions/skeletal_done_0.mp3"
+  "done": [],
+  "doneTiers": {
+   "perfect": {
+    "text": "Skeletal quiz complete. Perfect score! Every mark.",
+    "audio": "audio/anatomy/sessions/skeletal_done_perfect.mp3"
    },
-   {
-    "text": "Skeletal quiz complete. You got 1 out of 4. Run through the review again, then have another go.",
-    "audio": "audio/anatomy/sessions/skeletal_done_1.mp3"
+   "good": {
+    "text": "Skeletal quiz complete. Nice work. Check the ones you missed, then you're set.",
+    "audio": "audio/anatomy/sessions/skeletal_done_good.mp3"
    },
-   {
-    "text": "Skeletal quiz complete. You got 2 out of 4. Run through the review again, then have another go.",
-    "audio": "audio/anatomy/sessions/skeletal_done_2.mp3"
-   },
-   {
-    "text": "Skeletal quiz complete. You got 3 out of 4. Nice work.",
-    "audio": "audio/anatomy/sessions/skeletal_done_3.mp3"
-   },
-   {
-    "text": "Skeletal quiz complete. You got 4 out of 4. Perfect score.",
-    "audio": "audio/anatomy/sessions/skeletal_done_4.mp3"
+   "review": {
+    "text": "Skeletal quiz complete. Good effort. Run through the review again, then have another go.",
+    "audio": "audio/anatomy/sessions/skeletal_done_review.mp3"
    }
-  ]
+  }
  },
  "muscular": {
   "title": "Muscular system · quiz",
-  "intro": "Muscular system quiz. 4 questions. Pick or type your answer, then check it.",
-  "introAudio": "audio/anatomy/sessions/muscular_intro.mp3",
+  "subject": "Science",
+  "intro": "Muscular system quiz. 8 questions. Tap, match, fill in the blanks, and write a complete sentence.",
+  "introAudio": "audio/anatomy/sessions/muscular_intro_v2.mp3",
   "questions": [
    {
     "type": "pick",
@@ -1310,35 +1773,120 @@ window.QUIZ_SETS = {
     "wrongText": "Not quite. Muscles you move on purpose are voluntary muscles.",
     "rightAudio": "audio/anatomy/sessions/muscular_q4_right.mp3",
     "wrongAudio": "audio/anatomy/sessions/muscular_q4_wrong.mp3"
+   },
+   {
+    "type": "tf",
+    "q": "Muscles can push bones as well as pull them.",
+    "options": [
+     "True",
+     "False"
+    ],
+    "answer": "False",
+    "explain": "False. Muscles can only pull. They contract and pull on bones.",
+    "qAudio": "audio/anatomy/sessions/muscular_q5_tf.mp3",
+    "rightText": "Correct. Nice work. False. Muscles can only pull. They contract and pull on bones.",
+    "wrongText": "Not quite. False. Muscles can only pull. They contract and pull on bones.",
+    "rightAudio": "audio/anatomy/sessions/muscular_q5_right.mp3",
+    "wrongAudio": "audio/anatomy/sessions/muscular_q5_wrong.mp3"
+   },
+   {
+    "type": "match",
+    "q": "Match each type of muscle to where it is.",
+    "terms": [
+     "Skeletal muscle",
+     "Smooth muscle",
+     "Cardiac muscle"
+    ],
+    "defs": [
+     {
+      "letter": "A",
+      "text": "Found only in the heart"
+     },
+     {
+      "letter": "B",
+      "text": "Moves your bones; you control it"
+     },
+     {
+      "letter": "C",
+      "text": "In the walls of the stomach and intestines; works on its own"
+     }
+    ],
+    "answers": [
+     "B",
+     "C",
+     "A"
+    ],
+    "explain": "Skeletal: moves bones. Smooth: stomach and intestines. Cardiac: only the heart.",
+    "qAudio": "audio/anatomy/sessions/muscular_q6_match.mp3",
+    "rightText": "That's right. Skeletal: moves bones. Smooth: stomach and intestines. Cardiac: only the heart.",
+    "wrongText": "Not quite. Skeletal: moves bones. Smooth: stomach and intestines. Cardiac: only the heart.",
+    "rightAudio": "audio/anatomy/sessions/muscular_q6_right.mp3",
+    "wrongAudio": "audio/anatomy/sessions/muscular_q6_wrong.mp3"
+   },
+   {
+    "type": "inline",
+    "q": "Circle the correct word.",
+    "parts": [
+     "Muscles you control on purpose are ",
+     {
+      "choices": [
+       "involuntary",
+       "voluntary"
+      ],
+      "answer": "voluntary"
+     },
+     " muscles."
+    ],
+    "explain": "Muscles you move on purpose are voluntary.",
+    "qAudio": "audio/anatomy/sessions/muscular_q7_inline.mp3",
+    "rightText": "Yes, exactly. Muscles you move on purpose are voluntary.",
+    "wrongText": "Not quite. Muscles you move on purpose are voluntary.",
+    "rightAudio": "audio/anatomy/sessions/muscular_q7_right.mp3",
+    "wrongAudio": "audio/anatomy/sessions/muscular_q7_wrong.mp3"
+   },
+   {
+    "type": "sentence",
+    "q": "Explain how muscles and bones work together to move your arm.",
+    "rubric": [
+     {
+      "idea": "Muscles contract and pull on the bones",
+      "pts": 1
+     },
+     {
+      "idea": "The bones move at a joint, like the elbow",
+      "pts": 1
+     }
+    ],
+    "model": "Muscles contract and pull on the bones, and the bones move at a joint like the elbow.",
+    "explain": "Muscles pull on bones; bones move at the joints.",
+    "qAudio": "audio/anatomy/sessions/muscular_q8_sentence.mp3",
+    "rightText": "Spot on, Max. Muscles pull on bones; bones move at the joints.",
+    "wrongText": "Not quite. Muscles pull on bones; bones move at the joints.",
+    "rightAudio": "audio/anatomy/sessions/muscular_q8_right.mp3",
+    "wrongAudio": "audio/anatomy/sessions/muscular_q8_wrong.mp3"
    }
   ],
-  "done": [
-   {
-    "text": "Muscular quiz complete. You got 0 out of 4. Run through the review again, then have another go.",
-    "audio": "audio/anatomy/sessions/muscular_done_0.mp3"
+  "done": [],
+  "doneTiers": {
+   "perfect": {
+    "text": "Muscular quiz complete. Perfect score! Every mark.",
+    "audio": "audio/anatomy/sessions/muscular_done_perfect.mp3"
    },
-   {
-    "text": "Muscular quiz complete. You got 1 out of 4. Run through the review again, then have another go.",
-    "audio": "audio/anatomy/sessions/muscular_done_1.mp3"
+   "good": {
+    "text": "Muscular quiz complete. Nice work. Check the ones you missed, then you're set.",
+    "audio": "audio/anatomy/sessions/muscular_done_good.mp3"
    },
-   {
-    "text": "Muscular quiz complete. You got 2 out of 4. Run through the review again, then have another go.",
-    "audio": "audio/anatomy/sessions/muscular_done_2.mp3"
-   },
-   {
-    "text": "Muscular quiz complete. You got 3 out of 4. Nice work.",
-    "audio": "audio/anatomy/sessions/muscular_done_3.mp3"
-   },
-   {
-    "text": "Muscular quiz complete. You got 4 out of 4. Perfect score.",
-    "audio": "audio/anatomy/sessions/muscular_done_4.mp3"
+   "review": {
+    "text": "Muscular quiz complete. Good effort. Run through the review again, then have another go.",
+    "audio": "audio/anatomy/sessions/muscular_done_review.mp3"
    }
-  ]
+  }
  },
  "urinary": {
   "title": "Urinary system · quiz",
-  "intro": "Urinary system quiz. 4 questions. Pick or type your answer, then check it.",
-  "introAudio": "audio/anatomy/sessions/urinary_intro.mp3",
+  "subject": "Science",
+  "intro": "Urinary system quiz. 8 questions. Tap, match, fill in the blanks, and write a complete sentence.",
+  "introAudio": "audio/anatomy/sessions/urinary_intro_v2.mp3",
   "questions": [
    {
     "type": "mc",
@@ -1401,29 +1949,119 @@ window.QUIZ_SETS = {
     "wrongText": "Not quite. Most people have two kidneys.",
     "rightAudio": "audio/anatomy/sessions/urinary_q4_right.mp3",
     "wrongAudio": "audio/anatomy/sessions/urinary_q4_wrong.mp3"
+   },
+   {
+    "type": "tf",
+    "q": "The kidneys filter waste out of the blood.",
+    "options": [
+     "True",
+     "False"
+    ],
+    "answer": "True",
+    "explain": "True. The kidneys clean the blood.",
+    "qAudio": "audio/anatomy/sessions/urinary_q5_tf.mp3",
+    "rightText": "Correct. Nice work. True. The kidneys clean the blood.",
+    "wrongText": "Not quite. True. The kidneys clean the blood.",
+    "rightAudio": "audio/anatomy/sessions/urinary_q5_right.mp3",
+    "wrongAudio": "audio/anatomy/sessions/urinary_q5_wrong.mp3"
+   },
+   {
+    "type": "wordbank",
+    "q": "Fill in the blanks with words from the word bank. Each word is used once.",
+    "bank": [
+     "kidneys",
+     "ureters",
+     "bladder",
+     "urine",
+     "lungs"
+    ],
+    "items": [
+     {
+      "pre": "The ",
+      "answer": "kidneys",
+      "post": " filter waste out of the blood."
+     },
+     {
+      "pre": "Waste and extra water make ",
+      "answer": "urine",
+      "post": "."
+     },
+     {
+      "pre": "The ",
+      "answer": "ureters",
+      "post": " carry urine down to the bladder."
+     },
+     {
+      "pre": "The ",
+      "answer": "bladder",
+      "post": " stores urine until you go to the bathroom."
+     }
+    ],
+    "explain": "Kidneys filter, urine is the waste, ureters carry it, and the bladder stores it.",
+    "qAudio": "audio/anatomy/sessions/urinary_q6_wordbank.mp3",
+    "rightText": "That's right. Kidneys filter, urine is the waste, ureters carry it, and the bladder stores it.",
+    "wrongText": "Not quite. Kidneys filter, urine is the waste, ureters carry it, and the bladder stores it.",
+    "rightAudio": "audio/anatomy/sessions/urinary_q6_right.mp3",
+    "wrongAudio": "audio/anatomy/sessions/urinary_q6_wrong.mp3"
+   },
+   {
+    "type": "inline",
+    "q": "Circle the correct word.",
+    "parts": [
+     "Most people have ",
+     {
+      "choices": [
+       "one",
+       "two",
+       "four"
+      ],
+      "answer": "two"
+     },
+     " kidneys."
+    ],
+    "explain": "Most people have two kidneys.",
+    "qAudio": "audio/anatomy/sessions/urinary_q7_inline.mp3",
+    "rightText": "Yes, exactly. Most people have two kidneys.",
+    "wrongText": "Not quite. Most people have two kidneys.",
+    "rightAudio": "audio/anatomy/sessions/urinary_q7_right.mp3",
+    "wrongAudio": "audio/anatomy/sessions/urinary_q7_wrong.mp3"
+   },
+   {
+    "type": "sentence",
+    "q": "Explain how the urinary system and the circulatory system work together.",
+    "rubric": [
+     {
+      "idea": "The blood carries waste to the kidneys",
+      "pts": 1
+     },
+     {
+      "idea": "The kidneys filter the blood and make urine",
+      "pts": 1
+     }
+    ],
+    "model": "The blood carries waste to the kidneys, and the kidneys filter it out and make urine.",
+    "explain": "Blood brings waste to the kidneys; the kidneys filter it and make urine.",
+    "qAudio": "audio/anatomy/sessions/urinary_q8_sentence.mp3",
+    "rightText": "Spot on, Max. Blood brings waste to the kidneys; the kidneys filter it and make urine.",
+    "wrongText": "Not quite. Blood brings waste to the kidneys; the kidneys filter it and make urine.",
+    "rightAudio": "audio/anatomy/sessions/urinary_q8_right.mp3",
+    "wrongAudio": "audio/anatomy/sessions/urinary_q8_wrong.mp3"
    }
   ],
-  "done": [
-   {
-    "text": "Urinary quiz complete. You got 0 out of 4. Run through the review again, then have another go.",
-    "audio": "audio/anatomy/sessions/urinary_done_0.mp3"
+  "done": [],
+  "doneTiers": {
+   "perfect": {
+    "text": "Urinary quiz complete. Perfect score! Every mark.",
+    "audio": "audio/anatomy/sessions/urinary_done_perfect.mp3"
    },
-   {
-    "text": "Urinary quiz complete. You got 1 out of 4. Run through the review again, then have another go.",
-    "audio": "audio/anatomy/sessions/urinary_done_1.mp3"
+   "good": {
+    "text": "Urinary quiz complete. Nice work. Check the ones you missed, then you're set.",
+    "audio": "audio/anatomy/sessions/urinary_done_good.mp3"
    },
-   {
-    "text": "Urinary quiz complete. You got 2 out of 4. Run through the review again, then have another go.",
-    "audio": "audio/anatomy/sessions/urinary_done_2.mp3"
-   },
-   {
-    "text": "Urinary quiz complete. You got 3 out of 4. Nice work.",
-    "audio": "audio/anatomy/sessions/urinary_done_3.mp3"
-   },
-   {
-    "text": "Urinary quiz complete. You got 4 out of 4. Perfect score.",
-    "audio": "audio/anatomy/sessions/urinary_done_4.mp3"
+   "review": {
+    "text": "Urinary quiz complete. Good effort. Run through the review again, then have another go.",
+    "audio": "audio/anatomy/sessions/urinary_done_review.mp3"
    }
-  ]
+  }
  }
 };

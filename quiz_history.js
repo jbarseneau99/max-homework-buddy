@@ -1,7 +1,7 @@
 // Permanent quiz attempt history (localStorage hb.quizHistory.v1). No size cap beyond what the browser allows.
 // Keeps hb.lastResult.v1 for the Outbox "latest results" template. Migrates any prior lastResult on first load.
 // API: HB.quizHistory.list/filter/get/add/clear/exportJSON/importJSON
-//      HB.recordResult({ title, subject, topic, mode, score, total, questions:[{q,given,answer,ok,written?}], details })
+//      HB.recordResult({ title, subject, topic, mode, score, total, questions:[{q,given,answer,ok,written?,earned?,pts?,type?,grader?,feedback?}], details })
 (function () {
   const KEY = "hb.quizHistory.v1", LAST = "hb.lastResult.v1";
   const load = (k, d) => { try { const v = JSON.parse(localStorage.getItem(k)); return v == null ? d : v; } catch (e) { return d; } };
@@ -27,7 +27,12 @@
       given: String(q.given == null ? "" : q.given),
       answer: String(q.answer == null ? "" : q.answer),
       ok: !!q.ok,
-      written: q.written == null ? "" : String(q.written)
+      written: q.written == null ? "" : String(q.written),
+      // school-test types: marks earned / possible (half marks allowed), question type, who graded it (ai | self | auto)
+      ...(q.pts != null ? { earned: Number(q.earned) || 0, pts: Number(q.pts) || 1 } : {}),
+      ...(q.type ? { type: String(q.type) } : {}),
+      ...(q.grader ? { grader: String(q.grader) } : {}),
+      ...(q.feedback ? { feedback: String(q.feedback) } : {})
     })) : [];
     // Fall back: build question rows from details like "✓ foo" / "✗ foo"
     if (!questions.length && Array.isArray(r.details)) {

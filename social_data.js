@@ -6,28 +6,87 @@ window.SOCIAL_DATA = {
    "title": "Provinces & Territories",
    "blurb": "The 13 provinces and territories and their capitals.",
    "session": "The 13 and Their Capitals",
-   "sessionBlurb": "Every province and territory, its capital and a key fact."
+   "sessionBlurb": "Every province and territory, its capital and a key fact.",
+   "sessions": [
+    {
+     "id": "provinces",
+     "title": "The 13 and Their Capitals",
+     "blurb": "Every province and territory, its capital and a key fact.",
+     "review": "provinces",
+     "quiz": "ss_provinces"
+    }
+   ]
   },
   {
    "id": "maps",
    "title": "Maps & Globes",
    "blurb": "Continents, oceans, the compass rose, latitude and longitude.",
    "session": "Reading Maps and Globes",
-   "sessionBlurb": "Continents, oceans, directions and the global grid."
+   "sessionBlurb": "Continents, oceans, directions and the global grid.",
+   "sessions": [
+    {
+     "id": "maps",
+     "title": "Reading Maps and Globes",
+     "blurb": "Continents, oceans, directions and the global grid.",
+     "review": "maps",
+     "quiz": "ss_maps"
+    }
+   ]
   },
   {
    "id": "indigenous",
    "title": "Indigenous Peoples of Canada",
    "blurb": "First Nations, Inuit and Métis.",
    "session": "First Nations, Inuit and Métis",
-   "sessionBlurb": "The first peoples of Canada, their ways of life and today."
+   "sessionBlurb": "The first peoples of Canada, their ways of life and today.",
+   "sessions": [
+    {
+     "id": "indigenous",
+     "title": "First Nations, Inuit and Métis",
+     "blurb": "The first peoples of Canada, their ways of life and today.",
+     "review": "indigenous",
+     "quiz": "ss_indigenous"
+    }
+   ]
   },
   {
    "id": "history",
    "title": "Early Canadian History",
    "blurb": "New France, the fur trade and Confederation.",
    "session": "New France to Confederation",
-   "sessionBlurb": "From early explorers to July 1, 1867, and how Canada grew."
+   "sessionBlurb": "From early explorers to July 1, 1867, and how Canada grew.",
+   "sessions": [
+    {
+     "id": "history",
+     "title": "New France to Confederation",
+     "blurb": "From early explorers to July 1, 1867, and how Canada grew.",
+     "review": "history",
+     "quiz": "ss_history"
+    }
+   ]
+  },
+  {
+   "id": "government",
+   "title": "Government in Canada",
+   "blurb": "Federal, provincial and municipal government, councils, and citizens.",
+   "session": "Three Levels of Government",
+   "sessionBlurb": "Who leads each level, what each one looks after, and how councils vote.",
+   "sessions": [
+    {
+     "id": "government",
+     "title": "Three Levels of Government",
+     "blurb": "Who leads each level, what each one looks after, and how councils vote.",
+     "review": "government",
+     "quiz": "ss_government"
+    },
+    {
+     "id": "govreview",
+     "title": "Test Review: Government",
+     "blurb": "Aimed at what Max missed on his school test: mayor vs premier, schools, municipalities, local = municipal.",
+     "review": "government",
+     "quiz": "ss_govreview"
+    }
+   ]
   }
  ],
  "reviews": {
@@ -292,6 +351,85 @@ window.SOCIAL_DATA = {
      "Alberta and Saskatchewan joined in 1905, Newfoundland and Labrador in 1949, and Nunavut was created in 1999."
     ],
     "audio": "audio/social/history_growing.mp3"
+   }
+  ],
+  "government": [
+   {
+    "id": "levels",
+    "title": "Three levels of government",
+    "visual": "levels",
+    "facts": [
+     "Canada has three main levels of government: federal, provincial or territorial, and municipal.",
+     "Municipal government is also called local government. Local and municipal are the same level.",
+     "First Nations also have their own governments, called band councils, led by a chief."
+    ],
+    "audio": "audio/social/government_levels.mp3"
+   },
+   {
+    "id": "federal",
+    "title": "Federal: the whole country",
+    "visual": "levels:federal",
+    "facts": [
+     "The federal government makes decisions for all of Canada. It meets in Parliament, in Ottawa.",
+     "Its leader is the prime minister. The people we elect to Parliament are members of Parliament, or MPs.",
+     "It looks after things like the army, Canada's money, passports and citizenship, and mail delivered by Canada Post."
+    ],
+    "audio": "audio/social/government_federal.mp3"
+   },
+   {
+    "id": "provincial",
+    "title": "Provincial: one province",
+    "visual": "levels:provincial",
+    "facts": [
+     "Each province has its own government. Ontario's meets at Queen's Park, in Toronto.",
+     "Its leader is the premier. In Ontario, the people we elect are members of Provincial Parliament, or MPPs.",
+     "It looks after things like schools and education, hospitals and health care, highways, and driver's licences."
+    ],
+    "audio": "audio/social/government_provincial.mp3"
+   },
+   {
+    "id": "schools",
+    "title": "Who runs Ontario's schools?",
+    "visual": "levels:provincial",
+    "facts": [
+     "Education is a provincial job. The Ontario government sets the rules and the curriculum, and pays for schools.",
+     "School boards, with elected trustees, run the schools in each area, but they follow the province's rules.",
+     "So if a test asks which level is in charge of Ontario's schools, the answer is provincial, not municipal."
+    ],
+    "audio": "audio/social/government_schools.mp3"
+   },
+   {
+    "id": "municipal",
+    "title": "Municipal: your city or town",
+    "visual": "levels:municipal",
+    "facts": [
+     "Cities, towns and townships are called municipalities. One is a municipality; two or more are municipalities.",
+     "Municipal is the describing word: the municipal government runs a municipality. Its leader is the mayor.",
+     "It looks after things like garbage and recycling, parks and playgrounds, local roads and snow clearing, fire fighters, and libraries."
+    ],
+    "audio": "audio/social/government_municipal.mp3"
+   },
+   {
+    "id": "council",
+    "title": "How a council decides",
+    "visual": "council",
+    "facts": [
+     "A city or town council is made up of the mayor and councillors that people elect.",
+     "Council holds meetings, listens to people, and then votes. The side with the most votes wins.",
+     "If your neighbourhood wants a new playground, that is a municipal decision: council talks about it and votes."
+    ],
+    "audio": "audio/social/government_council.mp3"
+   },
+   {
+    "id": "citizens",
+    "title": "Citizens have a say",
+    "visual": "icon",
+    "facts": [
+     "Citizens choose their leaders by voting in elections. In Canada you can vote when you are 18.",
+     "Rights include freedom of speech, freedom of religion, and the right to vote.",
+     "Responsibilities include obeying the law, respecting the rights of others, and voting. You can also write to your MP, MPP or councillor."
+    ],
+    "audio": "audio/social/government_citizens.mp3"
    }
   ]
  },
@@ -683,14 +821,173 @@ window.SOCIAL_DATA = {
     "visual": null,
     "audio": "audio/social/history_growing.mp3"
    }
+  ],
+  "government": [
+   {
+    "id": "levels",
+    "title": "Three levels of government",
+    "facts": [
+     "Canada has three main levels of government: federal, provincial or territorial, and municipal.",
+     "Municipal government is also called local government. Local and municipal are the same level.",
+     "First Nations also have their own governments, called band councils, led by a chief."
+    ],
+    "visual": "levels",
+    "audio": "audio/social/government_levels.mp3"
+   },
+   {
+    "id": "federal",
+    "title": "Federal: the whole country",
+    "facts": [
+     "The federal government makes decisions for all of Canada. It meets in Parliament, in Ottawa.",
+     "Its leader is the prime minister. The people we elect to Parliament are members of Parliament, or MPs.",
+     "It looks after things like the army, Canada's money, passports and citizenship, and mail delivered by Canada Post."
+    ],
+    "visual": "levels:federal",
+    "audio": "audio/social/government_federal.mp3"
+   },
+   {
+    "id": "provincial",
+    "title": "Provincial: one province",
+    "facts": [
+     "Each province has its own government. Ontario's meets at Queen's Park, in Toronto.",
+     "Its leader is the premier. In Ontario, the people we elect are members of Provincial Parliament, or MPPs.",
+     "It looks after things like schools and education, hospitals and health care, highways, and driver's licences."
+    ],
+    "visual": "levels:provincial",
+    "audio": "audio/social/government_provincial.mp3"
+   },
+   {
+    "id": "schools",
+    "title": "Who runs Ontario's schools?",
+    "facts": [
+     "Education is a provincial job. The Ontario government sets the rules and the curriculum, and pays for schools.",
+     "School boards, with elected trustees, run the schools in each area, but they follow the province's rules.",
+     "So if a test asks which level is in charge of Ontario's schools, the answer is provincial, not municipal."
+    ],
+    "visual": "levels:provincial",
+    "audio": "audio/social/government_schools.mp3"
+   },
+   {
+    "id": "municipal",
+    "title": "Municipal: your city or town",
+    "facts": [
+     "Cities, towns and townships are called municipalities. One is a municipality; two or more are municipalities.",
+     "Municipal is the describing word: the municipal government runs a municipality. Its leader is the mayor.",
+     "It looks after things like garbage and recycling, parks and playgrounds, local roads and snow clearing, fire fighters, and libraries."
+    ],
+    "visual": "levels:municipal",
+    "audio": "audio/social/government_municipal.mp3"
+   },
+   {
+    "id": "council",
+    "title": "How a council decides",
+    "facts": [
+     "A city or town council is made up of the mayor and councillors that people elect.",
+     "Council holds meetings, listens to people, and then votes. The side with the most votes wins.",
+     "If your neighbourhood wants a new playground, that is a municipal decision: council talks about it and votes."
+    ],
+    "visual": "council",
+    "audio": "audio/social/government_council.mp3"
+   },
+   {
+    "id": "citizens",
+    "title": "Citizens have a say",
+    "facts": [
+     "Citizens choose their leaders by voting in elections. In Canada you can vote when you are 18.",
+     "Rights include freedom of speech, freedom of religion, and the right to vote.",
+     "Responsibilities include obeying the law, respecting the rights of others, and voting. You can also write to your MP, MPP or councillor."
+    ],
+    "visual": "icon",
+    "audio": "audio/social/government_citizens.mp3"
+   }
+  ],
+  "govreview": [
+   {
+    "id": "levels",
+    "title": "Three levels of government",
+    "facts": [
+     "Canada has three main levels of government: federal, provincial or territorial, and municipal.",
+     "Municipal government is also called local government. Local and municipal are the same level.",
+     "First Nations also have their own governments, called band councils, led by a chief."
+    ],
+    "visual": "levels",
+    "audio": "audio/social/government_levels.mp3"
+   },
+   {
+    "id": "federal",
+    "title": "Federal: the whole country",
+    "facts": [
+     "The federal government makes decisions for all of Canada. It meets in Parliament, in Ottawa.",
+     "Its leader is the prime minister. The people we elect to Parliament are members of Parliament, or MPs.",
+     "It looks after things like the army, Canada's money, passports and citizenship, and mail delivered by Canada Post."
+    ],
+    "visual": "levels:federal",
+    "audio": "audio/social/government_federal.mp3"
+   },
+   {
+    "id": "provincial",
+    "title": "Provincial: one province",
+    "facts": [
+     "Each province has its own government. Ontario's meets at Queen's Park, in Toronto.",
+     "Its leader is the premier. In Ontario, the people we elect are members of Provincial Parliament, or MPPs.",
+     "It looks after things like schools and education, hospitals and health care, highways, and driver's licences."
+    ],
+    "visual": "levels:provincial",
+    "audio": "audio/social/government_provincial.mp3"
+   },
+   {
+    "id": "schools",
+    "title": "Who runs Ontario's schools?",
+    "facts": [
+     "Education is a provincial job. The Ontario government sets the rules and the curriculum, and pays for schools.",
+     "School boards, with elected trustees, run the schools in each area, but they follow the province's rules.",
+     "So if a test asks which level is in charge of Ontario's schools, the answer is provincial, not municipal."
+    ],
+    "visual": "levels:provincial",
+    "audio": "audio/social/government_schools.mp3"
+   },
+   {
+    "id": "municipal",
+    "title": "Municipal: your city or town",
+    "facts": [
+     "Cities, towns and townships are called municipalities. One is a municipality; two or more are municipalities.",
+     "Municipal is the describing word: the municipal government runs a municipality. Its leader is the mayor.",
+     "It looks after things like garbage and recycling, parks and playgrounds, local roads and snow clearing, fire fighters, and libraries."
+    ],
+    "visual": "levels:municipal",
+    "audio": "audio/social/government_municipal.mp3"
+   },
+   {
+    "id": "council",
+    "title": "How a council decides",
+    "facts": [
+     "A city or town council is made up of the mayor and councillors that people elect.",
+     "Council holds meetings, listens to people, and then votes. The side with the most votes wins.",
+     "If your neighbourhood wants a new playground, that is a municipal decision: council talks about it and votes."
+    ],
+    "visual": "council",
+    "audio": "audio/social/government_council.mp3"
+   },
+   {
+    "id": "citizens",
+    "title": "Citizens have a say",
+    "facts": [
+     "Citizens choose their leaders by voting in elections. In Canada you can vote when you are 18.",
+     "Rights include freedom of speech, freedom of religion, and the right to vote.",
+     "Responsibilities include obeying the law, respecting the rights of others, and voting. You can also write to your MP, MPP or councillor."
+    ],
+    "visual": "icon",
+    "audio": "audio/social/government_citizens.mp3"
+   }
   ]
  }
 };
 window.QUIZ_SETS = Object.assign(window.QUIZ_SETS || {}, {
  "ss_provinces": {
   "title": "The 13 and Their Capitals · quiz",
-  "intro": "The 13 and Their Capitals quiz. 6 questions. Pick or type your answer, then check it.",
-  "introAudio": "audio/social/quiz/provinces_intro.mp3",
+  "subject": "Social Studies",
+  "intro": "The 13 and Their Capitals quiz. 10 questions, 15 marks. Tap, type, match, fill in the blanks, and write complete sentences.",
+  "introAudio": "audio/social/quiz/provinces_intro_v2.mp3",
   "questions": [
    {
     "type": "mc",
@@ -794,43 +1091,133 @@ window.QUIZ_SETS = Object.assign(window.QUIZ_SETS || {}, {
     "wrongText": "Not quite. Victoria, on Vancouver Island, is the capital of British Columbia.",
     "rightAudio": "audio/social/quiz/provinces_q6_right.mp3",
     "wrongAudio": "audio/social/quiz/provinces_q6_wrong.mp3"
+   },
+   {
+    "type": "tf",
+    "q": "Nunavut is a province.",
+    "options": [
+     "True",
+     "False"
+    ],
+    "answer": "False",
+    "explain": "Nunavut is a territory, not a province. Canada has 10 provinces and 3 territories.",
+    "qAudio": "audio/social/quiz/provinces_q7_tf.mp3",
+    "rightText": "Yes, exactly. Nunavut is a territory, not a province. Canada has 10 provinces and 3 territories.",
+    "wrongText": "Not quite. Nunavut is a territory, not a province. Canada has 10 provinces and 3 territories.",
+    "rightAudio": "audio/social/quiz/provinces_q7_right.mp3",
+    "wrongAudio": "audio/social/quiz/provinces_q7_wrong.mp3"
+   },
+   {
+    "type": "match",
+    "q": "Match each province to its capital city.",
+    "terms": [
+     "Ontario",
+     "Quebec",
+     "Alberta",
+     "Nova Scotia",
+     "Manitoba"
+    ],
+    "defs": [
+     {
+      "letter": "A",
+      "text": "Edmonton"
+     },
+     {
+      "letter": "B",
+      "text": "Winnipeg"
+     },
+     {
+      "letter": "C",
+      "text": "Toronto"
+     },
+     {
+      "letter": "D",
+      "text": "Halifax"
+     },
+     {
+      "letter": "E",
+      "text": "Quebec City"
+     }
+    ],
+    "answers": [
+     "C",
+     "E",
+     "A",
+     "D",
+     "B"
+    ],
+    "explain": "Ontario: Toronto. Quebec: Quebec City. Alberta: Edmonton. Nova Scotia: Halifax. Manitoba: Winnipeg.",
+    "qAudio": "audio/social/quiz/provinces_q8_match.mp3",
+    "rightText": "Spot on, Max. Ontario: Toronto. Quebec: Quebec City. Alberta: Edmonton. Nova Scotia: Halifax. Manitoba: Winnipeg.",
+    "wrongText": "Not quite. Ontario: Toronto. Quebec: Quebec City. Alberta: Edmonton. Nova Scotia: Halifax. Manitoba: Winnipeg.",
+    "rightAudio": "audio/social/quiz/provinces_q8_right.mp3",
+    "wrongAudio": "audio/social/quiz/provinces_q8_wrong.mp3"
+   },
+   {
+    "type": "inline",
+    "q": "Circle the correct word.",
+    "parts": [
+     "Territories get their powers from the ",
+     {
+      "choices": [
+       "provincial",
+       "federal",
+       "municipal"
+      ],
+      "answer": "federal"
+     },
+     " government."
+    ],
+    "explain": "Territories get their powers from the federal government in Ottawa.",
+    "qAudio": "audio/social/quiz/provinces_q9_inline.mp3",
+    "rightText": "Correct. Nice work. Territories get their powers from the federal government in Ottawa.",
+    "wrongText": "Not quite. Territories get their powers from the federal government in Ottawa.",
+    "rightAudio": "audio/social/quiz/provinces_q9_right.mp3",
+    "wrongAudio": "audio/social/quiz/provinces_q9_wrong.mp3"
+   },
+   {
+    "type": "sentence",
+    "q": "Explain one difference between a province and a territory.",
+    "rubric": [
+     {
+      "idea": "Provinces get their powers from the Constitution",
+      "pts": 1
+     },
+     {
+      "idea": "Territories get their powers from the federal government",
+      "pts": 1
+     }
+    ],
+    "model": "A province gets its powers from the Constitution, but a territory gets its powers from the federal government.",
+    "explain": "Provinces get their powers from the Constitution. Territories get theirs from the federal government in Ottawa.",
+    "qAudio": "audio/social/quiz/provinces_q10_sentence.mp3",
+    "rightText": "That's right. Provinces get their powers from the Constitution. Territories get theirs from the federal government in Ottawa.",
+    "wrongText": "Not quite. Provinces get their powers from the Constitution. Territories get theirs from the federal government in Ottawa.",
+    "rightAudio": "audio/social/quiz/provinces_q10_right.mp3",
+    "wrongAudio": "audio/social/quiz/provinces_q10_wrong.mp3"
    }
   ],
-  "done": [
-   {
-    "text": "Quiz complete. You got 0 out of 6. Run through the review again, then have another go.",
-    "audio": "audio/social/quiz/provinces_done_0.mp3"
+  "done": [],
+  "doneTiers": {
+   "perfect": {
+    "text": "The 13 and Their Capitals quiz complete. Perfect score! Every mark.",
+    "audio": "audio/social/quiz/provinces_done_perfect.mp3"
    },
-   {
-    "text": "Quiz complete. You got 1 out of 6. Run through the review again, then have another go.",
-    "audio": "audio/social/quiz/provinces_done_1.mp3"
+   "good": {
+    "text": "The 13 and Their Capitals quiz complete. Nice work. Check the ones you missed, then you're set.",
+    "audio": "audio/social/quiz/provinces_done_good.mp3"
    },
-   {
-    "text": "Quiz complete. You got 2 out of 6. Run through the review again, then have another go.",
-    "audio": "audio/social/quiz/provinces_done_2.mp3"
-   },
-   {
-    "text": "Quiz complete. You got 3 out of 6. Run through the review again, then have another go.",
-    "audio": "audio/social/quiz/provinces_done_3.mp3"
-   },
-   {
-    "text": "Quiz complete. You got 4 out of 6. Run through the review again, then have another go.",
-    "audio": "audio/social/quiz/provinces_done_4.mp3"
-   },
-   {
-    "text": "Quiz complete. You got 5 out of 6. Nice work.",
-    "audio": "audio/social/quiz/provinces_done_5.mp3"
-   },
-   {
-    "text": "Quiz complete. You got 6 out of 6. Perfect score.",
-    "audio": "audio/social/quiz/provinces_done_6.mp3"
+   "review": {
+    "text": "The 13 and Their Capitals quiz complete. Good effort. Run through the review again, then have another go.",
+    "audio": "audio/social/quiz/provinces_done_review.mp3"
    }
-  ]
+  }
  },
  "ss_maps": {
   "title": "Reading Maps and Globes · quiz",
-  "intro": "Reading Maps and Globes quiz. 6 questions. Pick or type your answer, then check it.",
-  "introAudio": "audio/social/quiz/maps_intro.mp3",
+  "subject": "Social Studies",
+  "intro": "Reading Maps and Globes quiz. 10 questions, 14 marks. Tap, type, match, fill in the blanks, and write complete sentences.",
+  "introAudio": "audio/social/quiz/maps_intro_v2.mp3",
   "questions": [
    {
     "type": "number",
@@ -933,43 +1320,126 @@ window.QUIZ_SETS = Object.assign(window.QUIZ_SETS || {}, {
     "wrongText": "Not quite. Northeast is halfway between north and east.",
     "rightAudio": "audio/social/quiz/maps_q6_right.mp3",
     "wrongAudio": "audio/social/quiz/maps_q6_wrong.mp3"
+   },
+   {
+    "type": "tf",
+    "q": "Lines of latitude run north and south, from pole to pole.",
+    "options": [
+     "True",
+     "False"
+    ],
+    "answer": "False",
+    "explain": "Latitude lines run east and west. Longitude lines run north and south, from pole to pole.",
+    "qAudio": "audio/social/quiz/maps_q7_tf.mp3",
+    "rightText": "Yes, exactly. Latitude lines run east and west. Longitude lines run north and south, from pole to pole.",
+    "wrongText": "Not quite. Latitude lines run east and west. Longitude lines run north and south, from pole to pole.",
+    "rightAudio": "audio/social/quiz/maps_q7_right.mp3",
+    "wrongAudio": "audio/social/quiz/maps_q7_wrong.mp3"
+   },
+   {
+    "type": "wordbank",
+    "q": "Fill in the blanks with words from the word bank. Each word is used once.",
+    "bank": [
+     "legend",
+     "scale",
+     "title",
+     "compass rose",
+     "equator"
+    ],
+    "items": [
+     {
+      "pre": "A map's ",
+      "answer": "legend",
+      "post": " explains what the symbols mean."
+     },
+     {
+      "pre": "A map's ",
+      "answer": "scale",
+      "post": " helps you measure distance."
+     },
+     {
+      "pre": "0 degrees latitude is the ",
+      "answer": "equator",
+      "post": "."
+     },
+     {
+      "pre": "A ",
+      "answer": "compass rose",
+      "post": " shows north, east, south and west."
+     }
+    ],
+    "explain": "The legend explains symbols, the scale measures distance, the equator is 0 degrees latitude, and the compass rose shows directions.",
+    "qAudio": "audio/social/quiz/maps_q8_wordbank.mp3",
+    "rightText": "Spot on, Max. The legend explains symbols, the scale measures distance, the equator is 0 degrees latitude, and the compass rose shows directions.",
+    "wrongText": "Not quite. The legend explains symbols, the scale measures distance, the equator is 0 degrees latitude, and the compass rose shows directions.",
+    "rightAudio": "audio/social/quiz/maps_q8_right.mp3",
+    "wrongAudio": "audio/social/quiz/maps_q8_wrong.mp3"
+   },
+   {
+    "type": "inline",
+    "q": "Circle the correct word.",
+    "parts": [
+     "Canada touches the Pacific, Atlantic and ",
+     {
+      "choices": [
+       "Arctic",
+       "Indian",
+       "Southern"
+      ],
+      "answer": "Arctic"
+     },
+     " oceans."
+    ],
+    "explain": "Canada touches the Pacific, Atlantic and Arctic oceans.",
+    "qAudio": "audio/social/quiz/maps_q9_inline.mp3",
+    "rightText": "Correct. Nice work. Canada touches the Pacific, Atlantic and Arctic oceans.",
+    "wrongText": "Not quite. Canada touches the Pacific, Atlantic and Arctic oceans.",
+    "rightAudio": "audio/social/quiz/maps_q9_right.mp3",
+    "wrongAudio": "audio/social/quiz/maps_q9_wrong.mp3"
+   },
+   {
+    "type": "sentence",
+    "q": "Why does a flat map stretch some places, when a globe does not?",
+    "rubric": [
+     {
+      "idea": "A globe is round like the Earth, so it shows true shapes and sizes",
+      "pts": 1
+     },
+     {
+      "idea": "A flat map has to stretch the round Earth onto a flat page, so some places look too big",
+      "pts": 1
+     }
+    ],
+    "model": "A globe is round like the Earth, but a flat map has to stretch the round Earth onto a flat page, so places like Greenland look too big.",
+    "explain": "A globe is a round model, so shapes and sizes are right. A flat map has to stretch some places to lie flat.",
+    "qAudio": "audio/social/quiz/maps_q10_sentence.mp3",
+    "rightText": "That's right. A globe is a round model, so shapes and sizes are right. A flat map has to stretch some places to lie flat.",
+    "wrongText": "Not quite. A globe is a round model, so shapes and sizes are right. A flat map has to stretch some places to lie flat.",
+    "rightAudio": "audio/social/quiz/maps_q10_right.mp3",
+    "wrongAudio": "audio/social/quiz/maps_q10_wrong.mp3"
    }
   ],
-  "done": [
-   {
-    "text": "Quiz complete. You got 0 out of 6. Run through the review again, then have another go.",
-    "audio": "audio/social/quiz/maps_done_0.mp3"
+  "done": [],
+  "doneTiers": {
+   "perfect": {
+    "text": "Reading Maps and Globes quiz complete. Perfect score! Every mark.",
+    "audio": "audio/social/quiz/maps_done_perfect.mp3"
    },
-   {
-    "text": "Quiz complete. You got 1 out of 6. Run through the review again, then have another go.",
-    "audio": "audio/social/quiz/maps_done_1.mp3"
+   "good": {
+    "text": "Reading Maps and Globes quiz complete. Nice work. Check the ones you missed, then you're set.",
+    "audio": "audio/social/quiz/maps_done_good.mp3"
    },
-   {
-    "text": "Quiz complete. You got 2 out of 6. Run through the review again, then have another go.",
-    "audio": "audio/social/quiz/maps_done_2.mp3"
-   },
-   {
-    "text": "Quiz complete. You got 3 out of 6. Run through the review again, then have another go.",
-    "audio": "audio/social/quiz/maps_done_3.mp3"
-   },
-   {
-    "text": "Quiz complete. You got 4 out of 6. Run through the review again, then have another go.",
-    "audio": "audio/social/quiz/maps_done_4.mp3"
-   },
-   {
-    "text": "Quiz complete. You got 5 out of 6. Nice work.",
-    "audio": "audio/social/quiz/maps_done_5.mp3"
-   },
-   {
-    "text": "Quiz complete. You got 6 out of 6. Perfect score.",
-    "audio": "audio/social/quiz/maps_done_6.mp3"
+   "review": {
+    "text": "Reading Maps and Globes quiz complete. Good effort. Run through the review again, then have another go.",
+    "audio": "audio/social/quiz/maps_done_review.mp3"
    }
-  ]
+  }
  },
  "ss_indigenous": {
   "title": "First Nations, Inuit and Métis · quiz",
-  "intro": "First Nations, Inuit and Métis quiz. 6 questions. Pick or type your answer, then check it.",
-  "introAudio": "audio/social/quiz/indigenous_intro.mp3",
+  "subject": "Social Studies",
+  "intro": "First Nations, Inuit and Métis quiz. 10 questions, 14 marks. Tap, type, match, fill in the blanks, and write complete sentences.",
+  "introAudio": "audio/social/quiz/indigenous_intro_v2.mp3",
   "questions": [
    {
     "type": "pick",
@@ -1079,43 +1549,127 @@ window.QUIZ_SETS = Object.assign(window.QUIZ_SETS || {}, {
     "wrongText": "Not quite. Michif is the language of the Métis.",
     "rightAudio": "audio/social/quiz/indigenous_q6_right.mp3",
     "wrongAudio": "audio/social/quiz/indigenous_q6_wrong.mp3"
+   },
+   {
+    "type": "tf",
+    "q": "First Nations, Inuit and Métis each have their own histories, languages and cultures.",
+    "options": [
+     "True",
+     "False"
+    ],
+    "answer": "True",
+    "explain": "True. Each group has its own histories, languages and cultures.",
+    "qAudio": "audio/social/quiz/indigenous_q7_tf.mp3",
+    "rightText": "Yes, exactly. True. Each group has its own histories, languages and cultures.",
+    "wrongText": "Not quite. True. Each group has its own histories, languages and cultures.",
+    "rightAudio": "audio/social/quiz/indigenous_q7_right.mp3",
+    "wrongAudio": "audio/social/quiz/indigenous_q7_wrong.mp3"
+   },
+   {
+    "type": "match",
+    "q": "Match each people to a fact about them.",
+    "terms": [
+     "Haida",
+     "Haudenosaunee",
+     "Inuit",
+     "Métis"
+    ],
+    "defs": [
+     {
+      "letter": "A",
+      "text": "Homeland in the Arctic called Inuit Nunangat"
+     },
+     {
+      "letter": "B",
+      "text": "Carved cedar canoes and totem poles"
+     },
+     {
+      "letter": "C",
+      "text": "Their language is Michif"
+     },
+     {
+      "letter": "D",
+      "text": "Grew the Three Sisters: corn, beans and squash"
+     }
+    ],
+    "answers": [
+     "B",
+     "D",
+     "A",
+     "C"
+    ],
+    "explain": "Haida: cedar canoes and totem poles. Haudenosaunee: the Three Sisters. Inuit: Inuit Nunangat in the Arctic. Métis: Michif.",
+    "qAudio": "audio/social/quiz/indigenous_q8_match.mp3",
+    "rightText": "Spot on, Max. Haida: cedar canoes and totem poles. Haudenosaunee: the Three Sisters. Inuit: Inuit Nunangat in the Arctic. Métis: Michif.",
+    "wrongText": "Not quite. Haida: cedar canoes and totem poles. Haudenosaunee: the Three Sisters. Inuit: Inuit Nunangat in the Arctic. Métis: Michif.",
+    "rightAudio": "audio/social/quiz/indigenous_q8_right.mp3",
+    "wrongAudio": "audio/social/quiz/indigenous_q8_wrong.mp3"
+   },
+   {
+    "type": "inline",
+    "q": "Circle the correct date.",
+    "parts": [
+     "The National Day for Truth and Reconciliation is on ",
+     {
+      "choices": [
+       "July 1",
+       "September 30",
+       "November 11"
+      ],
+      "answer": "September 30"
+     },
+     "."
+    ],
+    "explain": "September 30 is the National Day for Truth and Reconciliation.",
+    "qAudio": "audio/social/quiz/indigenous_q9_inline.mp3",
+    "rightText": "Correct. Nice work. September 30 is the National Day for Truth and Reconciliation.",
+    "wrongText": "Not quite. September 30 is the National Day for Truth and Reconciliation.",
+    "rightAudio": "audio/social/quiz/indigenous_q9_right.mp3",
+    "wrongAudio": "audio/social/quiz/indigenous_q9_wrong.mp3"
+   },
+   {
+    "type": "sentence",
+    "q": "Name the three Indigenous peoples recognized in Canada's Constitution, and tell one fact about one of them.",
+    "rubric": [
+     {
+      "idea": "Names all three: First Nations, Inuit and Métis",
+      "pts": 1
+     },
+     {
+      "idea": "Gives one correct fact about one of them",
+      "pts": 1
+     }
+    ],
+    "model": "The three are First Nations, Inuit and Métis, and the Inuit live in the Arctic in a homeland called Inuit Nunangat.",
+    "explain": "The three are First Nations, Inuit and Métis.",
+    "qAudio": "audio/social/quiz/indigenous_q10_sentence.mp3",
+    "rightText": "That's right. The three are First Nations, Inuit and Métis.",
+    "wrongText": "Not quite. The three are First Nations, Inuit and Métis.",
+    "rightAudio": "audio/social/quiz/indigenous_q10_right.mp3",
+    "wrongAudio": "audio/social/quiz/indigenous_q10_wrong.mp3"
    }
   ],
-  "done": [
-   {
-    "text": "Quiz complete. You got 0 out of 6. Run through the review again, then have another go.",
-    "audio": "audio/social/quiz/indigenous_done_0.mp3"
+  "done": [],
+  "doneTiers": {
+   "perfect": {
+    "text": "First Nations, Inuit and Métis quiz complete. Perfect score! Every mark.",
+    "audio": "audio/social/quiz/indigenous_done_perfect.mp3"
    },
-   {
-    "text": "Quiz complete. You got 1 out of 6. Run through the review again, then have another go.",
-    "audio": "audio/social/quiz/indigenous_done_1.mp3"
+   "good": {
+    "text": "First Nations, Inuit and Métis quiz complete. Nice work. Check the ones you missed, then you're set.",
+    "audio": "audio/social/quiz/indigenous_done_good.mp3"
    },
-   {
-    "text": "Quiz complete. You got 2 out of 6. Run through the review again, then have another go.",
-    "audio": "audio/social/quiz/indigenous_done_2.mp3"
-   },
-   {
-    "text": "Quiz complete. You got 3 out of 6. Run through the review again, then have another go.",
-    "audio": "audio/social/quiz/indigenous_done_3.mp3"
-   },
-   {
-    "text": "Quiz complete. You got 4 out of 6. Run through the review again, then have another go.",
-    "audio": "audio/social/quiz/indigenous_done_4.mp3"
-   },
-   {
-    "text": "Quiz complete. You got 5 out of 6. Nice work.",
-    "audio": "audio/social/quiz/indigenous_done_5.mp3"
-   },
-   {
-    "text": "Quiz complete. You got 6 out of 6. Perfect score.",
-    "audio": "audio/social/quiz/indigenous_done_6.mp3"
+   "review": {
+    "text": "First Nations, Inuit and Métis quiz complete. Good effort. Run through the review again, then have another go.",
+    "audio": "audio/social/quiz/indigenous_done_review.mp3"
    }
-  ]
+  }
  },
  "ss_history": {
   "title": "New France to Confederation · quiz",
-  "intro": "New France to Confederation quiz. 6 questions. Pick or type your answer, then check it.",
-  "introAudio": "audio/social/quiz/history_intro.mp3",
+  "subject": "Social Studies",
+  "intro": "New France to Confederation quiz. 10 questions, 14 marks. Tap, type, match, fill in the blanks, and write complete sentences.",
+  "introAudio": "audio/social/quiz/history_intro_v2.mp3",
   "questions": [
    {
     "type": "number",
@@ -1221,37 +1775,621 @@ window.QUIZ_SETS = Object.assign(window.QUIZ_SETS || {}, {
     "wrongText": "Not quite. Newfoundland and Labrador joined Canada in 1949.",
     "rightAudio": "audio/social/quiz/history_q6_right.mp3",
     "wrongAudio": "audio/social/quiz/history_q6_wrong.mp3"
+   },
+   {
+    "type": "tf",
+    "q": "Confederation created Canada on July 1, 1867.",
+    "options": [
+     "True",
+     "False"
+    ],
+    "answer": "True",
+    "explain": "True. Canada was created on July 1, 1867.",
+    "qAudio": "audio/social/quiz/history_q7_tf.mp3",
+    "rightText": "Yes, exactly. True. Canada was created on July 1, 1867.",
+    "wrongText": "Not quite. True. Canada was created on July 1, 1867.",
+    "rightAudio": "audio/social/quiz/history_q7_right.mp3",
+    "wrongAudio": "audio/social/quiz/history_q7_wrong.mp3"
+   },
+   {
+    "type": "wordbank",
+    "q": "Fill in the blanks with words from the word bank. Each word is used once.",
+    "bank": [
+     "beaver",
+     "Champlain",
+     "Macdonald",
+     "Confederation",
+     "Riel"
+    ],
+    "items": [
+     {
+      "pre": "Samuel de ",
+      "answer": "Champlain",
+      "post": " founded Quebec City in 1608."
+     },
+     {
+      "pre": "Europeans wanted ",
+      "answer": "beaver",
+      "post": " fur to make felt hats."
+     },
+     {
+      "pre": "Sir John A. ",
+      "answer": "Macdonald",
+      "post": " was Canada's first prime minister."
+     },
+     {
+      "pre": "In 1867, ",
+      "answer": "Confederation",
+      "post": " joined four provinces to form Canada."
+     }
+    ],
+    "explain": "Champlain founded Quebec City, beaver fur drove the fur trade, Macdonald was the first prime minister, and Confederation formed Canada in 1867.",
+    "qAudio": "audio/social/quiz/history_q8_wordbank.mp3",
+    "rightText": "Spot on, Max. Champlain founded Quebec City, beaver fur drove the fur trade, Macdonald was the first prime minister, and Confederation formed Canada in 1867.",
+    "wrongText": "Not quite. Champlain founded Quebec City, beaver fur drove the fur trade, Macdonald was the first prime minister, and Confederation formed Canada in 1867.",
+    "rightAudio": "audio/social/quiz/history_q8_right.mp3",
+    "wrongAudio": "audio/social/quiz/history_q8_wrong.mp3"
+   },
+   {
+    "type": "inline",
+    "q": "Circle the correct province.",
+    "parts": [
+     "The province that joined Canada last, in 1949, was ",
+     {
+      "choices": [
+       "Prince Edward Island",
+       "Newfoundland and Labrador",
+       "British Columbia"
+      ],
+      "answer": "Newfoundland and Labrador"
+     },
+     "."
+    ],
+    "explain": "Newfoundland and Labrador joined Canada in 1949.",
+    "qAudio": "audio/social/quiz/history_q9_inline.mp3",
+    "rightText": "Correct. Nice work. Newfoundland and Labrador joined Canada in 1949.",
+    "wrongText": "Not quite. Newfoundland and Labrador joined Canada in 1949.",
+    "rightAudio": "audio/social/quiz/history_q9_right.mp3",
+    "wrongAudio": "audio/social/quiz/history_q9_wrong.mp3"
+   },
+   {
+    "type": "sentence",
+    "q": "Why did Europeans want beaver fur?",
+    "rubric": [
+     {
+      "idea": "To make felt hats",
+      "pts": 1
+     },
+     {
+      "idea": "Beaver fur was valuable or popular in Europe, so it could be traded for a lot",
+      "pts": 1
+     }
+    ],
+    "model": "Europeans wanted beaver fur because it was valuable in Europe for making felt hats.",
+    "explain": "Beaver fur was wanted in Europe to make felt hats, so it was very valuable.",
+    "qAudio": "audio/social/quiz/history_q10_sentence.mp3",
+    "rightText": "That's right. Beaver fur was wanted in Europe to make felt hats, so it was very valuable.",
+    "wrongText": "Not quite. Beaver fur was wanted in Europe to make felt hats, so it was very valuable.",
+    "rightAudio": "audio/social/quiz/history_q10_right.mp3",
+    "wrongAudio": "audio/social/quiz/history_q10_wrong.mp3"
    }
   ],
-  "done": [
-   {
-    "text": "Quiz complete. You got 0 out of 6. Run through the review again, then have another go.",
-    "audio": "audio/social/quiz/history_done_0.mp3"
+  "done": [],
+  "doneTiers": {
+   "perfect": {
+    "text": "New France to Confederation quiz complete. Perfect score! Every mark.",
+    "audio": "audio/social/quiz/history_done_perfect.mp3"
    },
-   {
-    "text": "Quiz complete. You got 1 out of 6. Run through the review again, then have another go.",
-    "audio": "audio/social/quiz/history_done_1.mp3"
+   "good": {
+    "text": "New France to Confederation quiz complete. Nice work. Check the ones you missed, then you're set.",
+    "audio": "audio/social/quiz/history_done_good.mp3"
    },
-   {
-    "text": "Quiz complete. You got 2 out of 6. Run through the review again, then have another go.",
-    "audio": "audio/social/quiz/history_done_2.mp3"
-   },
-   {
-    "text": "Quiz complete. You got 3 out of 6. Run through the review again, then have another go.",
-    "audio": "audio/social/quiz/history_done_3.mp3"
-   },
-   {
-    "text": "Quiz complete. You got 4 out of 6. Run through the review again, then have another go.",
-    "audio": "audio/social/quiz/history_done_4.mp3"
-   },
-   {
-    "text": "Quiz complete. You got 5 out of 6. Nice work.",
-    "audio": "audio/social/quiz/history_done_5.mp3"
-   },
-   {
-    "text": "Quiz complete. You got 6 out of 6. Perfect score.",
-    "audio": "audio/social/quiz/history_done_6.mp3"
+   "review": {
+    "text": "New France to Confederation quiz complete. Good effort. Run through the review again, then have another go.",
+    "audio": "audio/social/quiz/history_done_review.mp3"
    }
-  ]
+  }
+ },
+ "ss_government": {
+  "title": "Three Levels of Government · quiz",
+  "subject": "Social Studies",
+  "intro": "Three Levels of Government quiz. 8 questions, 16 marks. Tap, type, match, fill in the blanks, and write complete sentences.",
+  "introAudio": "audio/social/quiz/government_intro_v2.mp3",
+  "questions": [
+   {
+    "type": "mc",
+    "q": "Who is the leader of the federal government?",
+    "options": [
+     "The mayor",
+     "The premier",
+     "The prime minister",
+     "The chief"
+    ],
+    "answer": "The prime minister",
+    "explain": "The prime minister leads the federal government.",
+    "qAudio": "audio/social/quiz/government_q1.mp3",
+    "rightText": "Correct. Nice work. The prime minister leads the federal government.",
+    "wrongText": "Not quite. The prime minister leads the federal government.",
+    "rightAudio": "audio/social/quiz/government_q1_right.mp3",
+    "wrongAudio": "audio/social/quiz/government_q1_wrong.mp3"
+   },
+   {
+    "type": "mc",
+    "q": "Where does Ontario's provincial government meet?",
+    "options": [
+     "Parliament in Ottawa",
+     "Queen's Park in Toronto",
+     "City hall",
+     "Rideau Hall"
+    ],
+    "answer": "Queen's Park in Toronto",
+    "explain": "Ontario's government meets at Queen's Park, in Toronto.",
+    "qAudio": "audio/social/quiz/government_q2.mp3",
+    "rightText": "That's right. Ontario's government meets at Queen's Park, in Toronto.",
+    "wrongText": "Not quite. Ontario's government meets at Queen's Park, in Toronto.",
+    "rightAudio": "audio/social/quiz/government_q2_right.mp3",
+    "wrongAudio": "audio/social/quiz/government_q2_wrong.mp3"
+   },
+   {
+    "type": "tf",
+    "q": "The mayor is the leader of a municipal government.",
+    "options": [
+     "True",
+     "False"
+    ],
+    "answer": "True",
+    "explain": "True. The mayor leads the municipal, or local, government.",
+    "qAudio": "audio/social/quiz/government_q3_tf.mp3",
+    "rightText": "Yes, exactly. True. The mayor leads the municipal, or local, government.",
+    "wrongText": "Not quite. True. The mayor leads the municipal, or local, government.",
+    "rightAudio": "audio/social/quiz/government_q3_right.mp3",
+    "wrongAudio": "audio/social/quiz/government_q3_wrong.mp3"
+   },
+   {
+    "type": "match",
+    "q": "Match each government to its leader.",
+    "terms": [
+     "Federal government",
+     "Provincial government",
+     "Municipal government",
+     "First Nation band council"
+    ],
+    "defs": [
+     {
+      "letter": "A",
+      "text": "Mayor"
+     },
+     {
+      "letter": "B",
+      "text": "Prime minister"
+     },
+     {
+      "letter": "C",
+      "text": "Chief"
+     },
+     {
+      "letter": "D",
+      "text": "Premier"
+     }
+    ],
+    "answers": [
+     "B",
+     "D",
+     "A",
+     "C"
+    ],
+    "explain": "Federal: prime minister. Provincial: premier. Municipal: mayor. Band council: chief.",
+    "qAudio": "audio/social/quiz/government_q4_match.mp3",
+    "rightText": "Spot on, Max. Federal: prime minister. Provincial: premier. Municipal: mayor. Band council: chief.",
+    "wrongText": "Not quite. Federal: prime minister. Provincial: premier. Municipal: mayor. Band council: chief.",
+    "rightAudio": "audio/social/quiz/government_q4_right.mp3",
+    "wrongAudio": "audio/social/quiz/government_q4_wrong.mp3"
+   },
+   {
+    "type": "wordbank",
+    "q": "Fill in the blanks with words from the word bank. Each word is used once.",
+    "bank": [
+     "Parliament",
+     "municipalities",
+     "bylaw",
+     "election",
+     "MPP",
+     "premier"
+    ],
+    "items": [
+     {
+      "pre": "Cities and towns are called ",
+      "answer": "municipalities",
+      "post": "."
+     },
+     {
+      "pre": "A rule made by a city council is called a ",
+      "answer": "bylaw",
+      "post": "."
+     },
+     {
+      "pre": "The federal government meets in ",
+      "answer": "Parliament",
+      "post": ", in Ottawa."
+     },
+     {
+      "pre": "Citizens choose their leaders by voting in an ",
+      "answer": "election",
+      "post": "."
+     },
+     {
+      "pre": "In Ontario, a person elected to Queen's Park is an ",
+      "answer": "MPP",
+      "post": "."
+     }
+    ],
+    "explain": "Municipalities are cities and towns, a bylaw is a city rule, Parliament is in Ottawa, we vote in an election, and Ontario elects MPPs.",
+    "qAudio": "audio/social/quiz/government_q5_wordbank.mp3",
+    "rightText": "Correct. Nice work. Municipalities are cities and towns, a bylaw is a city rule, Parliament is in Ottawa, we vote in an election, and Ontario elects MPPs.",
+    "wrongText": "Not quite. Municipalities are cities and towns, a bylaw is a city rule, Parliament is in Ottawa, we vote in an election, and Ontario elects MPPs.",
+    "rightAudio": "audio/social/quiz/government_q5_right.mp3",
+    "wrongAudio": "audio/social/quiz/government_q5_wrong.mp3"
+   },
+   {
+    "type": "inline",
+    "q": "Circle the correct level of government.",
+    "parts": [
+     "Hospitals and health care are looked after by the ",
+     {
+      "choices": [
+       "federal",
+       "provincial",
+       "municipal"
+      ],
+      "answer": "provincial"
+     },
+     " government."
+    ],
+    "explain": "Health care and hospitals are a provincial job.",
+    "qAudio": "audio/social/quiz/government_q6_inline.mp3",
+    "rightText": "That's right. Health care and hospitals are a provincial job.",
+    "wrongText": "Not quite. Health care and hospitals are a provincial job.",
+    "rightAudio": "audio/social/quiz/government_q6_right.mp3",
+    "wrongAudio": "audio/social/quiz/government_q6_wrong.mp3"
+   },
+   {
+    "type": "pick",
+    "q": "Pick the three services the municipal government looks after.",
+    "n": 3,
+    "options": [
+     "Garbage pickup",
+     "Passports",
+     "Parks and playgrounds",
+     "Canada's money",
+     "Fire fighters",
+     "Hospitals"
+    ],
+    "answers": [
+     "Garbage pickup",
+     "Parks and playgrounds",
+     "Fire fighters"
+    ],
+    "explain": "Garbage pickup, parks and playgrounds, and fire fighters are municipal services.",
+    "qAudio": "audio/social/quiz/government_q7.mp3",
+    "rightText": "Yes, exactly. Garbage pickup, parks and playgrounds, and fire fighters are municipal services.",
+    "wrongText": "Not quite. Garbage pickup, parks and playgrounds, and fire fighters are municipal services.",
+    "rightAudio": "audio/social/quiz/government_q7_right.mp3",
+    "wrongAudio": "audio/social/quiz/government_q7_wrong.mp3"
+   },
+   {
+    "type": "sentence",
+    "q": "Name one right and one responsibility of a Canadian citizen.",
+    "rubric": [
+     {
+      "idea": "Names a right, such as voting, freedom of speech or freedom of religion",
+      "pts": 1
+     },
+     {
+      "idea": "Names a responsibility, such as obeying the law, voting or respecting others' rights",
+      "pts": 1
+     }
+    ],
+    "model": "One right is freedom of speech, and one responsibility is to obey the law.",
+    "explain": "Rights include voting and freedom of speech. Responsibilities include obeying the law and respecting others.",
+    "qAudio": "audio/social/quiz/government_q8_sentence.mp3",
+    "rightText": "Spot on, Max. Rights include voting and freedom of speech. Responsibilities include obeying the law and respecting others.",
+    "wrongText": "Not quite. Rights include voting and freedom of speech. Responsibilities include obeying the law and respecting others.",
+    "rightAudio": "audio/social/quiz/government_q8_right.mp3",
+    "wrongAudio": "audio/social/quiz/government_q8_wrong.mp3"
+   }
+  ],
+  "done": [],
+  "doneTiers": {
+   "perfect": {
+    "text": "Three Levels of Government quiz complete. Perfect score! Every mark.",
+    "audio": "audio/social/quiz/government_done_perfect.mp3"
+   },
+   "good": {
+    "text": "Three Levels of Government quiz complete. Nice work. Check the ones you missed, then you're set.",
+    "audio": "audio/social/quiz/government_done_good.mp3"
+   },
+   "review": {
+    "text": "Three Levels of Government quiz complete. Good effort. Run through the review again, then have another go.",
+    "audio": "audio/social/quiz/government_done_review.mp3"
+   }
+  }
+ },
+ "ss_govreview": {
+  "title": "Test Review: Government · quiz",
+  "subject": "Social Studies",
+  "intro": "Test Review: Government quiz. 10 questions, 22 marks. Tap, type, match, fill in the blanks, and write complete sentences.",
+  "introAudio": "audio/social/quiz/govreview_intro_v2.mp3",
+  "questions": [
+   {
+    "type": "inline",
+    "q": "Circle the ONE correct answer. (On the test, both were circled.)",
+    "parts": [
+     "The leader of a municipal government is the ",
+     {
+      "choices": [
+       "premier",
+       "mayor",
+       "prime minister"
+      ],
+      "answer": "mayor"
+     },
+     "."
+    ],
+    "explain": "The mayor leads a municipal government. The premier leads a province, and the prime minister leads Canada.",
+    "qAudio": "audio/social/quiz/govreview_q1_inline.mp3",
+    "rightText": "Correct. Nice work. The mayor leads a municipal government. The premier leads a province, and the prime minister leads Canada.",
+    "wrongText": "Not quite. The mayor leads a municipal government. The premier leads a province, and the prime minister leads Canada.",
+    "rightAudio": "audio/social/quiz/govreview_q1_right.mp3",
+    "wrongAudio": "audio/social/quiz/govreview_q1_wrong.mp3"
+   },
+   {
+    "type": "inline",
+    "q": "Circle the ONE correct answer.",
+    "parts": [
+     "Ontario's schools are the job of the ",
+     {
+      "choices": [
+       "municipal",
+       "provincial",
+       "federal"
+      ],
+      "answer": "provincial"
+     },
+     " government."
+    ],
+    "explain": "Education is provincial. School boards run local schools, but they follow the Ontario government's rules.",
+    "qAudio": "audio/social/quiz/govreview_q2_inline.mp3",
+    "rightText": "That's right. Education is provincial. School boards run local schools, but they follow the Ontario government's rules.",
+    "wrongText": "Not quite. Education is provincial. School boards run local schools, but they follow the Ontario government's rules.",
+    "rightAudio": "audio/social/quiz/govreview_q2_right.mp3",
+    "wrongAudio": "audio/social/quiz/govreview_q2_wrong.mp3"
+   },
+   {
+    "type": "wordbank",
+    "q": "Fill in the blanks with words from the word bank. Each word is used once.",
+    "bank": [
+     "municipalities",
+     "municipal",
+     "mayor",
+     "council",
+     "provincial",
+     "federal"
+    ],
+    "items": [
+     {
+      "pre": "Cities, towns and townships are called ",
+      "answer": "municipalities",
+      "post": "."
+     },
+     {
+      "pre": "The ",
+      "answer": "municipal",
+      "post": " government is also called local government."
+     },
+     {
+      "pre": "The ",
+      "answer": "mayor",
+      "post": " is the leader of a city or town."
+     },
+     {
+      "pre": "Ontario's schools follow rules from the ",
+      "answer": "provincial",
+      "post": " government."
+     },
+     {
+      "pre": "The ",
+      "answer": "federal",
+      "post": " government looks after Canada's money and passports."
+     },
+     {
+      "pre": "City ",
+      "answer": "council",
+      "post": " holds meetings and votes on decisions like a new playground."
+     }
+    ],
+    "explain": "Municipalities are the places. Municipal is the describing word for their government. The mayor leads it, council votes, schools are provincial, money is federal.",
+    "qAudio": "audio/social/quiz/govreview_q3_wordbank.mp3",
+    "rightText": "Yes, exactly. Municipalities are the places. Municipal is the describing word for their government. The mayor leads it, council votes, schools are provincial, money is federal.",
+    "wrongText": "Not quite. Municipalities are the places. Municipal is the describing word for their government. The mayor leads it, council votes, schools are provincial, money is federal.",
+    "rightAudio": "audio/social/quiz/govreview_q3_right.mp3",
+    "wrongAudio": "audio/social/quiz/govreview_q3_wrong.mp3"
+   },
+   {
+    "type": "tf",
+    "q": "Local government and municipal government are two different levels of government.",
+    "options": [
+     "True",
+     "False"
+    ],
+    "answer": "False",
+    "explain": "False. Local government and municipal government are the same level: the government of your city or town.",
+    "qAudio": "audio/social/quiz/govreview_q4_tf.mp3",
+    "rightText": "Spot on, Max. False. Local government and municipal government are the same level: the government of your city or town.",
+    "wrongText": "Not quite. False. Local government and municipal government are the same level: the government of your city or town.",
+    "rightAudio": "audio/social/quiz/govreview_q4_right.mp3",
+    "wrongAudio": "audio/social/quiz/govreview_q4_wrong.mp3"
+   },
+   {
+    "type": "tf",
+    "q": "A city council holds meetings and votes to make decisions.",
+    "options": [
+     "True",
+     "False"
+    ],
+    "answer": "True",
+    "explain": "True. Council meets, listens, and then votes.",
+    "qAudio": "audio/social/quiz/govreview_q5_tf.mp3",
+    "rightText": "Correct. Nice work. True. Council meets, listens, and then votes.",
+    "wrongText": "Not quite. True. Council meets, listens, and then votes.",
+    "rightAudio": "audio/social/quiz/govreview_q5_right.mp3",
+    "wrongAudio": "audio/social/quiz/govreview_q5_wrong.mp3"
+   },
+   {
+    "type": "mc",
+    "q": "Your neighbourhood wants a new playground in the park. Which level of government decides?",
+    "options": [
+     "Federal",
+     "Provincial",
+     "Municipal (local)",
+     "None of them"
+    ],
+    "answer": "Municipal (local)",
+    "explain": "Parks and playgrounds are municipal, so city or town council talks about it and votes.",
+    "qAudio": "audio/social/quiz/govreview_q6.mp3",
+    "rightText": "That's right. Parks and playgrounds are municipal, so city or town council talks about it and votes.",
+    "wrongText": "Not quite. Parks and playgrounds are municipal, so city or town council talks about it and votes.",
+    "rightAudio": "audio/social/quiz/govreview_q6_right.mp3",
+    "wrongAudio": "audio/social/quiz/govreview_q6_wrong.mp3"
+   },
+   {
+    "type": "match",
+    "q": "Match each word to its meaning.",
+    "terms": [
+     "municipality",
+     "municipalities",
+     "municipal",
+     "council",
+     "premier"
+    ],
+    "defs": [
+     {
+      "letter": "A",
+      "text": "The elected group that meets and votes for a city"
+     },
+     {
+      "letter": "B",
+      "text": "A city, town or township"
+     },
+     {
+      "letter": "C",
+      "text": "The leader of a province"
+     },
+     {
+      "letter": "D",
+      "text": "The describing word for local government"
+     },
+     {
+      "letter": "E",
+      "text": "Two or more cities or towns"
+     }
+    ],
+    "answers": [
+     "B",
+     "E",
+     "D",
+     "A",
+     "C"
+    ],
+    "explain": "A municipality is one city or town, municipalities are more than one, municipal describes their government, council votes, and the premier leads a province.",
+    "qAudio": "audio/social/quiz/govreview_q7_match.mp3",
+    "rightText": "Yes, exactly. A municipality is one city or town, municipalities are more than one, municipal describes their government, council votes, and the premier leads a province.",
+    "wrongText": "Not quite. A municipality is one city or town, municipalities are more than one, municipal describes their government, council votes, and the premier leads a province.",
+    "rightAudio": "audio/social/quiz/govreview_q7_right.mp3",
+    "wrongAudio": "audio/social/quiz/govreview_q7_wrong.mp3"
+   },
+   {
+    "type": "inline",
+    "q": "Circle the correct word.",
+    "parts": [
+     "Toronto, Ottawa and Mississauga are all ",
+     {
+      "choices": [
+       "municipal",
+       "municipals",
+       "municipalities"
+      ],
+      "answer": "municipalities"
+     },
+     "."
+    ],
+    "explain": "The word for more than one city or town is municipalities.",
+    "qAudio": "audio/social/quiz/govreview_q8_inline.mp3",
+    "rightText": "Spot on, Max. The word for more than one city or town is municipalities.",
+    "wrongText": "Not quite. The word for more than one city or town is municipalities.",
+    "rightAudio": "audio/social/quiz/govreview_q8_right.mp3",
+    "wrongAudio": "audio/social/quiz/govreview_q8_wrong.mp3"
+   },
+   {
+    "type": "sentence",
+    "q": "Explain one difference between the municipal government and the federal government. Give one example of what each one is responsible for.",
+    "rubric": [
+     {
+      "idea": "A difference: municipal looks after one city or town (local); federal looks after the whole country",
+      "pts": 1
+     },
+     {
+      "idea": "A correct municipal job, such as garbage, parks and playgrounds, local roads, fire fighters or libraries",
+      "pts": 1
+     },
+     {
+      "idea": "A correct federal job, such as the army, Canada's money, passports or Canada Post mail",
+      "pts": 1
+     }
+    ],
+    "model": "The municipal government looks after one city or town, like garbage pickup, but the federal government looks after the whole country, like Canada's money.",
+    "explain": "Municipal is local, for one city or town, like garbage and parks. Federal is for all of Canada, like money, passports and the army.",
+    "qAudio": "audio/social/quiz/govreview_q9_sentence.mp3",
+    "rightText": "Correct. Nice work. Municipal is local, for one city or town, like garbage and parks. Federal is for all of Canada, like money, passports and the army.",
+    "wrongText": "Not quite. Municipal is local, for one city or town, like garbage and parks. Federal is for all of Canada, like money, passports and the army.",
+    "rightAudio": "audio/social/quiz/govreview_q9_right.mp3",
+    "wrongAudio": "audio/social/quiz/govreview_q9_wrong.mp3"
+   },
+   {
+    "type": "sentence",
+    "q": "Why is it important for citizens to vote?",
+    "rubric": [
+     {
+      "idea": "Voting is how citizens choose their leaders or government",
+      "pts": 1
+     },
+     {
+      "idea": "It gives people a say in the decisions that affect them",
+      "pts": 1
+     }
+    ],
+    "model": "Voting is important because it is how citizens choose their leaders and have a say in decisions that affect them.",
+    "explain": "Voting lets citizens choose their leaders and have a say in decisions.",
+    "qAudio": "audio/social/quiz/govreview_q10_sentence.mp3",
+    "rightText": "That's right. Voting lets citizens choose their leaders and have a say in decisions.",
+    "wrongText": "Not quite. Voting lets citizens choose their leaders and have a say in decisions.",
+    "rightAudio": "audio/social/quiz/govreview_q10_right.mp3",
+    "wrongAudio": "audio/social/quiz/govreview_q10_wrong.mp3"
+   }
+  ],
+  "done": [],
+  "doneTiers": {
+   "perfect": {
+    "text": "Test Review: Government quiz complete. Perfect score! Every mark.",
+    "audio": "audio/social/quiz/govreview_done_perfect.mp3"
+   },
+   "good": {
+    "text": "Test Review: Government quiz complete. Nice work. Check the ones you missed, then you're set.",
+    "audio": "audio/social/quiz/govreview_done_good.mp3"
+   },
+   "review": {
+    "text": "Test Review: Government quiz complete. Good effort. Run through the review again, then have another go.",
+    "audio": "audio/social/quiz/govreview_done_review.mp3"
+   }
+  }
  }
 });

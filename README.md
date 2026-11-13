@@ -153,3 +153,32 @@ PORT=8798 python3 serve.py          # then open http://127.0.0.1:8798/
 - Content: `mult_content.py` → `build_mult.py` → `mult_data.js` + `audio/mult/` (gTTS). Visuals in `mult_vis.js`. App: `mult_app.js` (`multWalk`, `multQuiz`). Mastery: `mult_mastery.js` (`hb.multMastery.v1`).
 - Eight lessons, each with Review (diagrams + Math Hero) and dual quizzes (Typed / Notepad). Problems are generated and weighted toward weak times-table facts; lesson level 1–3.
 - Home › **× Mastery** shows the 12×12 heatmap and per-lesson levels. Quiz History Export/Import includes `mastery.multiplication`.
+
+## Test-style question types (`quiz_types.js` + `school_types.py`)
+Max's real tests mix formats, so the shared `maxQuiz` engine supports, beside `mc` / `pick` / `number`:
+- `tf` — True / False buttons.
+- `wordbank` — `{bank, items:[{pre, answer, post}]}`; each bank word can be used once (1 mark per blank).
+- `match` — `{terms, defs:[{letter, text}], answers}`; pick a letter for each term (1 mark per term).
+- `inline` — circle-the-answer inside a sentence: `{parts:[text | {choices, answer}]}` (1 mark per group).
+- `sentence` — complete-sentence answer, typed or written on the notepad (📝 toggle). `HB.gradeSentence` grades it against a
+  rubric `[{idea, pts}]` with partial credit and checks it is a complete sentence (−½ if not). No key / AI off / error →
+  Max sees the model answer, ticks the rubric ideas he included and "complete sentence", then **Score my answer**.
+- Math `number` questions in **Notepad** mode are graded as show-your-work (`kind:"showwork"`): ½ mark for the steps and ½ for
+  the final answer, with feedback on each. Questions carry a `steps` model solution.
+Scores can be halves (shown as ½). Quiz History and the Outbox keep per-question `type`, `earned`, `pts`, `grader`, `feedback`.
+Write content with the helpers in `school_types.py` (`wordbank, match, tf, inline, sentence`); `check()` validates each one,
+`spoken()` makes the narration, `done_tiers()` makes end-of-quiz clips that work for any score. Changed text → new MP3 filename.
+Where they are used: every Anatomy body-system quiz and Max's Test Topics, every Social Studies quiz (plus **Test Review:
+Government**), Fractions Unit 3 and the Unit 4 practice test, and Spelling **Word Work** (`spell_week7_work`).
+The legacy `anatQuiz` quizzes (Organs, All Systems) are unchanged.
+
+## Math › Fractions Unit 3
+`u3_equiv` (3.1 Equivalent Fractions), `u3_mixed` (3.2 Mixed Numbers and Improper Fractions), `u3_order` (3.3 Comparing and
+Ordering) and `u3_practice` (Unit 3 Practice Test), each with Typed and Notepad sessions, before Unit 4. New pictures in
+`FRAC_VIS`: `shapes`, `nline` (number line with improper / mixed labels), `mix2imp`, `imp2mix`.
+
+## Curriculum (`curriculum.js` + `curriculum_ui.js`)
+Home › **Curriculum** maps the Ontario Grade 5 curriculum (Math 2020, Science and Technology 2022, Social Studies 2018,
+Language 2023, Health and Physical Education 2019) from https://www.dcp.edu.gov.on.ca/en/curriculum. Codes are official
+(copied from the ministry's content data); the descriptions are short paraphrases. Each topic is **Covered in class (tested)**,
+**Has lessons** (with an Open › link into the app) or **Coming up**. Edit `window.CURRICULUM` in `curriculum.js` to update status.

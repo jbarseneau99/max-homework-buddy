@@ -5,6 +5,10 @@ window.FRACTIONS_DATA = {
   "compare",
   "mixed",
   "muldiv",
+  "u3_equiv",
+  "u3_mixed",
+  "u3_order",
+  "u3_practice",
   "u4_addsub",
   "u4_unitfrac",
   "u4_practice"
@@ -1231,6 +1235,1233 @@ window.FRACTIONS_DATA = {
     }
    ]
   },
+  "u3_equiv": {
+   "title": "Unit 3.1 · Equivalent Fractions",
+   "blurb": "Multiply or divide top and bottom, say what you did, missing numbers, equivalent mixed numbers, and the vocabulary.",
+   "quiz": "frac_u3_31",
+   "dual": true,
+   "review": [
+    {
+     "id": "sameamt",
+     "title": "Equivalent fractions: same amount",
+     "vis": {
+      "kind": "shapes",
+      "items": [
+       {
+        "shape": "square",
+        "n": 1,
+        "d": 2
+       },
+       {
+        "shape": "square",
+        "n": 2,
+        "d": 4
+       },
+       {
+        "shape": "square",
+        "n": 4,
+        "d": 8
+       }
+      ]
+     },
+     "facts": [
+      "Equivalent fractions are different names for the same amount.",
+      "Each square is the same size. Half of each square is shaded.",
+      "So 1/2 = 2/4 = 4/8. The pieces get smaller, but there are more of them."
+     ],
+     "audio": "audio/fractions/u3_31/review_sameamt.mp3"
+    },
+    {
+     "id": "mult",
+     "title": "Multiply the top and the bottom",
+     "vis": {
+      "kind": "op",
+      "a": [
+       2,
+       3
+      ],
+      "op": "×",
+      "k": 4,
+      "b": [
+       8,
+       12
+      ]
+     },
+     "facts": [
+      "To make an equivalent fraction, multiply the numerator and the denominator by the same number.",
+      "2/3 = ?/12. What times 3 makes 12? It is 4, because 3 × 4 = 12. So multiply the top by 4 too: 2 × 4 = 8.",
+      "So 2/3 = 8/12. Say what you did: I multiplied the top and the bottom by 4."
+     ],
+     "audio": "audio/fractions/u3_31/review_mult.mp3"
+    },
+    {
+     "id": "div",
+     "title": "Divide the top and the bottom",
+     "vis": {
+      "kind": "op",
+      "a": [
+       8,
+       10
+      ],
+      "op": "÷",
+      "k": 2,
+      "b": [
+       4,
+       5
+      ]
+     },
+     "facts": [
+      "You can also divide the numerator and the denominator by the same number.",
+      "8/10 = ?/5. What divides 10 to make 5? It is 2, because 10 ÷ 2 = 5. So divide the top by 2 too: 8 ÷ 2 = 4.",
+      "So 8/10 = 4/5. Say what you did: I divided the top and the bottom by 2."
+     ],
+     "audio": "audio/fractions/u3_31/review_div.mp3"
+    },
+    {
+     "id": "missbottom",
+     "title": "Missing denominator",
+     "vis": {
+      "kind": "op",
+      "a": [
+       16,
+       6
+      ],
+      "op": "÷",
+      "k": 2,
+      "b": [
+       8,
+       3
+      ]
+     },
+     "facts": [
+      "Sometimes the bottom number is missing: 16/6 = 8/?.",
+      "Look at the numbers you know: 16 ÷ 2 = 8. So divide the bottom by 2 too: 6 ÷ 2 = 3.",
+      "So 16/6 = 8/3. Whatever you do to the top, do the same to the bottom."
+     ],
+     "audio": "audio/fractions/u3_31/review_missbottom.mp3"
+    },
+    {
+     "id": "models",
+     "title": "Squares, triangles and circles",
+     "vis": {
+      "kind": "shapes",
+      "items": [
+       {
+        "shape": "circle",
+        "n": 1,
+        "d": 2
+       },
+       {
+        "shape": "triangle",
+        "n": 2,
+        "d": 4
+       },
+       {
+        "shape": "square",
+        "n": 4,
+        "d": 8
+       }
+      ]
+     },
+     "facts": [
+      "Any shape can be cut into equal parts: circles, triangles, squares and rectangles.",
+      "The circle shows 1/2, the triangle shows 2/4, and the square shows 4/8.",
+      "All three are half shaded, so they show equivalent fractions: 1/2 = 2/4 = 4/8."
+     ],
+     "audio": "audio/fractions/u3_31/review_models.mp3"
+    },
+    {
+     "id": "mixedeq",
+     "title": "Equivalent mixed numbers",
+     "vis": {
+      "kind": "mixed",
+      "w": 2,
+      "n": 3,
+      "d": 4,
+      "imp": 11
+     },
+     "facts": [
+      "In a mixed number, the whole number stays the same. Only the fraction part changes.",
+      "2 3/4 = 2 ?/12: 4 × 3 = 12, so 3 × 3 = 9. So 2 3/4 = 2 9/12.",
+      "3 6/9 = 3 ?/3: 9 ÷ 3 = 3, so 6 ÷ 3 = 2. So 3 6/9 = 3 2/3."
+     ],
+     "audio": "audio/fractions/u3_31/review_mixedeq.mp3"
+    },
+    {
+     "id": "words1",
+     "title": "Words: proper, improper, mixed",
+     "vis": {
+      "kind": "mixed",
+      "w": 1,
+      "n": 3,
+      "d": 4,
+      "improper": true,
+      "imp": 7
+     },
+     "facts": [
+      "Proper fraction: the numerator is smaller than the denominator, like 3/4.",
+      "Improper fraction: the numerator is the same as or bigger than the denominator, like 7/4.",
+      "Mixed number: a whole number and a proper fraction together, like 1 3/4. Here 7/4 = 1 3/4."
+     ],
+     "audio": "audio/fractions/u3_31/review_words1.mp3"
+    },
+    {
+     "id": "words2",
+     "title": "Words: equivalent, unlike, common denominator",
+     "vis": {
+      "kind": "bars",
+      "rows": [
+       [
+        1,
+        2
+       ],
+       [
+        3,
+        6
+       ],
+       [
+        1,
+        3
+       ],
+       [
+        2,
+        6
+       ]
+      ],
+      "noGuide": true
+     },
+     "facts": [
+      "Equivalent fractions name the same amount, like 1/2 and 3/6.",
+      "Unlike fractions have different denominators, like 1/2 and 1/3.",
+      "A common denominator is one denominator that both fractions can use: 1/2 = 3/6 and 1/3 = 2/6, so 6 is a common denominator."
+     ],
+     "audio": "audio/fractions/u3_31/review_words2.mp3"
+    }
+   ],
+   "components": [
+    {
+     "id": "e1",
+     "title": "2/3 = ?/12",
+     "kind": "multiply",
+     "a": [
+      2,
+      3
+     ],
+     "b": [
+      8,
+      12
+     ],
+     "k": 4,
+     "vis": {
+      "kind": "op",
+      "a": [
+       2,
+       3
+      ],
+      "op": "×",
+      "k": 4,
+      "b": [
+       8,
+       12
+      ]
+     },
+     "facts": [
+      "3 × 4 = 12, so the rule is multiply by 4.",
+      "2 × 4 = 8.",
+      "So 2/3 = 8/12. I multiplied by 4."
+     ],
+     "audio": "audio/fractions/u3_31/e1.mp3"
+    },
+    {
+     "id": "e2",
+     "title": "8/10 = ?/5",
+     "kind": "simplify",
+     "a": [
+      8,
+      10
+     ],
+     "b": [
+      4,
+      5
+     ],
+     "k": 2,
+     "vis": {
+      "kind": "op",
+      "a": [
+       8,
+       10
+      ],
+      "op": "÷",
+      "k": 2,
+      "b": [
+       4,
+       5
+      ]
+     },
+     "facts": [
+      "10 ÷ 2 = 5, so the rule is divide by 2.",
+      "8 ÷ 2 = 4.",
+      "So 8/10 = 4/5. I divided by 2."
+     ],
+     "audio": "audio/fractions/u3_31/e2.mp3"
+    },
+    {
+     "id": "e3",
+     "title": "16/6 = 8/?",
+     "kind": "simplify",
+     "a": [
+      16,
+      6
+     ],
+     "b": [
+      8,
+      3
+     ],
+     "k": 2,
+     "vis": {
+      "kind": "op",
+      "a": [
+       16,
+       6
+      ],
+      "op": "÷",
+      "k": 2,
+      "b": [
+       8,
+       3
+      ]
+     },
+     "facts": [
+      "16 ÷ 2 = 8, so the rule is divide by 2.",
+      "6 ÷ 2 = 3.",
+      "So 16/6 = 8/3. I divided by 2."
+     ],
+     "audio": "audio/fractions/u3_31/e3.mp3"
+    },
+    {
+     "id": "e4",
+     "title": "2 3/4 = 2 ?/12",
+     "kind": "mixedEq",
+     "w": 2,
+     "a": [
+      3,
+      4
+     ],
+     "b": [
+      9,
+      12
+     ],
+     "vis": {
+      "kind": "mixed",
+      "w": 2,
+      "n": 3,
+      "d": 4,
+      "imp": 11
+     },
+     "facts": [
+      "The whole number 2 stays the same.",
+      "4 × 3 = 12, so 3 × 3 = 9.",
+      "So 2 3/4 = 2 9/12. I multiplied the fraction part by 3."
+     ],
+     "audio": "audio/fractions/u3_31/e4.mp3"
+    },
+    {
+     "id": "e5",
+     "title": "3 6/9 = 3 ?/3",
+     "kind": "mixedEq",
+     "w": 3,
+     "a": [
+      6,
+      9
+     ],
+     "b": [
+      2,
+      3
+     ],
+     "vis": {
+      "kind": "mixed",
+      "w": 3,
+      "n": 2,
+      "d": 3,
+      "imp": 11
+     },
+     "facts": [
+      "The whole number 3 stays the same.",
+      "9 ÷ 3 = 3, so 6 ÷ 3 = 2.",
+      "So 3 6/9 = 3 2/3. I divided the fraction part by 3."
+     ],
+     "audio": "audio/fractions/u3_31/e5.mp3"
+    },
+    {
+     "id": "e6",
+     "title": "One amount, three shapes",
+     "kind": "model",
+     "vis": {
+      "kind": "shapes",
+      "items": [
+       {
+        "shape": "circle",
+        "n": 3,
+        "d": 4
+       },
+       {
+        "shape": "square",
+        "n": 6,
+        "d": 8
+       },
+       {
+        "shape": "rect",
+        "n": 9,
+        "d": 12
+       }
+      ]
+     },
+     "facts": [
+      "The circle is cut into 4 equal parts with 3 shaded: 3/4.",
+      "The square shows 6/8 and the rectangle shows 9/12.",
+      "3/4 = 6/8 = 9/12, because 3 × 2 = 6, 4 × 2 = 8, 3 × 3 = 9 and 4 × 3 = 12."
+     ],
+     "audio": "audio/fractions/u3_31/e6.mp3"
+    }
+   ]
+  },
+  "u3_mixed": {
+   "title": "Unit 3.2 · Mixed Numbers & Improper Fractions",
+   "blurb": "Multiply and add, divide with a remainder over the SAME denominator, halves, and number lines in fifths.",
+   "quiz": "frac_u3_32",
+   "dual": true,
+   "review": [
+    {
+     "id": "halves",
+     "title": "Mixed numbers and improper fractions",
+     "vis": {
+      "kind": "mixed",
+      "w": 1,
+      "n": 1,
+      "d": 2,
+      "improper": true,
+      "imp": 3
+     },
+     "facts": [
+      "A mixed number has wholes and a fraction, like 1 1/2. An improper fraction shows the same amount as one fraction, like 3/2.",
+      "One whole is 2 halves. One whole and 1 more half makes 3 halves.",
+      "So 1 1/2 = 3/2."
+     ],
+     "audio": "audio/fractions/u3_32/review_halves.mp3"
+    },
+    {
+     "id": "toimp",
+     "title": "Mixed to improper: multiply, then add",
+     "vis": {
+      "kind": "mix2imp",
+      "w": 2,
+      "n": 3,
+      "d": 4
+     },
+     "facts": [
+      "Step 1: multiply the whole number by the denominator. Step 2: add the numerator.",
+      "2 3/4: 2 × 4 + 3 = 11.",
+      "Step 3: keep the same denominator. So 2 3/4 = 11/4."
+     ],
+     "audio": "audio/fractions/u3_32/review_toimp.mp3"
+    },
+    {
+     "id": "why",
+     "title": "Why it works",
+     "vis": {
+      "kind": "mixed",
+      "w": 2,
+      "n": 3,
+      "d": 4,
+      "improper": true,
+      "imp": 11
+     },
+     "facts": [
+      "Each whole pie is cut into 4 fourths, so 2 wholes make 8 fourths: 2 × 4 = 8.",
+      "Add the 3 extra fourths: 8 + 3 = 11.",
+      "Count the pieces: 11 fourths, so 11/4."
+     ],
+     "audio": "audio/fractions/u3_32/review_why.mp3"
+    },
+    {
+     "id": "tomix",
+     "title": "Improper to mixed: divide",
+     "vis": {
+      "kind": "imp2mix",
+      "N": 5,
+      "d": 3
+     },
+     "facts": [
+      "Divide the numerator by the denominator: 5 ÷ 3 = 1 remainder 2.",
+      "The 1 is the whole number. The remainder 2 is the new numerator.",
+      "The denominator stays 3. So 5/3 = 1 2/3, not 1 2/5!"
+     ],
+     "audio": "audio/fractions/u3_32/review_tomix.mp3"
+    },
+    {
+     "id": "stays",
+     "title": "The denominator stays the same",
+     "vis": {
+      "kind": "mixed",
+      "w": 1,
+      "n": 2,
+      "d": 3,
+      "improper": true,
+      "imp": 5
+     },
+     "facts": [
+      "Thirds stay thirds. 5 thirds is 1 whole, which is 3 thirds, with 2 thirds left over.",
+      "So 5/3 = 1 2/3.",
+      "Check it backwards: 1 × 3 + 2 = 5, so you get 5/3 again."
+     ],
+     "audio": "audio/fractions/u3_32/review_stays.mp3"
+    },
+    {
+     "id": "nline5",
+     "title": "A number line in fifths",
+     "vis": {
+      "kind": "nline",
+      "d": 5,
+      "max": 3,
+      "marks": [
+       {
+        "v": [
+         7,
+         5
+        ]
+       },
+       {
+        "v": [
+         12,
+         5
+        ]
+       }
+      ],
+      "show": "both"
+     },
+     "facts": [
+      "Each whole is cut into 5 fifths: 5/5 = 1, 10/5 = 2 and 15/5 = 3.",
+      "7/5 is 2 fifths past 1, so 7/5 = 1 2/5.",
+      "12/5 is 2 fifths past 2, so 12/5 = 2 2/5. Count by fifths past 2: 11/5, 12/5, 13/5, 14/5."
+     ],
+     "audio": "audio/fractions/u3_32/review_nline5.mp3"
+    },
+    {
+     "id": "showwork",
+     "title": "Show your work",
+     "vis": {
+      "kind": "mix2imp",
+      "w": 8,
+      "n": 3,
+      "d": 8
+     },
+     "facts": [
+      "Your teacher gives marks for the steps and for the answer, so write both.",
+      "8 3/8: 8 × 8 + 3 = 67, so 8 3/8 = 67/8.",
+      "17/5: 17 ÷ 5 = 3 remainder 2, so 17/5 = 3 2/5."
+     ],
+     "audio": "audio/fractions/u3_32/review_showwork.mp3"
+    }
+   ],
+   "components": [
+    {
+     "id": "m1",
+     "title": "8 3/8 as an improper fraction",
+     "kind": "toImproper",
+     "a": [
+      67,
+      8
+     ],
+     "m": [
+      8,
+      3,
+      8
+     ],
+     "vis": {
+      "kind": "mix2imp",
+      "w": 8,
+      "n": 3,
+      "d": 8
+     },
+     "facts": [
+      "Multiply, then add: 8 × 8 + 3 = 67.",
+      "Keep the denominator, 8.",
+      "So 8 3/8 = 67/8."
+     ],
+     "audio": "audio/fractions/u3_32/m1.mp3"
+    },
+    {
+     "id": "m2",
+     "title": "2 5/6 as an improper fraction",
+     "kind": "toImproper",
+     "a": [
+      17,
+      6
+     ],
+     "m": [
+      2,
+      5,
+      6
+     ],
+     "vis": {
+      "kind": "mix2imp",
+      "w": 2,
+      "n": 5,
+      "d": 6
+     },
+     "facts": [
+      "Multiply, then add: 2 × 6 + 5 = 17.",
+      "Keep the denominator, 6.",
+      "So 2 5/6 = 17/6."
+     ],
+     "audio": "audio/fractions/u3_32/m2.mp3"
+    },
+    {
+     "id": "m3",
+     "title": "4 1/2 as an improper fraction",
+     "kind": "toImproper",
+     "a": [
+      9,
+      2
+     ],
+     "m": [
+      4,
+      1,
+      2
+     ],
+     "vis": {
+      "kind": "mixed",
+      "w": 4,
+      "n": 1,
+      "d": 2,
+      "improper": true,
+      "imp": 9
+     },
+     "facts": [
+      "Each whole is 2 halves: 4 × 2 + 1 = 9.",
+      "Keep the denominator, 2.",
+      "So 4 1/2 = 9/2. Count the halves in the picture: 9."
+     ],
+     "audio": "audio/fractions/u3_32/m3.mp3"
+    },
+    {
+     "id": "m4",
+     "title": "2 3/4 = ?/12",
+     "kind": "chain",
+     "eq": [
+      "2 3/4",
+      "33/12"
+     ],
+     "vis": {
+      "kind": "mix2imp",
+      "w": 2,
+      "n": 3,
+      "d": 4
+     },
+     "facts": [
+      "First make an improper fraction: 2 × 4 + 3 = 11, so 2 3/4 = 11/4.",
+      "Now make twelfths: 4 × 3 = 12, so 11 × 3 = 33.",
+      "So 2 3/4 = 11/4 = 33/12."
+     ],
+     "audio": "audio/fractions/u3_32/m4.mp3"
+    },
+    {
+     "id": "m5",
+     "title": "5/3 as a mixed number",
+     "kind": "toMixed",
+     "a": [
+      5,
+      3
+     ],
+     "m": [
+      1,
+      2,
+      3
+     ],
+     "vis": {
+      "kind": "imp2mix",
+      "N": 5,
+      "d": 3
+     },
+     "facts": [
+      "Divide: 5 ÷ 3 = 1 remainder 2.",
+      "1 whole. The remainder 2 goes over the SAME denominator, 3.",
+      "So 5/3 = 1 2/3."
+     ],
+     "audio": "audio/fractions/u3_32/m5.mp3"
+    },
+    {
+     "id": "m6",
+     "title": "12/5 on the number line",
+     "kind": "toMixed",
+     "a": [
+      12,
+      5
+     ],
+     "m": [
+      2,
+      2,
+      5
+     ],
+     "vis": {
+      "kind": "nline",
+      "d": 5,
+      "max": 3,
+      "marks": [
+       {
+        "v": [
+         12,
+         5
+        ]
+       }
+      ],
+      "show": "both"
+     },
+     "facts": [
+      "12 ÷ 5 = 2 remainder 2.",
+      "On the line, 12/5 is 2 fifths past 2.",
+      "So 12/5 = 2 2/5."
+     ],
+     "audio": "audio/fractions/u3_32/m6.mp3"
+    }
+   ]
+  },
+  "u3_order": {
+   "title": "Unit 3.3 · Comparing & Ordering Fractions",
+   "blurb": "Common denominators, convert improper fractions first, least to greatest and greatest to least.",
+   "quiz": "frac_u3_33",
+   "dual": true,
+   "review": [
+    {
+     "id": "samed",
+     "title": "Same denominator: compare the tops",
+     "vis": {
+      "kind": "compare",
+      "a": [
+       3,
+       8
+      ],
+      "b": [
+       5,
+       8
+      ],
+      "sym": "<"
+     },
+     "facts": [
+      "When the denominators are the same, the pieces are the same size.",
+      "So just compare the numerators: 3 pieces is less than 5 pieces.",
+      "3/8 < 5/8."
+     ],
+     "audio": "audio/fractions/u3_33/review_samed.mp3"
+    },
+    {
+     "id": "commond",
+     "title": "Different denominators: find a common denominator",
+     "vis": {
+      "kind": "compare",
+      "a": [
+       2,
+       3
+      ],
+      "b": [
+       3,
+       4
+      ],
+      "sym": "<"
+     },
+     "facts": [
+      "Change both fractions to the same denominator. 12 works for thirds and fourths.",
+      "2/3 = 8/12 and 3/4 = 9/12.",
+      "8/12 < 9/12, so 2/3 < 3/4."
+     ],
+     "audio": "audio/fractions/u3_33/review_commond.mp3"
+    },
+    {
+     "id": "trap",
+     "title": "Watch out: improper fractions hide wholes",
+     "vis": {
+      "kind": "nline",
+      "d": 5,
+      "max": 3,
+      "marks": [
+       {
+        "v": [
+         12,
+         5
+        ],
+        "label": "12/5"
+       },
+       {
+        "v": [
+         13,
+         5
+        ],
+        "label": "2 3/5"
+       }
+      ],
+      "show": "none"
+     },
+     "facts": [
+      "Don't sort by the whole numbers alone. 12/5 has no whole number showing, but it is bigger than 2.",
+      "12 ÷ 5 = 2 remainder 2, so 12/5 = 2 2/5.",
+      "Now compare: 2 2/5 < 2 3/5, so 12/5 < 2 3/5."
+     ],
+     "audio": "audio/fractions/u3_33/review_trap.mp3"
+    },
+    {
+     "id": "least",
+     "title": "Least to greatest: 2 3/5, 1 7/10, 12/5",
+     "vis": {
+      "kind": "nline",
+      "d": 10,
+      "max": 3,
+      "marks": [
+       {
+        "v": [
+         17,
+         10
+        ],
+        "label": "1 7/10"
+       },
+       {
+        "v": [
+         24,
+         10
+        ],
+        "label": "12/5"
+       },
+       {
+        "v": [
+         26,
+         10
+        ],
+        "label": "2 3/5"
+       }
+      ],
+      "show": "none"
+     },
+     "facts": [
+      "Change them all to tenths: 2 3/5 = 26/10, 1 7/10 = 17/10 and 12/5 = 24/10.",
+      "Now order the tenths: 17/10 < 24/10 < 26/10.",
+      "Write the answer with the original numbers: 1 7/10, 12/5, 2 3/5."
+     ],
+     "audio": "audio/fractions/u3_33/review_least.mp3"
+    },
+    {
+     "id": "greatest",
+     "title": "Greatest to least: 15/12 L, 7/4 L, 1 2/3 L",
+     "vis": {
+      "kind": "nline",
+      "d": 12,
+      "max": 2,
+      "marks": [
+       {
+        "v": [
+         15,
+         12
+        ],
+        "label": "15/12"
+       },
+       {
+        "v": [
+         20,
+         12
+        ],
+        "label": "1 2/3"
+       },
+       {
+        "v": [
+         21,
+         12
+        ],
+        "label": "7/4"
+       }
+      ],
+      "show": "none"
+     },
+     "facts": [
+      "Change them all to twelfths: 15/12 stays, 7/4 = 21/12 and 1 2/3 = 20/12.",
+      "Greatest first: 21/12 > 20/12 > 15/12.",
+      "So in litres: 7/4 > 1 2/3 > 15/12."
+     ],
+     "audio": "audio/fractions/u3_33/review_greatest.mp3"
+    },
+    {
+     "id": "checkorder",
+     "title": "Check your order",
+     "vis": {
+      "kind": "bars",
+      "rows": [
+       [
+        1,
+        4
+       ],
+       [
+        1,
+        2
+       ],
+       [
+        3,
+        4
+       ]
+      ],
+      "noGuide": true
+     },
+     "facts": [
+      "Least to greatest means smallest first. Greatest to least means biggest first.",
+      "Convert first, then order, then write your answer using the numbers from the question.",
+      "Read your list back: does each number get bigger, or smaller, every time?"
+     ],
+     "audio": "audio/fractions/u3_33/review_checkorder.mp3"
+    }
+   ],
+   "components": [
+    {
+     "id": "c1",
+     "title": "3/8 or 5/8?",
+     "kind": "compare",
+     "a": [
+      3,
+      8
+     ],
+     "b": [
+      5,
+      8
+     ],
+     "vis": {
+      "kind": "compare",
+      "a": [
+       3,
+       8
+      ],
+      "b": [
+       5,
+       8
+      ],
+      "sym": "<"
+     },
+     "facts": [
+      "Same denominator, eighths.",
+      "Compare the numerators: 3 and 5.",
+      "So 3/8 < 5/8."
+     ],
+     "audio": "audio/fractions/u3_33/c1.mp3"
+    },
+    {
+     "id": "c2",
+     "title": "2/3 or 3/4?",
+     "kind": "compare",
+     "a": [
+      2,
+      3
+     ],
+     "b": [
+      3,
+      4
+     ],
+     "vis": {
+      "kind": "compare",
+      "a": [
+       2,
+       3
+      ],
+      "b": [
+       3,
+       4
+      ],
+      "sym": "<"
+     },
+     "facts": [
+      "Common denominator 12: 2/3 = 8/12 and 3/4 = 9/12.",
+      "8 twelfths is less than 9 twelfths.",
+      "So 2/3 < 3/4."
+     ],
+     "audio": "audio/fractions/u3_33/c2.mp3"
+    },
+    {
+     "id": "c3",
+     "title": "12/5 or 2 3/5?",
+     "kind": "compare",
+     "a": [
+      12,
+      5
+     ],
+     "b": [
+      13,
+      5
+     ],
+     "vis": {
+      "kind": "nline",
+      "d": 5,
+      "max": 3,
+      "marks": [
+       {
+        "v": [
+         12,
+         5
+        ],
+        "label": "12/5"
+       },
+       {
+        "v": [
+         13,
+         5
+        ],
+        "label": "2 3/5"
+       }
+      ],
+      "show": "none"
+     },
+     "facts": [
+      "Change 2 3/5 to an improper fraction: 2 × 5 + 3 = 13, so 13/5.",
+      "Both are fifths now. 12 is less than 13.",
+      "12/5 < 13/5, so 12/5 < 2 3/5."
+     ],
+     "audio": "audio/fractions/u3_33/c3.mp3"
+    },
+    {
+     "id": "c4",
+     "title": "Order 2 3/5, 1 7/10, 12/5",
+     "kind": "order",
+     "items": [
+      "2 3/5",
+      "1 7/10",
+      "12/5"
+     ],
+     "asc": true,
+     "answer": [
+      "1 7/10",
+      "12/5",
+      "2 3/5"
+     ],
+     "vis": {
+      "kind": "nline",
+      "d": 10,
+      "max": 3,
+      "marks": [
+       {
+        "v": [
+         17,
+         10
+        ],
+        "label": "1 7/10"
+       },
+       {
+        "v": [
+         24,
+         10
+        ],
+        "label": "12/5"
+       },
+       {
+        "v": [
+         26,
+         10
+        ],
+        "label": "2 3/5"
+       }
+      ],
+      "show": "none"
+     },
+     "facts": [
+      "Tenths: 2 3/5 = 26/10, 1 7/10 = 17/10, 12/5 = 24/10.",
+      "17/10 < 24/10 < 26/10.",
+      "Least to greatest: 1 7/10, 12/5, 2 3/5."
+     ],
+     "audio": "audio/fractions/u3_33/c4.mp3"
+    },
+    {
+     "id": "c5",
+     "title": "Order 15/12 L, 7/4 L, 1 2/3 L",
+     "kind": "order",
+     "items": [
+      "15/12",
+      "7/4",
+      "1 2/3"
+     ],
+     "asc": false,
+     "answer": [
+      "7/4",
+      "1 2/3",
+      "15/12"
+     ],
+     "vis": {
+      "kind": "nline",
+      "d": 12,
+      "max": 2,
+      "marks": [
+       {
+        "v": [
+         15,
+         12
+        ],
+        "label": "15/12"
+       },
+       {
+        "v": [
+         20,
+         12
+        ],
+        "label": "1 2/3"
+       },
+       {
+        "v": [
+         21,
+         12
+        ],
+        "label": "7/4"
+       }
+      ],
+      "show": "none"
+     },
+     "facts": [
+      "Twelfths: 7/4 = 21/12 and 1 2/3 = 20/12.",
+      "21/12 > 20/12 > 15/12.",
+      "Greatest to least: 7/4 L, 1 2/3 L, 15/12 L."
+     ],
+     "audio": "audio/fractions/u3_33/c5.mp3"
+    }
+   ]
+  },
+  "u3_practice": {
+   "title": "Unit 3 · Practice Test",
+   "blurb": "Everything from Unit 3, set out like the real test: show your work, word bank, matching, true/false and a sentence.",
+   "quiz": "frac_u3_practice",
+   "dual": true,
+   "review": [
+    {
+     "id": "recap1",
+     "title": "Equivalent fractions recap",
+     "vis": {
+      "kind": "op",
+      "a": [
+       3,
+       4
+      ],
+      "op": "×",
+      "k": 2,
+      "b": [
+       6,
+       8
+      ]
+     },
+     "facts": [
+      "Multiply or divide the top and the bottom by the same number, and say which one and by how much.",
+      "3/4 × 2 on top and bottom: 3/4 = 6/8.",
+      "Mixed numbers: keep the whole, change the fraction: 1 4/6 = 1 2/3."
+     ],
+     "audio": "audio/fractions/u3_practice/review_recap1.mp3"
+    },
+    {
+     "id": "recap2",
+     "title": "Mixed and improper recap",
+     "vis": {
+      "kind": "mix2imp",
+      "w": 3,
+      "n": 1,
+      "d": 4
+     },
+     "facts": [
+      "Mixed to improper: multiply, then add. 3 1/4: 3 × 4 + 1 = 13, so 13/4.",
+      "Improper to mixed: divide. 11/4: 11 ÷ 4 = 2 remainder 3, so 11/4 = 2 3/4.",
+      "The denominator stays the same both ways."
+     ],
+     "audio": "audio/fractions/u3_practice/review_recap2.mp3"
+    },
+    {
+     "id": "recap3",
+     "title": "Comparing and ordering recap",
+     "vis": {
+      "kind": "nline",
+      "d": 8,
+      "max": 2,
+      "marks": [
+       {
+        "v": [
+         10,
+         8
+        ],
+        "label": "5/4"
+       },
+       {
+        "v": [
+         11,
+         8
+        ],
+        "label": "1 3/8"
+       },
+       {
+        "v": [
+         12,
+         8
+        ],
+        "label": "1 1/2"
+       }
+      ],
+      "show": "none"
+     },
+     "facts": [
+      "Change to a common denominator or to improper fractions, then order.",
+      "In eighths: 5/4 = 10/8, 1 3/8 = 11/8 and 1 1/2 = 12/8.",
+      "So 5/4 < 1 3/8 < 1 1/2. Write the answer with the numbers from the question."
+     ],
+     "audio": "audio/fractions/u3_practice/review_recap3.mp3"
+    }
+   ],
+   "components": [
+    {
+     "id": "p1",
+     "title": "3 1/4 = ?/4",
+     "kind": "toImproper",
+     "a": [
+      13,
+      4
+     ],
+     "m": [
+      3,
+      1,
+      4
+     ],
+     "vis": {
+      "kind": "mix2imp",
+      "w": 3,
+      "n": 1,
+      "d": 4
+     },
+     "facts": [
+      "3 × 4 + 1 = 13.",
+      "Keep the 4.",
+      "So 3 1/4 = 13/4."
+     ],
+     "audio": "audio/fractions/u3_practice/p1.mp3"
+    },
+    {
+     "id": "p2",
+     "title": "11/4 as a mixed number",
+     "kind": "toMixed",
+     "a": [
+      11,
+      4
+     ],
+     "m": [
+      2,
+      3,
+      4
+     ],
+     "vis": {
+      "kind": "imp2mix",
+      "N": 11,
+      "d": 4
+     },
+     "facts": [
+      "11 ÷ 4 = 2 remainder 3.",
+      "The remainder 3 goes over 4.",
+      "So 11/4 = 2 3/4."
+     ],
+     "audio": "audio/fractions/u3_practice/p2.mp3"
+    }
+   ]
+  },
   "u4_addsub": {
    "title": "Unit 4.1 · Add & Subtract Like Fractions",
    "blurb": "Like fractions, bar and number-line models, rename mixed numbers. Typed + Notepad quizzes.",
@@ -2032,6 +3263,7 @@ window.FRACTIONS_DATA = {
 window.QUIZ_SETS = Object.assign(window.QUIZ_SETS || {}, {
  "frac_equiv": {
   "title": "Equivalent Fractions · quiz",
+  "subject": "Math › Fractions",
   "intro": "Equivalent Fractions quiz. 8 questions. Type the missing number, or tap your answer.",
   "introAudio": "audio/fractions/quiz_intro.mp3",
   "questions": [
@@ -2323,6 +3555,7 @@ window.QUIZ_SETS = Object.assign(window.QUIZ_SETS || {}, {
  },
  "frac_compare": {
   "title": "Comparing Fractions · quiz",
+  "subject": "Math › Fractions",
   "intro": "Comparing Fractions quiz. 8 questions. Type the missing number, or tap your answer.",
   "introAudio": "audio/fractions/compare/quiz_intro.mp3",
   "questions": [
@@ -2616,6 +3849,7 @@ window.QUIZ_SETS = Object.assign(window.QUIZ_SETS || {}, {
  },
  "frac_mixed": {
   "title": "Mixed Numbers · quiz",
+  "subject": "Math › Fractions",
   "intro": "Mixed Numbers quiz. 8 questions. Type the missing number, or tap your answer.",
   "introAudio": "audio/fractions/mixed/quiz_intro.mp3",
   "questions": [
@@ -2866,6 +4100,7 @@ window.QUIZ_SETS = Object.assign(window.QUIZ_SETS || {}, {
  },
  "frac_muldiv": {
   "title": "Multiplying & Dividing Fractions · quiz",
+  "subject": "Math › Fractions",
   "intro": "Multiplying & Dividing Fractions quiz. 8 questions. Type the missing number, or tap your answer.",
   "introAudio": "audio/fractions/muldiv/quiz_intro.mp3",
   "questions": [
@@ -3130,8 +4365,1530 @@ window.QUIZ_SETS = Object.assign(window.QUIZ_SETS || {}, {
    }
   ]
  },
+ "frac_u3_31": {
+  "title": "Unit 3.1 · Equivalent Fractions · quiz",
+  "subject": "Math › Fractions",
+  "intro": "Unit 3.1 · Equivalent Fractions quiz. 13 questions, set out like your real test. Show your work, fill in the word bank, match, circle, and write a complete sentence.",
+  "introAudio": "audio/fractions/u3_31/quiz_intro_v2.mp3",
+  "questions": [
+   {
+    "type": "number",
+    "q": "1/2 = ?/4. What is the missing numerator?",
+    "answer": 2,
+    "steps": "2 × 2 = 4, so 1 × 2 = 2. 1/2 = 2/4",
+    "vis": {
+     "kind": "shapes",
+     "items": [
+      {
+       "shape": "square",
+       "n": 1,
+       "d": 2
+      },
+      {
+       "shape": "square",
+       "n": 0,
+       "d": 4
+      }
+     ],
+     "bare": true
+    },
+    "after": {
+     "kind": "shapes",
+     "items": [
+      {
+       "shape": "square",
+       "n": 1,
+       "d": 2
+      },
+      {
+       "shape": "square",
+       "n": 2,
+       "d": 4
+      }
+     ]
+    },
+    "explain": "2 × 2 = 4, so multiply the top by 2 too: 1 × 2 = 2. 1/2 = 2/4.",
+    "qAudio": "audio/fractions/u3_31/quiz_q1.mp3",
+    "rightText": "Correct. Nice work. 2 × 2 = 4, so multiply the top by 2 too: 1 × 2 = 2. 1/2 = 2/4.",
+    "wrongText": "Not quite. 2 × 2 = 4, so multiply the top by 2 too: 1 × 2 = 2. 1/2 = 2/4.",
+    "rightAudio": "audio/fractions/u3_31/quiz_q1_right.mp3",
+    "wrongAudio": "audio/fractions/u3_31/quiz_q1_wrong.mp3"
+   },
+   {
+    "type": "number",
+    "q": "2/3 = ?/12. What is the missing numerator?",
+    "answer": 8,
+    "steps": "3 × 4 = 12, so 2 × 4 = 8. 2/3 = 8/12",
+    "vis": {
+     "kind": "missing",
+     "a": [
+      2,
+      3
+     ],
+     "d": 12
+    },
+    "after": {
+     "kind": "op",
+     "a": [
+      2,
+      3
+     ],
+     "op": "×",
+     "k": 4,
+     "b": [
+      8,
+      12
+     ]
+    },
+    "explain": "3 × 4 = 12, so multiply the top by 4 too: 2 × 4 = 8. 2/3 = 8/12.",
+    "qAudio": "audio/fractions/u3_31/quiz_q2.mp3",
+    "rightText": "That's right. 3 × 4 = 12, so multiply the top by 4 too: 2 × 4 = 8. 2/3 = 8/12.",
+    "wrongText": "Not quite. 3 × 4 = 12, so multiply the top by 4 too: 2 × 4 = 8. 2/3 = 8/12.",
+    "rightAudio": "audio/fractions/u3_31/quiz_q2_right.mp3",
+    "wrongAudio": "audio/fractions/u3_31/quiz_q2_wrong.mp3"
+   },
+   {
+    "type": "inline",
+    "q": "Say what you did.",
+    "parts": [
+     "To change 2/3 into 8/12, you ",
+     {
+      "choices": [
+       "multiply",
+       "divide"
+      ],
+      "answer": "multiply"
+     },
+     " the top and the bottom by ",
+     {
+      "choices": [
+       "2",
+       "3",
+       "4"
+      ],
+      "answer": "4"
+     },
+     "."
+    ],
+    "explain": "You multiply by 4: 2 × 4 = 8 and 3 × 4 = 12.",
+    "qAudio": "audio/fractions/u3_31/quiz_q3_inline.mp3",
+    "rightText": "Yes, exactly. You multiply by 4: 2 × 4 = 8 and 3 × 4 = 12.",
+    "wrongText": "Not quite. You multiply by 4: 2 × 4 = 8 and 3 × 4 = 12.",
+    "rightAudio": "audio/fractions/u3_31/quiz_q3_right.mp3",
+    "wrongAudio": "audio/fractions/u3_31/quiz_q3_wrong.mp3"
+   },
+   {
+    "type": "number",
+    "q": "8/10 = ?/5. What is the missing numerator?",
+    "answer": 4,
+    "steps": "10 ÷ 2 = 5, so 8 ÷ 2 = 4. 8/10 = 4/5",
+    "vis": {
+     "kind": "bars",
+     "rows": [
+      [
+       8,
+       10
+      ]
+     ]
+    },
+    "after": {
+     "kind": "op",
+     "a": [
+      8,
+      10
+     ],
+     "op": "÷",
+     "k": 2,
+     "b": [
+      4,
+      5
+     ]
+    },
+    "explain": "10 ÷ 2 = 5, so divide the top by 2 too: 8 ÷ 2 = 4. 8/10 = 4/5.",
+    "qAudio": "audio/fractions/u3_31/quiz_q4.mp3",
+    "rightText": "Spot on, Max. 10 ÷ 2 = 5, so divide the top by 2 too: 8 ÷ 2 = 4. 8/10 = 4/5.",
+    "wrongText": "Not quite. 10 ÷ 2 = 5, so divide the top by 2 too: 8 ÷ 2 = 4. 8/10 = 4/5.",
+    "rightAudio": "audio/fractions/u3_31/quiz_q4_right.mp3",
+    "wrongAudio": "audio/fractions/u3_31/quiz_q4_wrong.mp3"
+   },
+   {
+    "type": "inline",
+    "q": "Say what you did.",
+    "parts": [
+     "To change 8/10 into 4/5, you ",
+     {
+      "choices": [
+       "multiply",
+       "divide"
+      ],
+      "answer": "divide"
+     },
+     " the top and the bottom by ",
+     {
+      "choices": [
+       "2",
+       "4",
+       "5"
+      ],
+      "answer": "2"
+     },
+     "."
+    ],
+    "explain": "You divide by 2: 8 ÷ 2 = 4 and 10 ÷ 2 = 5.",
+    "qAudio": "audio/fractions/u3_31/quiz_q5_inline.mp3",
+    "rightText": "Correct. Nice work. You divide by 2: 8 ÷ 2 = 4 and 10 ÷ 2 = 5.",
+    "wrongText": "Not quite. You divide by 2: 8 ÷ 2 = 4 and 10 ÷ 2 = 5.",
+    "rightAudio": "audio/fractions/u3_31/quiz_q5_right.mp3",
+    "wrongAudio": "audio/fractions/u3_31/quiz_q5_wrong.mp3"
+   },
+   {
+    "type": "number",
+    "q": "16/6 = 8/?. What is the missing denominator?",
+    "answer": 3,
+    "steps": "16 ÷ 2 = 8, so 6 ÷ 2 = 3. 16/6 = 8/3",
+    "after": {
+     "kind": "op",
+     "a": [
+      16,
+      6
+     ],
+     "op": "÷",
+     "k": 2,
+     "b": [
+      8,
+      3
+     ]
+    },
+    "explain": "16 ÷ 2 = 8, so divide the bottom by 2 too: 6 ÷ 2 = 3. 16/6 = 8/3.",
+    "qAudio": "audio/fractions/u3_31/quiz_q6.mp3",
+    "rightText": "That's right. 16 ÷ 2 = 8, so divide the bottom by 2 too: 6 ÷ 2 = 3. 16/6 = 8/3.",
+    "wrongText": "Not quite. 16 ÷ 2 = 8, so divide the bottom by 2 too: 6 ÷ 2 = 3. 16/6 = 8/3.",
+    "rightAudio": "audio/fractions/u3_31/quiz_q6_right.mp3",
+    "wrongAudio": "audio/fractions/u3_31/quiz_q6_wrong.mp3"
+   },
+   {
+    "type": "number",
+    "q": "2 3/4 = 2 ?/12. What is the missing numerator?",
+    "answer": 9,
+    "steps": "4 × 3 = 12, so 3 × 3 = 9. 2 3/4 = 2 9/12",
+    "vis": {
+     "kind": "mixed",
+     "w": 2,
+     "n": 3,
+     "d": 4,
+     "imp": 11
+    },
+    "explain": "The 2 wholes stay. 4 × 3 = 12, so 3 × 3 = 9. 2 3/4 = 2 9/12.",
+    "qAudio": "audio/fractions/u3_31/quiz_q7.mp3",
+    "rightText": "Yes, exactly. The 2 wholes stay. 4 × 3 = 12, so 3 × 3 = 9. 2 3/4 = 2 9/12.",
+    "wrongText": "Not quite. The 2 wholes stay. 4 × 3 = 12, so 3 × 3 = 9. 2 3/4 = 2 9/12.",
+    "rightAudio": "audio/fractions/u3_31/quiz_q7_right.mp3",
+    "wrongAudio": "audio/fractions/u3_31/quiz_q7_wrong.mp3"
+   },
+   {
+    "type": "number",
+    "q": "3 6/9 = 3 ?/3. What is the missing numerator?",
+    "answer": 2,
+    "steps": "9 ÷ 3 = 3, so 6 ÷ 3 = 2. 3 6/9 = 3 2/3",
+    "vis": {
+     "kind": "mixed",
+     "w": 3,
+     "n": 6,
+     "d": 9,
+     "imp": 33
+    },
+    "explain": "The 3 wholes stay. 9 ÷ 3 = 3, so 6 ÷ 3 = 2. 3 6/9 = 3 2/3.",
+    "qAudio": "audio/fractions/u3_31/quiz_q8.mp3",
+    "rightText": "Spot on, Max. The 3 wholes stay. 9 ÷ 3 = 3, so 6 ÷ 3 = 2. 3 6/9 = 3 2/3.",
+    "wrongText": "Not quite. The 3 wholes stay. 9 ÷ 3 = 3, so 6 ÷ 3 = 2. 3 6/9 = 3 2/3.",
+    "rightAudio": "audio/fractions/u3_31/quiz_q8_right.mp3",
+    "wrongAudio": "audio/fractions/u3_31/quiz_q8_wrong.mp3"
+   },
+   {
+    "type": "tf",
+    "q": "3/5 and 6/10 are equivalent fractions.",
+    "options": [
+     "True",
+     "False"
+    ],
+    "answer": "True",
+    "explain": "True. 3 × 2 = 6 and 5 × 2 = 10, so 3/5 = 6/10.",
+    "qAudio": "audio/fractions/u3_31/quiz_q9_tf.mp3",
+    "rightText": "Correct. Nice work. True. 3 × 2 = 6 and 5 × 2 = 10, so 3/5 = 6/10.",
+    "wrongText": "Not quite. True. 3 × 2 = 6 and 5 × 2 = 10, so 3/5 = 6/10.",
+    "rightAudio": "audio/fractions/u3_31/quiz_q9_right.mp3",
+    "wrongAudio": "audio/fractions/u3_31/quiz_q9_wrong.mp3"
+   },
+   {
+    "type": "tf",
+    "q": "1/2 and 1/3 are unlike fractions.",
+    "options": [
+     "True",
+     "False"
+    ],
+    "answer": "True",
+    "explain": "True. Their denominators, 2 and 3, are different, so they are unlike fractions.",
+    "qAudio": "audio/fractions/u3_31/quiz_q10_tf.mp3",
+    "rightText": "That's right. True. Their denominators, 2 and 3, are different, so they are unlike fractions.",
+    "wrongText": "Not quite. True. Their denominators, 2 and 3, are different, so they are unlike fractions.",
+    "rightAudio": "audio/fractions/u3_31/quiz_q10_right.mp3",
+    "wrongAudio": "audio/fractions/u3_31/quiz_q10_wrong.mp3"
+   },
+   {
+    "type": "wordbank",
+    "q": "Vocabulary. Fill in each blank with a word from the word bank. Each word is used once.",
+    "bank": [
+     "equivalent fractions",
+     "unlike fractions",
+     "common denominator",
+     "proper fraction",
+     "improper fraction",
+     "mixed number"
+    ],
+    "items": [
+     {
+      "pre": "The numerator is smaller than the denominator, like 3/4: ",
+      "answer": "proper fraction",
+      "post": ""
+     },
+     {
+      "pre": "The numerator is bigger than the denominator, like 7/4: ",
+      "answer": "improper fraction",
+      "post": ""
+     },
+     {
+      "pre": "A whole number and a fraction together, like 1 3/4: ",
+      "answer": "mixed number",
+      "post": ""
+     },
+     {
+      "pre": "Fractions that name the same amount, like 1/2 and 2/4: ",
+      "answer": "equivalent fractions",
+      "post": ""
+     },
+     {
+      "pre": "Fractions with different denominators, like 1/3 and 1/4: ",
+      "answer": "unlike fractions",
+      "post": ""
+     },
+     {
+      "pre": "12 works for both 1/3 and 1/4, because 1/3 = 4/12 and 1/4 = 3/12. 12 is a ",
+      "answer": "common denominator",
+      "post": "."
+     }
+    ],
+    "explain": "Proper: top smaller. Improper: top bigger. Mixed: whole + fraction. Equivalent: same amount. Unlike: different denominators. Common denominator: one both can use.",
+    "qAudio": "audio/fractions/u3_31/quiz_q11_wordbank.mp3",
+    "rightText": "Yes, exactly. Proper: top smaller. Improper: top bigger. Mixed: whole + fraction. Equivalent: same amount. Unlike: different denominators. Common denominator: one both can use.",
+    "wrongText": "Not quite. Proper: top smaller. Improper: top bigger. Mixed: whole + fraction. Equivalent: same amount. Unlike: different denominators. Common denominator: one both can use.",
+    "rightAudio": "audio/fractions/u3_31/quiz_q11_right.mp3",
+    "wrongAudio": "audio/fractions/u3_31/quiz_q11_wrong.mp3"
+   },
+   {
+    "type": "match",
+    "q": "Match each word to an example.",
+    "terms": [
+     "proper fraction",
+     "improper fraction",
+     "mixed number",
+     "equivalent fractions",
+     "unlike fractions"
+    ],
+    "defs": [
+     {
+      "letter": "A",
+      "text": "2/3 and 4/6: the same amount"
+     },
+     {
+      "letter": "B",
+      "text": "5/8"
+     },
+     {
+      "letter": "C",
+      "text": "2/5 and 2/7: different denominators, different amounts"
+     },
+     {
+      "letter": "D",
+      "text": "2 1/4"
+     },
+     {
+      "letter": "E",
+      "text": "9/4"
+     }
+    ],
+    "answers": [
+     "B",
+     "E",
+     "D",
+     "A",
+     "C"
+    ],
+    "explain": "Proper: 5/8. Improper: 9/4. Mixed: 2 1/4. Equivalent: 2/3 and 4/6. Unlike: 2/5 and 2/7.",
+    "qAudio": "audio/fractions/u3_31/quiz_q12_match.mp3",
+    "rightText": "Spot on, Max. Proper: 5/8. Improper: 9/4. Mixed: 2 1/4. Equivalent: 2/3 and 4/6. Unlike: 2/5 and 2/7.",
+    "wrongText": "Not quite. Proper: 5/8. Improper: 9/4. Mixed: 2 1/4. Equivalent: 2/3 and 4/6. Unlike: 2/5 and 2/7.",
+    "rightAudio": "audio/fractions/u3_31/quiz_q12_right.mp3",
+    "wrongAudio": "audio/fractions/u3_31/quiz_q12_wrong.mp3"
+   },
+   {
+    "type": "sentence",
+    "q": "Explain how you know 2/3 and 8/12 are equivalent. Say whether you multiplied or divided, and by how much.",
+    "rubric": [
+     {
+      "idea": "Multiply the top and the bottom by the same number",
+      "pts": 1
+     },
+     {
+      "idea": "The number is 4: 2 × 4 = 8 and 3 × 4 = 12",
+      "pts": 1
+     }
+    ],
+    "model": "They are equivalent because I multiplied the numerator and the denominator of 2/3 by 4, and 2 × 4 = 8 and 3 × 4 = 12.",
+    "explain": "Multiply the top and the bottom by the same number, 4: 2 × 4 = 8 and 3 × 4 = 12.",
+    "qAudio": "audio/fractions/u3_31/quiz_q13_sentence.mp3",
+    "rightText": "Correct. Nice work. Multiply the top and the bottom by the same number, 4: 2 × 4 = 8 and 3 × 4 = 12.",
+    "wrongText": "Not quite. Multiply the top and the bottom by the same number, 4: 2 × 4 = 8 and 3 × 4 = 12.",
+    "rightAudio": "audio/fractions/u3_31/quiz_q13_right.mp3",
+    "wrongAudio": "audio/fractions/u3_31/quiz_q13_wrong.mp3"
+   }
+  ],
+  "done": [],
+  "doneTiers": {
+   "perfect": {
+    "text": "Quiz complete. Perfect score! Every mark.",
+    "audio": "audio/fractions/u3_31/quiz_done_perfect.mp3"
+   },
+   "good": {
+    "text": "Quiz complete. Nice work. Check the ones you missed, then you're set.",
+    "audio": "audio/fractions/u3_31/quiz_done_good.mp3"
+   },
+   "review": {
+    "text": "Quiz complete. Good effort. Run through the review again, then have another go.",
+    "audio": "audio/fractions/u3_31/quiz_done_review.mp3"
+   }
+  }
+ },
+ "frac_u3_32": {
+  "title": "Unit 3.2 · Mixed Numbers & Improper Fractions · quiz",
+  "subject": "Math › Fractions",
+  "intro": "Unit 3.2 · Mixed Numbers & Improper Fractions quiz. 13 questions, set out like your real test. Show your work, fill in the word bank, match, circle, and write a complete sentence.",
+  "introAudio": "audio/fractions/u3_32/quiz_intro_v2.mp3",
+  "questions": [
+   {
+    "type": "mc",
+    "q": "The pictures show halves. Which mixed number do they show?",
+    "options": [
+     "1 1/2",
+     "2 1/2",
+     "1 1/4",
+     "3"
+    ],
+    "answer": "1 1/2",
+    "vis": {
+     "kind": "mixed",
+     "w": 1,
+     "n": 1,
+     "d": 2,
+     "bare": true,
+     "imp": 3
+    },
+    "after": {
+     "kind": "mixed",
+     "w": 1,
+     "n": 1,
+     "d": 2,
+     "improper": true,
+     "imp": 3
+    },
+    "explain": "One whole and one half: 1 1/2, which is 3 halves, 3/2.",
+    "qAudio": "audio/fractions/u3_32/quiz_q1.mp3",
+    "rightText": "Correct. Nice work. One whole and one half: 1 1/2, which is 3 halves, 3/2.",
+    "wrongText": "Not quite. One whole and one half: 1 1/2, which is 3 halves, 3/2.",
+    "rightAudio": "audio/fractions/u3_32/quiz_q1_right.mp3",
+    "wrongAudio": "audio/fractions/u3_32/quiz_q1_wrong.mp3"
+   },
+   {
+    "type": "number",
+    "q": "4 1/2 = ?/2. What is the missing numerator?",
+    "answer": 9,
+    "steps": "4 × 2 + 1 = 9, so 4 1/2 = 9/2",
+    "after": {
+     "kind": "mixed",
+     "w": 4,
+     "n": 1,
+     "d": 2,
+     "improper": true,
+     "imp": 9
+    },
+    "explain": "Multiply, then add: 4 × 2 + 1 = 9. 4 1/2 = 9/2.",
+    "qAudio": "audio/fractions/u3_32/quiz_q2.mp3",
+    "rightText": "That's right. Multiply, then add: 4 × 2 + 1 = 9. 4 1/2 = 9/2.",
+    "wrongText": "Not quite. Multiply, then add: 4 × 2 + 1 = 9. 4 1/2 = 9/2.",
+    "rightAudio": "audio/fractions/u3_32/quiz_q2_right.mp3",
+    "wrongAudio": "audio/fractions/u3_32/quiz_q2_wrong.mp3"
+   },
+   {
+    "type": "number",
+    "q": "2 5/6 = ?/6. What is the missing numerator?",
+    "answer": 17,
+    "steps": "2 × 6 + 5 = 17, so 2 5/6 = 17/6",
+    "after": {
+     "kind": "mix2imp",
+     "w": 2,
+     "n": 5,
+     "d": 6
+    },
+    "explain": "Multiply, then add: 2 × 6 + 5 = 17. 2 5/6 = 17/6.",
+    "qAudio": "audio/fractions/u3_32/quiz_q3.mp3",
+    "rightText": "Yes, exactly. Multiply, then add: 2 × 6 + 5 = 17. 2 5/6 = 17/6.",
+    "wrongText": "Not quite. Multiply, then add: 2 × 6 + 5 = 17. 2 5/6 = 17/6.",
+    "rightAudio": "audio/fractions/u3_32/quiz_q3_right.mp3",
+    "wrongAudio": "audio/fractions/u3_32/quiz_q3_wrong.mp3"
+   },
+   {
+    "type": "number",
+    "q": "8 3/8 = ?/8. What is the missing numerator?",
+    "answer": 67,
+    "steps": "8 × 8 + 3 = 67, so 8 3/8 = 67/8",
+    "after": {
+     "kind": "mix2imp",
+     "w": 8,
+     "n": 3,
+     "d": 8
+    },
+    "explain": "Multiply, then add: 8 × 8 + 3 = 67. 8 3/8 = 67/8.",
+    "qAudio": "audio/fractions/u3_32/quiz_q4.mp3",
+    "rightText": "Spot on, Max. Multiply, then add: 8 × 8 + 3 = 67. 8 3/8 = 67/8.",
+    "wrongText": "Not quite. Multiply, then add: 8 × 8 + 3 = 67. 8 3/8 = 67/8.",
+    "rightAudio": "audio/fractions/u3_32/quiz_q4_right.mp3",
+    "wrongAudio": "audio/fractions/u3_32/quiz_q4_wrong.mp3"
+   },
+   {
+    "type": "number",
+    "q": "2 3/4 = ?/12. What is the missing numerator?",
+    "answer": 33,
+    "steps": "2 × 4 + 3 = 11, so 2 3/4 = 11/4 = 33/12",
+    "explain": "2 × 4 + 3 = 11, so 2 3/4 = 11/4. Then 4 × 3 = 12 and 11 × 3 = 33: 2 3/4 = 33/12.",
+    "qAudio": "audio/fractions/u3_32/quiz_q5.mp3",
+    "rightText": "Correct. Nice work. 2 × 4 + 3 = 11, so 2 3/4 = 11/4. Then 4 × 3 = 12 and 11 × 3 = 33: 2 3/4 = 33/12.",
+    "wrongText": "Not quite. 2 × 4 + 3 = 11, so 2 3/4 = 11/4. Then 4 × 3 = 12 and 11 × 3 = 33: 2 3/4 = 33/12.",
+    "rightAudio": "audio/fractions/u3_32/quiz_q5_right.mp3",
+    "wrongAudio": "audio/fractions/u3_32/quiz_q5_wrong.mp3"
+   },
+   {
+    "type": "tf",
+    "q": "5/3 is the same as 1 2/5.",
+    "options": [
+     "True",
+     "False"
+    ],
+    "answer": "False",
+    "explain": "False. 5 ÷ 3 = 1 remainder 2, and the denominator stays 3: 5/3 = 1 2/3.",
+    "qAudio": "audio/fractions/u3_32/quiz_q6_tf.mp3",
+    "rightText": "That's right. False. 5 ÷ 3 = 1 remainder 2, and the denominator stays 3: 5/3 = 1 2/3.",
+    "wrongText": "Not quite. False. 5 ÷ 3 = 1 remainder 2, and the denominator stays 3: 5/3 = 1 2/3.",
+    "rightAudio": "audio/fractions/u3_32/quiz_q6_right.mp3",
+    "wrongAudio": "audio/fractions/u3_32/quiz_q6_wrong.mp3"
+   },
+   {
+    "type": "number",
+    "q": "5/3 = 1 ?/3. What is the missing numerator?",
+    "answer": 2,
+    "steps": "5 ÷ 3 = 1 remainder 2, so 5/3 = 1 2/3",
+    "after": {
+     "kind": "imp2mix",
+     "N": 5,
+     "d": 3
+    },
+    "explain": "5 ÷ 3 = 1 remainder 2. The remainder goes over 3: 5/3 = 1 2/3.",
+    "qAudio": "audio/fractions/u3_32/quiz_q7.mp3",
+    "rightText": "Yes, exactly. 5 ÷ 3 = 1 remainder 2. The remainder goes over 3: 5/3 = 1 2/3.",
+    "wrongText": "Not quite. 5 ÷ 3 = 1 remainder 2. The remainder goes over 3: 5/3 = 1 2/3.",
+    "rightAudio": "audio/fractions/u3_32/quiz_q7_right.mp3",
+    "wrongAudio": "audio/fractions/u3_32/quiz_q7_wrong.mp3"
+   },
+   {
+    "type": "inline",
+    "q": "Circle the correct words.",
+    "parts": [
+     "When you change 5/3 into a mixed number, the denominator ",
+     {
+      "choices": [
+       "becomes 5",
+       "stays 3",
+       "becomes 2"
+      ],
+      "answer": "stays 3"
+     },
+     "."
+    ],
+    "explain": "The denominator always stays the same: thirds stay thirds.",
+    "qAudio": "audio/fractions/u3_32/quiz_q8_inline.mp3",
+    "rightText": "Spot on, Max. The denominator always stays the same: thirds stay thirds.",
+    "wrongText": "Not quite. The denominator always stays the same: thirds stay thirds.",
+    "rightAudio": "audio/fractions/u3_32/quiz_q8_right.mp3",
+    "wrongAudio": "audio/fractions/u3_32/quiz_q8_wrong.mp3"
+   },
+   {
+    "type": "number",
+    "q": "17/5 = ? 2/5. How many wholes?",
+    "answer": 3,
+    "steps": "17 ÷ 5 = 3 remainder 2, so 17/5 = 3 2/5",
+    "after": {
+     "kind": "imp2mix",
+     "N": 17,
+     "d": 5
+    },
+    "explain": "17 ÷ 5 = 3 remainder 2, so 17/5 = 3 2/5.",
+    "qAudio": "audio/fractions/u3_32/quiz_q9.mp3",
+    "rightText": "Correct. Nice work. 17 ÷ 5 = 3 remainder 2, so 17/5 = 3 2/5.",
+    "wrongText": "Not quite. 17 ÷ 5 = 3 remainder 2, so 17/5 = 3 2/5.",
+    "rightAudio": "audio/fractions/u3_32/quiz_q9_right.mp3",
+    "wrongAudio": "audio/fractions/u3_32/quiz_q9_wrong.mp3"
+   },
+   {
+    "type": "mc",
+    "q": "On the number line in fifths, which number is at the star?",
+    "options": [
+     "2 2/5",
+     "2 1/5",
+     "1 2/5",
+     "12/10"
+    ],
+    "answer": "2 2/5",
+    "vis": {
+     "kind": "nline",
+     "d": 5,
+     "max": 3,
+     "marks": [
+      {
+       "v": [
+        12,
+        5
+       ],
+       "label": "★"
+      }
+     ],
+     "show": "none"
+    },
+    "after": {
+     "kind": "nline",
+     "d": 5,
+     "max": 3,
+     "marks": [
+      {
+       "v": [
+        12,
+        5
+       ]
+      }
+     ],
+     "show": "both"
+    },
+    "explain": "The star is 2 fifths past 2: 12/5 = 2 2/5.",
+    "qAudio": "audio/fractions/u3_32/quiz_q10.mp3",
+    "rightText": "That's right. The star is 2 fifths past 2: 12/5 = 2 2/5.",
+    "wrongText": "Not quite. The star is 2 fifths past 2: 12/5 = 2 2/5.",
+    "rightAudio": "audio/fractions/u3_32/quiz_q10_right.mp3",
+    "wrongAudio": "audio/fractions/u3_32/quiz_q10_wrong.mp3"
+   },
+   {
+    "type": "match",
+    "q": "Match each improper fraction to its mixed number.",
+    "terms": [
+     "7/4",
+     "11/3",
+     "9/2",
+     "13/5"
+    ],
+    "defs": [
+     {
+      "letter": "A",
+      "text": "4 1/2"
+     },
+     {
+      "letter": "B",
+      "text": "1 3/4"
+     },
+     {
+      "letter": "C",
+      "text": "2 3/5"
+     },
+     {
+      "letter": "D",
+      "text": "3 2/3"
+     }
+    ],
+    "answers": [
+     "B",
+     "D",
+     "A",
+     "C"
+    ],
+    "explain": "7/4 = 1 3/4, 11/3 = 3 2/3, 9/2 = 4 1/2, 13/5 = 2 3/5.",
+    "qAudio": "audio/fractions/u3_32/quiz_q11_match.mp3",
+    "rightText": "Yes, exactly. 7/4 = 1 3/4, 11/3 = 3 2/3, 9/2 = 4 1/2, 13/5 = 2 3/5.",
+    "wrongText": "Not quite. 7/4 = 1 3/4, 11/3 = 3 2/3, 9/2 = 4 1/2, 13/5 = 2 3/5.",
+    "rightAudio": "audio/fractions/u3_32/quiz_q11_right.mp3",
+    "wrongAudio": "audio/fractions/u3_32/quiz_q11_wrong.mp3"
+   },
+   {
+    "type": "wordbank",
+    "q": "Fill in the steps with words from the word bank. Each word is used once.",
+    "bank": [
+     "multiply",
+     "add",
+     "divide",
+     "remainder",
+     "same",
+     "subtract"
+    ],
+    "items": [
+     {
+      "pre": "Mixed to improper: first ",
+      "answer": "multiply",
+      "post": " the whole number by the denominator."
+     },
+     {
+      "pre": "Then ",
+      "answer": "add",
+      "post": " the numerator."
+     },
+     {
+      "pre": "Improper to mixed: ",
+      "answer": "divide",
+      "post": " the numerator by the denominator."
+     },
+     {
+      "pre": "The ",
+      "answer": "remainder",
+      "post": " becomes the new numerator."
+     },
+     {
+      "pre": "Both ways, the denominator stays the ",
+      "answer": "same",
+      "post": "."
+     }
+    ],
+    "explain": "Multiply then add to get an improper fraction. Divide to get a mixed number; the remainder is the new numerator; the denominator stays the same.",
+    "qAudio": "audio/fractions/u3_32/quiz_q12_wordbank.mp3",
+    "rightText": "Spot on, Max. Multiply then add to get an improper fraction. Divide to get a mixed number; the remainder is the new numerator; the denominator stays the same.",
+    "wrongText": "Not quite. Multiply then add to get an improper fraction. Divide to get a mixed number; the remainder is the new numerator; the denominator stays the same.",
+    "rightAudio": "audio/fractions/u3_32/quiz_q12_right.mp3",
+    "wrongAudio": "audio/fractions/u3_32/quiz_q12_wrong.mp3"
+   },
+   {
+    "type": "sentence",
+    "q": "Explain how to change 2 5/6 into an improper fraction. Show the steps in your sentence.",
+    "rubric": [
+     {
+      "idea": "Multiply the whole number by the denominator: 2 × 6 = 12",
+      "pts": 1
+     },
+     {
+      "idea": "Add the numerator to get 17 and keep the denominator 6: 17/6",
+      "pts": 1
+     }
+    ],
+    "model": "I multiply 2 × 6 = 12, then add 5 to get 17, and keep the denominator 6, so 2 5/6 = 17/6.",
+    "explain": "2 × 6 + 5 = 17, so 2 5/6 = 17/6.",
+    "qAudio": "audio/fractions/u3_32/quiz_q13_sentence.mp3",
+    "rightText": "Correct. Nice work. 2 × 6 + 5 = 17, so 2 5/6 = 17/6.",
+    "wrongText": "Not quite. 2 × 6 + 5 = 17, so 2 5/6 = 17/6.",
+    "rightAudio": "audio/fractions/u3_32/quiz_q13_right.mp3",
+    "wrongAudio": "audio/fractions/u3_32/quiz_q13_wrong.mp3"
+   }
+  ],
+  "done": [],
+  "doneTiers": {
+   "perfect": {
+    "text": "Quiz complete. Perfect score! Every mark.",
+    "audio": "audio/fractions/u3_32/quiz_done_perfect.mp3"
+   },
+   "good": {
+    "text": "Quiz complete. Nice work. Check the ones you missed, then you're set.",
+    "audio": "audio/fractions/u3_32/quiz_done_good.mp3"
+   },
+   "review": {
+    "text": "Quiz complete. Good effort. Run through the review again, then have another go.",
+    "audio": "audio/fractions/u3_32/quiz_done_review.mp3"
+   }
+  }
+ },
+ "frac_u3_33": {
+  "title": "Unit 3.3 · Comparing & Ordering Fractions · quiz",
+  "subject": "Math › Fractions",
+  "intro": "Unit 3.3 · Comparing & Ordering Fractions quiz. 13 questions, set out like your real test. Show your work, fill in the word bank, match, circle, and write a complete sentence.",
+  "introAudio": "audio/fractions/u3_33/quiz_intro_v2.mp3",
+  "questions": [
+   {
+    "type": "mc",
+    "q": "Compare: 3/8 ? 5/8",
+    "options": [
+     "<",
+     ">",
+     "="
+    ],
+    "answer": "<",
+    "steps": "Same denominator, so compare 3 and 5: 3/8 < 5/8",
+    "after": {
+     "kind": "compare",
+     "a": [
+      3,
+      8
+     ],
+     "b": [
+      5,
+      8
+     ],
+     "sym": "<"
+    },
+    "explain": "Same denominator: 3 is less than 5, so 3/8 < 5/8.",
+    "qAudio": "audio/fractions/u3_33/quiz_q1.mp3",
+    "rightText": "Correct. Nice work. Same denominator: 3 is less than 5, so 3/8 < 5/8.",
+    "wrongText": "Not quite. Same denominator: 3 is less than 5, so 3/8 < 5/8.",
+    "rightAudio": "audio/fractions/u3_33/quiz_q1_right.mp3",
+    "wrongAudio": "audio/fractions/u3_33/quiz_q1_wrong.mp3"
+   },
+   {
+    "type": "mc",
+    "q": "Compare: 2/3 ? 3/4",
+    "options": [
+     "<",
+     ">",
+     "="
+    ],
+    "answer": "<",
+    "steps": "2/3 = 8/12 and 3/4 = 9/12, so 8/12 < 9/12",
+    "after": {
+     "kind": "compare",
+     "a": [
+      2,
+      3
+     ],
+     "b": [
+      3,
+      4
+     ],
+     "sym": "<"
+    },
+    "explain": "2/3 = 8/12 and 3/4 = 9/12, so 2/3 < 3/4.",
+    "qAudio": "audio/fractions/u3_33/quiz_q2.mp3",
+    "rightText": "That's right. 2/3 = 8/12 and 3/4 = 9/12, so 2/3 < 3/4.",
+    "wrongText": "Not quite. 2/3 = 8/12 and 3/4 = 9/12, so 2/3 < 3/4.",
+    "rightAudio": "audio/fractions/u3_33/quiz_q2_right.mp3",
+    "wrongAudio": "audio/fractions/u3_33/quiz_q2_wrong.mp3"
+   },
+   {
+    "type": "mc",
+    "q": "Compare: 12/5 ? 2 3/5",
+    "options": [
+     "<",
+     ">",
+     "="
+    ],
+    "answer": "<",
+    "steps": "12 ÷ 5 = 2 remainder 2, so 12/5 = 2 2/5 and 2 2/5 < 2 3/5",
+    "after": {
+     "kind": "nline",
+     "d": 5,
+     "max": 3,
+     "marks": [
+      {
+       "v": [
+        12,
+        5
+       ],
+       "label": "12/5"
+      },
+      {
+       "v": [
+        13,
+        5
+       ],
+       "label": "2 3/5"
+      }
+     ],
+     "show": "none"
+    },
+    "explain": "12/5 = 2 2/5, which is less than 2 3/5.",
+    "qAudio": "audio/fractions/u3_33/quiz_q3.mp3",
+    "rightText": "Yes, exactly. 12/5 = 2 2/5, which is less than 2 3/5.",
+    "wrongText": "Not quite. 12/5 = 2 2/5, which is less than 2 3/5.",
+    "rightAudio": "audio/fractions/u3_33/quiz_q3_right.mp3",
+    "wrongAudio": "audio/fractions/u3_33/quiz_q3_wrong.mp3"
+   },
+   {
+    "type": "mc",
+    "q": "Compare: 1 7/10 ? 12/5",
+    "options": [
+     "<",
+     ">",
+     "="
+    ],
+    "answer": "<",
+    "steps": "1 7/10 = 17/10 and 12/5 = 24/10, so 17/10 < 24/10",
+    "explain": "1 7/10 = 17/10 and 12/5 = 24/10, so 1 7/10 < 12/5.",
+    "qAudio": "audio/fractions/u3_33/quiz_q4.mp3",
+    "rightText": "Spot on, Max. 1 7/10 = 17/10 and 12/5 = 24/10, so 1 7/10 < 12/5.",
+    "wrongText": "Not quite. 1 7/10 = 17/10 and 12/5 = 24/10, so 1 7/10 < 12/5.",
+    "rightAudio": "audio/fractions/u3_33/quiz_q4_right.mp3",
+    "wrongAudio": "audio/fractions/u3_33/quiz_q4_wrong.mp3"
+   },
+   {
+    "type": "tf",
+    "q": "2 1/5 is greater than 1 9/10.",
+    "options": [
+     "True",
+     "False"
+    ],
+    "answer": "True",
+    "explain": "True. The whole numbers are different: 2 wholes is more than 1 and 9/10.",
+    "qAudio": "audio/fractions/u3_33/quiz_q5_tf.mp3",
+    "rightText": "Correct. Nice work. True. The whole numbers are different: 2 wholes is more than 1 and 9/10.",
+    "wrongText": "Not quite. True. The whole numbers are different: 2 wholes is more than 1 and 9/10.",
+    "rightAudio": "audio/fractions/u3_33/quiz_q5_right.mp3",
+    "wrongAudio": "audio/fractions/u3_33/quiz_q5_wrong.mp3"
+   },
+   {
+    "type": "tf",
+    "q": "12/5 is less than 2.",
+    "options": [
+     "True",
+     "False"
+    ],
+    "answer": "False",
+    "explain": "False. 12/5 = 2 2/5, which is more than 2. Improper fractions hide their wholes!",
+    "qAudio": "audio/fractions/u3_33/quiz_q6_tf.mp3",
+    "rightText": "That's right. False. 12/5 = 2 2/5, which is more than 2. Improper fractions hide their wholes!",
+    "wrongText": "Not quite. False. 12/5 = 2 2/5, which is more than 2. Improper fractions hide their wholes!",
+    "rightAudio": "audio/fractions/u3_33/quiz_q6_right.mp3",
+    "wrongAudio": "audio/fractions/u3_33/quiz_q6_wrong.mp3"
+   },
+   {
+    "type": "number",
+    "q": "7/4 = ?/12. What is the missing numerator?",
+    "answer": 21,
+    "steps": "4 × 3 = 12, so 7 × 3 = 21. 7/4 = 21/12",
+    "explain": "4 × 3 = 12, so 7 × 3 = 21. 7/4 = 21/12.",
+    "qAudio": "audio/fractions/u3_33/quiz_q7.mp3",
+    "rightText": "Yes, exactly. 4 × 3 = 12, so 7 × 3 = 21. 7/4 = 21/12.",
+    "wrongText": "Not quite. 4 × 3 = 12, so 7 × 3 = 21. 7/4 = 21/12.",
+    "rightAudio": "audio/fractions/u3_33/quiz_q7_right.mp3",
+    "wrongAudio": "audio/fractions/u3_33/quiz_q7_wrong.mp3"
+   },
+   {
+    "type": "number",
+    "q": "1 2/3 = ?/12. What is the missing numerator?",
+    "answer": 20,
+    "steps": "1 × 3 + 2 = 5, so 1 2/3 = 5/3 = 20/12",
+    "explain": "1 2/3 = 5/3, and 5/3 = 20/12 (multiply by 4).",
+    "qAudio": "audio/fractions/u3_33/quiz_q8.mp3",
+    "rightText": "Spot on, Max. 1 2/3 = 5/3, and 5/3 = 20/12 (multiply by 4).",
+    "wrongText": "Not quite. 1 2/3 = 5/3, and 5/3 = 20/12 (multiply by 4).",
+    "rightAudio": "audio/fractions/u3_33/quiz_q8_right.mp3",
+    "wrongAudio": "audio/fractions/u3_33/quiz_q8_wrong.mp3"
+   },
+   {
+    "type": "mc",
+    "q": "Order from least to greatest: 2 3/5, 1 7/10, 12/5",
+    "options": [
+     "1 7/10, 2 3/5, 12/5",
+     "1 7/10, 12/5, 2 3/5",
+     "12/5, 1 7/10, 2 3/5",
+     "2 3/5, 12/5, 1 7/10"
+    ],
+    "answer": "1 7/10, 12/5, 2 3/5",
+    "steps": "In tenths: 2 3/5 = 26/10, 1 7/10 = 17/10, 12/5 = 24/10, and 17/10 < 24/10 < 26/10",
+    "after": {
+     "kind": "nline",
+     "d": 10,
+     "max": 3,
+     "marks": [
+      {
+       "v": [
+        17,
+        10
+       ],
+       "label": "1 7/10"
+      },
+      {
+       "v": [
+        24,
+        10
+       ],
+       "label": "12/5"
+      },
+      {
+       "v": [
+        26,
+        10
+       ],
+       "label": "2 3/5"
+      }
+     ],
+     "show": "none"
+    },
+    "explain": "In tenths: 17/10 < 24/10 < 26/10, so 1 7/10 < 12/5 < 2 3/5.",
+    "qAudio": "audio/fractions/u3_33/quiz_q9.mp3",
+    "rightText": "Correct. Nice work. In tenths: 17/10 < 24/10 < 26/10, so 1 7/10 < 12/5 < 2 3/5.",
+    "wrongText": "Not quite. In tenths: 17/10 < 24/10 < 26/10, so 1 7/10 < 12/5 < 2 3/5.",
+    "rightAudio": "audio/fractions/u3_33/quiz_q9_right.mp3",
+    "wrongAudio": "audio/fractions/u3_33/quiz_q9_wrong.mp3"
+   },
+   {
+    "type": "mc",
+    "q": "Order from greatest to least: 15/12 L, 7/4 L, 1 2/3 L",
+    "options": [
+     "7/4 L, 1 2/3 L, 15/12 L",
+     "1 2/3 L, 7/4 L, 15/12 L",
+     "15/12 L, 7/4 L, 1 2/3 L",
+     "7/4 L, 15/12 L, 1 2/3 L"
+    ],
+    "answer": "7/4 L, 1 2/3 L, 15/12 L",
+    "steps": "In twelfths: 7/4 = 21/12, 1 2/3 = 20/12, and 21/12 > 20/12 > 15/12",
+    "after": {
+     "kind": "nline",
+     "d": 12,
+     "max": 2,
+     "marks": [
+      {
+       "v": [
+        15,
+        12
+       ],
+       "label": "15/12"
+      },
+      {
+       "v": [
+        20,
+        12
+       ],
+       "label": "1 2/3"
+      },
+      {
+       "v": [
+        21,
+        12
+       ],
+       "label": "7/4"
+      }
+     ],
+     "show": "none"
+    },
+    "explain": "In twelfths: 21/12 > 20/12 > 15/12, so 7/4 L > 1 2/3 L > 15/12 L.",
+    "qAudio": "audio/fractions/u3_33/quiz_q10.mp3",
+    "rightText": "That's right. In twelfths: 21/12 > 20/12 > 15/12, so 7/4 L > 1 2/3 L > 15/12 L.",
+    "wrongText": "Not quite. In twelfths: 21/12 > 20/12 > 15/12, so 7/4 L > 1 2/3 L > 15/12 L.",
+    "rightAudio": "audio/fractions/u3_33/quiz_q10_right.mp3",
+    "wrongAudio": "audio/fractions/u3_33/quiz_q10_wrong.mp3"
+   },
+   {
+    "type": "inline",
+    "q": "Circle the correct number.",
+    "parts": [
+     "A common denominator for fifths and tenths is ",
+     {
+      "choices": [
+       "7",
+       "10",
+       "15"
+      ],
+      "answer": "10"
+     },
+     "."
+    ],
+    "explain": "10 works: fifths become tenths by multiplying by 2, and tenths stay tenths.",
+    "qAudio": "audio/fractions/u3_33/quiz_q11_inline.mp3",
+    "rightText": "Yes, exactly. 10 works: fifths become tenths by multiplying by 2, and tenths stay tenths.",
+    "wrongText": "Not quite. 10 works: fifths become tenths by multiplying by 2, and tenths stay tenths.",
+    "rightAudio": "audio/fractions/u3_33/quiz_q11_right.mp3",
+    "wrongAudio": "audio/fractions/u3_33/quiz_q11_wrong.mp3"
+   },
+   {
+    "type": "wordbank",
+    "q": "Fill in the blanks with words from the word bank. Each word is used once.",
+    "bank": [
+     "least",
+     "greatest",
+     "common denominator",
+     "improper",
+     "whole"
+    ],
+    "items": [
+     {
+      "pre": "Least to greatest means the ",
+      "answer": "least",
+      "post": " number goes first."
+     },
+     {
+      "pre": "To compare 2/3 and 3/4, change them to a ",
+      "answer": "common denominator",
+      "post": ", like 12."
+     },
+     {
+      "pre": "To compare 12/5 with mixed numbers, change them all to ",
+      "answer": "improper",
+      "post": " fractions, or change 12/5 to a mixed number."
+     },
+     {
+      "pre": "Don't sort by the ",
+      "answer": "whole",
+      "post": " numbers alone!"
+     }
+    ],
+    "explain": "Least first, use a common denominator, convert improper fractions, and don't sort by whole numbers alone.",
+    "qAudio": "audio/fractions/u3_33/quiz_q12_wordbank.mp3",
+    "rightText": "Spot on, Max. Least first, use a common denominator, convert improper fractions, and don't sort by whole numbers alone.",
+    "wrongText": "Not quite. Least first, use a common denominator, convert improper fractions, and don't sort by whole numbers alone.",
+    "rightAudio": "audio/fractions/u3_33/quiz_q12_right.mp3",
+    "wrongAudio": "audio/fractions/u3_33/quiz_q12_wrong.mp3"
+   },
+   {
+    "type": "sentence",
+    "q": "Max sorted 2 3/5, 1 7/10 and 12/5 by looking only at the whole numbers. Explain why that doesn't work, and how to fix it.",
+    "rubric": [
+     {
+      "idea": "12/5 is an improper fraction that hides its wholes: 12/5 = 2 2/5",
+      "pts": 1
+     },
+     {
+      "idea": "Change them all to the same form or a common denominator (like tenths) before ordering",
+      "pts": 1
+     }
+    ],
+    "model": "It doesn't work because 12/5 is really 2 2/5, so you have to change all the numbers to tenths first and then order them.",
+    "explain": "12/5 = 2 2/5 hides its wholes. Convert everything to tenths first, then order.",
+    "qAudio": "audio/fractions/u3_33/quiz_q13_sentence.mp3",
+    "rightText": "Correct. Nice work. 12/5 = 2 2/5 hides its wholes. Convert everything to tenths first, then order.",
+    "wrongText": "Not quite. 12/5 = 2 2/5 hides its wholes. Convert everything to tenths first, then order.",
+    "rightAudio": "audio/fractions/u3_33/quiz_q13_right.mp3",
+    "wrongAudio": "audio/fractions/u3_33/quiz_q13_wrong.mp3"
+   }
+  ],
+  "done": [],
+  "doneTiers": {
+   "perfect": {
+    "text": "Quiz complete. Perfect score! Every mark.",
+    "audio": "audio/fractions/u3_33/quiz_done_perfect.mp3"
+   },
+   "good": {
+    "text": "Quiz complete. Nice work. Check the ones you missed, then you're set.",
+    "audio": "audio/fractions/u3_33/quiz_done_good.mp3"
+   },
+   "review": {
+    "text": "Quiz complete. Good effort. Run through the review again, then have another go.",
+    "audio": "audio/fractions/u3_33/quiz_done_review.mp3"
+   }
+  }
+ },
+ "frac_u3_practice": {
+  "title": "Unit 3 · Practice Test · quiz",
+  "subject": "Math › Fractions",
+  "intro": "Unit 3 · Practice Test quiz. 16 questions, set out like your real test. Show your work, fill in the word bank, match, circle, and write a complete sentence.",
+  "introAudio": "audio/fractions/u3_practice/quiz_intro_v2.mp3",
+  "questions": [
+   {
+    "type": "number",
+    "q": "3/4 = ?/8. What is the missing numerator?",
+    "answer": 6,
+    "steps": "4 × 2 = 8, so 3 × 2 = 6. 3/4 = 6/8",
+    "after": {
+     "kind": "op",
+     "a": [
+      3,
+      4
+     ],
+     "op": "×",
+     "k": 2,
+     "b": [
+      6,
+      8
+     ]
+    },
+    "explain": "4 × 2 = 8, so 3 × 2 = 6. 3/4 = 6/8.",
+    "qAudio": "audio/fractions/u3_practice/quiz_q1.mp3",
+    "rightText": "Correct. Nice work. 4 × 2 = 8, so 3 × 2 = 6. 3/4 = 6/8.",
+    "wrongText": "Not quite. 4 × 2 = 8, so 3 × 2 = 6. 3/4 = 6/8.",
+    "rightAudio": "audio/fractions/u3_practice/quiz_q1_right.mp3",
+    "wrongAudio": "audio/fractions/u3_practice/quiz_q1_wrong.mp3"
+   },
+   {
+    "type": "number",
+    "q": "10/12 = 5/?. What is the missing denominator?",
+    "answer": 6,
+    "steps": "10 ÷ 2 = 5, so 12 ÷ 2 = 6. 10/12 = 5/6",
+    "after": {
+     "kind": "op",
+     "a": [
+      10,
+      12
+     ],
+     "op": "÷",
+     "k": 2,
+     "b": [
+      5,
+      6
+     ]
+    },
+    "explain": "10 ÷ 2 = 5, so 12 ÷ 2 = 6. 10/12 = 5/6.",
+    "qAudio": "audio/fractions/u3_practice/quiz_q2.mp3",
+    "rightText": "That's right. 10 ÷ 2 = 5, so 12 ÷ 2 = 6. 10/12 = 5/6.",
+    "wrongText": "Not quite. 10 ÷ 2 = 5, so 12 ÷ 2 = 6. 10/12 = 5/6.",
+    "rightAudio": "audio/fractions/u3_practice/quiz_q2_right.mp3",
+    "wrongAudio": "audio/fractions/u3_practice/quiz_q2_wrong.mp3"
+   },
+   {
+    "type": "number",
+    "q": "1 4/6 = 1 ?/3. What is the missing numerator?",
+    "answer": 2,
+    "steps": "6 ÷ 2 = 3, so 4 ÷ 2 = 2. 1 4/6 = 1 2/3",
+    "explain": "Keep the 1. 6 ÷ 2 = 3, so 4 ÷ 2 = 2. 1 4/6 = 1 2/3.",
+    "qAudio": "audio/fractions/u3_practice/quiz_q3.mp3",
+    "rightText": "Yes, exactly. Keep the 1. 6 ÷ 2 = 3, so 4 ÷ 2 = 2. 1 4/6 = 1 2/3.",
+    "wrongText": "Not quite. Keep the 1. 6 ÷ 2 = 3, so 4 ÷ 2 = 2. 1 4/6 = 1 2/3.",
+    "rightAudio": "audio/fractions/u3_practice/quiz_q3_right.mp3",
+    "wrongAudio": "audio/fractions/u3_practice/quiz_q3_wrong.mp3"
+   },
+   {
+    "type": "number",
+    "q": "3 1/4 = ?/4. What is the missing numerator?",
+    "answer": 13,
+    "steps": "3 × 4 + 1 = 13, so 3 1/4 = 13/4",
+    "after": {
+     "kind": "mix2imp",
+     "w": 3,
+     "n": 1,
+     "d": 4
+    },
+    "explain": "Mixed to improper: 3 × 4 + 1 = 13, so 13/4.",
+    "qAudio": "audio/fractions/u3_practice/quiz_q4.mp3",
+    "rightText": "Spot on, Max. Mixed to improper: 3 × 4 + 1 = 13, so 13/4.",
+    "wrongText": "Not quite. Mixed to improper: 3 × 4 + 1 = 13, so 13/4.",
+    "rightAudio": "audio/fractions/u3_practice/quiz_q4_right.mp3",
+    "wrongAudio": "audio/fractions/u3_practice/quiz_q4_wrong.mp3"
+   },
+   {
+    "type": "number",
+    "q": "5 2/3 = ?/3. What is the missing numerator?",
+    "answer": 17,
+    "steps": "5 × 3 + 2 = 17, so 5 2/3 = 17/3",
+    "after": {
+     "kind": "mix2imp",
+     "w": 5,
+     "n": 2,
+     "d": 3
+    },
+    "explain": "5 × 3 + 2 = 17, so 5 2/3 = 17/3.",
+    "qAudio": "audio/fractions/u3_practice/quiz_q5.mp3",
+    "rightText": "Correct. Nice work. 5 × 3 + 2 = 17, so 5 2/3 = 17/3.",
+    "wrongText": "Not quite. 5 × 3 + 2 = 17, so 5 2/3 = 17/3.",
+    "rightAudio": "audio/fractions/u3_practice/quiz_q5_right.mp3",
+    "wrongAudio": "audio/fractions/u3_practice/quiz_q5_wrong.mp3"
+   },
+   {
+    "type": "number",
+    "q": "11/4 = ? 3/4. How many wholes?",
+    "answer": 2,
+    "steps": "11 ÷ 4 = 2 remainder 3, so 11/4 = 2 3/4",
+    "after": {
+     "kind": "imp2mix",
+     "N": 11,
+     "d": 4
+    },
+    "explain": "11 ÷ 4 = 2 remainder 3, so 11/4 = 2 3/4.",
+    "qAudio": "audio/fractions/u3_practice/quiz_q6.mp3",
+    "rightText": "That's right. 11 ÷ 4 = 2 remainder 3, so 11/4 = 2 3/4.",
+    "wrongText": "Not quite. 11 ÷ 4 = 2 remainder 3, so 11/4 = 2 3/4.",
+    "rightAudio": "audio/fractions/u3_practice/quiz_q6_right.mp3",
+    "wrongAudio": "audio/fractions/u3_practice/quiz_q6_wrong.mp3"
+   },
+   {
+    "type": "number",
+    "q": "23/6 = 3 ?/6. What is the missing numerator?",
+    "answer": 5,
+    "steps": "23 ÷ 6 = 3 remainder 5, so 23/6 = 3 5/6",
+    "after": {
+     "kind": "imp2mix",
+     "N": 23,
+     "d": 6
+    },
+    "explain": "23 ÷ 6 = 3 remainder 5, so 23/6 = 3 5/6.",
+    "qAudio": "audio/fractions/u3_practice/quiz_q7.mp3",
+    "rightText": "Yes, exactly. 23 ÷ 6 = 3 remainder 5, so 23/6 = 3 5/6.",
+    "wrongText": "Not quite. 23 ÷ 6 = 3 remainder 5, so 23/6 = 3 5/6.",
+    "rightAudio": "audio/fractions/u3_practice/quiz_q7_right.mp3",
+    "wrongAudio": "audio/fractions/u3_practice/quiz_q7_wrong.mp3"
+   },
+   {
+    "type": "tf",
+    "q": "9/4 is the same as 2 1/9.",
+    "options": [
+     "True",
+     "False"
+    ],
+    "answer": "False",
+    "explain": "False. 9 ÷ 4 = 2 remainder 1, and the denominator stays 4: 9/4 = 2 1/4.",
+    "qAudio": "audio/fractions/u3_practice/quiz_q8_tf.mp3",
+    "rightText": "Spot on, Max. False. 9 ÷ 4 = 2 remainder 1, and the denominator stays 4: 9/4 = 2 1/4.",
+    "wrongText": "Not quite. False. 9 ÷ 4 = 2 remainder 1, and the denominator stays 4: 9/4 = 2 1/4.",
+    "rightAudio": "audio/fractions/u3_practice/quiz_q8_right.mp3",
+    "wrongAudio": "audio/fractions/u3_practice/quiz_q8_wrong.mp3"
+   },
+   {
+    "type": "mc",
+    "q": "On the number line in fifths, which number is at the star?",
+    "options": [
+     "1 3/5",
+     "1 2/5",
+     "8/10",
+     "2 3/5"
+    ],
+    "answer": "1 3/5",
+    "vis": {
+     "kind": "nline",
+     "d": 5,
+     "max": 3,
+     "marks": [
+      {
+       "v": [
+        8,
+        5
+       ],
+       "label": "★"
+      }
+     ],
+     "show": "none"
+    },
+    "after": {
+     "kind": "nline",
+     "d": 5,
+     "max": 3,
+     "marks": [
+      {
+       "v": [
+        8,
+        5
+       ]
+      }
+     ],
+     "show": "both"
+    },
+    "explain": "The star is 3 fifths past 1: 8/5 = 1 3/5.",
+    "qAudio": "audio/fractions/u3_practice/quiz_q9.mp3",
+    "rightText": "Correct. Nice work. The star is 3 fifths past 1: 8/5 = 1 3/5.",
+    "wrongText": "Not quite. The star is 3 fifths past 1: 8/5 = 1 3/5.",
+    "rightAudio": "audio/fractions/u3_practice/quiz_q9_right.mp3",
+    "wrongAudio": "audio/fractions/u3_practice/quiz_q9_wrong.mp3"
+   },
+   {
+    "type": "mc",
+    "q": "Compare: 2 1/3 ? 9/4",
+    "options": [
+     "<",
+     ">",
+     "="
+    ],
+    "answer": ">",
+    "steps": "2 1/3 = 7/3 = 28/12 and 9/4 = 27/12, so 28/12 > 27/12",
+    "explain": "In twelfths: 2 1/3 = 28/12 and 9/4 = 27/12, so 2 1/3 > 9/4.",
+    "qAudio": "audio/fractions/u3_practice/quiz_q10.mp3",
+    "rightText": "That's right. In twelfths: 2 1/3 = 28/12 and 9/4 = 27/12, so 2 1/3 > 9/4.",
+    "wrongText": "Not quite. In twelfths: 2 1/3 = 28/12 and 9/4 = 27/12, so 2 1/3 > 9/4.",
+    "rightAudio": "audio/fractions/u3_practice/quiz_q10_right.mp3",
+    "wrongAudio": "audio/fractions/u3_practice/quiz_q10_wrong.mp3"
+   },
+   {
+    "type": "mc",
+    "q": "Order from least to greatest: 1 1/2, 5/4, 1 3/8",
+    "options": [
+     "5/4, 1 3/8, 1 1/2",
+     "1 1/2, 1 3/8, 5/4",
+     "1 3/8, 1 1/2, 5/4",
+     "5/4, 1 1/2, 1 3/8"
+    ],
+    "answer": "5/4, 1 3/8, 1 1/2",
+    "steps": "In eighths: 1 1/2 = 12/8, 5/4 = 10/8, 1 3/8 = 11/8, and 10/8 < 11/8 < 12/8",
+    "explain": "In eighths: 10/8 < 11/8 < 12/8, so 5/4 < 1 3/8 < 1 1/2.",
+    "qAudio": "audio/fractions/u3_practice/quiz_q11.mp3",
+    "rightText": "Yes, exactly. In eighths: 10/8 < 11/8 < 12/8, so 5/4 < 1 3/8 < 1 1/2.",
+    "wrongText": "Not quite. In eighths: 10/8 < 11/8 < 12/8, so 5/4 < 1 3/8 < 1 1/2.",
+    "rightAudio": "audio/fractions/u3_practice/quiz_q11_right.mp3",
+    "wrongAudio": "audio/fractions/u3_practice/quiz_q11_wrong.mp3"
+   },
+   {
+    "type": "mc",
+    "q": "Order from greatest to least: 7/3, 2 1/6, 11/6",
+    "options": [
+     "7/3, 2 1/6, 11/6",
+     "2 1/6, 7/3, 11/6",
+     "11/6, 2 1/6, 7/3",
+     "7/3, 11/6, 2 1/6"
+    ],
+    "answer": "7/3, 2 1/6, 11/6",
+    "steps": "In sixths: 7/3 = 14/6, 2 1/6 = 13/6, and 14/6 > 13/6 > 11/6",
+    "explain": "In sixths: 14/6 > 13/6 > 11/6, so 7/3 > 2 1/6 > 11/6.",
+    "qAudio": "audio/fractions/u3_practice/quiz_q12.mp3",
+    "rightText": "Spot on, Max. In sixths: 14/6 > 13/6 > 11/6, so 7/3 > 2 1/6 > 11/6.",
+    "wrongText": "Not quite. In sixths: 14/6 > 13/6 > 11/6, so 7/3 > 2 1/6 > 11/6.",
+    "rightAudio": "audio/fractions/u3_practice/quiz_q12_right.mp3",
+    "wrongAudio": "audio/fractions/u3_practice/quiz_q12_wrong.mp3"
+   },
+   {
+    "type": "wordbank",
+    "q": "Vocabulary. Fill in each blank with a word from the word bank. Each word is used once.",
+    "bank": [
+     "proper fraction",
+     "improper fraction",
+     "mixed number",
+     "equivalent fractions",
+     "unlike fractions"
+    ],
+    "items": [
+     {
+      "pre": "Like 2 2/3: ",
+      "answer": "mixed number",
+      "post": ""
+     },
+     {
+      "pre": "Like 8/5: ",
+      "answer": "improper fraction",
+      "post": ""
+     },
+     {
+      "pre": "Like 4/9: ",
+      "answer": "proper fraction",
+      "post": ""
+     },
+     {
+      "pre": "Same amount, like 3/4 and 9/12: ",
+      "answer": "equivalent fractions",
+      "post": ""
+     },
+     {
+      "pre": "Different denominators and different amounts, like 3/5 and 3/8: ",
+      "answer": "unlike fractions",
+      "post": ""
+     }
+    ],
+    "explain": "2 2/3 is a mixed number, 8/5 is improper, 4/9 is proper, 3/4 and 9/12 are equivalent, 3/5 and 3/8 are unlike.",
+    "qAudio": "audio/fractions/u3_practice/quiz_q13_wordbank.mp3",
+    "rightText": "Correct. Nice work. 2 2/3 is a mixed number, 8/5 is improper, 4/9 is proper, 3/4 and 9/12 are equivalent, 3/5 and 3/8 are unlike.",
+    "wrongText": "Not quite. 2 2/3 is a mixed number, 8/5 is improper, 4/9 is proper, 3/4 and 9/12 are equivalent, 3/5 and 3/8 are unlike.",
+    "rightAudio": "audio/fractions/u3_practice/quiz_q13_right.mp3",
+    "wrongAudio": "audio/fractions/u3_practice/quiz_q13_wrong.mp3"
+   },
+   {
+    "type": "match",
+    "q": "Match each mixed number to its improper fraction.",
+    "terms": [
+     "2 1/2",
+     "1 5/6",
+     "3 2/5",
+     "4 3/4"
+    ],
+    "defs": [
+     {
+      "letter": "A",
+      "text": "19/4"
+     },
+     {
+      "letter": "B",
+      "text": "11/6"
+     },
+     {
+      "letter": "C",
+      "text": "5/2"
+     },
+     {
+      "letter": "D",
+      "text": "17/5"
+     }
+    ],
+    "answers": [
+     "C",
+     "B",
+     "D",
+     "A"
+    ],
+    "explain": "2 1/2 = 5/2, 1 5/6 = 11/6, 3 2/5 = 17/5, 4 3/4 = 19/4.",
+    "qAudio": "audio/fractions/u3_practice/quiz_q14_match.mp3",
+    "rightText": "That's right. 2 1/2 = 5/2, 1 5/6 = 11/6, 3 2/5 = 17/5, 4 3/4 = 19/4.",
+    "wrongText": "Not quite. 2 1/2 = 5/2, 1 5/6 = 11/6, 3 2/5 = 17/5, 4 3/4 = 19/4.",
+    "rightAudio": "audio/fractions/u3_practice/quiz_q14_right.mp3",
+    "wrongAudio": "audio/fractions/u3_practice/quiz_q14_wrong.mp3"
+   },
+   {
+    "type": "inline",
+    "q": "Say what you did.",
+    "parts": [
+     "To change 3/4 into 6/8, you ",
+     {
+      "choices": [
+       "divide",
+       "multiply"
+      ],
+      "answer": "multiply"
+     },
+     " the top and the bottom by ",
+     {
+      "choices": [
+       "2",
+       "3",
+       "4"
+      ],
+      "answer": "2"
+     },
+     "."
+    ],
+    "explain": "Multiply by 2: 3 × 2 = 6 and 4 × 2 = 8.",
+    "qAudio": "audio/fractions/u3_practice/quiz_q15_inline.mp3",
+    "rightText": "Yes, exactly. Multiply by 2: 3 × 2 = 6 and 4 × 2 = 8.",
+    "wrongText": "Not quite. Multiply by 2: 3 × 2 = 6 and 4 × 2 = 8.",
+    "rightAudio": "audio/fractions/u3_practice/quiz_q15_right.mp3",
+    "wrongAudio": "audio/fractions/u3_practice/quiz_q15_wrong.mp3"
+   },
+   {
+    "type": "sentence",
+    "q": "Explain how to change 11/4 into a mixed number. Use the word remainder.",
+    "rubric": [
+     {
+      "idea": "Divide 11 by 4: 2 remainder 3",
+      "pts": 1
+     },
+     {
+      "idea": "The remainder 3 goes over the same denominator 4, so 2 3/4",
+      "pts": 1
+     }
+    ],
+    "model": "I divide 11 by 4 to get 2 remainder 3, and the remainder goes over the same denominator, so 11/4 = 2 3/4.",
+    "explain": "11 ÷ 4 = 2 remainder 3, so 11/4 = 2 3/4.",
+    "qAudio": "audio/fractions/u3_practice/quiz_q16_sentence.mp3",
+    "rightText": "Spot on, Max. 11 ÷ 4 = 2 remainder 3, so 11/4 = 2 3/4.",
+    "wrongText": "Not quite. 11 ÷ 4 = 2 remainder 3, so 11/4 = 2 3/4.",
+    "rightAudio": "audio/fractions/u3_practice/quiz_q16_right.mp3",
+    "wrongAudio": "audio/fractions/u3_practice/quiz_q16_wrong.mp3"
+   }
+  ],
+  "done": [],
+  "doneTiers": {
+   "perfect": {
+    "text": "Quiz complete. Perfect score! Every mark.",
+    "audio": "audio/fractions/u3_practice/quiz_done_perfect.mp3"
+   },
+   "good": {
+    "text": "Quiz complete. Nice work. Check the ones you missed, then you're set.",
+    "audio": "audio/fractions/u3_practice/quiz_done_good.mp3"
+   },
+   "review": {
+    "text": "Quiz complete. Good effort. Run through the review again, then have another go.",
+    "audio": "audio/fractions/u3_practice/quiz_done_review.mp3"
+   }
+  }
+ },
  "frac_u4_41": {
   "title": "Unit 4.1 · Add & Subtract Like Fractions · quiz",
+  "subject": "Math › Fractions",
   "intro": "Unit 4.1 · Add & Subtract Like Fractions quiz. 8 questions. Type the missing number, or tap your answer.",
   "introAudio": "audio/fractions/u4_41/quiz_intro.mp3",
   "questions": [
@@ -3358,6 +6115,7 @@ window.QUIZ_SETS = Object.assign(window.QUIZ_SETS || {}, {
  },
  "frac_u4_42": {
   "title": "Unit 4.2 · Whole ×÷ Unit Fraction · quiz",
+  "subject": "Math › Fractions",
   "intro": "Unit 4.2 · Whole ×÷ Unit Fraction quiz. 8 questions. Type the missing number, or tap your answer.",
   "introAudio": "audio/fractions/u4_42/quiz_intro.mp3",
   "questions": [
@@ -3623,8 +6381,9 @@ window.QUIZ_SETS = Object.assign(window.QUIZ_SETS || {}, {
  },
  "frac_u4_practice": {
   "title": "Unit 4 · Practice Test · quiz",
-  "intro": "Unit 4 · Practice Test quiz. 26 questions. Type the missing number, or tap your answer.",
-  "introAudio": "audio/fractions/u4_practice/quiz_intro.mp3",
+  "subject": "Math › Fractions",
+  "intro": "Unit 4 · Practice Test quiz. 33 questions, set out like your real test. Show your work, fill in the word bank, match, circle, and write a complete sentence.",
+  "introAudio": "audio/fractions/u4_practice/quiz_intro_v2.mp3",
   "questions": [
    {
     "type": "mc",
@@ -4337,117 +7096,203 @@ window.QUIZ_SETS = Object.assign(window.QUIZ_SETS || {}, {
     "wrongText": "Not quite. 4 ÷ 1/6 = 4 × 6 = 24 slices.",
     "rightAudio": "audio/fractions/u4_practice/quiz_q26_right.mp3",
     "wrongAudio": "audio/fractions/u4_practice/quiz_q26_wrong.mp3"
+   },
+   {
+    "type": "tf",
+    "q": "5/8 + 2/8 = 7/16 is correct.",
+    "options": [
+     "True",
+     "False"
+    ],
+    "answer": "False",
+    "explain": "False. Add the numerators and keep the denominator: 5/8 + 2/8 = 7/8.",
+    "qAudio": "audio/fractions/u4_practice/quiz_q27_tf.mp3",
+    "rightText": "Yes, exactly. False. Add the numerators and keep the denominator: 5/8 + 2/8 = 7/8.",
+    "wrongText": "Not quite. False. Add the numerators and keep the denominator: 5/8 + 2/8 = 7/8.",
+    "rightAudio": "audio/fractions/u4_practice/quiz_q27_right.mp3",
+    "wrongAudio": "audio/fractions/u4_practice/quiz_q27_wrong.mp3"
+   },
+   {
+    "type": "number",
+    "q": "1 3/5 + 4/5 = ?/5. What is the missing numerator?",
+    "answer": 12,
+    "steps": "1 × 5 + 3 = 8, so 8/5 + 4/5 = 12/5",
+    "explain": "Rename 1 3/5 as 8/5. 8/5 + 4/5 = 12/5.",
+    "qAudio": "audio/fractions/u4_practice/quiz_q28.mp3",
+    "rightText": "Spot on, Max. Rename 1 3/5 as 8/5. 8/5 + 4/5 = 12/5.",
+    "wrongText": "Not quite. Rename 1 3/5 as 8/5. 8/5 + 4/5 = 12/5.",
+    "rightAudio": "audio/fractions/u4_practice/quiz_q28_right.mp3",
+    "wrongAudio": "audio/fractions/u4_practice/quiz_q28_wrong.mp3"
+   },
+   {
+    "type": "number",
+    "q": "4 ÷ 1/5 = ?",
+    "answer": 20,
+    "steps": "Each whole has 5 fifths, so 4 × 5 = 20",
+    "after": {
+     "kind": "cup",
+     "mode": "div",
+     "total": [
+      4,
+      1
+     ],
+     "cup": [
+      1,
+      5
+     ],
+     "count": 20
+    },
+    "explain": "Each whole holds 5 fifths: 4 × 5 = 20.",
+    "qAudio": "audio/fractions/u4_practice/quiz_q29.mp3",
+    "rightText": "Correct. Nice work. Each whole holds 5 fifths: 4 × 5 = 20.",
+    "wrongText": "Not quite. Each whole holds 5 fifths: 4 × 5 = 20.",
+    "rightAudio": "audio/fractions/u4_practice/quiz_q29_right.mp3",
+    "wrongAudio": "audio/fractions/u4_practice/quiz_q29_wrong.mp3"
+   },
+   {
+    "type": "wordbank",
+    "q": "Vocabulary. Fill in each blank with a word from the word bank. Each word is used once.",
+    "bank": [
+     "like fractions",
+     "unit fraction",
+     "reciprocal",
+     "numerators",
+     "denominators"
+    ],
+    "items": [
+     {
+      "pre": "Fractions with the same denominator, like 2/7 and 4/7, are ",
+      "answer": "like fractions",
+      "post": "."
+     },
+     {
+      "pre": "A fraction with a numerator of 1, like 1/6, is a ",
+      "answer": "unit fraction",
+      "post": "."
+     },
+     {
+      "pre": "4 × 1/4 = 1, so 1/4 is the ",
+      "answer": "reciprocal",
+      "post": " of 4."
+     },
+     {
+      "pre": "To add like fractions, add the ",
+      "answer": "numerators",
+      "post": " and keep the denominator."
+     }
+    ],
+    "explain": "Like fractions share a denominator, a unit fraction has 1 on top, 1/4 is the reciprocal of 4, and you add the numerators.",
+    "qAudio": "audio/fractions/u4_practice/quiz_q30_wordbank.mp3",
+    "rightText": "That's right. Like fractions share a denominator, a unit fraction has 1 on top, 1/4 is the reciprocal of 4, and you add the numerators.",
+    "wrongText": "Not quite. Like fractions share a denominator, a unit fraction has 1 on top, 1/4 is the reciprocal of 4, and you add the numerators.",
+    "rightAudio": "audio/fractions/u4_practice/quiz_q30_right.mp3",
+    "wrongAudio": "audio/fractions/u4_practice/quiz_q30_wrong.mp3"
+   },
+   {
+    "type": "match",
+    "q": "Match each question to its answer.",
+    "terms": [
+     "3 × 1/4",
+     "2 ÷ 1/3",
+     "7/9 − 4/9",
+     "5/6 + 4/6"
+    ],
+    "defs": [
+     {
+      "letter": "A",
+      "text": "1/3"
+     },
+     {
+      "letter": "B",
+      "text": "1 1/2"
+     },
+     {
+      "letter": "C",
+      "text": "3/4"
+     },
+     {
+      "letter": "D",
+      "text": "6"
+     }
+    ],
+    "answers": [
+     "C",
+     "D",
+     "A",
+     "B"
+    ],
+    "explain": "3 × 1/4 = 3/4, 2 ÷ 1/3 = 6, 7/9 − 4/9 = 3/9 = 1/3, 5/6 + 4/6 = 9/6 = 1 1/2.",
+    "qAudio": "audio/fractions/u4_practice/quiz_q31_match.mp3",
+    "rightText": "Yes, exactly. 3 × 1/4 = 3/4, 2 ÷ 1/3 = 6, 7/9 − 4/9 = 3/9 = 1/3, 5/6 + 4/6 = 9/6 = 1 1/2.",
+    "wrongText": "Not quite. 3 × 1/4 = 3/4, 2 ÷ 1/3 = 6, 7/9 − 4/9 = 3/9 = 1/3, 5/6 + 4/6 = 9/6 = 1 1/2.",
+    "rightAudio": "audio/fractions/u4_practice/quiz_q31_right.mp3",
+    "wrongAudio": "audio/fractions/u4_practice/quiz_q31_wrong.mp3"
+   },
+   {
+    "type": "inline",
+    "q": "Circle the correct words.",
+    "parts": [
+     "To add 3/7 + 2/7, add the ",
+     {
+      "choices": [
+       "denominators",
+       "numerators"
+      ],
+      "answer": "numerators"
+     },
+     " and keep the ",
+     {
+      "choices": [
+       "numerator",
+       "denominator"
+      ],
+      "answer": "denominator"
+     },
+     "."
+    ],
+    "explain": "Add the numerators and keep the denominator: 3/7 + 2/7 = 5/7.",
+    "qAudio": "audio/fractions/u4_practice/quiz_q32_inline.mp3",
+    "rightText": "Spot on, Max. Add the numerators and keep the denominator: 3/7 + 2/7 = 5/7.",
+    "wrongText": "Not quite. Add the numerators and keep the denominator: 3/7 + 2/7 = 5/7.",
+    "rightAudio": "audio/fractions/u4_practice/quiz_q32_right.mp3",
+    "wrongAudio": "audio/fractions/u4_practice/quiz_q32_wrong.mp3"
+   },
+   {
+    "type": "sentence",
+    "q": "Explain why 2/5 + 1/5 is 3/5 and not 3/10.",
+    "rubric": [
+     {
+      "idea": "Fifths are the same size, so you add the numerators: 2 + 1 = 3",
+      "pts": 1
+     },
+     {
+      "idea": "The denominator stays 5 because it tells the size of the pieces",
+      "pts": 1
+     }
+    ],
+    "model": "It is 3/5 because you add 2 fifths and 1 fifth to get 3 fifths, and the denominator stays 5 because the pieces are still fifths.",
+    "explain": "2 fifths + 1 fifth = 3 fifths. The pieces are still fifths, so the denominator stays 5.",
+    "qAudio": "audio/fractions/u4_practice/quiz_q33_sentence.mp3",
+    "rightText": "Correct. Nice work. 2 fifths + 1 fifth = 3 fifths. The pieces are still fifths, so the denominator stays 5.",
+    "wrongText": "Not quite. 2 fifths + 1 fifth = 3 fifths. The pieces are still fifths, so the denominator stays 5.",
+    "rightAudio": "audio/fractions/u4_practice/quiz_q33_right.mp3",
+    "wrongAudio": "audio/fractions/u4_practice/quiz_q33_wrong.mp3"
    }
   ],
-  "done": [
-   {
-    "text": "Quiz complete. You got 0 out of 26. Run through the review again, then have another go.",
-    "audio": "audio/fractions/u4_practice/quiz_done_0.mp3"
+  "done": [],
+  "doneTiers": {
+   "perfect": {
+    "text": "Quiz complete. Perfect score! Every mark.",
+    "audio": "audio/fractions/u4_practice/quiz_done_perfect.mp3"
    },
-   {
-    "text": "Quiz complete. You got 1 out of 26. Run through the review again, then have another go.",
-    "audio": "audio/fractions/u4_practice/quiz_done_1.mp3"
+   "good": {
+    "text": "Quiz complete. Nice work. Check the ones you missed, then you're set.",
+    "audio": "audio/fractions/u4_practice/quiz_done_good.mp3"
    },
-   {
-    "text": "Quiz complete. You got 2 out of 26. Run through the review again, then have another go.",
-    "audio": "audio/fractions/u4_practice/quiz_done_2.mp3"
-   },
-   {
-    "text": "Quiz complete. You got 3 out of 26. Run through the review again, then have another go.",
-    "audio": "audio/fractions/u4_practice/quiz_done_3.mp3"
-   },
-   {
-    "text": "Quiz complete. You got 4 out of 26. Run through the review again, then have another go.",
-    "audio": "audio/fractions/u4_practice/quiz_done_4.mp3"
-   },
-   {
-    "text": "Quiz complete. You got 5 out of 26. Run through the review again, then have another go.",
-    "audio": "audio/fractions/u4_practice/quiz_done_5.mp3"
-   },
-   {
-    "text": "Quiz complete. You got 6 out of 26. Run through the review again, then have another go.",
-    "audio": "audio/fractions/u4_practice/quiz_done_6.mp3"
-   },
-   {
-    "text": "Quiz complete. You got 7 out of 26. Run through the review again, then have another go.",
-    "audio": "audio/fractions/u4_practice/quiz_done_7.mp3"
-   },
-   {
-    "text": "Quiz complete. You got 8 out of 26. Run through the review again, then have another go.",
-    "audio": "audio/fractions/u4_practice/quiz_done_8.mp3"
-   },
-   {
-    "text": "Quiz complete. You got 9 out of 26. Run through the review again, then have another go.",
-    "audio": "audio/fractions/u4_practice/quiz_done_9.mp3"
-   },
-   {
-    "text": "Quiz complete. You got 10 out of 26. Run through the review again, then have another go.",
-    "audio": "audio/fractions/u4_practice/quiz_done_10.mp3"
-   },
-   {
-    "text": "Quiz complete. You got 11 out of 26. Run through the review again, then have another go.",
-    "audio": "audio/fractions/u4_practice/quiz_done_11.mp3"
-   },
-   {
-    "text": "Quiz complete. You got 12 out of 26. Run through the review again, then have another go.",
-    "audio": "audio/fractions/u4_practice/quiz_done_12.mp3"
-   },
-   {
-    "text": "Quiz complete. You got 13 out of 26. Run through the review again, then have another go.",
-    "audio": "audio/fractions/u4_practice/quiz_done_13.mp3"
-   },
-   {
-    "text": "Quiz complete. You got 14 out of 26. Run through the review again, then have another go.",
-    "audio": "audio/fractions/u4_practice/quiz_done_14.mp3"
-   },
-   {
-    "text": "Quiz complete. You got 15 out of 26. Run through the review again, then have another go.",
-    "audio": "audio/fractions/u4_practice/quiz_done_15.mp3"
-   },
-   {
-    "text": "Quiz complete. You got 16 out of 26. Run through the review again, then have another go.",
-    "audio": "audio/fractions/u4_practice/quiz_done_16.mp3"
-   },
-   {
-    "text": "Quiz complete. You got 17 out of 26. Run through the review again, then have another go.",
-    "audio": "audio/fractions/u4_practice/quiz_done_17.mp3"
-   },
-   {
-    "text": "Quiz complete. You got 18 out of 26. Run through the review again, then have another go.",
-    "audio": "audio/fractions/u4_practice/quiz_done_18.mp3"
-   },
-   {
-    "text": "Quiz complete. You got 19 out of 26. Run through the review again, then have another go.",
-    "audio": "audio/fractions/u4_practice/quiz_done_19.mp3"
-   },
-   {
-    "text": "Quiz complete. You got 20 out of 26. Run through the review again, then have another go.",
-    "audio": "audio/fractions/u4_practice/quiz_done_20.mp3"
-   },
-   {
-    "text": "Quiz complete. You got 21 out of 26. Run through the review again, then have another go.",
-    "audio": "audio/fractions/u4_practice/quiz_done_21.mp3"
-   },
-   {
-    "text": "Quiz complete. You got 22 out of 26. Run through the review again, then have another go.",
-    "audio": "audio/fractions/u4_practice/quiz_done_22.mp3"
-   },
-   {
-    "text": "Quiz complete. You got 23 out of 26. Run through the review again, then have another go.",
-    "audio": "audio/fractions/u4_practice/quiz_done_23.mp3"
-   },
-   {
-    "text": "Quiz complete. You got 24 out of 26. Run through the review again, then have another go.",
-    "audio": "audio/fractions/u4_practice/quiz_done_24.mp3"
-   },
-   {
-    "text": "Quiz complete. You got 25 out of 26. Nice work.",
-    "audio": "audio/fractions/u4_practice/quiz_done_25.mp3"
-   },
-   {
-    "text": "Quiz complete. You got 26 out of 26. Perfect score.",
-    "audio": "audio/fractions/u4_practice/quiz_done_26.mp3"
+   "review": {
+    "text": "Quiz complete. Good effort. Run through the review again, then have another go.",
+    "audio": "audio/fractions/u4_practice/quiz_done_review.mp3"
    }
-  ]
+  }
  }
 });

@@ -404,3 +404,258 @@ window.SPELLING_DATA = {
   }
  }
 };
+window.QUIZ_SETS = Object.assign(window.QUIZ_SETS || {}, {
+ "spell_week7_work": {
+  "title": "Week 7 Vocabulary · Word Work",
+  "subject": "Language › Spelling",
+  "intro": "Week 7 Vocabulary word work. 8 questions like your real test: true or false, word bank, matching, circle the spelling, and complete sentences.",
+  "introAudio": "audio/spelling/work/week7_intro.mp3",
+  "questions": [
+   {
+    "type": "tf",
+    "q": "The prefix pre- means “before”.",
+    "options": [
+     "True",
+     "False"
+    ],
+    "answer": "True",
+    "explain": "Yes. Pre- means before: a preview is a look before, and preschool comes before school.",
+    "qAudio": "audio/spelling/work/week7_q1_tf.mp3",
+    "rightText": "Nice spelling! Yes. Pre- means before: a preview is a look before, and preschool comes before school.",
+    "wrongText": "Not quite. Yes. Pre- means before: a preview is a look before, and preschool comes before school.",
+    "rightAudio": "audio/spelling/work/week7_q1_right.mp3",
+    "wrongAudio": "audio/spelling/work/week7_q1_wrong.mp3"
+   },
+   {
+    "type": "tf",
+    "q": "Thrifty means someone who wastes a lot of money.",
+    "options": [
+     "True",
+     "False"
+    ],
+    "answer": "False",
+    "explain": "False. Thrifty means careful with money and good at not wasting things.",
+    "qAudio": "audio/spelling/work/week7_q2_tf.mp3",
+    "rightText": "You got it! False. Thrifty means careful with money and good at not wasting things.",
+    "wrongText": "Not quite. False. Thrifty means careful with money and good at not wasting things.",
+    "rightAudio": "audio/spelling/work/week7_q2_right.mp3",
+    "wrongAudio": "audio/spelling/work/week7_q2_wrong.mp3"
+   },
+   {
+    "type": "wordbank",
+    "q": "Fill in each blank with a word from the word bank. Each word is used once.",
+    "bank": [
+     "threshold",
+     "splinter",
+     "precaution",
+     "thrive",
+     "splurge",
+     "preview"
+    ],
+    "items": [
+     {
+      "pre": "We wore helmets as a ",
+      "answer": "precaution",
+      "post": " before we rode our bikes."
+     },
+     {
+      "pre": "I got a ",
+      "answer": "splinter",
+      "post": " in my finger from the old fence."
+     },
+     {
+      "pre": "Tomato plants ",
+      "answer": "thrive",
+      "post": " in warm sunshine."
+     },
+     {
+      "pre": "Wipe your shoes before you cross the ",
+      "answer": "threshold",
+      "post": "."
+     },
+     {
+      "pre": "We watched a movie ",
+      "answer": "preview",
+      "post": " before the feature started."
+     },
+     {
+      "pre": "We decided to ",
+      "answer": "splurge",
+      "post": " on ice cream after the big game."
+     }
+    ],
+    "explain": "precaution, splinter, thrive, threshold, preview, splurge.",
+    "qAudio": "audio/spelling/work/week7_q3_wordbank.mp3",
+    "rightText": "Perfect! precaution, splinter, thrive, threshold, preview, splurge.",
+    "wrongText": "Not quite. precaution, splinter, thrive, threshold, preview, splurge.",
+    "rightAudio": "audio/spelling/work/week7_q3_right.mp3",
+    "wrongAudio": "audio/spelling/work/week7_q3_wrong.mp3"
+   },
+   {
+    "type": "match",
+    "q": "Match each word to its meaning.",
+    "terms": [
+     "preclude",
+     "splendid",
+     "prerequisite",
+     "threaten",
+     "splatter"
+    ],
+    "defs": [
+     {
+      "letter": "A",
+      "text": "Something you must finish first"
+     },
+     {
+      "letter": "B",
+      "text": "To scatter drops in a messy way"
+     },
+     {
+      "letter": "C",
+      "text": "To stop something from happening"
+     },
+     {
+      "letter": "D",
+      "text": "To show you might cause trouble"
+     },
+     {
+      "letter": "E",
+      "text": "Very impressive or beautiful"
+     }
+    ],
+    "answers": [
+     "C",
+     "E",
+     "A",
+     "D",
+     "B"
+    ],
+    "explain": "preclude: stop it happening. splendid: impressive. prerequisite: must come first. threaten: might cause trouble. splatter: messy drops.",
+    "qAudio": "audio/spelling/work/week7_q4_match.mp3",
+    "rightText": "Great job! preclude: stop it happening. splendid: impressive. prerequisite: must come first. threaten: might cause trouble. splatter: messy drops.",
+    "wrongText": "Not quite. preclude: stop it happening. splendid: impressive. prerequisite: must come first. threaten: might cause trouble. splatter: messy drops.",
+    "rightAudio": "audio/spelling/work/week7_q4_right.mp3",
+    "wrongAudio": "audio/spelling/work/week7_q4_wrong.mp3"
+   },
+   {
+    "type": "inline",
+    "q": "Circle the correct spelling.",
+    "parts": [
+     "The coaches will ",
+     {
+      "choices": [
+       "perdetermine",
+       "predetermine",
+       "predeturmine"
+      ],
+      "answer": "predetermine"
+     },
+     " the lineup, and the fans ",
+     {
+      "choices": [
+       "splutered",
+       "splutterd",
+       "spluttered"
+      ],
+      "answer": "spluttered"
+     },
+     " with excitement."
+    ],
+    "explain": "predetermine, and spluttered: pre- at the front, and a double t before -ered.",
+    "qAudio": "audio/spelling/work/week7_q5_inline.mp3",
+    "rightText": "Yes — that's it! predetermine, and spluttered: pre- at the front, and a double t before -ered.",
+    "wrongText": "Not quite. predetermine, and spluttered: pre- at the front, and a double t before -ered.",
+    "rightAudio": "audio/spelling/work/week7_q5_right.mp3",
+    "wrongAudio": "audio/spelling/work/week7_q5_wrong.mp3"
+   },
+   {
+    "type": "inline",
+    "q": "Circle the correct word.",
+    "parts": [
+     "A movie full of suspense is a ",
+     {
+      "choices": [
+       "threshold",
+       "thrifty",
+       "thriller"
+      ],
+      "answer": "thriller"
+     },
+     ". Dinosaurs ",
+     {
+      "choices": [
+       "predate",
+       "preface",
+       "preview"
+      ],
+      "answer": "predate"
+     },
+     " humans."
+    ],
+    "explain": "A thriller is full of suspense. Predate means to come earlier in time.",
+    "qAudio": "audio/spelling/work/week7_q6_inline.mp3",
+    "rightText": "Nice spelling! A thriller is full of suspense. Predate means to come earlier in time.",
+    "wrongText": "Not quite. A thriller is full of suspense. Predate means to come earlier in time.",
+    "rightAudio": "audio/spelling/work/week7_q6_right.mp3",
+    "wrongAudio": "audio/spelling/work/week7_q6_wrong.mp3"
+   },
+   {
+    "type": "sentence",
+    "q": "Write a complete sentence using the word precaution. Show that you know what it means.",
+    "rubric": [
+     {
+      "idea": "uses the word precaution, spelled correctly",
+      "pts": 1
+     },
+     {
+      "idea": "the sentence shows doing something ahead of time to stay safe",
+      "pts": 1
+     }
+    ],
+    "model": "I packed a first aid kit as a precaution before our camping trip.",
+    "explain": "A precaution is something you do ahead of time to stay safe, like wearing a helmet.",
+    "qAudio": "audio/spelling/work/week7_q7_sentence.mp3",
+    "rightText": "You got it! A precaution is something you do ahead of time to stay safe, like wearing a helmet.",
+    "wrongText": "Not quite. A precaution is something you do ahead of time to stay safe, like wearing a helmet.",
+    "rightAudio": "audio/spelling/work/week7_q7_right.mp3",
+    "wrongAudio": "audio/spelling/work/week7_q7_wrong.mp3"
+   },
+   {
+    "type": "sentence",
+    "q": "Explain what the prefix pre- means. Use one of this week’s words as an example.",
+    "rubric": [
+     {
+      "idea": "pre- means before",
+      "pts": 1
+     },
+     {
+      "idea": "gives a pre- word from the list, like preview or preschool, and how it means before",
+      "pts": 1
+     }
+    ],
+    "model": "Pre- means before, so a preview is a look at something before it comes out.",
+    "explain": "Pre- means before. Preschool is before school; a preview is a look before; predate is to come before.",
+    "qAudio": "audio/spelling/work/week7_q8_sentence.mp3",
+    "rightText": "Perfect! Pre- means before. Preschool is before school; a preview is a look before; predate is to come before.",
+    "wrongText": "Not quite. Pre- means before. Preschool is before school; a preview is a look before; predate is to come before.",
+    "rightAudio": "audio/spelling/work/week7_q8_right.mp3",
+    "wrongAudio": "audio/spelling/work/week7_q8_wrong.mp3"
+   }
+  ],
+  "done": [],
+  "doneTiers": {
+   "perfect": {
+    "text": "Word work complete. Perfect score! Every mark.",
+    "audio": "audio/spelling/work/week7_done_perfect.mp3"
+   },
+   "good": {
+    "text": "Word work complete. Nice work. Check the ones you missed, then you're set.",
+    "audio": "audio/spelling/work/week7_done_good.mp3"
+   },
+   "review": {
+    "text": "Word work complete. Good effort. Run through the review again, then have another go.",
+    "audio": "audio/spelling/work/week7_done_review.mp3"
+   }
+  }
+ }
+});

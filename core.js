@@ -27,8 +27,8 @@
   const modules = {};
   // level: home | subject | subtopic | session | review | quiz | component
   const st = { level: "home", subject: null, subtopic: null, session: null, comp: null, active: null, returnTo: null };
-  const PANELS = ["settings", "outbox", "quizHistory", "multMastery"];   // off-tree screens (top bar); Back returns to where you were
-  const HB = window.HB = { icon, modules, state: st };
+  const PANELS = ["settings", "outbox", "quizHistory", "multMastery", "curriculum"];   // off-tree screens (top bar); Back returns to where you were
+  const HB = window.HB = Object.assign(window.HB || {}, { icon, modules, state: st });   // keep HB.QT (quiz_types.js loads first)
 
   HB.registerModule = (name, mod) => { modules[name] = mod; };
   HB.stopAudio = () => {
@@ -139,6 +139,13 @@
       b.onclick = () => HB.go({ level: "subject", subject: t });
       g.appendChild(b);
     });
+    if (window.CURRICULUM && modules.curriculum) {   // Ontario Grade 5 map (curriculum.js + curriculum_ui.js)
+      const b = document.createElement("button");
+      b.type = "button"; b.className = "tile"; b.dataset.subject = "curriculum";
+      b.innerHTML = `${icon("book", "tile-ic")}<span class="tile-title">Curriculum</span><span class="tile-blurb">Ontario Grade 5: every subject, what's tested, and what's coming up.</span>`;
+      b.onclick = () => HB.go({ level: "curriculum" });
+      g.appendChild(b);
+    }
   }
   function renderSubject() {
     const s = st.subject;
