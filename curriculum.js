@@ -1,4 +1,4 @@
-// Ontario Grade 5 curriculum map for Max's Homework Buddy.
+// Ontario Grade 5 curriculum map for Max's Study Buddy.
 // Source: Ontario Ministry of Education, Curriculum and Resources (https://www.dcp.edu.gov.on.ca/en/curriculum),
 // read from its public content API on 2026-11-13. Codes are the official expectation codes; the "say" text is a short,
 // kid-friendly paraphrase (not the official wording). Only codes that appear in the ministry data are listed.

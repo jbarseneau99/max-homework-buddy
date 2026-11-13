@@ -98,7 +98,7 @@
       const r = load(LAST, null);
       if (!r) return { subject: "Max's quiz results", body: `Hi,\n\nNo quiz results yet on this device.\n\n${sig()}` };
       return { subject: `Max's quiz results — ${r.title}: ${r.score}/${r.total}`,
-        body: `Hi,\n\nI just finished "${r.title}" in Max's Homework Buddy.\nScore: ${r.score} / ${r.total}\n` +
+        body: `Hi,\n\nI just finished "${r.title}" in Max's Study Buddy.\nScore: ${r.score} / ${r.total}\n` +
           (r.details && r.details.length ? `\n${r.details.join("\n")}\n` : "") + `\nDate: ${new Date(r.at).toLocaleString()}\n\n${sig()}`, onlyResults: true };
     },
     question(ctx) {

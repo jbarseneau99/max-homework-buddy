@@ -2,9 +2,16 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<link rel="icon" href="data:," />
+<link rel="icon" href="icons/icon-192.png" type="image/png" />
+<link rel="manifest" href="manifest.json" />
+<meta name="theme-color" content="#060b1a" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta name="apple-mobile-web-app-title" content="Study Buddy" />
+<link rel="apple-touch-icon" href="apple-touch-icon.png" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<title>Max's Homework Buddy — Math, Spelling &amp; Anatomy</title>
+<title>Max's Study Buddy — Math, Spelling &amp; Anatomy</title>
 <style>
   :root {
     --bg:#060b1a; --glass:rgba(10,18,38,.72); --glass-solid:#0c1630; --panel2:rgba(14,26,54,.78);
@@ -534,6 +541,13 @@
   .cur-go { padding:6px 12px; min-height:0; }
   .cur-src { color:var(--muted); font-size:.88rem; margin-top:12px; } .cur-src a { color:var(--cyan2); }
   @media (max-width:700px) { .cur-item { grid-template-columns:52px 1fr; } .cur-tag, .cur-go { grid-column:2; justify-self:start; } }
+  /* install banner (pwa.js) */
+  .hb-install { position:fixed; left:12px; right:12px; bottom:calc(12px + env(safe-area-inset-bottom)); z-index:9999; display:flex; align-items:center; gap:12px;
+    background:rgba(8,16,36,.96); border:1px solid var(--cyan); border-radius:var(--r); padding:10px 12px; box-shadow:0 0 24px rgba(76,201,240,.25); color:var(--ink); max-width:640px; margin:0 auto; }
+  .hb-install img { border-radius:10px; flex:none; }
+  .hb-install-txt { flex:1; display:grid; gap:2px; font-size:.95rem; } .hb-install-txt span { color:var(--muted); }
+  .hb-install-txt span b { color:var(--cyan2); } .hb-share { color:var(--cyan2); }
+  .hb-install-go { flex:none; } .hb-install-x { flex:none; background:none; border:1px solid var(--line); color:var(--muted); border-radius:8px; min-width:36px; min-height:36px; }
 </style>
 </head>
 <body>
@@ -551,8 +565,8 @@
   <!-- ===== HOME ===== -->
   <section id="view-home" class="view">
     <div class="home-head">
-      <div class="eyebrow">Homework HQ</div>
-      <h1 class="brand">Max's <span>Homework Buddy</span></h1>
+      <div class="eyebrow">Study HQ</div>
+      <h1 class="brand">Max's <span>Study Buddy</span></h1>
       <p class="greet">Hey Max, let's get to work. Pick a subject.</p>
     </div>
     <div class="tiles" id="homeTiles"></div>
@@ -840,7 +854,7 @@
     </div>
     <div class="glass-card ob-work-card" id="obWorkCard">
       <div class="ob-sent-top"><div class="ob-label">Work submissions (this device) · <span id="obWorkCount">0</span></div><button id="obWorkClear" type="button">Clear</button></div>
-      <p class="set-blurb">Each Submit work saves Max's scratch-pad drawing with the question and whether his final answer was right. Download a PNG to share it in the Homework Buddy chat for a handwriting review. (Email can't attach pictures from here.)</p>
+      <p class="set-blurb">Each Submit work saves Max's scratch-pad drawing with the question and whether his final answer was right. Download a PNG to share it in the Study Buddy chat for a handwriting review. (Email can't attach pictures from here.)</p>
       <ul id="obWork" class="ob-work"></ul>
     </div>
   </section>
@@ -1082,37 +1096,38 @@
 <audio id="aud-ex4_step4" preload="auto" playsinline controlsList="nodownload"><source src="audio/ex4_step4.mp3" type="audio/mpeg"></audio>
 <audio id="aud-ex4_step5" preload="auto" playsinline controlsList="nodownload"><source src="audio/ex4_step5.mp3" type="audio/mpeg"></audio>
   </div>
-<script src="math_quiz_data.js?v=20261113a"></script>
-<script src="anatomy_data.js?v=20261113a"></script>
-<script src="explore_data.js?v=20261113a"></script>
-<script src="maxtopics_data.js?v=20261113a"></script>
-<script src="sessions_data.js?v=20261113a"></script>
-<script src="social_data.js?v=20261113a"></script>
-<script src="fractions_data.js?v=20261113a"></script>
-<script src="spelling_data.js?v=20261113a"></script>
-<script src="mult_data.js?v=20261113a"></script>
-<script src="anime_icons.js?v=20261113a"></script>
-<script src="quiz_types.js?v=20261113a"></script>
-<script src="topics.js?v=20261113a"></script>
-<script src="core.js?v=20261113a"></script>
-<script src="scratchpad.js?v=20261113a"></script>
-<script src="ai_grade.js?v=20261113a"></script>
-<script src="math_review.js?v=20261113a"></script>
-<script src="math_quiz.js?v=20261113a"></script>
-<script src="anatomy_app.js?v=20261113a"></script>
-<script src="explore_app.js?v=20261113a"></script>
-<script src="maxquiz.js?v=20261113a"></script>
-<script src="spelling.js?v=20261113a"></script>
-<script src="social_app.js?v=20261113a"></script>
-<script src="fractions_app.js?v=20261113a"></script>
-<script src="mult_vis.js?v=20261113a"></script>
-<script src="mult_mastery.js?v=20261113a"></script>
-<script src="mult_app.js?v=20261113a"></script>
-<script src="settings.js?v=20261113a"></script>
-<script src="quiz_history.js?v=20261113a"></script>
-<script src="quiz_history_ui.js?v=20261113a"></script>
-<script src="curriculum.js?v=20261113a"></script>
-<script src="curriculum_ui.js?v=20261113a"></script>
+<script src="math_quiz_data.js?v=20261113b"></script>
+<script src="anatomy_data.js?v=20261113b"></script>
+<script src="explore_data.js?v=20261113b"></script>
+<script src="maxtopics_data.js?v=20261113b"></script>
+<script src="sessions_data.js?v=20261113b"></script>
+<script src="social_data.js?v=20261113b"></script>
+<script src="fractions_data.js?v=20261113b"></script>
+<script src="spelling_data.js?v=20261113b"></script>
+<script src="mult_data.js?v=20261113b"></script>
+<script src="anime_icons.js?v=20261113b"></script>
+<script src="quiz_types.js?v=20261113b"></script>
+<script src="topics.js?v=20261113b"></script>
+<script src="core.js?v=20261113b"></script>
+<script src="scratchpad.js?v=20261113b"></script>
+<script src="ai_grade.js?v=20261113b"></script>
+<script src="math_review.js?v=20261113b"></script>
+<script src="math_quiz.js?v=20261113b"></script>
+<script src="anatomy_app.js?v=20261113b"></script>
+<script src="explore_app.js?v=20261113b"></script>
+<script src="maxquiz.js?v=20261113b"></script>
+<script src="spelling.js?v=20261113b"></script>
+<script src="social_app.js?v=20261113b"></script>
+<script src="fractions_app.js?v=20261113b"></script>
+<script src="mult_vis.js?v=20261113b"></script>
+<script src="mult_mastery.js?v=20261113b"></script>
+<script src="mult_app.js?v=20261113b"></script>
+<script src="settings.js?v=20261113b"></script>
+<script src="quiz_history.js?v=20261113b"></script>
+<script src="quiz_history_ui.js?v=20261113b"></script>
+<script src="curriculum.js?v=20261113b"></script>
+<script src="curriculum_ui.js?v=20261113b"></script>
 <script>HB.start();</script>
+<script src="pwa.js?v=20261113b"></script>
 </body>
 </html>

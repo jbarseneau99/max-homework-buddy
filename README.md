@@ -1,4 +1,6 @@
-# Max's Homework Buddy
+# Max's Study Buddy
+
+(Formerly "Max's Homework Buddy". The repo and URL path stay `max-homework-buddy`; localStorage keys stay `hb.*`.)
 
 A static site with no build tools and no CDNs, just plain HTML, CSS and JS plus pre-generated MP3 narration.
 Every path is relative, so it works from the GitHub Pages subpath `/max-homework-buddy/`.
@@ -182,3 +184,12 @@ Home › **Curriculum** maps the Ontario Grade 5 curriculum (Math 2020, Science 
 Language 2023, Health and Physical Education 2019) from https://www.dcp.edu.gov.on.ca/en/curriculum. Codes are official
 (copied from the ministry's content data); the descriptions are short paraphrases. Each topic is **Covered in class (tested)**,
 **Has lessons** (with an Open › link into the app) or **Coming up**. Edit `window.CURRICULUM` in `curriculum.js` to update status.
+
+## Installable app (PWA)
+`manifest.json` (name, short name, standalone, dark theme `#060b1a`, icons in `icons/` + `apple-touch-icon.png`, all made by
+`make_icons.py` with Pillow) and `sw.js`, registered by `pwa.js` with a relative path. The service worker is **network-first**:
+online, every request goes to the network (so `?v=` cache-busting keeps working); the versioned cache (`hb-pwa-v…`) is only an
+offline fallback. MP3s are never cached by it. `pwa.js` also shows a dismissible install banner: **Install app** on Android
+Chrome (`beforeinstallprompt`), "Tap Share then Add to Home Screen" on iOS Safari, nothing on desktop unless the browser offers
+an install. Dismissal is stored in `localStorage` (`hb.installBanner.dismissed`); hidden when already running standalone.
+When you change `sw.js`, bump `CACHE`.

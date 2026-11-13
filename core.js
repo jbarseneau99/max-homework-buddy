@@ -1,4 +1,4 @@
-// ===== Homework Buddy core: router, nav bar, breadcrumbs, shared screens =====
+// ===== Study Buddy core: router, nav bar, breadcrumbs, shared screens =====
 // No speech APIs. All audio is pre-generated MP3 played from a button tap.
 (function () {
   const $ = id => document.getElementById(id);
