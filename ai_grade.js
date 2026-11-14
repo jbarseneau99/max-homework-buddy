@@ -197,6 +197,23 @@
     }, o);
   }
 
+  // "Explain it another way" with the AI (only when the key is set in Settings). Text only, no grading.
+  //   o = { question, answer, given, subject, misconception } -> resolves { mode:"ai", text, model }
+  const SYSTEM_EXPLAIN = [
+    "You are a warm, patient grade-5 tutor in Ontario, Canada, helping Max after he got a question wrong.",
+    "Explain the idea a DIFFERENT way from a textbook: use a picture-like everyday example (food, sports, money, Canadian places) and simple words.",
+    "Name the likely mistake kindly, then explain, then give one quick tip to check next time. At most 70 words. No markdown, no lists.",
+    "Reply with ONLY a JSON object: {\"text\": \"<your explanation>\"}"
+  ].join("\n");
+  async function explainAnother(o) {
+    o = o || {};
+    const text = [`Subject: ${o.subject || ""}`, `Question: ${o.question || ""}`, `Correct answer: ${o.answer || ""}`, `Max's answer: ${o.given || "(not readable)"}`,
+      o.misconception ? `Likely mistake: ${o.misconception}` : "", "Explain it another way now. JSON only."].filter(Boolean).join("\n");
+    return callAI([{ role: "system", content: SYSTEM_EXPLAIN }, { role: "user", content: text }], raw => {
+      const j = jsonOf(raw); const t = String(j.text || "").trim(); if (!t) throw new Error("empty"); return { text: t.slice(0, 600) }; }, o);
+  }
+  HB.explainAnother = explainAnother;
+
   HB.ai = { status, ready: () => status().ready, DEFAULT_MODEL, FALLBACK_MODELS, ENDPOINT, _parse: parseVerdict, _parseShowWork: parseShowWork };
   HB.gradeScratch = gradeScratch;
   HB.gradeSentence = gradeSentence;

@@ -34,7 +34,7 @@
           ${s.strands.map(x => `<div class="cur-strand"><div class="eyebrow">Strand ${esc(x.code)}</div><h3>${esc(x.title)}</h3><ul>
             ${x.items.map(i => `<li class="cur-item ${i.status}"><span class="cur-code">${esc(i.code)}</span>
               <span class="cur-say">${esc(i.say)}${i.note ? `<small>${esc(i.note)}</small>` : ""}</span>
-              <span class="cur-tag ${i.status}">${LABEL[i.status]}</span>
+              <span class="cur-tag ${i.status}">${LABEL[i.status]}</span>${HB.SkillMap ? HB.SkillMap.badge(s.id, i.code) : ""}
               ${i.link ? `<button type="button" class="cur-go btn-cyan" data-link="${esc(i.link.join("/"))}">Open ›</button>` : ""}</li>`).join("")}
           </ul></div>`).join("")}
           <p class="cur-src">Official source: <a href="${esc(s.source)}" target="_blank" rel="noopener">Ontario curriculum · ${esc(s.title)}</a>. Codes are official; the descriptions are short kid-friendly summaries.</p>
@@ -43,6 +43,7 @@
       card.querySelectorAll(".cur-go").forEach(b => b.onclick = () => goLink(b.dataset.link.split("/")));
       box.appendChild(card);
     });
+    if (HB.SkillMap && $("curSkillMap")) HB.SkillMap.render($("curSkillMap"));   // edtech: skill map coloured from Quiz History
     $("curSource").innerHTML = `From the Ontario Ministry of Education's <a href="${esc(C.home)}" target="_blank" rel="noopener">Curriculum and Resources</a> site (checked ${esc(C.checked)}).`;
   }
   HB.registerModule("curriculum", { view: "view-curriculum", enter(ctx) { if (ctx.opts && ctx.opts.open) open = ctx.opts.open; render(); }, leave() {} });

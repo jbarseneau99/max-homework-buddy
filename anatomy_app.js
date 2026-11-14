@@ -79,6 +79,7 @@
     els.progress.textContent = `${st.lesson.title} — ${st.idx + 1} of ${n}`;
     els.emoji.textContent = it.emoji;
     els.options.innerHTML = ""; els.feedback.textContent = "";
+    if (window.HB && HB.Help) HB.Help.clear($("anatHelp"));
     els.nextBtn.disabled = true; els.nextBtn.textContent = "Next ›";
     if (it.intro) {
       st.phase = "intro";
@@ -95,6 +96,7 @@
   function showQuestion() {
     const it = item();
     st.phase = "question";
+    if (window.HB && HB.Help) HB.Help.clear($("anatHelp"));
     els.quizBtn.hidden = true;
     if (!it.intro) { els.title.textContent = it.name; els.organs.textContent = ""; }
     else { els.title.textContent = "Quiz time"; els.organs.textContent = ""; }
@@ -123,6 +125,8 @@
     if (ok) { st.score++; btn.classList.add("correct"); }
     else btn.classList.add("incorrect");
     els.feedback.textContent = (ok ? "✓ " : "✗ ") + (ok ? it.rightText : it.wrongText);
+    if (window.HB && HB.Help) { if (ok) HB.Help.clear($("anatHelp"));
+      else HB.Help.show($("anatHelp"), { skill: st.lesson.id === "organs" ? "anat.organs" : "anat.systems", q: { type: "mc", q: it.question, options: it.options, answer: it.answer, explain: it.fact }, given: opt, subject: "Science" }); }
     setScore();
     const last = st.idx === st.lesson.items.length - 1;
     els.nextBtn.disabled = false;

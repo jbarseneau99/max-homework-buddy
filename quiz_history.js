@@ -32,7 +32,8 @@
       ...(q.pts != null ? { earned: Number(q.earned) || 0, pts: Number(q.pts) || 1 } : {}),
       ...(q.type ? { type: String(q.type) } : {}),
       ...(q.grader ? { grader: String(q.grader) } : {}),
-      ...(q.feedback ? { feedback: String(q.feedback) } : {})
+      ...(q.feedback ? { feedback: String(q.feedback) } : {}),
+      ...(q.skill ? { skill: String(q.skill) } : {})   // edtech skill id (skill map / warm-up)
     })) : [];
     // Fall back: build question rows from details like "✓ foo" / "✗ foo"
     if (!questions.length && Array.isArray(r.details)) {
@@ -48,6 +49,7 @@
       subject: r.subject || bits.subject || "",
       topic: r.topic || bits.topic || "",
       mode: r.mode || "",
+      ...(r.skill ? { skill: String(r.skill) } : {}),
       score: Number(r.score) || 0,
       total: Number(r.total) || 0,
       questions,
@@ -74,7 +76,8 @@
   })();
 
   function exportJSON() {
-    return JSON.stringify({ version: 1, exportedAt: new Date().toISOString(), attempts: list() }, null, 2);
+    return JSON.stringify({ version: 1, exportedAt: new Date().toISOString(), attempts: list(),
+      ...(window.HB && HB.confidence ? { confidence: HB.confidence.list() } : {}) }, null, 2);
   }
   function importJSON(text) {
     let data;
@@ -89,6 +92,7 @@
     });
     const merged = [...byId.values()].sort((a, b) => String(b.at).localeCompare(String(a.at)));
     write(merged);
+    if (data && Array.isArray(data.confidence) && window.HB && HB.confidence) HB.confidence.merge(data.confidence);
     return { added, total: merged.length };
   }
 

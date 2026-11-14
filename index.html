@@ -548,6 +548,88 @@
   .hb-install-txt { flex:1; display:grid; gap:2px; font-size:.95rem; } .hb-install-txt span { color:var(--muted); }
   .hb-install-txt span b { color:var(--cyan2); } .hb-share { color:var(--cyan2); }
   .hb-install-go { flex:none; } .hb-install-x { flex:none; background:none; border:1px solid var(--line); color:var(--muted); border-radius:8px; min-width:36px; min-height:36px; }
+  /* ---------- edtech: mistake help, hints, goals, skill map, practice, narration (edtech_ui.js) ---------- */
+  .ed-help { margin:12px 0 4px; padding:14px 16px; border:1px solid rgba(255,194,61,.35); border-radius:12px; background:rgba(40,30,6,.35); text-align:left; }
+  .ed-help .ed-miss { font-weight:800; color:var(--gold2); font-size:1.02rem; }
+  .ed-help .ed-why { margin:6px 0 10px; line-height:1.5; }
+  .ed-help-btns, .ed-row { display:flex; flex-wrap:wrap; gap:8px; align-items:center; }
+  .ed-another, .ed-ai-out { margin-top:10px; padding:10px 12px; border-left:3px solid var(--cyan); background:rgba(76,201,240,.08); border-radius:8px; line-height:1.5; }
+  .ed-skill-tag { display:inline-block; font-size:.78rem; color:var(--muted); border:1px solid var(--line); border-radius:999px; padding:2px 9px; margin-left:6px; }
+  .ed-hint { margin:10px 0; text-align:left; }
+  .ed-hint-btn { border-color:var(--gold); color:var(--gold2); }
+  .ed-hint-steps { margin:8px 0 0; padding-left:22px; line-height:1.55; }
+  .ed-hint-steps li { margin:4px 0; }
+  .ed-worked { margin-top:8px; padding:10px 12px; border:1px dashed var(--line); border-radius:10px; }
+  .ed-goal { margin:0 0 14px; text-align:left; border-color:rgba(255,194,61,.4); }
+  .ed-goal-h { display:flex; justify-content:space-between; gap:10px; align-items:center; flex-wrap:wrap; }
+  .ed-goal-b[hidden] { display:none; }
+  .ed-learn { font-size:1.08rem; font-weight:700; margin:6px 0; }
+  .ed-got { margin:4px 0 8px; padding-left:22px; line-height:1.5; }
+  .ed-stages { list-style:none; display:flex; gap:6px; padding:0; margin:8px 0 4px; flex-wrap:wrap; }
+  .ed-stages li { padding:4px 12px; border-radius:999px; border:1px solid var(--line); color:var(--muted); font-size:.85rem; }
+  .ed-stages li.on { border-color:var(--gold); color:#1a1200; background:var(--gold); font-weight:800; }
+  .ed-goal-tog { font-size:.85rem; padding:4px 10px; }
+  .ed-wrap { margin-top:14px; text-align:left; border-color:rgba(94,242,160,.35); }
+  .ed-wrap-t { font-weight:800; font-size:1.05rem; margin:4px 0 8px; }
+  .ed-check { list-style:none; padding:0; margin:0 0 10px; line-height:1.6; }
+  .ed-check li { margin:6px 0; }
+  .ed-tick { padding:2px 10px; min-width:36px; }
+  .ed-tick[aria-pressed="true"] { color:var(--ok); border-color:var(--ok); }
+  .ed-conf-btns { display:flex; gap:10px; flex-wrap:wrap; margin:8px 0; }
+  .ed-conf-b { font-size:1.05rem; padding:12px 18px; min-width:120px; }
+  .ed-conf-b.on { border-color:var(--gold); box-shadow:0 0 14px rgba(255,194,61,.5); }
+  .ed-conf-msg { color:var(--cyan2); min-height:1.2em; }
+  .ed-describe { margin:10px 0; text-align:left; }
+  .ed-describe-text { margin-top:8px; padding:10px 12px; border-left:3px solid var(--cyan); background:rgba(76,201,240,.08); border-radius:8px; line-height:1.5; }
+  .narr-on { color:var(--gold2); text-shadow:0 0 10px rgba(255,194,61,.35); }
+  .ed-narr { position:sticky; top:6px; z-index:20; display:flex; gap:6px; align-items:center; flex-wrap:wrap; justify-content:center; width:fit-content; margin:0 auto 12px;
+    background:rgba(6,11,26,.94); border:1px solid var(--cyan); border-radius:999px; padding:6px 10px; box-shadow:0 0 20px rgba(76,201,240,.35); max-width:100%; }
+  .ed-narr[hidden] { display:none; }
+  .ed-narr button { padding:7px 12px; font-size:.9rem; }
+  .ed-narr button.on { background:var(--cyan); color:#001018; }
+  .ed-narr-lbl { color:var(--muted); font-size:.82rem; padding:0 6px; }
+  .ed-x { padding:4px 10px !important; }
+  .ed-overlay { position:fixed; inset:0; z-index:70; background:rgba(2,6,16,.78); display:flex; align-items:flex-start; justify-content:center; overflow:auto; padding:24px 12px; }
+  .ed-overlay[hidden] { display:none; }
+  #edPractice .mq-feedback:empty { display:none; }
+  body.ed-modal-open { overflow:hidden; }
+  .ed-sheet { width:min(760px,100%); background:var(--glass-solid); text-align:left; }
+  .ed-sheet-head { display:flex; justify-content:space-between; align-items:flex-start; gap:10px; }
+  .ed-sub { color:var(--muted); margin:4px 0 10px; }
+  .ed-q { font-size:1.15rem; font-weight:700; margin:10px 0; line-height:1.45; }
+  .ed-opts { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:10px; margin:10px 0; }
+  .ed-opts button { padding:14px; font-size:1.05rem; }
+  .ed-opts button.correct { border-color:var(--ok); background:rgba(94,242,160,.15); }
+  .ed-opts button.incorrect { border-color:var(--gold); background:rgba(255,194,61,.12); }
+  .ed-opts button.on { border-color:var(--cyan); background:rgba(76,201,240,.18); }
+  .ed-num { display:flex; flex-direction:column; align-items:center; gap:8px; margin:8px 0; }
+  .ed-overlay.car .ed-q { font-size:1.5rem; }
+  .ed-overlay.car .ed-opts { grid-template-columns:1fr; }
+  .ed-overlay.car .ed-opts button { font-size:1.45rem; padding:22px; min-height:76px; }
+  .ed-overlay.car .ed-big { font-size:1.3rem; padding:18px 26px; }
+  .ed-end { text-align:center; padding:10px 0; }
+  .ed-end .big { font-size:2rem; font-weight:800; color:var(--gold2); }
+  .ed-map { margin:14px 0; text-align:left; }
+  .ed-map-h { display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap; }
+  .ed-legend { display:flex; gap:8px; flex-wrap:wrap; font-size:.85rem; }
+  .ed-map-g { margin-top:10px; }
+  .ed-map-chips { display:flex; flex-wrap:wrap; gap:8px; margin:6px 0 10px; }
+  .ed-chip { border-radius:12px; padding:8px 12px; text-align:left; font-size:.92rem; }
+  .ed-chip small { display:block; color:var(--muted); font-size:.78rem; }
+  .ed-sk { display:inline-block; border-radius:999px; padding:2px 10px; font-size:.78rem; border:1px solid var(--line); margin-left:6px; }
+  .ed-sk-none { color:var(--muted); border-color:rgba(147,166,198,.4); }
+  .ed-sk-practising { color:var(--gold2); border-color:var(--gold); background:rgba(255,194,61,.1); }
+  .ed-sk-got { color:var(--ok); border-color:var(--ok); background:rgba(94,242,160,.1); }
+  .ed-map-note { color:var(--muted); font-size:.88rem; margin-top:6px; }
+  .ed-map-next { margin-top:8px; }
+  .home-quick { display:flex; flex-wrap:wrap; gap:10px; justify-content:center; align-items:center; margin:14px 0 4px; }
+  .home-quick button { font-size:1.02rem; padding:12px 18px; }
+  .home-quick-info { width:100%; text-align:center; color:var(--muted); font-size:.9rem; }
+  .qh-conf { margin-top:14px; text-align:left; }
+  .qh-conf-list { list-style:none; padding:0; margin:8px 0 0; display:grid; gap:6px; }
+  .qh-conf-list small { display:block; color:var(--muted); }
+  .qh-conf-lvl { display:inline-block; min-width:96px; font-weight:700; }
+  .qh-conf-lvl.got { color:var(--ok); } .qh-conf-lvl.kind { color:var(--cyan2); } .qh-conf-lvl.notyet { color:var(--gold2); }
 </style>
 </head>
 <body>
@@ -569,6 +651,7 @@
       <h1 class="brand">Max's <span>Study Buddy</span></h1>
       <p class="greet">Hey Max, let's get to work. Pick a subject.</p>
     </div>
+    <div class="home-quick" id="homeQuick"><button id="homeWarmBtn" type="button" class="btn-gold">🔁 Warm-up review</button><button id="homeCarBtn" type="button" class="btn-cyan">🚗 Car ride · 10 min</button><div class="home-quick-info" id="homeQuickInfo"></div></div>
     <div class="tiles" id="homeTiles"></div>
     <div class="home-foot home-tools"><button id="homeHelloBtn" type="button" class="btn-cyan" data-icon="sound"> Play greeting</button><button id="homeHistoryBtn" type="button" class="btn-gold" data-icon="quiz"> Quiz History</button>
 <button id="homeMasteryBtn" type="button" class="btn-cyan" data-icon="divide"> × Mastery</button><button id="homeCurriculumBtn" type="button" class="btn-gold" data-icon="book"> Curriculum</button></div>
@@ -648,7 +731,9 @@
             <span class="mq-R">R</span>
             <button type="button" class="mq-field" id="mqRBtn" aria-label="Remainder"><small>Remainder</small><span class="v" id="mqR">–</span></button>
           </div>
+          <div class="ed-hint" id="mqHintBox" hidden></div>
           <div class="mq-feedback" id="mqFeedback" aria-live="polite"></div>
+          <div id="mqHelp" hidden></div>
           <div class="mq-how glass-card" id="mqHow" hidden><div class="eyebrow">Worked solution</div><ol id="mqHowSteps"></ol></div>
         </div>
         <div class="glass-card">
@@ -690,6 +775,7 @@
         <div class="tag" id="cTag">TARGET</div><h3 id="cName"></h3><p id="cDoes"></p><p class="fact" id="cFact"></p>
       </div>
     </div>
+    <div class="ed-describe" id="exDescribe" hidden></div>
     <div id="walkCtl">
       <div class="meter"><div id="walkBar"></div></div>
       <div class="walk-ctl">
@@ -723,6 +809,7 @@
       <div class="anat-text" id="anatText" aria-live="polite"></div>
       <div class="anatomy-options" id="anatomyOptions"></div>
       <div class="anatomy-feedback" id="anatomyFeedback" aria-live="polite"></div>
+      <div id="anatHelp" hidden></div>
       <div class="anat-actions">
         <button id="anatQuizBtn" type="button">I'm ready — quiz me</button>
         <button id="anatNextBtn" type="button" disabled>Next ›</button>
@@ -750,11 +837,13 @@
         <div class="mq-field mx-num"><small>Your answer</small><span class="v" id="mxNum">–</span></div>
         <div class="pad mx-pad" id="mxPad"></div>
       </div>
+      <div class="ed-hint" id="mxHintBox" hidden></div>
       <div style="text-align:center"><button id="mxCheck" type="button" class="btn-gold" style="min-width:180px">Check</button></div>
       <div style="text-align:center"><button id="mxTypeToggle" type="button" class="ai-type-toggle" hidden>Type answer instead</button><button id="mxPadToggle" type="button" class="ai-type-toggle" hidden>✎ Write it on the notepad instead</button></div>
       <p class="ai-hint" id="mxAiHint" hidden></p>
       <div class="mq-feedback" id="mxFeedback" aria-live="polite"></div>
       <div id="mxSelf"></div>
+      <div id="mxHelp" hidden></div>
       <div class="mq-nav">
         <button id="mxPrev" type="button">‹ Previous</button>
         <button id="mxNext" type="button" class="btn-gold" disabled>Next question</button>
@@ -806,6 +895,7 @@
         <h3 class="fw-title" id="fwStepTitle"></h3>
         <div class="fw-kicker" id="fwKicker" hidden></div>
         <ul class="fw-facts" id="fwFacts"></ul>
+        <div class="ed-describe" id="fwDescribe" hidden></div>
       </div>
     </div>
     <div class="walk-ctl fw-ctl">
@@ -903,6 +993,7 @@
       </div>
       <div id="spReveal" class="sp-reveal" hidden></div>
       <div id="spFeedback" class="mq-feedback" aria-live="polite"></div>
+      <div id="spHelp" hidden></div>
       <div class="sp-quiz-ctl">
         <button id="spReplay" type="button" class="btn-cyan" data-icon="sound"> Replay</button>
         <button id="spCheck" type="button" class="btn-gold" disabled>Check</button>
@@ -939,6 +1030,7 @@
       <button id="qhClear" type="button">Clear all</button>
       <span id="qhStatus" class="set-status" aria-live="polite"></span>
     </div>
+    <div id="qhConf" class="glass-card qh-conf" hidden></div>
     <ul id="qhList" class="qh-list" style="margin-top:14px"></ul>
     <div id="qhDetail" class="glass-card qh-detail" hidden style="margin-top:14px">
       <div class="eyebrow" id="qhDetailWhen"></div>
@@ -958,6 +1050,7 @@
     <h2 class="h2">Curriculum</h2>
     <p class="set-blurb">What Grade 5 covers in Ontario, and where Max is. Tap a subject to see its strands. <span class="cur-tag tested">Covered in class (tested)</span> <span class="cur-tag lessons">Has lessons</span> <span class="cur-tag soon">Coming up</span></p>
     <div class="glass-card cur-summary" id="curSummary"></div>
+    <div class="glass-card ed-map" id="curSkillMap"></div>
     <div id="curSubjects" class="cur-list"></div>
     <p class="cur-src" id="curSource"></p>
   </section>
@@ -1001,7 +1094,9 @@
         <input id="mvFallbackInput" type="text" inputmode="numeric" autocomplete="off">
       </div>
       <div id="mvReveal" class="sp-reveal" hidden></div>
+      <div class="ed-hint" id="mvHintBox" hidden></div>
       <div id="mvFeedback" class="mq-feedback" aria-live="polite"></div>
+      <div id="mvHelp" hidden></div>
       <div class="sp-quiz-ctl">
         <button id="mvReplay" type="button" class="btn-cyan" data-icon="sound"> Replay</button>
         <button id="mvCheck" type="button" class="btn-gold" disabled>Check</button>
@@ -1096,38 +1191,41 @@
 <audio id="aud-ex4_step4" preload="auto" playsinline controlsList="nodownload"><source src="audio/ex4_step4.mp3" type="audio/mpeg"></audio>
 <audio id="aud-ex4_step5" preload="auto" playsinline controlsList="nodownload"><source src="audio/ex4_step5.mp3" type="audio/mpeg"></audio>
   </div>
-<script src="math_quiz_data.js?v=20261113b"></script>
-<script src="anatomy_data.js?v=20261113b"></script>
-<script src="explore_data.js?v=20261113b"></script>
-<script src="maxtopics_data.js?v=20261113b"></script>
-<script src="sessions_data.js?v=20261113b"></script>
-<script src="social_data.js?v=20261113b"></script>
-<script src="fractions_data.js?v=20261113b"></script>
-<script src="spelling_data.js?v=20261113b"></script>
-<script src="mult_data.js?v=20261113b"></script>
-<script src="anime_icons.js?v=20261113b"></script>
-<script src="quiz_types.js?v=20261113b"></script>
-<script src="topics.js?v=20261113b"></script>
-<script src="core.js?v=20261113b"></script>
-<script src="scratchpad.js?v=20261113b"></script>
-<script src="ai_grade.js?v=20261113b"></script>
-<script src="math_review.js?v=20261113b"></script>
-<script src="math_quiz.js?v=20261113b"></script>
-<script src="anatomy_app.js?v=20261113b"></script>
-<script src="explore_app.js?v=20261113b"></script>
-<script src="maxquiz.js?v=20261113b"></script>
-<script src="spelling.js?v=20261113b"></script>
-<script src="social_app.js?v=20261113b"></script>
-<script src="fractions_app.js?v=20261113b"></script>
-<script src="mult_vis.js?v=20261113b"></script>
-<script src="mult_mastery.js?v=20261113b"></script>
-<script src="mult_app.js?v=20261113b"></script>
-<script src="settings.js?v=20261113b"></script>
-<script src="quiz_history.js?v=20261113b"></script>
-<script src="quiz_history_ui.js?v=20261113b"></script>
-<script src="curriculum.js?v=20261113b"></script>
-<script src="curriculum_ui.js?v=20261113b"></script>
+<script src="math_quiz_data.js?v=20261114a"></script>
+<script src="anatomy_data.js?v=20261114a"></script>
+<script src="explore_data.js?v=20261114a"></script>
+<script src="maxtopics_data.js?v=20261114a"></script>
+<script src="sessions_data.js?v=20261114a"></script>
+<script src="social_data.js?v=20261114a"></script>
+<script src="fractions_data.js?v=20261114a"></script>
+<script src="spelling_data.js?v=20261114a"></script>
+<script src="mult_data.js?v=20261114a"></script>
+<script src="anime_icons.js?v=20261114a"></script>
+<script src="edtech_data.js?v=20261114a"></script>
+<script src="edtech_core.js?v=20261114a"></script>
+<script src="quiz_types.js?v=20261114a"></script>
+<script src="topics.js?v=20261114a"></script>
+<script src="core.js?v=20261114a"></script>
+<script src="scratchpad.js?v=20261114a"></script>
+<script src="ai_grade.js?v=20261114a"></script>
+<script src="math_review.js?v=20261114a"></script>
+<script src="math_quiz.js?v=20261114a"></script>
+<script src="anatomy_app.js?v=20261114a"></script>
+<script src="explore_app.js?v=20261114a"></script>
+<script src="maxquiz.js?v=20261114a"></script>
+<script src="spelling.js?v=20261114a"></script>
+<script src="social_app.js?v=20261114a"></script>
+<script src="fractions_app.js?v=20261114a"></script>
+<script src="mult_vis.js?v=20261114a"></script>
+<script src="mult_mastery.js?v=20261114a"></script>
+<script src="mult_app.js?v=20261114a"></script>
+<script src="settings.js?v=20261114a"></script>
+<script src="quiz_history.js?v=20261114a"></script>
+<script src="quiz_history_ui.js?v=20261114a"></script>
+<script src="curriculum.js?v=20261114a"></script>
+<script src="curriculum_ui.js?v=20261114a"></script>
+<script src="edtech_ui.js?v=20261114a"></script>
 <script>HB.start();</script>
-<script src="pwa.js?v=20261113b"></script>
+<script src="pwa.js?v=20261114a"></script>
 </body>
 </html>

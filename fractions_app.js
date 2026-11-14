@@ -280,7 +280,8 @@
     $("frNext").textContent = last ? (st.mode === "review" ? "Go to quiz ›" : "Back to review ›") : "Next ›";
     $("frChips").querySelectorAll("button").forEach((b, k) => b.classList.toggle("active", k === st.i));
     if (window.ANAT) ANAT.setScoreText("");
-    if (speak) play(s.audio);
+    if (HB.lessonStep && st.mode === "review") HB.lessonStep({ first: st.i === 0, last: last });
+    if (speak) (HB.Narr ? HB.Narr.say(s.audio, $("frFacts")) : play(s.audio));
   }
   $("frPrev").onclick = () => { if (st.i <= 0) return; if (st.mode === "component") return HB.goComponent(st.i - 1); st.i--; render(true); };
   $("frNext").onclick = () => {
@@ -290,7 +291,7 @@
     st.i++; render(true);
   };
   // Hear it replays the narration and restarts the animation
-  $("frHear").onclick = () => { const s = st.list[st.i]; if (!s) return; $("frVisual").innerHTML = FRAC_VIS.render(s.vis); play(s.audio); };
+  $("frHear").onclick = () => { const s = st.list[st.i]; if (!s) return; $("frVisual").innerHTML = FRAC_VIS.render(s.vis); HB.Narr ? HB.Narr.say(s.audio, $("frFacts")) : play(s.audio); };
 
   HB.registerModule("fracWalk", {
     view: "view-fracWalk",

@@ -71,7 +71,9 @@
     $("fwNext").textContent = last ? (st.mode === "review" ? "Go to quiz ›" : "Back to review ›") : "Next ›";
     $("fwChips").querySelectorAll("button").forEach((b, k) => b.classList.toggle("active", k === st.i));
     if (window.ANAT) ANAT.setScoreText("");
-    if (speak) play(s.audio);
+    if (HB.Describe) HB.Describe.set($("fwDescribe"), s.capital ? "badge:" + s.id : s.visual && s.visual !== "icon" ? "ss:" + (s.visual === "levels" ? "levels:" : s.visual) : "");
+    if (HB.lessonStep && st.mode === "review") HB.lessonStep({ first: st.i === 0, last: last });
+    if (speak) (HB.Narr ? HB.Narr.say(s.audio, $("fwFacts")) : play(s.audio));
   }
 
   $("fwPrev").onclick = () => { if (st.i <= 0) return; if (st.mode === "component") return HB.goComponent(st.i - 1); st.i--; render(true); };
@@ -81,7 +83,7 @@
     if (last) return HB.goQuiz();
     st.i++; render(true);
   };
-  $("fwHear").onclick = () => play((st.list[st.i] || {}).audio);
+  $("fwHear").onclick = () => { const a = (st.list[st.i] || {}).audio; HB.Narr ? HB.Narr.say(a, $("fwFacts")) : play(a); };
 
   HB.registerModule("factWalk", {
     view: "view-factWalk",

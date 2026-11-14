@@ -116,6 +116,7 @@ function showStep(i) {
   nextExerciseBtn.disabled = !(i >= current().steps.length - 1 && exIndex < exercises.length - 1);
   startBtn.textContent = "Restart exercise";
   syncMathNav();
+  if (window.HB && HB.lessonStep) HB.lessonStep({ first: exIndex === 0 && i === 0, last: exIndex === exercises.length - 1 && i >= current().steps.length - 1 });
   if (audioEnabled && audioUnlocked) playById(step.audioId);
 }
 

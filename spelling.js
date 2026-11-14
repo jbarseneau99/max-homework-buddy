@@ -41,7 +41,8 @@
     $("spNext").textContent = last ? (rv.mode === "review" ? "Go to quiz ›" : "Back to review ›") : "Next ›";
     $("spChips").querySelectorAll("button").forEach((b, k) => b.classList.toggle("active", k === rv.i));
     if (window.ANAT) ANAT.setScoreText("");
-    if (speak) play(w.reviewAudio);
+    if (HB.lessonStep && rv.mode === "review") HB.lessonStep({ first: rv.i === 0, last: rv.i === rv.words.length - 1 });
+    if (speak) (HB.Narr ? HB.Narr.say(w.reviewAudio, null) : play(w.reviewAudio));
   }
 
   $("spPrev").onclick = () => {
@@ -55,7 +56,7 @@
     if (last) return HB.goQuiz();
     rv.i++; renderReview(true);
   };
-  $("spHear").onclick = () => play((rv.words[rv.i] || {}).reviewAudio);
+  $("spHear").onclick = () => { const a = (rv.words[rv.i] || {}).reviewAudio; HB.Narr ? HB.Narr.say(a, null) : play(a); };
 
   HB.registerModule("spellingReview", {
     view: "view-spellingReview",
@@ -175,6 +176,7 @@
     $("spqBar").style.width = ((qz.i + 1) / n() * 100) + "%";
     $("spFeedback").textContent = ""; $("spFeedback").className = "mq-feedback";
     $("spReveal").hidden = true; $("spReveal").innerHTML = "";
+    if (HB.Help) HB.Help.clear($("spHelp"));
     $("spFallbackInput").value = "";
     const answered = !!qz.results[qz.i];
     $("spFallbackInput").disabled = answered;
@@ -242,6 +244,9 @@
       : ("✗ " + (res.feedback || w.wrongText));
     $("spFeedback").textContent = msg;
     $("spFeedback").className = "mq-feedback " + (res.ok ? "ok" : "bad");
+    if (HB.Help) { if (res.ok) HB.Help.clear($("spHelp"));
+      else HB.Help.show($("spHelp"), { skill: "spell.words", q: { word: w.word, q: w.word, answer: w.word, type: "spell" }, notepad: isNotepad(), subject: "Language › Spelling",
+        given: res.written || (Array.isArray(res.given) ? res.given.join("") : res.given) }); }
     $("spqNext").disabled = false;
     if (speak) play(res.ok ? w.rightAudio : w.wrongAudio);
   }

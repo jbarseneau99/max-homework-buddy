@@ -22,6 +22,7 @@
     const items = HB.quizHistory.filter(st.filter);
     const ul = $("qhList");
     $("qhDetail").hidden = true; ul.hidden = false;
+    renderConfidence();
     if (!items.length) {
       ul.innerHTML = '<li class="qh-empty" style="cursor:default">No quiz attempts saved yet. Finish any quiz and it will show up here.</li>';
       return;
@@ -39,8 +40,20 @@
     });
   }
 
+  // "How I felt" taps from the end of each lesson (hb.confidence.v1), newest first
+  function renderConfidence() {
+    const box = $("qhConf"); if (!box) return;
+    const L = HB.confidence ? HB.confidence.LEVELS : {};
+    const all = HB.confidence ? HB.confidence.list().filter(c => st.filter === "all" || (c.subject || "").toLowerCase() === String(st.filter).toLowerCase()) : [];
+    box.hidden = !all.length;
+    box.innerHTML = all.length ? `<div class="eyebrow">How I felt after lessons</div><ul class="qh-conf-list">${all.slice(0, 12).map(c => { const l = L[c.level] || {};
+      return `<li><span class="qh-conf-lvl ${esc(c.level)}">${l.emoji || ""} ${esc(l.label || c.level)}</span> <b>${esc(c.title)}</b><small>${esc(c.subject)} · ${esc(new Date(c.at).toLocaleString())}</small></li>`; }).join("")}</ul>` +
+      (all.length > 12 ? `<small>${all.length - 12} more saved.</small>` : "") : "";
+  }
+
   function openDetail(id) {
     const a = HB.quizHistory.get(id); if (!a) return;
+    if ($("qhConf")) $("qhConf").hidden = true;
     st.openId = id;
     $("qhList").hidden = true; $("qhDetail").hidden = false;
     $("qhDetailWhen").textContent = new Date(a.at).toLocaleString();

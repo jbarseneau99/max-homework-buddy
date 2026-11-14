@@ -1,7 +1,7 @@
 // Max's Study Buddy service worker — NETWORK-FIRST. Online, every request goes to the network, so fresh HTML/JS
 // (and the ?v= cache-bust) always win. The cache is only an offline fallback. MP3 narration is never cached here.
 // All paths are relative: the site lives under /max-homework-buddy/ on GitHub Pages.
-const CACHE = "hb-pwa-v20261113b";
+const CACHE = "hb-pwa-v20261114a";
 const SHELL = ["./", "./index.html", "./manifest.json", "./icons/icon-192.png", "./icons/icon-512.png", "./apple-touch-icon.png"];
 
 self.addEventListener("install", e => {

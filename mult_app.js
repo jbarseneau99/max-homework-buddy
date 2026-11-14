@@ -20,6 +20,7 @@
     $("mvCount").textContent = `${rv.i + 1} / ${rv.steps.length}`;
     $("mvStepTitle").textContent = s.title;
     $("mvFacts").innerHTML = (s.facts || (s.say ? [s.say] : [])).map(f => `<li>${esc(f)}</li>`).join("");
+    if (HB.lessonStep && rv.mode === "review") HB.lessonStep({ first: rv.i === 0, last: rv.i === rv.steps.length - 1 });
     // For normal steps show say as facts if no facts array; hero has facts
     if (!s.facts && s.say) $("mvFacts").innerHTML = `<li>${esc(s.say)}</li>`;
     $("mvVisual").innerHTML = (window.MULT_VIS && s.vis) ? MULT_VIS.render(s.vis) : (s.heroBadge || "");
@@ -28,7 +29,7 @@
     const last = rv.i === rv.steps.length - 1;
     $("mvNext").textContent = last ? (rv.mode === "review" ? "Go to quiz ›" : "Back to review ›") : "Next ›";
     if (window.ANAT) ANAT.setScoreText("");
-    if (speak) play(s.audio);
+    if (speak) (HB.Narr ? HB.Narr.say(s.audio, $("mvFacts")) : play(s.audio));
   }
 
   $("mvPrev").onclick = () => { if (rv.i <= 0) return; if (rv.mode === "component") return HB.goComponent(rv.i - 1); rv.i--; renderReview(true); };
@@ -38,7 +39,7 @@
     if (last) return HB.goQuiz();
     rv.i++; renderReview(true);
   };
-  $("mvHear").onclick = () => play((rv.steps[rv.i] || {}).audio);
+  $("mvHear").onclick = () => { const a = (rv.steps[rv.i] || {}).audio; HB.Narr ? HB.Narr.say(a, $("mvFacts")) : play(a); };
 
   function buildSteps(S) {
     const steps = (S.review || []).map(x => Object.assign({}, x));
@@ -153,6 +154,8 @@
     if (p.a > 6 || p.b > 6) $("mvqVis").innerHTML = "";
     $("mvFeedback").textContent = ""; $("mvFeedback").className = "mq-feedback";
     $("mvReveal").hidden = true;
+    if (HB.Help) HB.Help.clear($("mvHelp"));   // edtech: mistake feedback + step-by-step hints
+    if (HB.Hint) { if (!qz.results[qz.i] && p.kind !== "check") HB.Hint.mount($("mvHintBox"), HB.ED.hintsForMult(p.a, p.b)); else HB.Hint.clear($("mvHintBox")); }
     $("mvAnswer").value = ""; $("mvFallbackInput").value = "";
     // Critical: showResult() disables inputs after Q1 — always clear that for a fresh unanswered question.
     const answered = !!qz.results[qz.i];
@@ -209,6 +212,10 @@
     }
     $("mvFeedback").textContent = (res.ok ? "✓ " : "✗ ") + (res.feedback || (res.ok ? "Nice!" : "Not quite."));
     $("mvFeedback").className = "mq-feedback " + (res.ok ? "ok" : "bad");
+    if (HB.Hint) HB.Hint.finish($("mvHintBox"));
+    if (HB.Help) { if (res.ok) HB.Help.clear($("mvHelp"));
+      else HB.Help.show($("mvHelp"), { skill: p.a <= 12 && p.b <= 12 ? "mult.facts" : "mult.multi", subject: "Math › Multiplication", notepad: qz.mode === "notepad",
+        q: { mult: [p.a, p.b], type: "number", q: p.q, answer: p.answer, explain: `${p.a} × ${p.b} = ${p.a * p.b}.` }, given: p.kind === "check" ? "" : (res.written || res.given) }); }
     $("mvqNext").disabled = false;
     if (speak) {
       const pack = res.ok ? D().cheers : D().wrongs;

@@ -49,6 +49,8 @@
     $("mqBar").style.width = ((i + 1) / D.problems.length * 100) + "%";
     $("mqDividend").textContent = p.dividend; $("mqDivisor").textContent = p.divisor;
     $("mqHow").hidden = true; $("mqHowSteps").innerHTML = "";
+    if (HB.Help) HB.Help.clear($("mqHelp"));   // edtech: mistake feedback + step-by-step hints
+    if (HB.Hint) { if (!a) HB.Hint.mount($("mqHintBox"), HB.ED.hintsForDivision(p)); else HB.Hint.clear($("mqHintBox")); }
     $("mqPrev").disabled = i === 0;
     if (a) { st.vals = { q: String(p.quotient), r: String(p.remainder) }; lock(a.ok ? "✓ Solved" : "Answer shown", a.ok); sp.loadImage(st.ink[i]); }
     else { sp.loadBlank(); unlock(); $("mqFeedback").textContent = aiMode() ? "Write your work and your final answer on the scratch pad, then tap Submit work." : i === 0 ? INTRO : "Write your work on the scratch pad, enter the quotient and remainder, then tap Submit work."; $("mqFeedback").className = "mq-feedback"; }
@@ -123,15 +125,19 @@
       st.vals = { q: String(p.quotient), r: String(p.remainder) }; renderFields();
       lock(`✓ ${ai ? x.feedback : c.text} ${p.label} = ${p.quotient} R ${p.remainder}`, true);
       $("mqNext").disabled = false; setScore(); play(c.audio);
+      if (HB.Help) HB.Help.clear($("mqHelp")); if (HB.Hint) HB.Hint.finish($("mqHintBox"));
     } else if (st.tries === 0) {
       st.tries = 1;
       if (ai) sp.setEnabled(true);   // keep his drawing so he can fix it
       $("mqFeedback").textContent = "✗ " + (ai ? x.feedback + " Fix your work on the pad and tap Submit work again." : D.tryAgain); $("mqFeedback").className = "mq-feedback bad";
+      if (HB.Help) HB.Help.show($("mqHelp"), { skill: "div.long", q: { div: [p.dividend, p.divisor], q: p.label }, given: x.given, notepad: ai, subject: "Math › Division" });
       play(D.tryAgainAudio);
     } else {
       st.answered[st.i] = { ok: false, given: x.given || `${st.vals.q} R ${st.vals.r}`, written: x.written || "" };
       st.vals = { q: String(p.quotient), r: String(p.remainder) }; renderFields();
       lock("✗ " + (ai && x.feedback ? x.feedback + " " : "") + p.revealText, false);
+      if (HB.Hint) HB.Hint.finish($("mqHintBox"));
+      if (HB.Help) HB.Help.show($("mqHelp"), { skill: "div.long", q: { div: [p.dividend, p.divisor], q: p.label, answer: `${p.quotient} R ${p.remainder}`, explain: p.revealText }, given: x.given, notepad: ai, subject: "Math › Division" });
       $("mqNext").disabled = false; play(p.revealAudio);
     }
   }

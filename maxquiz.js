@@ -94,6 +94,9 @@
     renderNum();
     $("mxFeedback").textContent = ""; $("mxFeedback").className = "mq-feedback";
     $("mxSelf").innerHTML = "";
+    if (HB.Help) HB.Help.clear($("mxHelp"));   // edtech: mistake feedback + step-by-step hints (edtech_ui.js)
+    if (HB.Hint) { const sk = HB.ED.skillOfSetQuestion(st.set, q);
+      if (!res && !isRich(q) && /^frac\./.test(sk || "")) HB.Hint.mount($("mxHintBox"), HB.ED.hintsFor(q, sk)); else HB.Hint.clear($("mxHintBox")); }
     $("mxPrev").disabled = st.i === 0;
     $("mxNext").textContent = st.i === n() - 1 ? "See results" : "Next question";
     $("mxNext").disabled = !res;
@@ -212,6 +215,10 @@
       fb.className = "mq-feedback " + (res.ok ? "ok" : "bad");
     }
     if (q.after) showVis(q.after);
+    if (HB.Hint) HB.Hint.finish($("mxHintBox"));
+    if (HB.Help) { if (res.ok) HB.Help.clear($("mxHelp"));
+      else HB.Help.show($("mxHelp"), { skill: HB.ED.skillOfSetQuestion(st.set, q), q, res, notepad: !!st.padQ, subject: subj(),
+        given: isRich(q) ? null : res.ai && res.ai.written ? res.ai.written : (res.given || []).join(", ") }); }
     $("mxTypeToggle").hidden = true;
     $("mxNext").disabled = false;
     if (speak) play(res.ok ? q.rightAudio : q.wrongAudio);

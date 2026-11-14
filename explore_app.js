@@ -169,6 +169,8 @@
     els.prev.disabled = st.step === 0;
     els.next.disabled = st.step >= n;
     els.bar.style.width = (Math.min(st.step + 1, n) / n * 100) + "%";
+    if (HB.lessonStep && st.mode === "walk") HB.lessonStep({ first: st.step === 0, last: st.step >= n - 1 });
+    if (HB.Describe) HB.Describe.set($("exDescribe"), st.step >= n ? "" : (/^t\d+$/.test(st.steps[st.step].key) ? "topic:" : "organ:") + st.steps[st.step].key);
     if (st.step >= n) {
       els.cTag.textContent = "SCAN COMPLETE";
       els.cName.textContent = st.doneTitle || "All organs checked";
@@ -191,7 +193,7 @@
     els.cDoes.textContent = s.does;
     els.cFact.textContent = s.factRaw ? s.fact : "Fun fact: " + s.fact;
     placeCallout(s.y);
-    if (speak) play(s.audio);
+    if (speak) (HB.Narr ? HB.Narr.say(s.audio, null) : play(s.audio));
   }
 
   function showSystem(key, speak) {
@@ -214,6 +216,8 @@
     els.cDoes.textContent = s.does;
     els.cFact.innerHTML = "<span class='parts-h'>Parts</span>" + s.partNames.map(p => `<span class="chip">${p}</span>`).join("");
     els.callout.style.marginTop = "0px";
+    if (HB.Describe) HB.Describe.set($("exDescribe"), "sys:" + key);
+    if (HB.lessonStep && st.mode === "systems") HB.lessonStep({ first: false, last: true });
     if (speak) play(s.audio);
   }
 
@@ -279,6 +283,7 @@
         els.cTag.textContent = "SYSTEMS"; els.cName.textContent = "Pick a system";
         els.cDoes.textContent = "Tap a system to light up its parts and watch the flow.";
         els.cFact.textContent = ""; els.callout.style.marginTop = "0px";
+        if (HB.Describe) HB.Describe.set($("exDescribe"), "sys:all");
       }
     },
     leave() { clearParts(); }
