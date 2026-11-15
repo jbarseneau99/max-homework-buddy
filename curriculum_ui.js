@@ -35,12 +35,14 @@
             ${x.items.map(i => `<li class="cur-item ${i.status}"><span class="cur-code">${esc(i.code)}</span>
               <span class="cur-say">${esc(i.say)}${i.note ? `<small>${esc(i.note)}</small>` : ""}</span>
               <span class="cur-tag ${i.status}">${LABEL[i.status]}</span>${HB.SkillMap ? HB.SkillMap.badge(s.id, i.code) : ""}
-              ${i.link ? `<button type="button" class="cur-go btn-cyan" data-link="${esc(i.link.join("/"))}">Open ›</button>` : ""}</li>`).join("")}
+              ${i.link ? `<button type="button" class="cur-go btn-cyan" data-link="${esc(i.link.join("/"))}">Open ›</button>` : ""}
+              ${(i.worked || []).filter(id => HB.Worked && HB.Worked.byId(id)).map(id => `<button type="button" class="cur-wk btn-gold" data-worked="${esc(id)}">✎ Worked example: ${esc(HB.Worked.byId(id).title)}</button>`).join("")}</li>`).join("")}
           </ul></div>`).join("")}
           <p class="cur-src">Official source: <a href="${esc(s.source)}" target="_blank" rel="noopener">Ontario curriculum · ${esc(s.title)}</a>. Codes are official; the descriptions are short kid-friendly summaries.</p>
         </div>`;
       card.querySelector(".cur-head").onclick = () => { open = open === s.id ? null : s.id; render(); };
       card.querySelectorAll(".cur-go").forEach(b => b.onclick = () => goLink(b.dataset.link.split("/")));
+      card.querySelectorAll(".cur-wk").forEach(b => b.onclick = () => HB.Worked.open(b.dataset.worked, { via: "curriculum" }));
       box.appendChild(card);
     });
     if (HB.SkillMap && $("curSkillMap")) HB.SkillMap.render($("curSkillMap"));   // edtech: skill map coloured from Quiz History

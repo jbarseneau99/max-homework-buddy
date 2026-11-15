@@ -193,3 +193,21 @@ offline fallback. MP3s are never cached by it. `pwa.js` also shows a dismissible
 Chrome (`beforeinstallprompt`), "Tap Share then Add to Home Screen" on iOS Safari, nothing on desktop unless the browser offers
 an install. Dismissal is stored in `localStorage` (`hb.installBanner.dismissed`); hidden when already running standalone.
 When you change `sw.js`, bump `CACHE`.
+
+## Worked Examples (`worked_data.js` + `worked_app.js`, built by `build_worked.py`)
+The third kind of work, next to **Lessons** (Review) and **Quizzes**. A worked example is a problem solved one step per tap
+(Next / Back, or tap a step number), with an animated picture for each step, a "work so far" notebook column, mistake callouts,
+an optional "Another way" step, and a **Try one like it** practice set at the end (step hints, mistake feedback, "Explain it
+another way", generated "3 more like it"; results go to Quiz History). Every line of a step has its own gTTS MP3
+(`audio/worked/<id>/sNN_cK.mp3`), played through the shared narration controls (Pause / Replay this part / Slower) with the
+line highlighted. No speech APIs.
+
+Where examples show up (automatic, from each example's `subject` and `subtopic`): the Home tile **Worked Examples**, a card on
+the subject page, a section on the subtopic page, a third **Worked examples** button on every session of that subtopic, and a
+button on the Curriculum topic that lists the example id in `worked: [...]` (`curriculum.js`).
+
+**Add an example:** append a dict to `EXAMPLES` in `build_worked.py` (title, problem, answer, steps with `lines` of `t` (shown)
+and `say` (spoken), `work`, `vis`, optional `callout` / `another`, and `try` questions with their mistake options), add asserts
+for its numbers at the top of the file, and run `python3 build_worked.py`. Visual kinds: `bars` (rows of fraction bars:
+`d` pieces, `on` shaded, `x` crossed out from the right, `col: "gold"`, `split` animates the cut lines, `tag`, `brace`) and
+`numline` (estimate jumps). First example: **3 1/2 − 1 3/4 = 1 3/4** (Math › Fractions, skill `frac.mixedsub`).

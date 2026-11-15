@@ -27,7 +27,8 @@
   const modules = {};
   // level: home | subject | subtopic | session | review | quiz | component
   const st = { level: "home", subject: null, subtopic: null, session: null, comp: null, active: null, returnTo: null };
-  const PANELS = ["settings", "outbox", "quizHistory", "multMastery", "curriculum"];   // off-tree screens (top bar); Back returns to where you were
+  // workedList / worked = Worked Examples (worked_app.js)
+  const PANELS = ["settings", "outbox", "quizHistory", "multMastery", "curriculum", "workedList", "worked"];   // off-tree screens (top bar); Back returns to where you were
   const HB = window.HB = Object.assign(window.HB || {}, { icon, modules, state: st });   // keep HB.QT (quiz_types.js loads first)
 
   HB.registerModule = (name, mod) => { modules[name] = mod; };
@@ -77,7 +78,8 @@
       case "subtopic": return { level: "subject", subject: st.subject };
       case "session": return { level: "subtopic", subject: st.subject, subtopic: st.subtopic };
       case "review": case "quiz": case "component": return { level: "session", ...here() };
-      case "settings": case "outbox": case "quizHistory": case "multMastery": return st.returnTo || { level: "home" };
+      case "settings": case "outbox": case "quizHistory": case "multMastery": case "workedList": return st.returnTo || { level: "home" };
+      case "worked": return st.workedVia === "list" ? { level: "workedList", opts: st.workedListOpts || {} } : st.workedVia === "curriculum" ? { level: "curriculum" } : (st.returnTo || { level: "home" });
       default: return null;
     }
   }
@@ -92,6 +94,8 @@
     if (st.level === "outbox") parts.push("Outbox");
     if (st.level === "quizHistory") parts.push("Quiz History");
     if (st.level === "multMastery") parts.push("Multiplication Mastery");
+    if (st.level === "workedList" || st.level === "worked") parts.push("Worked Examples");
+    if (st.level === "worked" && HB.Worked && st.workedId) { const ex = HB.Worked.byId(st.workedId); if (ex) parts.push(ex.title); }
     return parts;
   }
 
@@ -146,16 +150,19 @@
       b.onclick = () => HB.go({ level: "curriculum" });
       g.appendChild(b);
     }
+    if (HB.Worked) HB.Worked.decorate("home");   // Worked Examples tile (worked_app.js)
   }
   function renderSubject() {
     const s = st.subject;
     $("subjIcon").innerHTML = icon(s.icon, "hero-ic"); $("subjTitle").textContent = s.title; $("subjBlurb").textContent = s.blurb;
     cardList($("subjList"), s.subtopics, "subtopic", t => HB.go({ level: "subtopic", subject: s, subtopic: t }), s.moreComingSoon);
+    if (HB.Worked) HB.Worked.decorate("subject", { subject: s });
   }
   function renderSubtopic() {
     const t = st.subtopic;
     $("subtIcon").innerHTML = icon(t.icon, "hero-ic"); $("subtTitle").textContent = t.title; $("subtBlurb").textContent = t.blurb;
     cardList($("sessList"), t.sessions, "session", s => HB.go({ level: "session", subject: st.subject, subtopic: t, session: s }), t.moreComingSoon);
+    if (HB.Worked) HB.Worked.decorate("subtopic", { subject: st.subject, subtopic: t });
   }
   function renderSession() {
     const s = st.session;
@@ -171,12 +178,14 @@
       box.appendChild(b);
     });
     if (s.componentsSoon) box.innerHTML = '<span class="comp-chip soon">Components coming soon</span>';
+    if (HB.Worked) HB.Worked.decorate("session", { subject: st.subject, subtopic: st.subtopic, session: s });
   }
 
   HB.go = function (t) {
     if (PANELS.includes(t.level)) {
       if (!PANELS.includes(st.level)) st.returnTo = { level: st.level, subject: st.subject, subtopic: st.subtopic, session: st.session, comp: st.comp };
       const about = [st.subject, st.subtopic, st.session].filter(Boolean).map(x => x.title).join(" › ");
+      if (t.level === "worked" && t.opts && t.opts.id) st.workedId = t.opts.id;
       leaveActive(); HB.stopAudio();
       st.level = t.level;
       const mod = modules[t.level]; showView(mod.view); st.active = mod; updateNav();

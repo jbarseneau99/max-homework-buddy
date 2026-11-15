@@ -4,6 +4,7 @@
 // kid-friendly paraphrase (not the official wording). Only codes that appear in the ministry data are listed.
 // status: "tested" = covered in class and tested · "lessons" = has lessons in this app · "soon" = coming up
 // link: [subject id, subtopic id] in TOPICS (topics.js) — opens that part of the app.
+// worked: [example ids] in WORKED_DATA (worked_data.js) — adds a "Worked example" button to that topic.
 window.CURRICULUM = {
   grade: 5, province: "Ontario", checked: "2026-11-13",
   home: "https://www.dcp.edu.gov.on.ca/en/curriculum",
@@ -25,7 +26,7 @@ window.CURRICULUM = {
           { code: "B2.2", say: "Know multiplication facts from 0 × 0 to 12 × 12, and the matching division facts.", status: "lessons", link: ["math", "multiplication"], note: "× Mastery tracking." },
           { code: "B2.3", say: "Mental math: multiply by 0.1 and 0.01, and estimate decimal sums and differences.", status: "soon" },
           { code: "B2.4", say: "Add and subtract whole numbers (to 100 000) and decimals (to hundredths).", status: "soon" },
-          { code: "B2.5", say: "Add and subtract fractions with like denominators.", status: "tested", link: ["math", "fractions"], note: "Fractions Unit 4." },
+          { code: "B2.5", say: "Add and subtract fractions with like denominators.", status: "tested", link: ["math", "fractions"], note: "Fractions Unit 4. Worked example: 3 1/2 − 1 3/4 (mixed numbers with regrouping; halves and fourths go a step past Grade 5).", worked: ["fr-mixsub-01"] },
           { code: "B2.6", say: "Multiply two-digit by two-digit numbers with the area model and algorithms.", status: "lessons", link: ["math", "multiplication"], note: "Area model, lattice, line up place values." },
           { code: "B2.7", say: "Divide three-digit by two-digit numbers with the area model and algorithms, including remainders.", status: "lessons", link: ["math", "division"], note: "Long division with remainders." },
           { code: "B2.8", say: "Multiply and divide one-digit whole numbers by unit fractions.", status: "tested", link: ["math", "fractions"], note: "Fractions Unit 4." },

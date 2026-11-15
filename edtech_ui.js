@@ -55,7 +55,7 @@
   pill.id = "edNarr"; pill.hidden = true; document.body.appendChild(pill);
   const rate = () => nset.slow ? SLOW : 1;
   // the controls sit inside the lesson (sticky at the top while scrolling), only on review / walkthrough screens
-  const lessonLevel = () => !!(HB.state && (HB.state.level === "review" || HB.state.level === "component"));
+  const lessonLevel = () => !!(HB.state && (HB.state.level === "review" || HB.state.level === "component" || HB.state.level === "worked"));   // worked = Worked Examples
   function placePill() {
     const v = document.querySelector("section.view:not([hidden])"); if (!v) return;
     if (pill.parentNode !== v) { const g = v.querySelector(":scope > .ed-goal"), t = v.querySelector(":scope > .toolbar-slot");
